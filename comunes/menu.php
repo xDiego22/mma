@@ -408,7 +408,6 @@
 		        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Ayudas</a>
 		 
 		        <div class="dropdown-menu">
-		            <a class="dropdown-item" target="_blank" href="manual_usuario.pdf"><img src="img/iconos/manual.png" style="width:30px;margin-right:10px;">Manual de Usuario</a>
 					<a class="dropdown-item" href="?pagina=manual"><img src="img/iconos/manual.png" style="width:30px;margin-right:10px;">Manual Interactivo</a>
 		        </div>
 		    </li>
