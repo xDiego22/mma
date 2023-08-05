@@ -4,7 +4,7 @@
 	<?php  require_once('comunes/cabecera.php');?>
 </head>
 <body id="page-top">
-	
+
 	<div id="wrapper">	
 		<?php require_once('comunes/menu-sidebar.php')?>
 
@@ -20,7 +20,7 @@
 								echo $_SESSION['nombre'];
 							}?>
 						</div>
-						<div class="container mt-3">
+						<div class="mt-3">
 							
 							<div class="card-body">
 								<div class="h5">
