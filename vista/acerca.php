@@ -12,7 +12,7 @@
 
 			<?php require_once('comunes/menu-topbar.php')?>
 
-			<div class="container-fluid border mt-4 shadow p-3 mb-4 bg-white rounded" style="width:90%;">
+			<div class="container-fluid border mt-4 shadow p-3 mb-4 bg-white rounded" style="width:85%;">
 				
 				<div class="card-body">
 					<div class="h5 text-center">
