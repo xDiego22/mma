@@ -4,8 +4,7 @@
 	<?php  require_once('comunes/cabecera.php');?>
 </head>
 <body id="page-top">
- 
-	<?php //require_once('comunes/menu.php'); ?>
+	
 	<div id="wrapper">	
 		<?php require_once('comunes/menu-sidebar.php')?>
 
