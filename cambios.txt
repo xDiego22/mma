@@ -1,0 +1,9 @@
+25/07/2023
+1- elimine el session start del controlador de modal socket
+2- la cabecera se modifico y se dejo solo css y se creo archivo en comunes scripts.php para colocarlo en la parte inferior de todos los documentos 
+3- gracias a script.php se soluciono el problema de los nombres por php 
+4- se cambio el bootstrap por uno modificado para el sidebar
+5- se le añadieron iconos font awesome para los iconos del sidebar que trae por defecto
+6- se le añadio el script.php a todas las vistas
+
+
