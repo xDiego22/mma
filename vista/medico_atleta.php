@@ -111,7 +111,7 @@
 				<div class="modal-header text-light bg-dark">
 					<h5 class="modal-title" id="modal_gestionlabel"></h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<i class="bi bi-x"></i><span aria-hidden="true">&times;</span>
+						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
@@ -135,13 +135,13 @@
 						<div class="col-md-6 mb-2">
 							<label for="medicamento_atleta">Medicamento que consume</label>
 							<input class="form-control" maxlength="50" type="text" id="medicamento_atleta" name="medicamento_atleta" placeholder="Ej: &quot;Ninguno, Diclofenaco...&quot;">
-							<span id="smedicamento_atleta" style="color: #ff0000;"></span>
+							<span class="texto" id="smedicamento_atleta" style="color: #ff0000;"></span>
 						</div>
 
 						<div class="col-md-6 mb-2">
 							<label for="enfermedad_atleta">Enfermedad que padezca actualmente</label>
 							<input class="form-control" maxlength="50" type="text" id="enfermedad_atleta" name="enfermedad_atleta" placeholder="Ej: &quot;Ninguno, Artritis&quot;">
-							<span id="senfermedad_atleta" style="color: #ff0000;"></span>
+							<span class="texto" id="senfermedad_atleta" style="color: #ff0000;"></span>
 						</div>
 
 					</div>
@@ -150,13 +150,13 @@
 						<div class="col-md-6 mb-2">
 							<label for="discapacidad_atleta">Discapacidad que posee</label>
 							<input class="form-control" maxlength="50" type="text" id="discapacidad_atleta" name="discapacidad_atleta" placeholder="Ej:  &quot;Ninguno...&quot;">
-							<span id="sdiscapacidad_atleta" style="color: #ff0000;"></span>
+							<span class="texto" id="sdiscapacidad_atleta" style="color: #ff0000;"></span>
 						</div>
 
 						<div class="col-md-6 mb-2">
 							<label for="dieta_atleta">Dieta alimenticia</label>
 							<input class="form-control" maxlength="50" type="text" id="dieta_atleta" name="dieta_atleta" placeholder="Ej:  &quot;Ninguno, Proteina Pura...&quot;">
-							<span id="sdieta_atleta" style="color: #ff0000;"></span>
+							<span class="texto" id="sdieta_atleta" style="color: #ff0000;"></span>
 						</div>
 
 					</div>
@@ -165,13 +165,13 @@
 						<div class="col-md-6 mb-2">
 							<label for="enfermedades_pasadas">Enfermedades Pasadas</label>
 							<input class="form-control" maxlength="50" type="text" id="enfermedades_pasadas" name="enfermedades_pasadas" placeholder="Cirugias, Huesos rotos, Electrocardiogramas, Etc...">
-							<span id="senfermedades_pasadas" style="color: #ff0000;"></span>
+							<span class="texto" id="senfermedades_pasadas" style="color: #ff0000;"></span>
 						</div>
 
 						<div class="col-md-6 mb-2">
 							<label for="nombre_parentesco">Nombre de contacto en caso de emergencia</label>
 							<input class="form-control" maxlength="50" type="text" id="nombre_parentesco" name="nombre_parentesco" placeholder="Ramon Ramos">
-							<span id="snombre_parentesco" style="color: #ff0000;"></span>
+							<span class="texto" id="snombre_parentesco" style="color: #ff0000;"></span>
 						</div>
 
 					</div>
@@ -180,12 +180,12 @@
 						<div class="col-md-6 mb-2">
 							<label for="telefono_parentesco">Telefono de contacto en caso de emergencia</label>
 							<input class="form-control" maxlength="11"  type="text" id="telefono_parentesco" name="telefono_parentesco" placeholder="Ej: &quot;04145746754&quot;">
-							<span id="stelefono_parentesco" style="color: #ff0000;"></span>
+							<span class="texto" id="stelefono_parentesco" style="color: #ff0000;"></span>
 						</div>
 						<div class="col-md-6 mb-2">
 							<label for="relacion_parentesco">Tipo de relacion de contacto que tiene con el atleta</label>
 							<input class="form-control" maxlength="20" type="text" id="relacion_parentesco" name="relacion_parentesco" placeholder="Ej: Padre, Madre, Amigo, Etc...">
-							<span id="srelacion_parentesco" style="color: #ff0000;"></span>
+							<span class="texto" id="srelacion_parentesco" style="color: #ff0000;"></span>
 						</div>
 					</div>
 					</div>

@@ -95,7 +95,7 @@
 				<div class="modal-header text-light bg-dark">
 					<h5 class="modal-title" id="modal_gestionlabel"></h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<i class="bi bi-x"></i><span aria-hidden="true">&times;</span>
+						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
@@ -104,7 +104,7 @@
 							<div class="col-md-12">
 								<label for="nombre_rol">Nombre de Rol</label>
 								<input class="form-control" maxlength="30" type="text" name="nombre_rol" id="nombre_rol" placeholder="Ej: &quot;Administrador, Invitado...&quot;">
-								<span id="snombre_rol" style="color: #ff0000;"></span>
+								<span class="texto" id="snombre_rol" style="color: #ff0000;"></span>
 							</div>
 						</div>
 
@@ -112,7 +112,7 @@
 							<div class="col-md-12">
 								<label for="descripcion_rol">Descripcion de Rol</label>
 								<input class="form-control" maxlength="50" type="text" name="descripcion_rol" id="descripcion_rol">
-								<span id="sdescripcion_rol" style="color: #ff0000;"></span>
+								<span class="texto" id="sdescripcion_rol" style="color: #ff0000;"></span>
 							</div>
 						</div>
 
@@ -241,7 +241,7 @@
 				<div class="modal-header text-light bg-dark">
 					<h5 class="modal-title" id="modal_modificarlabel">Modificar Rol</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<i class="bi bi-x"></i><span aria-hidden="true">&times;</span>
+						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
@@ -250,7 +250,7 @@
 							<div class="col-md-12">
 								<label for="nombre_rol2">Nombre de Rol</label>
 								<input class="form-control" disabled type="text" name="nombre_rol2" id="nombre_rol2" placeholder="Ej: &quot;Administrador, Invitado...&quot;">
-								<span id="snombre_rol2" style="color: #ff0000;"></span>
+								<span class="texto" id="snombre_rol2" style="color: #ff0000;"></span>
 							</div>
 						</div>
 
@@ -258,7 +258,7 @@
 							<div class="col-md-12">
 								<label for="descripcion_rol2">Descripcion de Rol</label>
 								<input class="form-control" type="text" name="descripcion_rol2" id="descripcion_rol2">
-								<span id="sdescripcion_rol2" style="color: #ff0000;"></span>
+								<span class="texto" id="sdescripcion_rol2" style="color: #ff0000;"></span>
 							</div>
 						</div>
 

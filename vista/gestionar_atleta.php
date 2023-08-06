@@ -118,7 +118,7 @@
 				<div class="modal-header text-light bg-dark">
 					<h5 class="modal-title" id="modal_gestionlabel"></h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<i class="bi bi-x"></i><span aria-hidden="true">&times;</span>
+						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
@@ -154,12 +154,12 @@
 							<div class="col-md-6 mb-2">
 								<label for="cedula_atleta">Cedula</label>
 								<input class="form-control" maxlength="8" type="text" name="cedula_atleta" id="cedula_atleta" placeholder="Ej: &quot;15345987&quot;">
-								<span id="scedula_atleta" style="color: #ff0000;"></span>
+								<span class="texto" id="scedula_atleta" style="color: #ff0000;"></span>
 							</div>
 							<div class="col-md-6 mb-2">
 								<label for="nombres_atleta">Nombre</label>
 								<input class="form-control" maxlength="24" type="text" name="nombres_atleta" id="nombres_atleta" placeholder="Ej: &quot;Luis Gustavo&quot;">
-								<span id="snombres_atleta" style="color: #ff0000;"></span>
+								<span class="texto" id="snombres_atleta" style="color: #ff0000;"></span>
 							</div>
 						</div>
 
@@ -167,12 +167,12 @@
 							<div class="col-md-6 mb-2">
 								<label for="apellidos_atleta">Apellido</label>
 								<input class="form-control" maxlength="25" type="text" name="apellidos_atleta" id="apellidos_atleta" placeholder="Ej: &quot;Perdomo Perez&quot;">
-								<span id="sapellidos_atleta" style="color: #ff0000;"></span>
+								<span class="texto" id="sapellidos_atleta" style="color: #ff0000;"></span>
 							</div>
 							<div class="col-md-6 mb-2">
 								<label for="peso_atleta">Peso (Kg)</label>
 								<input class="form-control" maxlength="5" type="text" name="peso_atleta" id="peso_atleta" placeholder="Ej: &quot;56.4&quot;">
-								<span id="speso_atleta" style="color: #ff0000;"></span>
+								<span class="texto" id="speso_atleta" style="color: #ff0000;"></span>
 							</div>
 						</div>
 
@@ -180,7 +180,7 @@
 							<div class="col-md-6 mb-2">
 								<label for="estatura_atleta">Estatura (Metros)</label>
 								<input class="form-control" maxlength="4" type="text" name="estatura_atleta" id="estatura_atleta" placeholder="Ej: &quot;1.68&quot;">
-								<span id="sestatura_atleta" style="color: #ff0000;"></span>
+								<span class="texto" id="sestatura_atleta" style="color: #ff0000;"></span>
 							</div>
 							<div class="col-md-6 mb-2">
 								<label for="fecha_atleta">Fecha de Nacimiento</label>
@@ -192,7 +192,7 @@
 							<div class="col-md-6 mb-2">
 								<label for="telefono_atleta">Telefono</label>
 								<input class="form-control" maxlength="11" type="text" name="telefono_atleta" id="telefono_atleta" placeholder="Ej: &quot;04141234567&quot;">
-								<span id="stelefono_atleta" style="color: #ff0000;"></span>
+								<span class="texto" id="stelefono_atleta" style="color: #ff0000;"></span>
 							</div>
 							<div class="col-md-6 mb-2">
 								<label for="sexo_atleta">Sexo</label>
@@ -238,7 +238,7 @@
 							<div class="col-md-6 mb-2">
 								<label for="entrenador_atleta">Entrenador del Atleta</label>
 								<input class="form-control" maxlength="25" type="text" name="entrenador_atleta" id="entrenador_atleta">
-								<span id="sentrenador_atleta" style="color: #ff0000;"></span>
+								<span class="texto" id="sentrenador_atleta" style="color: #ff0000;"></span>
 							</div>
 						</div>
 					</div>

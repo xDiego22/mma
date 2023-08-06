@@ -108,7 +108,7 @@
 				<div class="modal-header text-light bg-dark">
 					<h5 class="modal-title" id="modal_gestionlabel"></h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<i class="bi bi-x"></i><span aria-hidden="true">&times;</span>
+						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
@@ -118,7 +118,7 @@
 							<div class="col-md-6">
 								<label for="nombre_evento">Nombre</label>
 								<input class="form-control" maxlength="30" type="text" name="nombre_evento" id="nombre_evento">
-								<span id="snombre_evento" style="color: #ff0000;"></span>
+								<span class="texto" id="snombre_evento" style="color: #ff0000;"></span>
 							</div>
 							<div class="col-md-6">
 								<label for="fecha_evento">Fecha</label>
@@ -149,12 +149,12 @@
 							<div class="col-md-6">
 								<label for="monto_evento">Monto</label>
 								<input class="form-control" maxlength="16" type="text" name="monto_evento" id="monto_evento">
-								<span id="smonto_evento" style="color: #ff0000;"></span>
+								<span class="texto" id="smonto_evento" style="color: #ff0000;"></span>
 							</div>
 							<div class="col-md-6">
 								<label for="direccion_evento">Direccion</label>
 								<input class="form-control" maxlength="30" type="text" name="direccion_evento" id="direccion_evento">
-								<span id="sdireccion_evento" style="color: #ff0000;"></span>
+								<span class="texto" id="sdireccion_evento" style="color: #ff0000;"></span>
 							</div>
 						</div>
 
@@ -162,17 +162,17 @@
 							<div class="col-md-4">
 								<label for="juez1">Nombre del Juez 1</label>
 								<input type="text" id="juez1" maxlength="50" name="juez1" class="form-control">
-								<span id="sjuez1" style="color: #ff0000;"></span>
+								<span class="texto" id="sjuez1" style="color: #ff0000;"></span>
 							</div>
 							<div class="col-md-4">
 								<label for="juez2">Nombre del Juez 2</label>
 								<input type="text" id="juez2" maxlength="50" name="juez2" class="form-control">
-								<span id="sjuez2" style="color: #ff0000;"></span>
+								<span class="texto" id="sjuez2" style="color: #ff0000;"></span>
 							</div>
 							<div class="col-md-4">
 								<label for="juez3">Nombre del Juez 3</label>
 								<input type="text" id="juez3" maxlength="50" name="juez3" class="form-control">
-								<span id="sjuez3" style="color: #ff0000;"></span>
+								<span class="texto" id="sjuez3" style="color: #ff0000;"></span>
 							</div>
 						</div>
 					</div>

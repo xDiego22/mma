@@ -111,7 +111,7 @@
 				<div class="modal-header text-light bg-dark">
 					<h5 class="modal-title" id="modal_gestionlabel"></h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<i class="bi bi-x"></i><span aria-hidden="true">&times;</span>
+						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
@@ -157,7 +157,7 @@
 							<div class="col-md-6 mb-2">
 								<label for="habitantes_vivienda">Cantidad de habitantes del hogar</label>
 								<input type="number" class="form-control" name="habitantes_vivienda" id="habitantes_vivienda" min="0" max="20" placeholder="Ej: 1, 2, 3...">
-								<span id="shabitantes_vivienda" style="color: #ff0000;"></span>
+								<span class="texto" id="shabitantes_vivienda" style="color: #ff0000;"></span>
 							</div> 
 							<div class="col-md-6 mb-2">
 								<label for="propiedad_vivienda">Propiedad de la vivienda</label>

@@ -105,7 +105,7 @@
 				<div class="modal-header text-light bg-dark">
 					<h5 class="modal-title" id="modal_gestionlabel"></h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<i class="bi bi-x"></i><span aria-hidden="true">&times;</span>
+						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
@@ -129,12 +129,12 @@
 							<div class="col-md-6">
 								<label for="cedula_personal">Cedula</label>
 								<input class="form-control" maxlength="8" type="text" name="cedula_personal" id="cedula_personal" placeholder="Ej: &quot;15345987&quot;">
-								<span id="scedula_personal" style="color: #ff0000;"></span>
+								<span class="texto" id="scedula_personal" style="color: #ff0000;"></span>
 							</div>
 							<div class="col-md-6">
 								<label for="nombres_personal">Nombres</label>
 								<input class="form-control" maxlength="30" type="text" name="nombres_personal" id="nombres_personal" placeholder="Ej: &quot;Diego Alejandro&quot;">
-								<span id="snombres_personal" style="color: #ff0000;"></span>
+								<span class="texto" id="snombres_personal" style="color: #ff0000;"></span>
 							</div>
 						</div>
 
@@ -142,12 +142,12 @@
 							<div class="col-md-6">
 								<label for="apellidos_personal">Apellidos</label>
 								<input class="form-control" maxlength="30" type="text" name="apellidos_personal" id="apellidos_personal" placeholder="Ej: &quot;Aguilar Suarez&quot;">
-								<span id="sapellidos_personal" style="color: #ff0000;"></span>
+								<span class="texto" id="sapellidos_personal" style="color: #ff0000;"></span>
 							</div> 
 							<div class="col-md-6">
 								<label for="telefono_personal">Telefono</label>
 								<input class="form-control" maxlength="11" type="text" name="telefono_personal" id="telefono_personal" placeholder="Ej: &quot;04141234567&quot;">
-								<span id="stelefono_personal" style="color: #ff0000;"></span>
+								<span class="texto" id="stelefono_personal" style="color: #ff0000;"></span>
 							</div>
 						</div>
 
@@ -167,7 +167,7 @@
 							<div class="col-md-6">
 								<label for="direccion_personal">Direccion</label>
 								<input class="form-control" maxlength="30" type="text" name="direccion_personal" id="direccion_personal">
-								<span id="sdireccion_personal" style="color: #ff0000;"></span>
+								<span class="texto" id="sdireccion_personal" style="color: #ff0000;"></span>
 							</div>
 						</div>
 					</div>
