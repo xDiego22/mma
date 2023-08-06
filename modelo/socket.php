@@ -1,5 +1,5 @@
 <?php
-	define("BASE_URL", "http://127.0.0.1/trayecto3/mma/");
+	define("BASE_URL", "http://127.0.0.1/trayecto4/mma/");
 	define("SOKECT_FRONTEND", "127.0.0.1:12345");
 	define("SOKECT_BACKEND_IP", "127.0.0.1");
 	define("SOKECT_FRONTEND_PORT", "12345");
