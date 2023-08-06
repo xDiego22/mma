@@ -53,7 +53,7 @@ var FancyWebSocket = function(url){
 
 	var dispatch = function(event_name, message){
 		if(message == null || message == ""){
-			console.log("No se envio");
+			//console.log("No se envio");
 		}else{
 			if(message[0] == "V"){
 				$("#contenedormensaje").append('<div class="d-flex justify-content-center"><label>Admin: </label> '+message+' </div>');
