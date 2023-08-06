@@ -3,7 +3,7 @@
 <head>
 	<?php require_once('comunes/cabecera.php') ?>
 </head>
-<body >  
+<body id="page-top">  
 
 	<!--Div oculta para colocar el mensaje a mostrar-->
 	<div id="mensajes" style="display:none">
@@ -14,71 +14,82 @@
 		?>	
 	</div>
 
-	<?php require_once('comunes/menu.php') ?>
 	<?php require_once('comunes/modal.php') ?>
 
-	<div class="container-fluid my-4 pt-4 shadow bg-white rounded" style="width:90%;">
+	<div id="wrapper">
 
-		<div class="container-fluid mt-4 mb-3">
-			<div class="row justify-content-between">
-				<div class="col-md-9 mb-2">
-					<div class="h4 text-dark">Gestionar Clubes</div>
-				</div>
-				<div class="col-md-3" >
-					<?php 
-						if($permisos[1] == "true"){
-					?> 
-					<button type="button" class="btn btn-success"  data-toggle="modal" data-target="#modal_gestion" id="boton_nuevo" onclick="modalregistrar()">
-						<i class="bi bi-plus-circle mr-1"></i>Nuevo registro
-					</button>
-					<?php 
-						}
-					?>
-				</div>
-			</div>
-		</div>
+		<?php require_once('comunes/menu-sidebar.php')?>
+
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div id="content">
+
+				<?php require_once('comunes/menu-topbar.php')?>
+	
+				<div class="container-fluid my-4 pt-4 shadow bg-white rounded" style="width:95%;">
 			
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="table-responsive">
-						<table class="table table-striped table-hover table-borderless" id="tablaconsulta">
-							<thead class="thead-dark">
-								<tr> 
-									<th>#Codigo</th>
-									<th>Nombre</th>
-									<th>Telefono</th>
-									<th>Deporte Base</th>
-									<th>Direccion</th>
-									<th>Acciones</th>
-									
-								</tr>
-							</thead>
-							<tbody id="resultadoconsulta">
+					<div class="container-fluid mt-4 mb-3">
+						<div class="row justify-content-between">
+							<div class="col-auto mr-auto mb-2">
+								<div class="h4 text-dark">Gestionar Clubes</div>
+							</div>
+							<div class="col-auto" >
 								<?php 
-									if(!empty ($listaconsulta)){
-										echo $listaconsulta;
-									}else{
-								?>
-									<tr>
-										<td colspan="7">No hay informacion</td>
-										<td style="display:none;"></td>
-										<td style="display:none;"></td>
-										<td style="display:none;"></td>
-										<td style="display:none;"></td>
-										<td style="display:none;"></td>
-									</tr>
+									if($permisos[1] == "true"){
+								?> 
+								<button type="button" class="btn btn-success"  data-toggle="modal" data-target="#modal_gestion" id="boton_nuevo" onclick="modalregistrar()">
+									<i class="bi bi-plus-circle mr-1"></i>Nuevo registro
+								</button>
 								<?php 
 									}
 								?>
-							</tbody>
-						</table>
+							</div>
+						</div>
 					</div>
-					
+						
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="table-responsive">
+									<table class="table table-striped table-hover table-borderless" id="tablaconsulta" width="100%" cellspacing="0">
+										<thead class="thead-dark">
+											<tr> 
+												<th>#Codigo</th>
+												<th>Nombre</th>
+												<th>Telefono</th>
+												<th>Deporte Base</th>
+												<th>Direccion</th>
+												<th>Acciones</th>
+												
+											</tr>
+										</thead>
+										<tbody id="resultadoconsulta">
+											<?php 
+												if(!empty ($listaconsulta)){
+													echo $listaconsulta;
+												}else{
+											?>
+												<tr>
+													<td colspan="7">No hay informacion</td>
+													<td style="display:none;"></td>
+													<td style="display:none;"></td>
+													<td style="display:none;"></td>
+													<td style="display:none;"></td>
+													<td style="display:none;"></td>
+												</tr>
+											<?php 
+												}
+											?>
+										</tbody>
+									</table>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+					 
 				</div>
 			</div>
 		</div>
-		 
 	</div>
 
 	<!--Modal-->
@@ -158,6 +169,10 @@
 		</div>
 	</div>
 	<!--Fin Modal regitro-->
+
+	<a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 	<?php require_once('comunes/scripts.php')?>
 	<script type="text/javascript" src="js/gestionar_clubes.js"></script>
 	

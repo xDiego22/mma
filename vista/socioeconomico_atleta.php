@@ -3,7 +3,7 @@
 <head>
     <?php require_once('comunes/cabecera.php');?>
 </head>
-<body>
+<body id="page-top">
     <!--Div oculta para colocar el mensaje a mostrar-->
 	<div id="mensajes" style="display:none">
 		<?php
@@ -12,84 +12,97 @@
 			}
 		?>	
 	</div> 
-	<?php require_once('comunes/menu.php') ?>
+
 	<?php require_once('comunes/modal.php') ?>
 
-	<div class="container border my-4 shadow bg-white rounded" style="width:90%;">
+	<div id="wrapper">
 
-		<div class="container mt-4 mb-3">
-			<div class="row">
-				<div class="col-md-9 mb-2">
-					<div class="h4 text-dark">Gestionar Informacion Socioeconomica de Atletas</div>
-				</div>
-				<div class="col-md-3">
-					<?php 
-						if($permisos[1] == "true"){
-					?>
-					<button type="button" class="btn btn-success"  data-toggle="modal" data-target="#modal_gestion" id="boton_nuevo" onclick="modalregistrar()">
-						<i class="bi bi-plus-circle mr-1"></i>Nuevo registro
-					</button>
-					<?php 
-						}
-					?>
-				</div>
-			</div>
-		</div>
+		<?php require_once('comunes/menu-sidebar.php')?>
+
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div id="content">
+
+				<?php require_once('comunes/menu-topbar.php')?>
+
+				<div class="container border my-4 shadow bg-white rounded" style="width:95%;">
 			
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12" >
-					<div class="table-responsive">
-						<table class="table table-striped table-hover table-borderless" id="tablaconsulta">
-							<thead class="thead-dark">
-								<th style="display:none;">id_atleta</th>
-								<th>Cedula</th>
-								<th>Nombre</th>
-								<th>Tipo de vivienda</th>
-								<th>Zona de vivienda</th>
-								<th>Cant. habitantes del hogar</th>
-								<th>Propiedad de la vivienda</th>
-								<th>Internet</th>
-								<th>Luz</th>
-								<th>Agua</th>
-								<th>Tlf. residencial</th>
-								<th>Cable</th>
-								<th>Acciones</th>
-							</thead>
-							<tbody id="resultadoconsulta">
+					<div class="container mt-4 mb-3">
+						<div class="row">
+							<div class="col-auto mr-auto mb-2">
+								<div class="h4 text-dark">Gestionar Informacion Socioeconomica de Atletas</div>
+							</div>
+							<div class="col-auto">
 								<?php 
-									if(!empty ($listaconsulta)){
-										echo $listaconsulta;
-									}else{
+									if($permisos[1] == "true"){
 								?>
-									<tr>
-										<td colspan="12">No hay informacion</td>
-										<td style="display:none"></td>
-										<td style="display:none"></td>
-										<td style="display:none"></td>
-										<td style="display:none"></td>
-										<td style="display:none"></td>
-										<td style="display:none"></td>
-										<td style="display:none"></td>
-										<td style="display:none"></td>
-										<td style="display:none"></td>
-										<td style="display:none"></td>
-										<td style="display:none"></td>
-										<td style="display:none"></td>
-									</tr>
-									
+								<button type="button" class="btn btn-success"  data-toggle="modal" data-target="#modal_gestion" id="boton_nuevo" onclick="modalregistrar()">
+									<i class="bi bi-plus-circle mr-1"></i>Nuevo registro
+								</button>
 								<?php 
 									}
 								?>
-							</tbody>
-						</table>
+							</div>
+						</div>
+					</div>
+						
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12" >
+								<div class="table-responsive">
+									<table class="table table-striped table-hover table-borderless" id="tablaconsulta" width="100%" cellspacing="0">
+										<thead class="thead-dark">
+											<th style="display:none;">id_atleta</th>
+											<th>Cedula</th>
+											<th>Nombre</th>
+											<th>Tipo de vivienda</th>
+											<th>Zona de vivienda</th>
+											<th>Cant. habitantes del hogar</th>
+											<th>Propiedad de la vivienda</th>
+											<th>Internet</th>
+											<th>Luz</th>
+											<th>Agua</th>
+											<th>Tlf. residencial</th>
+											<th>Cable</th>
+											<th>Acciones</th>
+										</thead>
+										<tbody id="resultadoconsulta">
+											<?php 
+												if(!empty ($listaconsulta)){
+													echo $listaconsulta;
+												}else{
+											?>
+												<tr>
+													<td colspan="12">No hay informacion</td>
+													<td style="display:none"></td>
+													<td style="display:none"></td>
+													<td style="display:none"></td>
+													<td style="display:none"></td>
+													<td style="display:none"></td>
+													<td style="display:none"></td>
+													<td style="display:none"></td>
+													<td style="display:none"></td>
+													<td style="display:none"></td>
+													<td style="display:none"></td>
+													<td style="display:none"></td>
+													<td style="display:none"></td>
+												</tr>
+												
+											<?php 
+												}
+											?>
+										</tbody>
+									</table>
+								</div>
+								
+							</div>
+						</div>
 					</div>
 					
 				</div>
 			</div>
 		</div>
-		
 	</div>
+
 
 	<!--Modal-->
 	<div class="modal fade" id="modal_gestion" tabindex="-1" aria-labelledby="modal_gestionlabel" aria-hidden="true">
@@ -223,6 +236,9 @@
 		</div>
 	</div>
 	<!--Fin Modal-->
+	<a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
     <?php require_once('comunes/scripts.php')?>
 	<script type="text/javascript" src="js/socioeconomico_atleta.js"></script>
 </body>
