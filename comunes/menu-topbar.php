@@ -8,9 +8,9 @@
 
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
-<?php 
-    if($usuario!==""){
-?>
+    <?php 
+        if($usuario!==""){
+    ?>
         <!-- Nav Item - Alerts -->
         <li class="nav-item mx-1">
             <a class="nav-link " href="#" data-target="#modal_notificaciones" role="button"
@@ -52,19 +52,19 @@
                 </a>
             </div>
         </li>
-<?php 
-    } else {
-        
-?>
+    <?php 
+        } else {
+            
+    ?>
         <li class="nav-item mx-1">
             <a href="?pagina=inicio_sesion" class="btn btn-danger">
                 <i class="bi bi-box-arrow-in-right mr-1"></i>
                 Entrar
             </a>
         </li>
-<?php 
-    }
-?>
+    <?php 
+        }
+    ?>
     </ul>
 
 </nav>
