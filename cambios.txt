@@ -7,3 +7,7 @@
 6- se le añadio el script.php a todas las vistas
 
 
+bug 
+06/08/2023
+se añade clase ".texto" a cada uno de los span de los input para que al darle click al modal de modificar y añadir en JavaScript no se elimine lo que contenga, el bug elimina todo el contenido de los span. a todos los modulos que contengan modalregistrar y modalmodificar
+
