@@ -259,7 +259,7 @@ function limpia_formulario(){
 
 function modalregistrar() {
 	$("#modal_gestionlabel").html("Registrar");
-	$("span").html('') ;
+	$(".texto").html('') ;
 	limpia_formulario()
 	$("#registrar_personal").show();
 	$("#modificar_personal").hide();
@@ -267,7 +267,7 @@ function modalregistrar() {
 
 function modalmodificar(fila) {
 	$("#modal_gestionlabel").html("Modificar");
-	$("span").html('');
+	$(".texto").html('');
 	$("#modificar_personal").show();
 	$("#registrar_personal").hide();
 

@@ -255,7 +255,7 @@ function limpia_formulario(){
 
 function modalregistrar() {
 	$("#modal_gestionlabel").html("Registrar");
-	$("span").html('') ;
+	$(".texto").html('') ;
 	limpia_formulario()
 	$("#registrar_usuarios").show();
 	$("#modificar_usuarios").hide();
@@ -263,7 +263,7 @@ function modalregistrar() {
 
 function modalmodificar(fila) {
 	$("#modal_gestionlabel").html("Modificar");
-	$("span").html('');
+	$(".texto").html('');
 	$("#modificar_usuarios").show();
 	$("#registrar_usuarios").hide();
 

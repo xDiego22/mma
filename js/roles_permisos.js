@@ -395,14 +395,14 @@ function limpia_formulario(){
 
 function modalregistrar() {
 	$("#modal_gestionlabel").html("Registrar");
-	$("span").html('') ;
+	$(".texto").html('') ;
 	limpia_formulario()
 	$("#registrar").show();
 	$("#modificar").hide();
 }
 
 function modalmodificar(fila) {
-	$("span").html('');
+	$(".texto").html('');
 	var linea = $(fila).closest('tr');
 	$("#nombre_rol2").val($(linea).find("td:eq(1)").text());
 	$("#descripcion_rol2").val($(linea).find("td:eq(2)").text());

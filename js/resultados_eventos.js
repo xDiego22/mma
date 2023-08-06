@@ -170,7 +170,7 @@ function limpia_formulario() {
 
 function modalregistrar() {
 	$("#modal_gestionlabel").html("Registrar");
-	$("span").html('') ;
+	$(".texto").html('') ;
 	limpia_formulario();
 	$('#nombre_evento').val('');
 	$("#registrar_resultados").show();

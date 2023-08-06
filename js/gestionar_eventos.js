@@ -293,7 +293,7 @@ function limpia_formulario(){
 
 function modalregistrar() {
 	$("#modal_gestionlabel").html("Registrar");
-	$("span").html('') ;
+	$(".texto").html('') ;
 	limpia_formulario()
 	$("#registrar_evento").show();
 	$("#modificar_evento").hide();
@@ -301,7 +301,7 @@ function modalregistrar() {
 
 function modalmodificar(fila) {
 	$("#modal_gestionlabel").html("Modificar");
-	$("span").html('');
+	$(".texto").html('');
 	$("#modificar_evento").show();
 	$("#registrar_evento").hide();
 

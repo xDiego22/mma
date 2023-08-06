@@ -294,7 +294,7 @@ function validarboton() {
 
 function modalregistrar() {
 	$("#modal_gestionlabel").html("Registrar");
-	$("span").html('') ;
+	$(".texto").html('') ;
 	limpia_formulario()
 	$("#registrar").show();
 	$("#modificar").hide();
@@ -302,7 +302,7 @@ function modalregistrar() {
 
 function modalmodificar(fila) {
 	$("#modal_gestionlabel").html("Modificar");
-	$("span").html('');
+	$(".texto").html('');
 	$("#modificar").show();
 	$("#registrar").hide();
 
