@@ -99,7 +99,7 @@
 				<div class="modal-header text-light bg-dark">
 					<h5 class="modal-title" id="modal_gestionlabel"></h5>
 					 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<i class="bi bi-x"></i><span aria-hidden="true">&times;</span>
+						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
@@ -108,13 +108,13 @@
 							<div class="col-md-6">
 								<label for="codigo_club">Codigo del Club</label>
 								<input class="form-control" maxlength="10" type="text" name="codigo_club" id="codigo_club">
-								<span id="scodigo_club" style="color: #ff0000;"></span>
+								<span class="texto" id="scodigo_club" style="color: #ff0000;"></span>
 							</div>
 
 							<div class="col-md-6">
 								<label for="nombre_club">Nombre del Club</label>
 								<input class="form-control" maxlength="30" type="text" name="nombre_club" id="nombre_club">
-								<span id="snombre_club" style="color: #ff0000;"></span>
+								<span class="texto" id="snombre_club" style="color: #ff0000;"></span>
 							</div>
 						</div>
 
@@ -122,7 +122,7 @@
 							<div class="col-md-6">
 								<label for="telefono_club">Telefono</label>
 								<input class="form-control" maxlength="11" type="text" name="telefono_club" id="telefono_club" placeholder="Ej: &quot;04141234567&quot;">
-								<span id="stelefono_club" style="color: #ff0000;"></span>
+								<span class="texto" id="stelefono_club" style="color: #ff0000;"></span>
 							</div>
 							<div class="col-md-6"> 
 								<label for="deporte_club">Deporte Base</label>
@@ -142,7 +142,7 @@
 							<div class="col-md-12">
 								<label for="direccion_club">Direccion del Club</label>
 								<input class="form-control" maxlength="30" type="text" name="direccion_club" id="direccion_club">
-								<span id="sdireccion_club" style="color: #ff0000;"></span>
+								<span class="texto" id="sdireccion_club" style="color: #ff0000;"></span>
 							</div>
 						</div>
 						
