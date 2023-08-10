@@ -28,7 +28,7 @@
 				</div>
 
 				<div class="form_group">
-					<input type="password" class="form_input" id="contrasena_inicio" name="contrasena_inicio" placeholder=" ">
+					<input type="password" maxlength="15" class="form_input" id="contrasena_inicio" name="contrasena_inicio" placeholder=" ">
 					<label for="contrasena_inicio" class="form_label">Contraseña</label>
 					<span class="form_line"></span>
 				</div>

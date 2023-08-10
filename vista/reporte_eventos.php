@@ -24,7 +24,7 @@
 						<div class="row">
 							<div class="col-md-6">
 								<label for="nombre_reporte_evento">Nombre</label>
-								<input class="form-control" type="text" name="nombre_reporte_evento" id="nombre_reporte_evento">
+								<input class="form-control" maxlength="40" type="text" name="nombre_reporte_evento" id="nombre_reporte_evento">
 								
 							</div>
 							<div class="col-md-6">

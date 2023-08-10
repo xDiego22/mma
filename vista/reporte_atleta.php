@@ -35,7 +35,7 @@
 			
 							<div class="col-md-6">
 								<label for="cedula_reporte_atleta">Cedula</label>
-								<input class="form-control" type="text" name="cedula_reporte_atleta" id="cedula_reporte_atleta" placeholder="Ej: &quot;15345987&quot;">
+								<input class="form-control" maxlength="8" type="text" name="cedula_reporte_atleta" id="cedula_reporte_atleta" placeholder="Ej: &quot;15345987&quot;">
 								
 							</div>
 						</div>
@@ -45,13 +45,13 @@
 							
 							<div class="col-md-6">
 								<label for="nombres_reporte_atleta">Nombre</label>
-								<input class="form-control" type="text" name="nombres_reporte_atleta" id="nombres_reporte_atleta" placeholder="Ej: &quot;Luis Gustavo&quot;">
+								<input class="form-control" maxlength="24" type="text" name="nombres_reporte_atleta" id="nombres_reporte_atleta" placeholder="Ej: &quot;Luis Gustavo&quot;">
 								
 							</div>
 			
 							<div class="col-md-6">
 								<label for="apellidos_reporte_atleta">Apellido</label>
-								<input class="form-control" type="text" name="apellidos_reporte_atleta" id="apellidos_reporte_atleta" placeholder="Ej: &quot;Perdomo Perez&quot;">
+								<input class="form-control" maxlength="25" type="text" name="apellidos_reporte_atleta" id="apellidos_reporte_atleta" placeholder="Ej: &quot;Perdomo Perez&quot;">
 							</div>
 						</div>
 			 
