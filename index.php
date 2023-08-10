@@ -12,7 +12,7 @@
 		require_once("controlador/".$pagina.".php");
 	}
 	else{
-		echo "PAGINA EN CONSTRUCCION";
+		require_once("controlador/error404.php");
 	}
 
 ?>
