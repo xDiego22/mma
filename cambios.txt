@@ -20,3 +20,7 @@ se creo campo correo en base de datos tabla usuarios
 se añadio boton de recuperar contraseña en el inicio
 
 se creo vista de recuperar contraseña
+
+se creo campo token y correo en tabla usuarios en la base de datos y la vista
+
+se modifico modelo de gestion de usuarios para token y correo junto con su validacion 
