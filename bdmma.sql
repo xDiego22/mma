@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-03-2023 a las 19:37:30
+-- Tiempo de generación: 10-08-2023 a las 07:42:49
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -84,16 +84,6 @@ CREATE TABLE `bitacora_usuario` (
   `accion_realizada` varchar(300) NOT NULL COMMENT 'accion que realizo el usuario'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `bitacora_usuario`
---
-
-INSERT INTO `bitacora_usuario` (`id`, `cedula_usuario`, `id_modulo`, `fecha_registro`, `hora_registro`, `accion_realizada`) VALUES
-(1, 29831184, 1, '2023-03-17', '14:22:50', 'Ha consultado la tabla de Clubes'),
-(2, 29831184, 1, '2023-03-17', '14:25:42', 'Ha regitrado un nuevo Club'),
-(3, 29831184, 1, '2023-03-17', '14:25:42', 'Ha consultado la tabla de Clubes'),
-(4, 29831184, 1, '2023-03-17', '14:55:14', 'Ha consultado la tabla de Clubes');
-
 -- --------------------------------------------------------
 
 --
@@ -118,7 +108,8 @@ INSERT INTO `clubes` (`id`, `codigo`, `nombre`, `telefono`, `deportebase`, `dire
 (19, 'deded', 'juanes', '04122448721', 'Kapoeira', 'dededde'),
 (87, 'Lucha32', 'The Black', '04243890543', 'Boxeo', 'Grecia'),
 (88, 'Recreacion200', 'Boxeo05', '04128745125', 'Karate', 'La lucha'),
-(162, 'jbjbjj', 'ihuhuhuh', '04245809452', 'Kapoeira', 'caja de agua');
+(162, 'jbjbjj', 'ihuhuhuh', '04245809452', 'Kapoeira', 'caja de agua'),
+(165, 'dwdwdw', 'wdwdwdwdw', '04122448721', 'Boxeo', 'wdwdwdw');
 
 -- --------------------------------------------------------
 
@@ -138,18 +129,6 @@ CREATE TABLE `emparejamientos` (
 --
 
 INSERT INTO `emparejamientos` (`id`, `id_evento`, `atleta`, `ronda`) VALUES
-(83, 9, 13, '1'),
-(84, 9, 10, '1'),
-(85, 9, 14, '1'),
-(86, 9, 16, '1'),
-(87, 9, 11, '1'),
-(88, 9, 12, '1'),
-(89, 9, 13, '5'),
-(90, 9, 14, '5'),
-(91, 9, 11, '5'),
-(92, 9, 13, '6'),
-(93, 9, 11, '6'),
-(94, 9, 13, '7'),
 (161, 36, 56, '1'),
 (162, 36, 55, '1'),
 (163, 36, 57, '1'),
@@ -303,7 +282,6 @@ INSERT INTO `inscripcion_evento` (`id`, `id_evento`, `cedula`, `nombre`, `sexo`,
 (10, 9, '29831186', 'jose ramon', 'Masculino', '60', '1999-11-12', 'Caracas'),
 (11, 9, '29831187', 'miguel vasquez', 'Masculino', '60', '1989-03-12', 'Lara'),
 (12, 9, '29831188', 'sebastian ramos', 'Masculino', '60', '1997-11-11', 'Lara'),
-(13, 9, '29831189', 'angel cortez', 'Masculino', '60', '1999-12-01', 'Lara'),
 (14, 9, '28356556', 'Manuel Rodriguez', 'Masculino', '60', '2000-07-20', 'Sucre'),
 (15, 9, '25656787', 'Carlos Belcast', 'Masculino', '61', '2000-12-20', 'Carabobo'),
 (16, 9, '25677887', 'Miguel Tigre', 'Masculino', '60', '2000-06-20', 'Guarico'),
@@ -362,21 +340,21 @@ INSERT INTO `intermediaria` (`id`, `id_rol`, `id_modulos`, `consultar`, `registr
 (12, 1, 12, 'true', 'true', 'true', 'true'),
 (13, 1, 13, 'true', 'true', 'true', 'true'),
 (15, 1, 21, 'true', 'true', 'true', 'true'),
-(16, 5, 1, 'true', 'false', 'false', 'false'),
-(17, 5, 2, 'true', 'false', 'false', 'false'),
-(18, 5, 3, 'true', 'false', 'false', 'false'),
+(16, 5, 1, 'true', 'true', 'true', 'true'),
+(17, 5, 2, 'true', 'true', 'true', 'true'),
+(18, 5, 3, 'true', 'true', 'true', 'true'),
 (19, 5, 4, 'true', 'true', 'true', 'true'),
 (20, 5, 5, 'true', 'true', 'true', 'true'),
 (21, 5, 6, 'true', 'true', 'true', 'true'),
-(22, 5, 10, 'true', 'false', 'false', 'false'),
+(22, 5, 10, 'true', 'true', 'true', 'true'),
 (24, 5, 11, 'true', 'true', 'true', 'true'),
 (25, 5, 12, 'true', 'true', 'true', 'true'),
 (26, 5, 13, 'true', 'true', 'true', 'true'),
 (28, 5, 15, 'true', 'true', 'true', 'true'),
-(49, 12, 1, 'true', 'false', 'false', 'false'),
-(50, 12, 3, 'true', 'false', 'false', 'false'),
-(51, 12, 4, 'true', 'false', 'false', 'false'),
-(52, 12, 5, 'true', 'false', 'false', 'false');
+(49, 12, 1, 'true', 'true', 'true', 'true'),
+(50, 12, 3, 'true', 'true', 'true', 'true'),
+(51, 12, 4, 'true', 'true', 'true', 'true'),
+(52, 12, 5, 'true', 'true', 'true', 'true');
 
 -- --------------------------------------------------------
 
@@ -447,7 +425,8 @@ INSERT INTO `personal` (`id`, `id_club`, `cedula`, `nombre`, `apellido`, `telefo
 (16, 88, '17034388', 'Carmen', 'rojas', '04246784566', 'Secretaria', 'El cuji'),
 (17, 87, '12312311', 'Carlos', 'mujica', '04148658694', 'Administrador', 'core 4'),
 (18, 18, '32432533', 'Angel', 'Delgado', '04145696032', 'Entrenador', 'Tostado'),
-(19, 88, '35236243', 'Cesar', 'verde', '02514478645', 'Administrador', 'Centro');
+(19, 88, '35236243', 'Cesar', 'verde', '02514478645', 'Administrador', 'Centro'),
+(20, 87, '30591237', 'luis', 'perdomo', '67844211243', 'Administrador', 'cabudare');
 
 -- --------------------------------------------------------
 
@@ -459,14 +438,6 @@ CREATE TABLE `personal_clubes` (
   `id_clubes` int(11) NOT NULL COMMENT 'clave foranea de tabla clubes',
   `id_personal` int(11) NOT NULL COMMENT 'clave foranea de tabla personal'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `personal_clubes`
---
-
-INSERT INTO `personal_clubes` (`id_clubes`, `id_personal`) VALUES
-(19, 1),
-(18, 1);
 
 -- --------------------------------------------------------
 
@@ -482,16 +453,6 @@ CREATE TABLE `resultados` (
   `forma_ganar` varchar(20) NOT NULL,
   `ronda` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `resultados`
---
-
-INSERT INTO `resultados` (`id`, `id_evento`, `atleta1`, `atleta2`, `forma_ganar`, `ronda`) VALUES
-(10, 9, 14, 12, 'decision', '1'),
-(16, 9, 13, 11, 'forfeit', '6'),
-(17, 9, 16, 10, 'rcb', '1'),
-(18, 9, 13, 14, 'decision', '5');
 
 -- --------------------------------------------------------
 
@@ -524,18 +485,23 @@ CREATE TABLE `usuarios` (
   `cedula` int(11) NOT NULL,
   `id_rol` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL COMMENT 'nombre del usuario',
-  `contrasena` varchar(250) NOT NULL
+  `contrasena` varchar(250) NOT NULL,
+  `correo` varchar(50) NOT NULL,
+  `token` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`cedula`, `id_rol`, `nombre`, `contrasena`) VALUES
-(29604245, 1, 'Ruander Cuello', '$2y$12$bF1cG.EVFW3T7DmISUUED.6foycYTwJscssYnuMBhb5Uxcm.biAjK'),
-(29831184, 1, 'Diego Aguilar', '$2y$12$6l5T8HGy4pE/3LAjMJg0qe9pa31PzzmfJ2Hf9OTA64.4BaQ96mElS'),
-(29945099, 1, 'Cirez Barriga', '$2y$12$MvJlskHkIyRYtG5rInwbLe9f2Te.cP2g5V3HaD.1fwVWB8aaBboOy'),
-(30591237, 1, 'Luis Perdomo', '$2y$12$RpARghZuVmSBALdC/YSz1un1bufhbq5NgSspTHAZGIWKuJa784RcS');
+INSERT INTO `usuarios` (`cedula`, `id_rol`, `nombre`, `contrasena`, `correo`, `token`) VALUES
+(12092166, 12, 'raul', '$2y$12$gCQc3MS3ItRAiu/djjHaSu2T2rSESMr3Tq6NSRA1eJHicmjcO9htq', '', ''),
+(13504699, 12, 'pastora', '$2y$12$to55oNa4jumkO9pVaB4NUe6I3CjPjq1vuDEE/EhSebhBE2Ws63dAm', 'pastora2@correo.com', '25b82c8b0e53eab47ce330e770f0806d'),
+(29604245, 1, 'Ruander Cuello', '$2y$12$bF1cG.EVFW3T7DmISUUED.6foycYTwJscssYnuMBhb5Uxcm.biAjK', '', ''),
+(29831184, 1, 'Diego Aguilar', '$2y$12$.MqG..IuD1tKj8YOvT4SMOzK5jo19O7CVdLecLEuA2L2QImwWRaJK', 'diegoaguilar221202@gmail.com', 'ada1400bcb1618d28ab9bec0e274ac03'),
+(29945099, 1, 'Cirez Barriga', '$2y$12$MvJlskHkIyRYtG5rInwbLe9f2Te.cP2g5V3HaD.1fwVWB8aaBboOy', '', ''),
+(30591237, 1, 'Luis Perdomo', '$2y$12$RpARghZuVmSBALdC/YSz1un1bufhbq5NgSspTHAZGIWKuJa784RcS', '', ''),
+(31027594, 12, 'jermain silva', '$2y$12$OcI.ZBoD88RnwAM3xuWoyu79I2aYIrunhWsy/LYN91a8wwHdUErsC', 'jermain@correo.com', 'b355ebd374e78d5b5f7cbbb8515c2e11');
 
 --
 -- Índices para tablas volcadas
@@ -661,13 +627,13 @@ ALTER TABLE `atletas`
 -- AUTO_INCREMENT de la tabla `bitacora_usuario`
 --
 ALTER TABLE `bitacora_usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `clubes`
 --
 ALTER TABLE `clubes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de tabla clubes', AUTO_INCREMENT=163;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de tabla clubes', AUTO_INCREMENT=166;
 
 --
 -- AUTO_INCREMENT de la tabla `emparejamientos`
@@ -715,13 +681,13 @@ ALTER TABLE `modulos`
 -- AUTO_INCREMENT de la tabla `personal`
 --
 ALTER TABLE `personal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de tabla personal', AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de tabla personal', AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `resultados`
 --
 ALTER TABLE `resultados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
