@@ -34,7 +34,8 @@
 				</div>
 
 				<button type="button" class="form_submit" id="iniciar_sesion" name="iniciar_sesion">Ingresar</button>
-				
+
+				<a href="?pagina=recuperar_contrasena" class="form_link">¿Olvidaste tu contraseña?</a>
 			</div>
 		</div>
  	</div>
