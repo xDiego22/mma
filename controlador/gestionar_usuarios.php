@@ -46,6 +46,7 @@
 				$objeto->set_contrasena_usuarios($_POST['contrasena_usuarios']);
 				$objeto->set_rol_usuario($_POST['rol_usuario']);
 				
+				$objeto->set_correo_usuarios($_POST['correo_usuarios']);
 	
 				
 				if($accion=='registrar_usuarios'){
