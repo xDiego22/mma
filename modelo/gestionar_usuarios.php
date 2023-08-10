@@ -10,6 +10,7 @@ class gestionar_usuarios extends conexion{
 	private $cedula_usuarios;
 	private $nombre_usuarios;
 	private $contrasena_usuarios;
+	private $correo_usuarios;
 	private $rol_usuario;
 
 	private $permiso;
@@ -25,6 +26,10 @@ class gestionar_usuarios extends conexion{
 
 	public function set_contrasena_usuarios($valor){
 		$this->contrasena_usuarios = $valor;
+	}
+
+	public function set_correo_usuarios($valor){
+		$this->correo_usuarios = $valor;
 	}
 
 	public function set_rol_usuario($valor){
@@ -46,6 +51,10 @@ class gestionar_usuarios extends conexion{
 
 	public function get_contrasena_usuarios(){
 		return $this->contrasena_usuarios;
+	}
+
+	public function get_correo_usuario(){
+		return $this->correo_usuario;
 	}
 
 	public function get_rol_usuario(){
@@ -72,25 +81,34 @@ class gestionar_usuarios extends conexion{
 			if(!$this->existe($this->cedula_usuarios)){
 				$co = $this->conecta();
 				$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				//se añaden atributos a la conexión para poder controlar los errores
-				//atributos para poder manejar los posibles errores
+				
 				try{
 					$contrasena_hash = password_hash($this->contrasena_usuarios,PASSWORD_DEFAULT,['cost'=>12]);
+					
+					//generacion de token de usuario
+					$token = md5(uniqid(mt_rand(),false));
+
 					$resultado = $co->prepare("INSERT into usuarios(
 						cedula,
 						nombre,
 						contrasena,
-						id_rol)
+						id_rol,
+						correo,
+						token)
 						Values(
 						:cedula_usuarios,
 						:nombre_usuarios,
 						:contrasena_usuarios,
-						:rol_usuario)");
+						:rol_usuario,
+						:correo_usuarios,
+						:token)");
 
 					$resultado->bindParam(':cedula_usuarios',$this->cedula_usuarios);
 					$resultado->bindParam(':nombre_usuarios',$this->nombre_usuarios);
 					$resultado->bindParam(':contrasena_usuarios',$contrasena_hash);
 					$resultado->bindParam(':rol_usuario',$this->rol_usuario);
+					$resultado->bindParam(':correo_usuarios',$this->correo_usuarios);
+					$resultado->bindParam(':token',$token);
 
 					$resultado->execute();
 					
@@ -122,18 +140,25 @@ class gestionar_usuarios extends conexion{
 
 				try{
 					$contrasena_hash = password_hash($this->contrasena_usuarios,PASSWORD_DEFAULT,['cost'=>12]);
+
+					//generacion de token de usuario
+					$token = md5(uniqid(mt_rand(),false));
+
 					$resultado = $co->prepare("UPDATE usuarios set
 						cedula = :cedula_usuarios,
 						nombre = :nombre_usuarios,
 						contrasena = :contrasena_usuarios,
-						id_rol = :rol_usuario
+						id_rol = :rol_usuario,
+						correo = :correo_usuarios,
+						token = :token
 						where cedula = :cedula_usuarios");
 
 					$resultado->bindParam(':cedula_usuarios',$this->cedula_usuarios);
 					$resultado->bindParam(':nombre_usuarios',$this->nombre_usuarios);
 					$resultado->bindParam(':contrasena_usuarios',$contrasena_hash);
 					$resultado->bindParam(':rol_usuario',$this->rol_usuario);
-
+					$resultado->bindParam(':correo_usuarios',$this->correo_usuarios);
+					$resultado->bindParam(':token',$token);
 					$resultado->execute();
 					
 					//registro de bitacora
@@ -203,7 +228,7 @@ class gestionar_usuarios extends conexion{
 
 		try{
 
-			$resultado = $co->prepare("SELECT usuarios.cedula, usuarios.contrasena, roles.nombre, roles.id, usuarios.nombre from usuarios, roles where usuarios.id_rol = roles.id");
+			$resultado = $co->prepare("SELECT usuarios.cedula, usuarios.contrasena, roles.nombre, roles.id, usuarios.nombre, usuarios.correo from usuarios, roles where usuarios.id_rol = roles.id");
 
 			$resultado->execute();
 
@@ -222,6 +247,10 @@ class gestionar_usuarios extends conexion{
 
 						$respuesta = $respuesta."<td>";
 							$respuesta = $respuesta.$r[4];//nombre
+						$respuesta = $respuesta."</td>";
+
+						$respuesta = $respuesta."<td>";
+							$respuesta = $respuesta.$r[5];//correo
 						$respuesta = $respuesta."</td>";
 
 						$respuesta = $respuesta."<td>";
@@ -378,7 +407,12 @@ class gestionar_usuarios extends conexion{
 	}
 
 	public function validar(){
+		$this->cedula_usuarios = trim($this->cedula_usuarios);
 		$this->nombre_usuarios = trim($this->nombre_usuarios);
+		$this->rol_usuario = trim($this->rol_usuario);
+		$this->contrasena_usuarios = trim($this->contrasena_usuarios);
+		$this->correo_usuarios = trim($this->correo_usuarios);
+		
 		if(!preg_match_all('/^[0-9\b]{7,8}$/',$this->cedula_usuarios)){
 			return false;
 		}
@@ -389,6 +423,9 @@ class gestionar_usuarios extends conexion{
 			return false;
 		}
 		else if(!preg_match('/^[A-Za-z0-9ñÑ_.@$!%*?&#\/\b-]{6,70}$/',$this->contrasena_usuarios)){
+			return false;
+		}
+		else if(!preg_match('/^[A-Za-z0-9ñÑüÜ_.@\b-]{6,70}$/',$this->correo_usuarios)){
 			return false;
 		}
 		else{
