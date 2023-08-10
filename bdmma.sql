@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-08-2023 a las 07:42:49
+-- Tiempo de generación: 11-08-2023 a las 00:19:36
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -83,6 +83,28 @@ CREATE TABLE `bitacora_usuario` (
   `hora_registro` time NOT NULL COMMENT 'hora que realizo accion el usuario',
   `accion_realizada` varchar(300) NOT NULL COMMENT 'accion que realizo el usuario'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `bitacora_usuario`
+--
+
+INSERT INTO `bitacora_usuario` (`id`, `cedula_usuario`, `id_modulo`, `fecha_registro`, `hora_registro`, `accion_realizada`) VALUES
+(1, 29831184, 7, '2023-08-10', '17:29:33', 'Ha consultado la tabla Usuarios'),
+(2, 29831184, 7, '2023-08-10', '17:32:02', 'Ha consultado la tabla Usuarios'),
+(3, 29831184, 7, '2023-08-10', '17:32:37', 'Ha modificado un Usuario'),
+(4, 29831184, 7, '2023-08-10', '17:32:37', 'Ha consultado la tabla Usuarios'),
+(5, 29831184, 7, '2023-08-10', '17:32:46', 'Ha consultado la tabla Usuarios'),
+(6, 29831184, 7, '2023-08-10', '17:34:28', 'Ha modificado un Usuario'),
+(7, 29831184, 7, '2023-08-10', '17:34:28', 'Ha consultado la tabla Usuarios'),
+(8, 29831184, 7, '2023-08-10', '17:34:53', 'Ha modificado un Usuario'),
+(9, 29831184, 7, '2023-08-10', '17:34:53', 'Ha consultado la tabla Usuarios'),
+(10, 29831184, 7, '2023-08-10', '17:35:19', 'Ha consultado la tabla Usuarios'),
+(11, 29831184, 7, '2023-08-10', '17:36:23', 'Ha consultado la tabla Usuarios'),
+(12, 29831184, 7, '2023-08-10', '17:36:30', 'Ha consultado la tabla Usuarios'),
+(13, 29831184, 7, '2023-08-10', '17:36:37', 'Ha consultado la tabla Usuarios'),
+(14, 29831184, 7, '2023-08-10', '17:37:07', 'Ha consultado la tabla Usuarios'),
+(15, 29831184, 7, '2023-08-10', '17:37:17', 'Ha consultado la tabla Usuarios'),
+(16, 29831184, 7, '2023-08-10', '17:37:38', 'Ha consultado la tabla Usuarios');
 
 -- --------------------------------------------------------
 
@@ -487,21 +509,20 @@ CREATE TABLE `usuarios` (
   `nombre` varchar(50) NOT NULL COMMENT 'nombre del usuario',
   `contrasena` varchar(250) NOT NULL,
   `correo` varchar(50) NOT NULL,
-  `token` text NOT NULL
+  `token` text NOT NULL COMMENT 'token de usuario',
+  `token_contrasena` text NOT NULL COMMENT 'token generado para cambio de contrasena',
+  `solicitud_contrasena` int(11) NOT NULL COMMENT 'solicitud de cambio de contrasena'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`cedula`, `id_rol`, `nombre`, `contrasena`, `correo`, `token`) VALUES
-(12092166, 12, 'raul', '$2y$12$gCQc3MS3ItRAiu/djjHaSu2T2rSESMr3Tq6NSRA1eJHicmjcO9htq', '', ''),
-(13504699, 12, 'pastora', '$2y$12$to55oNa4jumkO9pVaB4NUe6I3CjPjq1vuDEE/EhSebhBE2Ws63dAm', 'pastora2@correo.com', '25b82c8b0e53eab47ce330e770f0806d'),
-(29604245, 1, 'Ruander Cuello', '$2y$12$bF1cG.EVFW3T7DmISUUED.6foycYTwJscssYnuMBhb5Uxcm.biAjK', '', ''),
-(29831184, 1, 'Diego Aguilar', '$2y$12$.MqG..IuD1tKj8YOvT4SMOzK5jo19O7CVdLecLEuA2L2QImwWRaJK', 'diegoaguilar221202@gmail.com', 'ada1400bcb1618d28ab9bec0e274ac03'),
-(29945099, 1, 'Cirez Barriga', '$2y$12$MvJlskHkIyRYtG5rInwbLe9f2Te.cP2g5V3HaD.1fwVWB8aaBboOy', '', ''),
-(30591237, 1, 'Luis Perdomo', '$2y$12$RpARghZuVmSBALdC/YSz1un1bufhbq5NgSspTHAZGIWKuJa784RcS', '', ''),
-(31027594, 12, 'jermain silva', '$2y$12$OcI.ZBoD88RnwAM3xuWoyu79I2aYIrunhWsy/LYN91a8wwHdUErsC', 'jermain@correo.com', 'b355ebd374e78d5b5f7cbbb8515c2e11');
+INSERT INTO `usuarios` (`cedula`, `id_rol`, `nombre`, `contrasena`, `correo`, `token`, `token_contrasena`, `solicitud_contrasena`) VALUES
+(29604245, 1, 'Ruander Cuello', '$2y$12$2/zNAJ7Q24Qk0mx/pJ8mZeu00bjyK9MN/KDEsEm1SeUQGE6G8kSxS', 'ruander@gmail.com', '2ab7b2ba94b6be0b945f024864bf4a7a', '', 0),
+(29831184, 1, 'Diego Aguilar', '$2y$12$.MqG..IuD1tKj8YOvT4SMOzK5jo19O7CVdLecLEuA2L2QImwWRaJK', 'diegoaguilar221202@gmail.com', 'ada1400bcb1618d28ab9bec0e274ac03', '', 0),
+(29945099, 1, 'Cirez Barriga', '$2y$12$/lOpjy0T8sMSBqViwrJMc.f9NbqF91aIS9Civ2/iWpGU60F0q7MV2', 'cirez@gmail.com', '345174499fb6560ca975c6fff94a4006', '', 0),
+(30591237, 1, 'Luis Perdomo', '$2y$12$6JtwDm0B5SWOTAvQyDbIce9T0aiCj49ivD0Gfbprs5K1PDOMxFbK2', 'luis@gmail.com', '2adc3aab90083b346fc73538c0408551', '31d78ccbafc5009763e8143f6e9a7e12', 1);
 
 --
 -- Índices para tablas volcadas
@@ -627,7 +648,7 @@ ALTER TABLE `atletas`
 -- AUTO_INCREMENT de la tabla `bitacora_usuario`
 --
 ALTER TABLE `bitacora_usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `clubes`
