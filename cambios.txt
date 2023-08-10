@@ -32,3 +32,5 @@ se creo htaccess para indexar directorios
 se agregan campos en bd de token_contrasena y solicitud_contrasena a tabla usuarios
 
 se agrega campo de registro y de modificar solicitud_contrasena en gestion de usuarios
+
+php mailer envia datos al correo para modificar contraseña
