@@ -54,6 +54,7 @@
 										<thead class="thead-dark">
 											<th>Cedula</th>
 											<th>Nombre</th>
+											<th>Correo</th>
 											<th>Contraseña</th>
 											<th style="display:none">Confirmacion Contraseña</th>
 											<th>Rol Usuario</th>
@@ -133,6 +134,14 @@
 								<span class="texto" id="scontrasena2_usuarios" style="color: #ff0000;"></span>
 							</div>
 						</div> 
+
+						<div class="row">
+							<div class="col-md-12">
+								<label for="correo_usuarios">Correo</label>
+								<input type="email" class="form-control" id="correo_usuarios" name="correo_usuarios" maxlength="50">
+								<span class="texto" id="scorreo_usuarios" style="color: #ff0000;"></span>
+							</div>
+						</div>
 
 						<div class="row">
 							<div class="col-md-12">
