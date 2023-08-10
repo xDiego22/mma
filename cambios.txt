@@ -12,3 +12,11 @@ bug
 se añade clase ".texto" a cada uno de los span de los input para que al darle click al modal de modificar y añadir en JavaScript no se elimine lo que contenga, el bug elimina todo el contenido de los span. a todos los modulos que contengan modalregistrar y modalmodificar
 
 comprobar si el socket funciona en otra pc que no sea la de diego
+
+se le añaden maxlength a campos
+
+se creo campo correo en base de datos tabla usuarios
+
+se añadio boton de recuperar contraseña en el inicio
+
+se creo vista de recuperar contraseña
