@@ -50,7 +50,15 @@ $(document).ready(function(){
 	});
 	$("#contrasena2_usuarios").on("keyup",function(){
 		validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,70}$/,$(this),$("#scontrasena2_usuarios"),"Ingrese confirmacion de contraseña correctamente");
+	}); 
+
+	$("#correo_usuarios").on("keypress", function (e) {
+    	validarkeypress(/^[A-Za-z0-9@_.\b\u00f1\u00d1\u00E0-\u00FC-]*$/, e);
 	});
+	
+	$("#correo_usuarios").on("keyup", function (e) {
+    	validarkeyup(/^[0-9A-Za-z_\u00f1\u00d1\u00E0-\u00FC-]{3,30}[@]{1}[A-Za-z0-9]{3,8}[.]{1}[A-Za-z]{2,3}$/,$("#correo_usuarios"),$("#scorreo_usuarios"),"formato de correo incorrecto") == false
+  	});
 
 	//VALIDACION DE BOTONES
 	$("#registrar_usuarios").on("click", function(){
@@ -61,7 +69,8 @@ $(document).ready(function(){
 			datos.append('nombre_usuarios',$("#nombre_usuarios").val());
 			datos.append('contrasena_usuarios',$("#contrasena_usuarios").val());
 			datos.append('contrasena2_usuarios',$("#contrasena2_usuarios").val());
-			datos.append('rol_usuario',$("#rol_usuario").val());
+			datos.append('rol_usuario', $("#rol_usuario").val());
+			datos.append("correo_usuarios", $("#correo_usuarios").val());
 			enviaAjax(datos, 'registrar_usuarios');
 			
 		}
@@ -77,7 +86,8 @@ $(document).ready(function(){
 			datos.append('nombre_usuarios',$("#nombre_usuarios").val());
 			datos.append('contrasena_usuarios',$("#contrasena_usuarios").val());
 			datos.append('contrasena2_usuarios',$("#contrasena2_usuarios").val());
-			datos.append('rol_usuario',$("#rol_usuario").val());
+			datos.append('rol_usuario', $("#rol_usuario").val());
+			datos.append("correo_usuarios", $("#correo_usuarios").val());
 			enviaAjax(datos,'modificar_usuarios');
 		}
 		$("#modal_gestion").modal("hide");
@@ -131,7 +141,7 @@ function validarboton () {
 	if (validarkeyup(/^[0-9]{7,8}$/, $("#cedula_usuarios"), $("#scedula_usuarios"), "Debe ser formato (15345987)") == false &&
 		validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,70}$/, $("#contrasena_usuarios"), $("#scontrasena_usuarios"), "Ingrese contraseña correctamente") == false &&
 		validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,70}$/, $("#contrasena2_usuarios"), $("#scontrasena2_usuarios"), "Ingrese confirmacion de contraseña correctamente") == false &&
-		$("#rol_usuario").val()=="") {
+		$("#rol_usuario").val()=="" && validarkeyup(/^[0-9A-Za-z_\u00f1\u00d1\u00E0-\u00FC-]{3,30}[@]{1}[A-Za-z0-9]{3,8}[.]{1}[A-Za-z]{2,3}$/,$("#correo_usuarios"),$("#scorreo_usuarios"),"ERROR EN CORREO") == false) {
 		mensajemodal("NINGUN CAMPO HA SIDO COMPLETADO");
 		return false;
 	}
@@ -160,21 +170,26 @@ function validarboton () {
 		return false;
 	}
 		
-	//tipo de usuario
-	else if ($("#rol_usuario").val()=="") {
-		mensajemodal("ERROR EN ROL DE USUARIO");
-		return false;
-	}
+	else if (validarkeyup(/^[0-9A-Za-z_\u00f1\u00d1\u00E0-\u00FC-]{3,30}[@]{1}[A-Za-z0-9]{3,8}[.]{1}[A-Za-z]{2,3}$/,$("#correo_usuarios"),$("#scorreo_usuarios"),"formato de correo incorrecto") == false
+  ) {
+	mensajemodal("ERROR EN CORREO");
+  }
 
-	//contraseña y la confirmacion de la contraseña no coinciden
-	else if ($("#contrasena_usuarios").val() != $("#contrasena2_usuarios").val()) {
-		mensajemodal("LAS CONTRASEÑAS NO COINCIDEN <br> INGRESELAS CORRECTAMENTE");
-		return false;
-	}
-	
-	else{
-		return true;
-	}
+  //tipo de usuario
+  else if ($("#rol_usuario").val() == "") {
+    mensajemodal("ERROR EN ROL DE USUARIO");
+    return false;
+  }
+
+  //contraseña y la confirmacion de la contraseña no coinciden
+  else if (
+    $("#contrasena_usuarios").val() != $("#contrasena2_usuarios").val()
+  ) {
+    mensajemodal("LAS CONTRASEÑAS NO COINCIDEN <br> INGRESELAS CORRECTAMENTE");
+    return false;
+  } else {
+    return true;
+  }
 }
 
 
@@ -250,6 +265,7 @@ function limpia_formulario(){
 	$("#contrasena_usuarios").val('');
 	$("#contrasena2_usuarios").val('');
 	$("#rol_usuario").val('');
+	$("#correo_usuarios").val("");
 	
 }
 
@@ -272,7 +288,9 @@ function modalmodificar(fila) {
 	$("#nombre_usuarios").val($(linea).find("td:eq(1)").text());
 	//$("#contrasena_usuarios").val($(linea).find("td:eq(2)").text());
 	//$("#contrasena2_usuarios").val($(linea).find("td:eq(2)").text());
-	$("#rol_usuario").val($(linea).find("td:eq(5)").text());
+	$("#rol_usuario").val($(linea).find("td:eq(6)").text());
+
+	$("#correo_usuarios").val($(linea).find("td:eq(2)").text());
 }
 
 
