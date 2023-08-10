@@ -29,6 +29,11 @@ body{
 	margin-bottom: .5em;
 }
 
+.form_link {
+	font-weight: 400;
+	color: #000;
+}
+
 .form_container{
 	margin-top: 3em;
 	display: grid;
