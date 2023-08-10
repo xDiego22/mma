@@ -52,7 +52,7 @@ function mensajemodal(mensaje) {
   $("#mostrarmodal").modal("show");
   setTimeout(function () {
     $("#mostrarmodal").modal("hide");
-  }, 4000);
+  }, 100000);
 }
 
 function enviaAjax(datos) {
@@ -64,9 +64,9 @@ function enviaAjax(datos) {
         data: datos,
         processData: false,
         cache: false,
-        success: function () {
-    
-           //mensajemodal("enviado")
+        success: function (respuesta) {
+            
+          mensajemodal(respuesta);
 
         },
         error: function () {

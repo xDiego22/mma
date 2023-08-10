@@ -7,8 +7,9 @@
 
 		if(isset($_POST['accion_recuperar'])){
             
-            $objeto->set_correo($_POST['correo_recuperar']);
-            
+            $objeto->set_correo($_POST['correo_recuperar']); 
+			
+			echo $objeto->restaurarContrasena();;
 			exit;
 		}
 		
