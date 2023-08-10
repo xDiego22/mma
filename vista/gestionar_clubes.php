@@ -113,7 +113,7 @@
 
 							<div class="col-md-6">
 								<label for="nombre_club">Nombre del Club</label>
-								<input class="form-control" maxlength="30" type="text" name="nombre_club" id="nombre_club">
+								<input class="form-control" maxlength="20" type="text" name="nombre_club" id="nombre_club">
 								<span class="texto" id="snombre_club" style="color: #ff0000;"></span>
 							</div>
 						</div>

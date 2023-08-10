@@ -148,7 +148,7 @@
 						<div class="row">
 							<div class="col-md-6">
 								<label for="monto_evento">Monto</label>
-								<input class="form-control" maxlength="16" type="text" name="monto_evento" id="monto_evento">
+								<input class="form-control" maxlength="10" type="text" name="monto_evento" id="monto_evento">
 								<span class="texto" id="smonto_evento" style="color: #ff0000;"></span>
 							</div>
 							<div class="col-md-6">
@@ -161,17 +161,17 @@
 						<div class="row">
 							<div class="col-md-4">
 								<label for="juez1">Nombre del Juez 1</label>
-								<input type="text" id="juez1" maxlength="50" name="juez1" class="form-control">
+								<input type="text" id="juez1" maxlength="30" name="juez1" class="form-control">
 								<span class="texto" id="sjuez1" style="color: #ff0000;"></span>
 							</div>
 							<div class="col-md-4">
 								<label for="juez2">Nombre del Juez 2</label>
-								<input type="text" id="juez2" maxlength="50" name="juez2" class="form-control">
+								<input type="text" id="juez2" maxlength="30" name="juez2" class="form-control">
 								<span class="texto" id="sjuez2" style="color: #ff0000;"></span>
 							</div>
 							<div class="col-md-4">
 								<label for="juez3">Nombre del Juez 3</label>
-								<input type="text" id="juez3" maxlength="50" name="juez3" class="form-control">
+								<input type="text" id="juez3" maxlength="30" name="juez3" class="form-control">
 								<span class="texto" id="sjuez3" style="color: #ff0000;"></span>
 							</div>
 						</div>

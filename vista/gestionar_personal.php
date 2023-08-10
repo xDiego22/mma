@@ -133,7 +133,7 @@
 							</div>
 							<div class="col-md-6">
 								<label for="nombres_personal">Nombres</label>
-								<input class="form-control" maxlength="30" type="text" name="nombres_personal" id="nombres_personal" placeholder="Ej: &quot;Diego Alejandro&quot;">
+								<input class="form-control" maxlength="20" type="text" name="nombres_personal" id="nombres_personal" placeholder="Ej: &quot;Diego Alejandro&quot;">
 								<span class="texto" id="snombres_personal" style="color: #ff0000;"></span>
 							</div>
 						</div>
@@ -141,7 +141,7 @@
 						<div class="row">
 							<div class="col-md-6">
 								<label for="apellidos_personal">Apellidos</label>
-								<input class="form-control" maxlength="30" type="text" name="apellidos_personal" id="apellidos_personal" placeholder="Ej: &quot;Aguilar Suarez&quot;">
+								<input class="form-control" maxlength="20" type="text" name="apellidos_personal" id="apellidos_personal" placeholder="Ej: &quot;Aguilar Suarez&quot;">
 								<span class="texto" id="sapellidos_personal" style="color: #ff0000;"></span>
 							</div> 
 							<div class="col-md-6">

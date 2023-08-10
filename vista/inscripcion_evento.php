@@ -78,7 +78,7 @@
 								</div>
 								<div class="col-md-4">
 									<label for="nombre_inscripcion">Nombre</label>
-									<input type="text" maxlength="50" class="form-control" id="nombre_inscripcion" name="nombre_inscripcion" placeholder="Ej: &quot;Luis Perdomo&quot;">
+									<input type="text" maxlength="20" class="form-control" id="nombre_inscripcion" name="nombre_inscripcion" placeholder="Ej: &quot;Luis Perdomo&quot;">
 									<span id="snombre_inscripcion" style="color: #ff0000;"></span>
 								</div>
 								
