@@ -31,7 +31,7 @@
                         $correo = $this->correo;
                         $tokenContrasena = $this->generarTokenContrasena($cedula); 
 
-                        $url = 'http://'.$_SERVER["SERVER_NAME"].'/trayecto4/mma/?pagina=cambiar_contrasena.php&cedula='.$cedula.'&token='.$tokenContrasena;
+                        $url = 'http://'.$_SERVER["SERVER_NAME"].'/trayecto4/mma/?pagina=cambiar_contrasena&cedula='.$cedula.'&token='.$tokenContrasena;
 
                         $asunto = 'Recuperar Contraseña';
 
