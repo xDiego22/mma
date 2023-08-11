@@ -122,15 +122,15 @@ class gestionar_usuarios extends conexion{
 						return $e->getMessage();
 					}
 				} else{ 
-					return "Error: El correo ya pertenece a otro usuario";
+					return "Error: el correo ya pertenece a otro usuario";
 				}
 				
 			} 
 			else {
-				return "Ya existe usuario con la cedula que desea ingresar";
+				return "Error: ya existe usuario con la cedula que desea ingresar";
 			}
 		}else{
-			return "ingrese datos correctamente";
+			return "Error: ingrese datos correctamente";
 		}
 		
 	}
@@ -142,47 +142,51 @@ class gestionar_usuarios extends conexion{
 
 		if($this->validar()){
 			if($this->existe($this->cedula_usuarios)){
-
-				try{
-					$contrasena_hash = password_hash($this->contrasena_usuarios,PASSWORD_DEFAULT,['cost'=>12]);
-
-					//generacion de token de usuario
-					$token = md5(uniqid(mt_rand(),false));
-
-					$resultado = $co->prepare("UPDATE usuarios set
-						cedula = :cedula_usuarios,
-						nombre = :nombre_usuarios,
-						contrasena = :contrasena_usuarios,
-						id_rol = :rol_usuario,
-						correo = :correo_usuarios,
-						token = :token
-						where cedula = :cedula_usuarios");
-
-					$resultado->bindParam(':cedula_usuarios',$this->cedula_usuarios);
-					$resultado->bindParam(':nombre_usuarios',$this->nombre_usuarios);
-					$resultado->bindParam(':contrasena_usuarios',$contrasena_hash);
-					$resultado->bindParam(':rol_usuario',$this->rol_usuario);
-					$resultado->bindParam(':correo_usuarios',$this->correo_usuarios);
-					$resultado->bindParam(':token',$token);
-					$resultado->execute();
+				if(!$this->existeCorreo()){
 					
-					//registro de bitacora
-			
-					$accion= "Ha modificado un Usuario";
-					
-					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-
-					return  $this->consultar($rol_usuario, $cedula_bitacora,$modulo);
-
-				} catch(Exception $e) {
-					return $e->getMessage();
+					try{
+						$contrasena_hash = password_hash($this->contrasena_usuarios,PASSWORD_DEFAULT,['cost'=>12]);
+	
+						//generacion de token de usuario
+						$token = md5(uniqid(mt_rand(),false));
+	
+						$resultado = $co->prepare("UPDATE usuarios set
+							cedula = :cedula_usuarios,
+							nombre = :nombre_usuarios,
+							contrasena = :contrasena_usuarios,
+							id_rol = :rol_usuario,
+							correo = :correo_usuarios,
+							token = :token
+							where cedula = :cedula_usuarios");
+	
+						$resultado->bindParam(':cedula_usuarios',$this->cedula_usuarios);
+						$resultado->bindParam(':nombre_usuarios',$this->nombre_usuarios);
+						$resultado->bindParam(':contrasena_usuarios',$contrasena_hash);
+						$resultado->bindParam(':rol_usuario',$this->rol_usuario);
+						$resultado->bindParam(':correo_usuarios',$this->correo_usuarios);
+						$resultado->bindParam(':token',$token);
+						$resultado->execute();
+						
+						//registro de bitacora
+				
+						$accion= "Ha modificado un Usuario";
+						
+						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+	
+						return  $this->consultar($rol_usuario, $cedula_bitacora,$modulo);
+	
+					} catch(Exception $e) {
+						return $e->getMessage();
+					}
+				}else{
+					return "Error: el correo ya pertenece a otro usuario";
 				}
 			}
 			else {
-				return "Usuario no registrado";
+				return "Error: usuario no registrado";
 			}
 		}else{
-			return "ingrese datos correctamente";
+			return "Error: ingrese datos correctamente";
 		}
 	}
 
@@ -190,12 +194,13 @@ class gestionar_usuarios extends conexion{
 
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
 		if(preg_match_all('/^[0-9\b]{7,8}$/',$this->cedula_usuarios)){
 			if($this->existe($this->cedula_usuarios)){
 
 				try{
 
-					$resultado = $co->prepare("Delete from usuarios where cedula = :cedula_usuarios");
+					$resultado = $co->prepare("DELETE from usuarios where cedula = :cedula_usuarios");
 
 					$resultado->bindParam(':cedula_usuarios',$this->cedula_usuarios);
 
@@ -218,10 +223,10 @@ class gestionar_usuarios extends conexion{
 				}
 			}
 			else {
-				return "Usuario no registrado";
+				return "Error: usuario no registrado";
 			}
 		}else{
-			return "ingrese datos correctamente";
+			return "Error: ingrese datos correctamente";
 		}	
 		
 	}
