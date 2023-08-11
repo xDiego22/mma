@@ -91,7 +91,7 @@
             $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             try {
-                $resultado = $co->prepare("SELECT * from usuarios where correo = :correo");
+                $resultado = $co->prepare("SELECT usuarios.cedula from usuarios where correo = :correo");
 
                 $resultado->bindParam(':correo',$this->correo);
                 $resultado->execute();
