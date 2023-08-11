@@ -53,7 +53,7 @@
 						<div class="row">
 							<div class="col-md-6">
 								<label for="apellidos_reporte_personal">Apellidos</label>
-								<input class="form-control" maxlength="50" type="text" name="apellidos_reporte_personal" id="apellidos_reporte_personal" placeholder="Ej: &quot;Aguilar Suarez&quot;">
+								<input class="form-control" maxlength="40" type="text" name="apellidos_reporte_personal" id="apellidos_reporte_personal" placeholder="Ej: &quot;Aguilar Suarez&quot;">
 								
 							</div>
 			
