@@ -6,8 +6,6 @@
 
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
-
-    use League\OAuth2\Client\Provider\Google;
     
     class recuperar_contrasena extends conexion{
         private $correo;
@@ -37,7 +35,8 @@
 
                         $asunto = 'Recuperar Contraseña';
 
-                        $cuerpo = "Hola $nombre <br><br> se ha solicitado un cambio de contraseña. <br><br> Click al siguiente enlace para restaurarla: <a href='$url>Link</a>";
+                        $cuerpo = "Hola $nombre <br><br> se ha solicitado un cambio de contraseña. <br><br> Click al siguiente enlace para restaurarla: 
+                        <a href='$url'>Click aqui</a>";
 
                         return $this->enviarCorreo($correo,$nombre,$asunto,$cuerpo);
                         
@@ -50,6 +49,41 @@
             }catch(Exception $e) {
 			    return $e->getMessage();
 		    }
+        }
+
+        public function enviarCorreo($correo,$nombre,$asunto,$cuerpo){
+
+            $mail = new PHPMailer(true);
+
+            try {
+                //Server settings
+                $mail->SMTPDebug = 0;                      //Enable verbose debug output
+                $mail->isSMTP();                                            //Send using SMTP
+                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                $mail->Username   = 'suppormmalara12@gmail.com';                     //SMTP username
+                $mail->Password   = 'wynwzmrmiegicuie';                               //SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+                //Recipients
+                $mail->setFrom('suppormmalara12@gmail.com', 'Soporte de Usuarios MMA');
+                $mail->addAddress($correo, $nombre);     //Add a recipient
+
+                //Content
+                $mail->isHTML(true);                                  //Set email format to HTML
+                $mail->Subject = $asunto;
+                $mail -> CharSet = "UTF-8";
+                $mail->Body    = $cuerpo;
+                //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+                $mail->send();
+                return 'El mensaje ha sido enviado exitosamente, revisa la bandeja de entrada de su correo electronico';
+            } catch (Exception $e) {
+                return "El mensaje no pudo ser enviado. <p>Fallo con la conexion.</p>";
+                // "Mailer Error: {$mail->ErrorInfo}";
+            }
+
         }
 
         private function obtenerCedula(){
@@ -77,28 +111,6 @@
             }
         }
 
-        private function generarTokenContrasena($cedula){
-            $co = $this->conecta();
-            $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            try {
-                //generacion de token de contrasena
-				$token = md5(uniqid(mt_rand(),false));
-
-                $resultado = $co->prepare("UPDATE usuarios SET token_contrasena = :token, solicitud_contrasena = 1 WHERE cedula = :cedula");
-
-                $resultado->bindParam(':token',$token);
-                $resultado->bindParam(':cedula',$cedula);
-
-                $resultado->execute();
-
-                return $token;
-
-            } catch(Exception $e) {
-			    return $e->getMessage();
-		    }
-        } 
-
         private function obtenerNombre(){
             $co = $this->conecta();
             $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -123,6 +135,28 @@
 			    return $e->getMessage();
 		    }
         }
+
+        private function generarTokenContrasena($cedula){
+            $co = $this->conecta();
+            $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            try {
+                //generacion de token de contrasena
+				$token = md5(uniqid(mt_rand(),false));
+
+                $resultado = $co->prepare("UPDATE usuarios SET token_contrasena = :token, solicitud_contrasena = 1 WHERE cedula = :cedula");
+
+                $resultado->bindParam(':token',$token);
+                $resultado->bindParam(':cedula',$cedula);
+
+                $resultado->execute();
+
+                return $token;
+
+            } catch(Exception $e) {
+			    return $e->getMessage();
+		    }
+        } 
 
         public function validarCorreo(){
             $this->correo = trim($this->correo);
@@ -159,37 +193,5 @@
 		    }
 
 	    }
-
-        public function enviarCorreo($correo,$nombre,$asunto,$cuerpo){
-            $mail = new PHPMailer(true);
-
-            try {
-                //Server settings
-                $mail->SMTPDebug = 2;                      //Enable verbose debug output
-                $mail->isSMTP();                                            //Send using SMTP
-                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                $mail->Username   = 'suppormmalara12@gmail.com';                     //SMTP username
-                $mail->Password   = 'wynwzmrmiegicuie';                               //SMTP password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-                //Recipients
-                $mail->setFrom('supportmma12@gmail.com', 'Soporte de Usuarios MMA');
-                $mail->addAddress($correo, $nombre);     //Add a recipient
-
-                //Content
-                $mail->isHTML(true);                                  //Set email format to HTML
-                $mail->Subject = $asunto;
-                $mail->Body    = $cuerpo;
-                //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-                $mail->send();
-                return 'El mensaje ha sido enviado';
-            } catch (Exception $e) {
-                return "El mensaje no pudo ser enviado. Mailer Error: {$mail->ErrorInfo}";
-            }
-
-        }
     }
 ?>
