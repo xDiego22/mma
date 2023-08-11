@@ -52,7 +52,7 @@ function mensajemodal(mensaje) {
   $("#mostrarmodal").modal("show");
   setTimeout(function () {
     $("#mostrarmodal").modal("hide");
-  }, 100000);
+  }, 7000);
 }
 
 function enviaAjax(datos) {
