@@ -34,3 +34,5 @@ se agregan campos en bd de token_contrasena y solicitud_contrasena a tabla usuar
 se agrega campo de registro y de modificar solicitud_contrasena en gestion de usuarios
 
 php mailer envia datos al correo para modificar contraseña
+
+se crea funcion para existeCorreo en gestion usuarios para comprobar si algun usuario posee el correo a registrar
