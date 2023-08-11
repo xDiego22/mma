@@ -79,47 +79,52 @@ class gestionar_usuarios extends conexion{
 
 		if($this->validar()){
 			if(!$this->existe($this->cedula_usuarios)){
-				$co = $this->conecta();
-				$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				
-				try{
-					$contrasena_hash = password_hash($this->contrasena_usuarios,PASSWORD_DEFAULT,['cost'=>12]);
+				if(!$this->existeCorreo()){
+					$co = $this->conecta();
+					$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					
-					//generacion de token de usuario
-					$token = md5(uniqid(mt_rand(),false));
+					try{
+						$contrasena_hash = password_hash($this->contrasena_usuarios,PASSWORD_DEFAULT,['cost'=>12]);
+						
+						//generacion de token de usuario
+						$token = md5(uniqid(mt_rand(),false));
 
-					$resultado = $co->prepare("INSERT into usuarios(
-						cedula,
-						nombre,
-						contrasena,
-						id_rol,
-						correo,
-						token)
-						Values(
-						:cedula_usuarios,
-						:nombre_usuarios,
-						:contrasena_usuarios,
-						:rol_usuario,
-						:correo_usuarios,
-						:token)");
+						$resultado = $co->prepare("INSERT into usuarios(
+							cedula,
+							nombre,
+							contrasena,
+							id_rol,
+							correo,
+							token)
+							Values(
+							:cedula_usuarios,
+							:nombre_usuarios,
+							:contrasena_usuarios,
+							:rol_usuario,
+							:correo_usuarios,
+							:token)");
 
-					$resultado->bindParam(':cedula_usuarios',$this->cedula_usuarios);
-					$resultado->bindParam(':nombre_usuarios',$this->nombre_usuarios);
-					$resultado->bindParam(':contrasena_usuarios',$contrasena_hash);
-					$resultado->bindParam(':rol_usuario',$this->rol_usuario);
-					$resultado->bindParam(':correo_usuarios',$this->correo_usuarios);
-					$resultado->bindParam(':token',$token);
+						$resultado->bindParam(':cedula_usuarios',$this->cedula_usuarios);
+						$resultado->bindParam(':nombre_usuarios',$this->nombre_usuarios);
+						$resultado->bindParam(':contrasena_usuarios',$contrasena_hash);
+						$resultado->bindParam(':rol_usuario',$this->rol_usuario);
+						$resultado->bindParam(':correo_usuarios',$this->correo_usuarios);
+						$resultado->bindParam(':token',$token);
 
-					$resultado->execute();
-					
-					$accion= "Ha regitrado un nuevo Usuario";
+						$resultado->execute();
+						
+						$accion= "Ha regitrado un nuevo Usuario";
 
-					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
 
-					return  $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
-				}catch(Exception $e){
-					return $e->getMessage();
+						return  $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
+					}catch(Exception $e){
+						return $e->getMessage();
+					}
+				} else{ 
+					return "Error: El correo ya pertenece a otro usuario";
 				}
+				
 			} 
 			else {
 				return "Ya existe usuario con la cedula que desea ingresar";
@@ -299,32 +304,24 @@ class gestionar_usuarios extends conexion{
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		//se hace un try esto hace que en caso de error el programa continue por cath
 		try {
  
-			//se asigna a $resultado la consulta prepare para conocer si existe el registro
-			$resultado = $co->prepare("Select * from usuarios where cedula = :cedula_usuarios");
+			$resultado = $co->prepare("SELECT * from usuarios where cedula = :cedula_usuarios");
 
 			$resultado->bindParam(':cedula_usuarios',$this->cedula_usuarios);
 
 			$resultado->execute();
 
-			//se combierte el resultado en un arreglo asociativo 
-			//y se asigna a la variable $fila
 			$fila = $resultado->fetchAll(PDO::FETCH_BOTH);
-			if($fila){ //si $fila, significa que encontro la cedula
 
-				return true; //retorna verdadero
-			    
+			if($fila){ 
+				return true; 
 			}
 			else{
-				
-				return false; //retorna falso en caso de que no consiga la cedula
+				return false; 
 			}
 			
 		}catch(Exception $e){
-			//si estra aca es que hubo algun error por lo que tambien me retornara que
-			//no la encontro
 			return false;
 		}
 
@@ -430,6 +427,31 @@ class gestionar_usuarios extends conexion{
 		}
 		else{
 			return true;
+		}
+	}
+
+	private function existeCorreo(){
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+		try {
+			$resultado = $co->prepare("SELECT usuarios.correo from usuarios where correo = :correo");
+
+			$resultado->bindParam(':correo',$this->correo_usuarios);
+			$resultado->execute();
+			
+			
+			$fila = $resultado->fetchAll(PDO::FETCH_BOTH);
+			
+			if($fila){ 
+				return true; 
+			}
+			else{
+				return false; 
+			}
+			
+		}catch(Exception $e){
+			return $e->getMessage();
 		}
 	}
 
