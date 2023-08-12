@@ -116,7 +116,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<label for="nombre_usuarios">Nombre</label>
-								<input type="text" maxlength="10" class='form-control' id='nombre_usuarios' name='nombre_usuarios'>
+								<input type="text" maxlength="30" class='form-control' id='nombre_usuarios' name='nombre_usuarios'>
 								<span class="texto" id="snombre_usuarios" style="color: #ff0000;"></span>
 							</div>
 						</div>
