@@ -124,13 +124,13 @@
 						<div class="row">
 							<div class="col-md-6">
 								<label for="contrasena_usuarios">Contraseña</label>
-								<input class="form-control" maxlength="15" type="password" name="contrasena_usuarios" id="contrasena_usuarios">
+								<input class="form-control" maxlength="20" type="password" name="contrasena_usuarios" id="contrasena_usuarios">
 								<span class="texto" id="scontrasena_usuarios" style="color: #ff0000;"></span>
 							</div>
 
 							<div class="col-md-6">
 								<label for="contrasena2_usuarios">Confirmar Contraseña</label>
-								<input class="form-control" maxlength="15" type="password" name="contrasena2_usuarios" id="contrasena2_usuarios">
+								<input class="form-control" maxlength="20" type="password" name="contrasena2_usuarios" id="contrasena2_usuarios">
 								<span class="texto" id="scontrasena2_usuarios" style="color: #ff0000;"></span>
 							</div>
 						</div> 
