@@ -424,7 +424,7 @@ class gestionar_usuarios extends conexion{
 		else if(!preg_match_all('/^[0-9\b]{1,10}$/',$this->rol_usuario)){
 			return false;
 		}
-		else if(!preg_match('/^[A-Za-z0-9ñÑ_.@$!%*?&#\/\b-]{6,70}$/',$this->contrasena_usuarios)){
+		else if(!preg_match('/^[A-Za-z0-9ñÑ_.@$!%*?&#\/\b-]{6,20}$/',$this->contrasena_usuarios)){
 			return false;
 		}
 		else if(!preg_match('/^[A-Za-z0-9ñÑüÜ_.@\b-]{6,70}$/',$this->correo_usuarios)){
