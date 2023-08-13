@@ -8,6 +8,15 @@
 
 	<?php require_once('comunes/modal.php') ?>
 
+    <!--Div oculta para colocar el mensaje a mostrar-->
+	<div id="mensajes" style="display:none">
+		<?php
+			if(!empty($mensaje)){
+				echo $mensaje;
+			}
+		?>	
+	</div>
+
 	<div class="contenedor">
 
         <div class="form">
@@ -31,5 +40,6 @@
 		
 	</div>
 <?php require_once('comunes/scripts.php')?>
+<script src="js/cambiar_contrasena.js"></script>
 </body>
 </html>
