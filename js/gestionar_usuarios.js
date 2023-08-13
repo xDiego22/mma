@@ -159,13 +159,13 @@ function validarboton () {
 	}
 
 	//solo contraseña
-	else if (validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,70}$/,$("#contrasena_usuarios"),$("#scontrasena_usuarios"),"Ingrese contraseña correctamente")==false) {
+	else if (validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,20}$/,$("#contrasena_usuarios"),$("#scontrasena_usuarios"),"Ingrese contraseña correctamente")==false) {
 		mensajemodal("ERROR EN CONTRASEÑA");
 		return false;
 	}
 
 	//solo confirmacion de contraseña
-	else if (validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,70}$/,$("#contrasena2_usuarios"),$("#scontrasena2_usuarios"),"Solo debe ser A-Z a-z 0-9 _ . - entre 6 a 20 caracteres")==false) {
+	else if (validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,20}$/,$("#contrasena2_usuarios"),$("#scontrasena2_usuarios"),"Solo debe ser A-Z a-z 0-9 _ . - entre 6 a 20 caracteres")==false) {
 		mensajemodal("ERROR EN CONFIRMACION DE CONTRASEÑA");
 		return false;
 	}
