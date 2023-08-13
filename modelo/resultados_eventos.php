@@ -418,6 +418,11 @@ class resultados_eventos extends conexion{
 
 	public function validar(){
 
+		$this->nombre_evento = trim($this->nombre_evento);
+		$this->ronda = trim($this->ronda);
+		$this->atleta_ganador = trim($this->atleta_ganador);
+		$this->atleta_perdedor = trim($this->atleta_perdedor);
+		
 		$this->forma_ganar = trim($this->forma_ganar);
 
 		if(!preg_match_all('/^[0-9\b]{1,10}$/',$this->nombre_evento)){

@@ -476,6 +476,12 @@ class socioeconomico_atleta extends conexion{
 
 	public function validar(){
 		
+		$this->nombre_atleta = trim($this->nombre_atleta);
+		$this->tipo_vivienda = trim($this->tipo_vivienda);
+		$this->zona_vivienda = trim($this->zona_vivienda);
+		$this->habitantes_vivienda = trim($this->habitantes_vivienda);
+		$this->propiedad_vivienda = trim($this->propiedad_vivienda);
+		
 		$this->internet = trim($this->internet);
 		$this->luz = trim($this->luz);
 		$this->agua = trim($this->agua);

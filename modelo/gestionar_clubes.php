@@ -343,9 +343,15 @@ class gestionar_clubes extends conexion{
 	}
 
 	public function validar(){
+
+        $this->codigo_club = trim($this->codigo_club);
+        $this->telefono_club = trim($this->telefono_club);
+        $this->deporte_club = trim($this->deporte_club);
+        
 		$this->nombre_club = trim($this->nombre_club);
 		$this->direccion_club = trim($this->direccion_club);
-		if(!preg_match_all('/^[A-Za-z0-9\b]{3,30}$/',$this->codigo_club)){
+
+		if(!preg_match_all('/^[A-Za-z0-9\b]{3,10}$/',$this->codigo_club)){
 			return false;
 		}
 		else if(!preg_match_all('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]{5,30}$/',$this->nombre_club)){

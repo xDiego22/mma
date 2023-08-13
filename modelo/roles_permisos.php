@@ -680,6 +680,8 @@
 
         public function validar_registrar(){
 
+            $this->descripcion = trim($this->descripcion);
+            
             $this->nombre = trim($this->nombre);//elimina espacios en blanco
 
             if(!preg_match_all('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ -]{5,30}$/',$this->nombre)){
@@ -737,7 +739,11 @@
         }
 
         public function validar_modificar(){
+            
+            $this->descripcion = trim($this->descripcion);
+            
             $this->nombre = trim($this->nombre);//elimina espacios en blanco
+
             if(!preg_match_all('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ -]{5,30}$/',$this->nombre)){
 			    return false;
 		    }

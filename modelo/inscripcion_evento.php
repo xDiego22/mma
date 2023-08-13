@@ -407,6 +407,12 @@ class inscripcion_evento extends conexion{
 	}
 
 	public function validar_incluir(){
+
+		$this->evento_inscripcion = trim($this->evento_inscripcion);
+		$this->cedula_inscripcion =trim($this->cedula_inscripcion);
+		$this->sexo_inscripcion = trim($this->sexo_inscripcion);
+		$this->fechadenacimiento = trim($this->fechadenacimiento);
+		
 		$this->nombre_inscripcion = trim($this->nombre_inscripcion);
 		$this->peso_inscripcion = trim($this->peso_inscripcion);
 		$this->estado = trim($this->estado);

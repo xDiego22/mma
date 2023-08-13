@@ -539,6 +539,16 @@ class gestionar_atleta extends conexion{
 
 	public function validar(){
 
+        $this->club_atleta = trim($this->club_atleta);
+        $this->cedula_atleta = trim($this->cedula_atleta);
+        $this->peso_atleta = trim($this->peso_atleta);
+        $this->estatura_atleta = trim($this->estatura_atleta);
+        $this->fecha_atleta = trim($this->fecha_atleta);
+        $this->telefono_atleta = trim($this->telefono_atleta);
+        $this->sexo_atleta = trim($this->sexo_atleta);
+        $this->deporte_atleta = trim($this->deporte_atleta);
+        $this->fecha_ingreso_atleta = trim($this->fecha_ingreso_atleta);
+        
 		$this->nombres_atleta = trim($this->nombres_atleta);
 		$this->apellidos_atleta = trim($this->apellidos_atleta);
 		$this->categoria_atleta = trim($this->categoria_atleta);

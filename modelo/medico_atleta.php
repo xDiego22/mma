@@ -458,6 +458,9 @@ class medico_atleta extends conexion{
 
 	public function validar(){
 		
+		$this->nombre_atleta = trim($this->nombre_atleta);        
+        $this->telefono_parentesco = trim($this->telefono_parentesco);        
+        
 		$this->nombre_parentesco = trim($this->nombre_parentesco);
 		$this->relacion_parentesco = trim($this->relacion_parentesco);
 		$this->medicamento_atleta = trim($this->medicamento_atleta);

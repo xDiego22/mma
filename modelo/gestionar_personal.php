@@ -425,6 +425,11 @@ class gestionar_personal extends conexion{
 
 	public function validar(){
 		
+        $this->club_personal = trim($this->club_personal);
+        $this->cedula_personal = trim($this->cedula_personal);
+        $this->telefono_personal = trim($this->telefono_personal);
+        $this->cargo_personal = trim($this->cargo_personal);
+        
 		$this->nombres_personal = trim($this->nombres_personal);
 		$this->apellidos_personal = trim($this->apellidos_personal);
 		$this->direccion_personal = trim($this->direccion_personal);

@@ -229,7 +229,7 @@ class gestionar_eventos extends conexion{
 	} 
 
 	public function eliminar($cedula_bitacora,$modulo){
-		if(preg_match_all('/^[A-Za-z0-9 ]{5,50}$/',$this->nombre_evento)){
+		if(preg_match_all('/^[A-Za-z0-9 ]{5,40}$/',$this->nombre_evento)){
 			if($this->existe($this->nombre_evento)){
 
 				$co = $this->conecta();
@@ -464,6 +464,9 @@ class gestionar_eventos extends conexion{
 	}
 
 	public function validar(){
+
+        $this->club_responsable_evento = trim($this->club_responsable_evento);
+        
 		$this->nombre_evento = trim($this->nombre_evento);
 		$this->monto_evento = trim($this->monto_evento);
 		$this->fecha_evento = trim($this->fecha_evento);
