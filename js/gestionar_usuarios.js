@@ -42,14 +42,14 @@ $(document).ready(function(){
 		validarkeypress(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]*$/,e);
 	});
 	$("#contrasena_usuarios").on("keyup",function(){
-		validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,70}$/,$(this),$("#scontrasena_usuarios"),"Ingrese contraseña correctamente");
+		validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,20}$/,$(this),$("#scontrasena_usuarios"),"Ingrese contraseña correctamente");
 	});
 
 	$("#contrasena2_usuarios").on("keypress",function(e){
 		validarkeypress(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]*$/,e);
 	});
 	$("#contrasena2_usuarios").on("keyup",function(){
-		validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,70}$/,$(this),$("#scontrasena2_usuarios"),"Ingrese confirmacion de contraseña correctamente");
+		validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,20}$/,$(this),$("#scontrasena2_usuarios"),"Ingrese confirmacion de contraseña correctamente");
 	}); 
 
 	$("#correo_usuarios").on("keypress", function (e) {
@@ -139,8 +139,8 @@ function mensajemodal(mensaje){
 function validarboton () {
 	//ningun campo completado
 	if (validarkeyup(/^[0-9]{7,8}$/, $("#cedula_usuarios"), $("#scedula_usuarios"), "Debe ser formato (15345987)") == false &&
-		validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,70}$/, $("#contrasena_usuarios"), $("#scontrasena_usuarios"), "Ingrese contraseña correctamente") == false &&
-		validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,70}$/, $("#contrasena2_usuarios"), $("#scontrasena2_usuarios"), "Ingrese confirmacion de contraseña correctamente") == false &&
+		validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,20}$/, $("#contrasena_usuarios"), $("#scontrasena_usuarios"), "Ingrese contraseña correctamente") == false &&
+		validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,20}$/, $("#contrasena2_usuarios"), $("#scontrasena2_usuarios"), "Ingrese confirmacion de contraseña correctamente") == false &&
 		$("#rol_usuario").val()=="" && validarkeyup(/^[0-9A-Za-z_\u00f1\u00d1\u00E0-\u00FC-]{3,30}[@]{1}[A-Za-z0-9]{3,8}[.]{1}[A-Za-z]{2,3}$/,$("#correo_usuarios"),$("#scorreo_usuarios"),"ERROR EN CORREO") == false) {
 		mensajemodal("NINGUN CAMPO HA SIDO COMPLETADO");
 		return false;
