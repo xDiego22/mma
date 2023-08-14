@@ -57,7 +57,7 @@ $(document).ready(function(){
 	});
 	
 	$("#correo_usuarios").on("keyup", function (e) {
-    	validarkeyup(/^[0-9A-Za-z_\u00f1\u00d1\u00E0-\u00FC-]{3,30}[@]{1}[A-Za-z0-9]{3,8}[.]{1}[A-Za-z]{2,3}$/,$("#correo_usuarios"),$("#scorreo_usuarios"),"formato de correo incorrecto") == false
+    	validarkeyup(/^[0-9A-Za-z_.\u00f1\u00d1\u00E0-\u00FC-]{3,30}[@]{1}[A-Za-z0-9]{3,8}[.]{1}[A-Za-z]{2,3}$/,$("#correo_usuarios"),$("#scorreo_usuarios"),"formato de correo incorrecto") == false
   	});
 
 	//VALIDACION DE BOTONES
@@ -141,7 +141,7 @@ function validarboton () {
 	if (validarkeyup(/^[0-9]{7,8}$/, $("#cedula_usuarios"), $("#scedula_usuarios"), "Debe ser formato (15345987)") == false &&
 		validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,20}$/, $("#contrasena_usuarios"), $("#scontrasena_usuarios"), "Ingrese contraseña correctamente") == false &&
 		validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,20}$/, $("#contrasena2_usuarios"), $("#scontrasena2_usuarios"), "Ingrese confirmacion de contraseña correctamente") == false &&
-		$("#rol_usuario").val()=="" && validarkeyup(/^[0-9A-Za-z_\u00f1\u00d1\u00E0-\u00FC-]{3,30}[@]{1}[A-Za-z0-9]{3,8}[.]{1}[A-Za-z]{2,3}$/,$("#correo_usuarios"),$("#scorreo_usuarios"),"ERROR EN CORREO") == false) {
+		$("#rol_usuario").val()=="" && validarkeyup(/^[0-9A-Za-z_.\u00f1\u00d1\u00E0-\u00FC-]{3,30}[@]{1}[A-Za-z0-9]{3,8}[.]{1}[A-Za-z]{2,3}$/,$("#correo_usuarios"),$("#scorreo_usuarios"),"ERROR EN CORREO") == false) {
 		mensajemodal("NINGUN CAMPO HA SIDO COMPLETADO");
 		return false;
 	}
@@ -170,7 +170,7 @@ function validarboton () {
 		return false;
 	}
 		
-	else if (validarkeyup(/^[0-9A-Za-z_\u00f1\u00d1\u00E0-\u00FC-]{3,30}[@]{1}[A-Za-z0-9]{3,8}[.]{1}[A-Za-z]{2,3}$/,$("#correo_usuarios"),$("#scorreo_usuarios"),"formato de correo incorrecto") == false
+	else if (validarkeyup(/^[0-9A-Za-z_.\u00f1\u00d1\u00E0-\u00FC-]{3,30}[@]{1}[A-Za-z0-9]{3,8}[.]{1}[A-Za-z]{2,3}$/,$("#correo_usuarios"),$("#scorreo_usuarios"),"formato de correo incorrecto") == false
   ) {
 	mensajemodal("ERROR EN CORREO");
   }

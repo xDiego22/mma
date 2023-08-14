@@ -79,7 +79,7 @@ function validarboton() {
   
     if (
       validarkeyup(
-        /^[0-9A-Za-z_\u00f1\u00d1\u00E0-\u00FC-]{3,30}[@]{1}[A-Za-z0-9]{3,8}[.]{1}[A-Za-z]{2,3}$/,
+        /^[0-9A-Za-z_.\u00f1\u00d1\u00E0-\u00FC-]{3,30}[@]{1}[A-Za-z0-9]{3,8}[.]{1}[A-Za-z]{2,3}$/,
         $("#correo_recuperar")
       ) == false
     ) {
