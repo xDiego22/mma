@@ -22,6 +22,11 @@
         <div class="form">
             <h4 >Restaurar Contraseña</h4>
             <div class="row mb-4">
+
+                <input type="text" id="cedula" name="cedula" value="<?php echo $_GET['cedula']?>" style="display:none">
+
+                <input type="text" id="token" name="token" value="<?php echo $_GET['token']?>" style="display:none">
+
                 <div class="col-md-12 mb-4">
                     <label for="contrasena">Nueva contraseña</label>
                     <input class="form-control" type="password" name="contrasena" id="contrasena" placeholder="Ej: &quot;15345987&quot;">
@@ -34,7 +39,7 @@
                 </div>
             </div>
 
-            <button type="button" class="btn btn-md btn-primary" id="enviar" name="enviar">Enviar</button>
+            <button type="button" class="btn btn-md btn-primary" id="enviar" name="enviar">Modificar</button>
             
         </div>
 		

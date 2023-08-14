@@ -36,3 +36,32 @@ se agrega campo de registro y de modificar solicitud_contrasena en gestion de us
 php mailer envia datos al correo para modificar contraseña
 
 se crea funcion para existeCorreo en gestion usuarios para comprobar si algun usuario posee el correo a registrar
+
+10/08/2023
+
+cambios de Luis:
+
+
+1- Se modificó el rango de las validaciones backend de gestionar_clubes.
+
+
+2- Se modificó el rango de las validaciones backend de gestionar_eventos.
+
+
+3- Se modificó el rango de las validaciones frontend de gestionar_usuarios.
+
+
+4- Se modificó el rango de las validaciones backend de gestionar_usuarios.
+
+
+
+11/08/2023
+
+Cambios de Luis:
+
+
+1- Se agregaron nuevos atributos trim a las validaciones backend de gestionar_atletas, gestionar_clubes, gestionar_eventos, gestionar_personal, inscripcion_evento, medico_atleta, resultados_eventos, roles_permisos, socioeconomico_atleta.
+
+13/08/2023
+
+se termina restaurar contraseña, terminando de crear los modulos de cambiar_contrasena.php
