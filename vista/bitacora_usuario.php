@@ -39,41 +39,23 @@
 						</div>
 					</div>
 					
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-md-12" > 
+					<div class="">
+						
 								<div class="table-responsive mb-4" > 
 									<table class="table table-hover table-borderless" id="tablaconsulta" width="100%" cellspacing="0">
 										<thead class="">
 											
 											<th>Usuario</th>
+											<th>Nombre</th>
 											<th>Modulo</th>
 											<th>Fecha Registro</th>
 											<th>Hora Registro</th>
 											<th>Accion Realizada</th>
 										</thead>
-										<tbody id="resultadoconsulta">
-											<?php 
-												if(!empty ($listaconsulta)){
-													echo $listaconsulta;
-												}else{
-											?>
-												<tr>
-													<td colspan="5">No hay informacion</td>
-													<td style="display:none"></td>
-													<td style="display:none"></th>
-													<td style="display:none"></td>
-													<td style="display:none"></td>
-												</tr>
-											<?php 
-												}
-											?>
-										</tbody>
+										
 									</table>
 								</div>
-								
-							</div>
-						</div>
+							
 					</div>
 					
 				</div>
