@@ -22,63 +22,39 @@ class bitacora_usuario extends conexion{
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         try{
+			$valor = $this->permisos($rol_usuario); //rol del usuario
+			if ($valor[0]=="true") {
 
-			$resultado = $co->query("SELECT b.cedula_usuario, m.nombre, DATE_FORMAT(b.fecha_registro, '%d/%m/%Y'), TIME_FORMAT(b.hora_registro, '%r'), b.accion_realizada from bitacora_usuario as b, modulos as m where m.id = b.id_modulo ORDER BY b.fecha_registro DESC, b.hora_registro DESC");
+				$stmt = $co->prepare("SELECT b.cedula_usuario as cedula,u.nombre as nombre, m.nombre as modulo, DATE_FORMAT(b.fecha_registro, '%d/%m/%Y') as fecha, TIME_FORMAT(b.hora_registro, '%r') as hora, b.accion_realizada as accion from bitacora_usuario as b, modulos as m, usuarios as u where u.cedula = b.cedula_usuario and m.id = b.id_modulo ORDER BY b.id DESC");
 
-			// $resultado = $co->query("SELECT b.cedula_usuario, m.nombre, DATE_FORMAT(b.fecha_registro, '%d/%m/%Y'), TIME_FORMAT(b.hora_registro, '%r'), b.accion_realizada from bitacora_usuario as b, modulos as m where m.id = b.id_modulo ORDER BY b.id DESC");
+				$stmt->execute();
 
-			//$resultado->execute();
-			if($resultado){
-
-				$respuesta = '';
+				$resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				
-				
-				foreach($resultado as $r){
+				$datos = array();
+
+				foreach($resultado as $fila){
 					
-					$valor = $this->permisos($rol_usuario); //rol del usuario
-					if ($valor[0]=="true") {
-						$respuesta = $respuesta."<tr>";
-                        
-                            $respuesta = $respuesta."<td>";
 
-								$respuesta = $respuesta."<table>";
-									$respuesta = $respuesta."<tr>";
-										$respuesta = $respuesta."<td>";
-											$respuesta = $respuesta."<img src='img/bootstrap-icons/person.svg' width='30px'>";
-										$respuesta = $respuesta."</td>";
-
-										$respuesta = $respuesta."<td>";
-											$respuesta = $respuesta.$r[0];
-										$respuesta = $respuesta."</td>";
-									$respuesta = $respuesta."</tr>";
-								$respuesta = $respuesta."</table>";
-
-                            $respuesta = $respuesta."</td>";
-
-                            $respuesta = $respuesta."<td>";
-                                $respuesta = $respuesta.$r[1];
-                            $respuesta = $respuesta."</td>";
-
-                            $respuesta = $respuesta."<td>";
-                                $respuesta = $respuesta.$r[2];
-                            $respuesta = $respuesta."</td>";
-
-                            $respuesta = $respuesta."<td>";
-                                $respuesta = $respuesta.$r[3];
-                            $respuesta = $respuesta."</td>";
-                            
-                            $respuesta = $respuesta."<td>";
-                                $respuesta = $respuesta.$r[4];
-                            $respuesta = $respuesta."</td>";
-
-						$respuesta = $respuesta."</tr>";
-					}
+					$subarray=array();
+					$subarray['cedula']=$fila['cedula'];
+					$subarray['nombre']=$fila['nombre'];
+					$subarray['modulo']=$fila['modulo'];
+					$subarray['fecha']=$fila['fecha'];
+					$subarray['hora']=$fila['hora'];
+					$subarray['accion']=$fila['accion'];
+					
+					$datos[] = $subarray;
+					
 				}
 
-				return $respuesta;
-			}
-			else {
-				return '';
+				$json = array(
+					"data" => $datos
+				);
+
+				return json_encode($json);
+			}else{
+				return "No tiene permiso para realizar esta tarea";
 			}
 
 		}catch(Exception $e) {
@@ -94,17 +70,17 @@ class bitacora_usuario extends conexion{
 		try{
 			
 			
-			$resultado = $co->prepare("SELECT consultar, registrar, modificar, eliminar FROM intermediaria WHERE id_rol = :rol and id_modulos = '8' ");
+			$stmt = $co->prepare("SELECT consultar, registrar, modificar, eliminar FROM intermediaria WHERE id_rol = :rol and id_modulos = '8' ");
 			
-			$resultado->bindParam(':rol',$rol);
-			$resultado->execute();
+			$stmt->bindParam(':rol',$rol);
+			$stmt->execute();
 			
 			$consultar="";
 			$registrar="";
 			$modificar="";
 			$eliminar="";
 			
-			foreach($resultado as $r){
+			foreach($stmt as $r){
 				$consultar = $r['consultar'];
 				$registrar = $r['registrar'];
 				$modificar = $r['modificar'];
