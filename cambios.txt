@@ -65,3 +65,13 @@ Cambios de Luis:
 13/08/2023
 
 se termina restaurar contraseña, terminando de crear los modulos de cambiar_contrasena.php
+
+16/08/2023
+
+bitacora_usuarios.js se realiza datatable correctamente, accion actualizar recarga el datatable
+
+bitacora_usuarios.php controlador se coloca elimina variable listarconsulta para colocar
+
+bitacora_usuarios modelo se modifica sql para realizar mejor la busqueda y se coloca prepare
+
+se elimina el html de retorno por un objeto para el datatable
