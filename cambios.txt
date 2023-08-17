@@ -75,3 +75,7 @@ bitacora_usuarios.php controlador se coloca elimina variable listarconsulta para
 bitacora_usuarios modelo se modifica sql para realizar mejor la busqueda y se coloca prepare
 
 se elimina el html de retorno por un objeto para el datatable
+
+se soluciona bug de roles y permisos al actualizar permisos
+
+se modifica la bd en foranea de bitacora, cedula usuario en cascada
