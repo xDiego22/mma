@@ -169,9 +169,9 @@ function envia_rol(rol_modulo) {
 	datos.append('rol_modulo', rol_modulo);
 	
 	enviaAjax(datos, 'envia_rol');
-
+	$("#rol_modulo2").val(rol_modulo);//solucion aqui, esto estaba debajo
 	$("#actualizar").on("click", function() {
-		$("#rol_modulo2").val(rol_modulo);
+		
 		enviaAjax2($("#formulario_permisos"));
 		$("#modal_permisos").modal("hide");
     });
@@ -179,8 +179,7 @@ function envia_rol(rol_modulo) {
 
 function verifica(check){
     if ($(check).val()=="true") {
-        $(check).val("false");
-       
+        $(check).val("false");  
     }
     else if ($(check).val()=="false") {
         $(check).val("true");
@@ -379,8 +378,9 @@ function enviaAjax2(datos) {
             data: datos.serialize(),
             beforeSend: function(){},
             timeout:10000,
-            success: function(respuesta) {
-				mensajemodal("Permisos guardados");
+            complete: function() {
+				mensajemodal("Permisos actualizados");
+				
             },
             error: function(){
 				mensajemodal("Error con ajax");	
