@@ -46,7 +46,7 @@
 						</div>
 					</div>
 						
-					<div class="container-fluid mb-5">
+					<div class="mb-5">
 						<div class="row">
 							<div class="col-md-12" >
 								<div class="table-responsive">
@@ -296,9 +296,12 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="table-responsive card">
-								<form id="formulario_permisos">
-									<input type="text" name="accion" id="accion2" value="Modificar" style="display:none;" />
+								<form id="formulario_permisos" method="post">
+
+									<input type="text" id="accion2" name="accion" value="Modificar" style="display:none;">
+
 									<input type="text" id="accion" name="accion" value="actualizar_permiso" style="display:none;">
+									
 									<input type="text" id="rol_modulo2" name="rol_modulo2" style="display:none;">
 									
 									<table class="table table-hover " id="tabla_permisos">
