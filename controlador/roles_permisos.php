@@ -9,7 +9,7 @@
 				return "false";
 				
 			}else{
-				return $valor;
+				return "true";
 			}
 		}	
 
@@ -84,13 +84,13 @@
   
 				$contador = count($_POST['modulo_id']);
 				$modulo_2 = $_POST['modulo_id'];
-
+				
 				$objeto->set_rol_2($_POST['rol_modulo2']);
 				
 				for ($i=0; $i < $contador; $i++) {
 					
-					$registrar = verifica2($_POST['registrar'.$i]);
 					$consultar = verifica2($_POST['consultar'.$i]);
+					$registrar = verifica2($_POST['registrar'.$i]);
 					$modificar = verifica2($_POST['modificar'.$i]);
 					$eliminar =verifica2($_POST['eliminar'.$i]);
 					
