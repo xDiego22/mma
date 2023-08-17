@@ -128,7 +128,7 @@
 					    if ($valor[0]=="true") {
                             $respuesta = $respuesta."<tr>";
 
-                                $respuesta = $respuesta."<td>";
+                                $respuesta = $respuesta."<td value = ".$r['id'].">";
                                     $respuesta = $respuesta.$r['id'];
                                 $respuesta = $respuesta."</td>";
 
@@ -595,7 +595,7 @@
                                         if ($r[2]=="true") {
                                             $respuesta = $respuesta.'<input type="checkbox" checked="" name="consultar'.$i.'" value="true" onclick="verifica(this);">';
                                         }else{
-                                            $respuesta = $respuesta.'<input type="checkbox" name="consultar'.$i.'" value="false" onclick="verifica(this);">';
+                                            $respuesta = $respuesta.'<input type="checkbox" name="consultar'.$i.'" onclick="verifica(this);">';
                                         }
                                     $respuesta = $respuesta."</td>";
 
@@ -603,7 +603,7 @@
                                         if ($r[3]=="true") {
                                             $respuesta = $respuesta.'<input type="checkbox" checked="" name="registrar'.$i.'" value="true" onclick="verifica(this);">';
                                         }else{
-                                            $respuesta = $respuesta.'<input type="checkbox" name="registrar'.$i.'" value="false" onclick="verifica(this);">';
+                                            $respuesta = $respuesta.'<input type="checkbox" name="registrar'.$i.'" onclick="verifica(this);">';
                                         }
                                     $respuesta = $respuesta."</td>";
 
@@ -611,7 +611,7 @@
                                         if ($r[4]=="true") {
                                             $respuesta = $respuesta.'<input type="checkbox" checked="" name="modificar'.$i.'" value="true" onclick="verifica(this);">';                
                                         }else{
-                                            $respuesta = $respuesta.'<input type="checkbox" name="modificar'.$i.'" value="false" onclick="verifica(this);">';
+                                            $respuesta = $respuesta.'<input type="checkbox" name="modificar'.$i.'" onclick="verifica(this);">';
                                         }
                                     $respuesta = $respuesta."</td>";
 
@@ -619,7 +619,7 @@
                                         if ($r[5]=="true") {
                                             $respuesta = $respuesta.'<input type="checkbox" checked="" name="eliminar'.$i.'" value="true" onclick="verifica(this);">';
                                         }else{
-                                            $respuesta = $respuesta.'<input type="checkbox" name="eliminar'.$i.'" value="false" onclick="verifica(this);">';
+                                            $respuesta = $respuesta.'<input type="checkbox" name="eliminar'.$i.'" onclick="verifica(this);">';
                                         }
                                     $respuesta = $respuesta."</td>";
                                 $respuesta = $respuesta."</tr>";
