@@ -79,3 +79,7 @@ se elimina el html de retorno por un objeto para el datatable
 se soluciona bug de roles y permisos al actualizar permisos
 
 se modifica la bd en foranea de bitacora, cedula usuario en cascada
+
+controlador de principal y acerca se le añade session start para que se reanude la sesion
+
+base de datos tabla de usuarios en token contraseña y solicitud contraseña se modifica y se vuelve valor predeterminado NULL
