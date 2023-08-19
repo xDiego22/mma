@@ -39,7 +39,7 @@
 							$modulo = $objeto->busca_modulo();
 							
 							$_SESSION['modulo'] = $modulo;
-	
+							
 							$mensaje= "ok";//el ok e para el envio ajax
 						} 
 						//si no coinciden manda el mensaje de datos incorrectos
