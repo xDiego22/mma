@@ -85,3 +85,5 @@ controlador de principal y acerca se le añade session start para que se reanude 
 base de datos tabla de usuarios en token contraseña y solicitud contraseña se modifica y se vuelve valor predeterminado NULL
 
 se modifica index para redireccionar usuarios si no se han loggeado
+
+bloqueo de usuarios por intentos erroneos implentado en inicio de sesion
