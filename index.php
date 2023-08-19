@@ -9,6 +9,16 @@
 	}
 
 	if(is_file("controlador/".$pagina.".php")){
+		
+		if(empty($_SESSION) and $pagina != 'inicio_sesion'){
+			session_start();
+		}
+		if(!isset($_SESSION['cedula']) || $_SESSION['cedula'] == "" and $pagina != 'inicio_sesion' and $pagina != 'error404'){
+			
+			require_once("controlador/cerrar_sesion.php");
+			exit;
+		}
+
 		require_once("controlador/".$pagina.".php");
 	}
 	else{
