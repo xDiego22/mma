@@ -29,7 +29,7 @@
 
 				<button type="button" class="form_submit" id="enviar_correo" name="enviar_correo">Enviar</button>
 
-                <a href="?pagina=inicio_sesion" class="form_link">Iniciar sesion</a>
+                <a href="?pagina=inicio_sesion" class="form_link">Ir a iniciar sesion</a>
 			</div>
 		</div>
  	</div>
