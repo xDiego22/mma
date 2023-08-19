@@ -87,3 +87,7 @@ base de datos tabla de usuarios en token contraseña y solicitud contraseña se mo
 se modifica index para redireccionar usuarios si no se han loggeado
 
 bloqueo de usuarios por intentos erroneos implentado en inicio de sesion
+
+se implemento recaptcha v2 de google al inicio de sesion
+ 
+se modifico estilos.css para el inicio de sesion ya que se le agregó el captcha
