@@ -22,7 +22,8 @@ $(document).ready(function(){
 			var datos = new FormData();
 			datos.append('accion_inicio_sesion','iniciar_sesion');
 			datos.append('cedula_inicio',$("#cedula_inicio").val());
-			datos.append('contrasena_inicio',$("#contrasena_inicio").val());
+			datos.append('contrasena_inicio', $("#contrasena_inicio").val());
+			datos.append("g-recaptcha-response", $("#g-recaptcha-response").val());
 			enviaAjax(datos);
 			limpia_formulario();
 		}
