@@ -3,6 +3,8 @@
 <head>  
 	<?php  require_once('comunes/cabecera.php');?> 
 	<link rel="stylesheet" href="css/estilos.css">
+	<!-- script de recaptcha -->
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body> 
 	<?php require_once('comunes/modal.php') ?>
@@ -32,6 +34,8 @@
 					<label for="contrasena_inicio" class="form_label">Contraseña</label>
 					<span class="form_line"></span>
 				</div>
+
+				<div class="g-recaptcha" data-sitekey="6LcEU7wnAAAAAB43ll7nNTrzfjg-LNjk_0QNgRmi"></div>
 
 				<button type="button" class="form_submit" id="iniciar_sesion" name="iniciar_sesion">Ingresar</button>
 
