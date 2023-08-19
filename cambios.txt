@@ -83,3 +83,5 @@ se modifica la bd en foranea de bitacora, cedula usuario en cascada
 controlador de principal y acerca se le añade session start para que se reanude la sesion
 
 base de datos tabla de usuarios en token contraseña y solicitud contraseña se modifica y se vuelve valor predeterminado NULL
+
+se modifica index para redireccionar usuarios si no se han loggeado
