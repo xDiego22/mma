@@ -50,7 +50,7 @@
 								$contador++;
 								setcookie($cedula,$contador,time()+ 120);
 	
-								if($contador >= 3){
+								if($contador >= 4){
 									setcookie("block".$cedula,$contador,time()+ 60);
 								}
 	
