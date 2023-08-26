@@ -69,134 +69,158 @@ class gestionar_clubes extends conexion{
 
 	//metodos
 	public function registrar($rol_usuario,$cedula_bitacora,$modulo){
-
-		if($this->validar()){
-			if(!$this->existe($this->codigo_club)){
-
-			$co = $this->conecta();
-			$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-			try{
-				
-				$resultado = $co->prepare("INSERT into clubes(
-					codigo,
-					nombre,
-					telefono,
-					deportebase,
-					direccion)
-					Values(
-					:codigo_club,
-					:nombre_club,
-					:telefono_club,
-					:deporte_club,
-					:direccion_club)");
-
-				$resultado->bindParam(':codigo_club',$this->codigo_club);
-				$resultado->bindParam(':nombre_club',$this->nombre_club);
-				$resultado->bindParam(':telefono_club',$this->telefono_club);
-				$resultado->bindParam(':deporte_club',$this->deporte_club);
-				$resultado->bindParam(':direccion_club',$this->direccion_club);
-
-				$resultado->execute();
-				
-				$accion= "Ha regitrado un nuevo Club";
-
-				parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-				
-				return $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
-				
-				}catch(Exception $e){
-					return $e->getMessage();
-				}
-			} 
-			else {
-				return "ya existe club con el codigo que desea ingresar";
-			}
-		}else{
-			return "ingrese datos correctamente";
-		}
+		$valor = $this->permisos($rol_usuario); //rol del usuario
+		if($valor[1]=="true"){
 		
-	}
+			if($this->validar()){
+				if(!$this->existe($this->codigo_club)){
 
-	public function modificar($rol_usuario,$cedula_bitacora,$modulo){
-
-		$co = $this->conecta();
-		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		if($this->validar()){
-			if($this->existe($this->codigo_club)){
+				$co = $this->conecta();
+				$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 				try{
+					
+					$resultado = $co->prepare("INSERT into clubes(
+						codigo,
+						nombre,
+						telefono,
+						deportebase,
+						direccion)
+						Values(
+						:codigo_club,
+						:nombre_club,
+						:telefono_club,
+						:deporte_club,
+						:direccion_club)");
 
-					$resultado = $co->prepare("UPDATE clubes set
-						codigo = :codigo_club,
-						nombre = :nombre_club,
-						telefono = :telefono_club,
-						deportebase = :deporte_club,
-						direccion = :direccion_club
-						where codigo = :codigo_club");
-
+					//SE ENCRIPTA LA INFORMACION
+					$this->telefono_club = parent::encriptar($this->telefono_club);
+					$this->deporte_club = parent::encriptar($this->deporte_club);
+					$this->direccion_club = parent::encriptar($this->direccion_club);
+				
 					$resultado->bindParam(':codigo_club',$this->codigo_club);
 					$resultado->bindParam(':nombre_club',$this->nombre_club);
 					$resultado->bindParam(':telefono_club',$this->telefono_club);
 					$resultado->bindParam(':deporte_club',$this->deporte_club);
 					$resultado->bindParam(':direccion_club',$this->direccion_club);
 
-					$resultado->execute();			
-						
-					$accion= "Ha modificado un Club";
+					$resultado->execute();
+					
+					$accion= "Ha regitrado un nuevo Club";
 
 					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+					
 					return $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
-
-				} catch(Exception $e) {
-					return $e->getMessage();
+					
+					}catch(Exception $e){
+						return $e->getMessage();
+					}
+				} 
+				else {
+					return "ya existe club con el codigo que desea ingresar";
 				}
+			}else{
+				return "ingrese datos correctamente";
 			}
-			else {
-				return "club no registrado";
+		}else {
+			return "no tiene permiso para registrar";
+		}
+	}
+
+	public function modificar($rol_usuario,$cedula_bitacora,$modulo){
+
+		$valor = $this->permisos($rol_usuario); //rol del usuario
+		if($valor[2]=="true"){
+		
+			$co = $this->conecta();
+			$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			if($this->validar()){
+				if($this->existe($this->codigo_club)){
+
+					try{
+
+						$resultado = $co->prepare("UPDATE clubes set
+							codigo = :codigo_club,
+							nombre = :nombre_club,
+							telefono = :telefono_club,
+							deportebase = :deporte_club,
+							direccion = :direccion_club
+							where codigo = :codigo_club");
+
+						//SE ENCRIPTA LA INFORMACION
+						$this->telefono_club = parent::encriptar($this->telefono_club);
+						$this->deporte_club = parent::encriptar($this->deporte_club);
+						$this->direccion_club = parent::encriptar($this->direccion_club);
+
+						$resultado->bindParam(':codigo_club',$this->codigo_club);
+						$resultado->bindParam(':nombre_club',$this->nombre_club);
+						$resultado->bindParam(':telefono_club',$this->telefono_club);
+						$resultado->bindParam(':deporte_club',$this->deporte_club);
+						$resultado->bindParam(':direccion_club',$this->direccion_club);
+
+						$resultado->execute();			
+							
+						$accion= "Ha modificado un Club";
+
+						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+						return $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
+
+					} catch(Exception $e) {
+						return $e->getMessage();
+					}
+				}
+				else {
+					return "club no registrado";
+				}
+			}else{
+				return "ingrese datos correctamente";
 			}
-		}else{
-			return "ingrese datos correctamente";
+		}else {
+			return "no tiene permiso para modificar";
 		}
 	}
  
-	public function eliminar($cedula_bitacora,$modulo){
+	public function eliminar($cedula_bitacora,$modulo,$rol_usuario){
+		$valor = $this->permisos($rol_usuario); //rol del usuario
+		if($valor[3]=="true"){
+			$co = $this->conecta();
+			$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		$co = $this->conecta();
-		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			if(preg_match_all('/^[A-Za-z0-9\b]{3,30}$/',$this->codigo_club)){
+			
+				if($this->existe($this->codigo_club)){
 
-		if(preg_match_all('/^[A-Za-z0-9\b]{3,30}$/',$this->codigo_club)){
-		
-			if($this->existe($this->codigo_club)){
+					try{
 
-				try{
+						$resultado = $co->prepare("DELETE from clubes where codigo = :codigo_club");
 
-					$resultado = $co->prepare("DELETE from clubes where codigo = :codigo_club");
+						$resultado->bindParam(':codigo_club',$this->codigo_club);
 
-					$resultado->bindParam(':codigo_club',$this->codigo_club);
+						$resultado->execute();		
 
-					$resultado->execute();		
+						if ($resultado) {
+							$accion= "Ha eliminado un Club";
 
-					if ($resultado) {
-						$accion= "Ha eliminado un Club";
-
-						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-						return "eliminado";
+							parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+							return "eliminado";
+						}
+						else{
+							return "no eliminado";
+						}
+						
+					}catch(Exception $e) {
+						return $e->getMessage();
 					}
-					else{
-						return "no eliminado";
-					}
-					
-				}catch(Exception $e) {
-					return $e->getMessage();
+				}
+				else {
+					return "Club no registrado";
 				}
 			}
-			else {
-				return "Club no registrado";
+			else{
+				return "ingrese datos correctamente";
 			}
-		}
-		else{
-			return "ingrese datos correctamente";
+		}else {
+			return "no tiene permiso para eliminar";
 		}
 	}
 
@@ -229,18 +253,18 @@ class gestionar_clubes extends conexion{
 							$respuesta = $respuesta."</td>";
 
 							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r['telefono'];
+								$respuesta = $respuesta.parent::desencriptar($r['telefono']);
 							$respuesta = $respuesta."</td>";
 
 							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r['deportebase'];
+								$respuesta = $respuesta.parent::desencriptar($r['deportebase']);
 							$respuesta = $respuesta."</td>";
 							
 							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r['direccion'];
+								$respuesta = $respuesta.parent::desencriptar($r['direccion']);
 							$respuesta = $respuesta."</td>";
 
-							$respuesta = $respuesta."<td>";
+							$respuesta = $respuesta."<td class='d-flex'>";
 								if ($valor[2]=="true") {
 									$respuesta = $respuesta."<button type='button' class='btn btn-primary mb-1 mr-1' data-toggle='modal' data-target='#modal_gestion' onclick='modalmodificar(this)' id='boton_modificar'><i class='bi bi-pencil-fill'></i></button>";
 								}
