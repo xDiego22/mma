@@ -34,7 +34,6 @@ class bitacora_usuario extends conexion{
 				$datos = array();
 
 				foreach($resultado as $fila){
-					
 
 					$subarray=array();
 					$subarray['cedula']=$fila['cedula'];
@@ -42,7 +41,7 @@ class bitacora_usuario extends conexion{
 					$subarray['modulo']=$fila['modulo'];
 					$subarray['fecha']=$fila['fecha'];
 					$subarray['hora']=$fila['hora'];
-					$subarray['accion']=$fila['accion'];
+					$subarray['accion']= parent::desencriptar($fila['accion']);
 					
 					$datos[] = $subarray;
 					
