@@ -32,7 +32,7 @@
  
 			if($accion=='eliminar_personal'){
 				$objeto->set_cedula_personal($_POST['cedula_personal']);
-				echo $objeto->eliminar($cedula_bitacora,$modulo);
+				echo $objeto->eliminar($cedula_bitacora,$modulo,$rol_usuario);
 			}else{
 				
 				$objeto->set_club_personal($_POST['club_personal']);
