@@ -88,152 +88,165 @@ class gestionar_personal extends conexion{
 
 	public function registrar($rol_usuario, $cedula_bitacora,$modulo){
 
-		if($this->validar()){
-			if(!$this->existe($this->cedula_personal)){
+		$valor = $this->permisos($rol_usuario); //rol del usuario
+		if($valor[1]=="true"){
+			if($this->validar()){
+				if(!$this->existe($this->cedula_personal)){
 
-				
-				$co = $this->conecta();
-				$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				//se añaden atributos a la conección para poder controlar los errores
-				//atributos para poder manejar los posibles errores
-
-
-				try{
-
-					$resultado = $co->prepare("INSERT into personal(
-						id_club,
-						cedula,
-						nombre,
-						apellido,
-						telefono,
-						cargo,
-						direccion)
-						Values(
-						:club_personal,
-						:cedula_personal,
-						:nombres_personal,
-						:apellidos_personal,
-						:telefono_personal,
-						:cargo_personal,
-						:direccion_personal)");
 					
-					//SE ENCRIPTA LA INFORMACION
-					$this->direccion_personal = parent::encriptar($this->direccion_personal);
+					$co = $this->conecta();
+					$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					//se añaden atributos a la conección para poder controlar los errores
+					//atributos para poder manejar los posibles errores
 
-					$resultado->bindParam(':club_personal',$this->club_personal);
-					$resultado->bindParam(':cedula_personal',$this->cedula_personal);
-					$resultado->bindParam(':nombres_personal',$this->nombres_personal);
-					$resultado->bindParam(':apellidos_personal',$this->apellidos_personal);
-					$resultado->bindParam(':telefono_personal',$this->telefono_personal);
-					$resultado->bindParam(':cargo_personal',$this->cargo_personal);
-					$resultado->bindParam(':direccion_personal',$this->direccion_personal);
-	
-					$resultado->execute();
 
-					$accion= "Ha regitrado un nuevo Personal de club";
+					try{
 
-					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+						$resultado = $co->prepare("INSERT into personal(
+							id_club,
+							cedula,
+							nombre,
+							apellido,
+							telefono,
+							cargo,
+							direccion)
+							Values(
+							:club_personal,
+							:cedula_personal,
+							:nombres_personal,
+							:apellidos_personal,
+							:telefono_personal,
+							:cargo_personal,
+							:direccion_personal)");
+						
+						//SE ENCRIPTA LA INFORMACION
+						$this->direccion_personal = parent::encriptar($this->direccion_personal);
 
-					return  $this->consultar($rol_usuario, $cedula_bitacora,$modulo);
+						$resultado->bindParam(':club_personal',$this->club_personal);
+						$resultado->bindParam(':cedula_personal',$this->cedula_personal);
+						$resultado->bindParam(':nombres_personal',$this->nombres_personal);
+						$resultado->bindParam(':apellidos_personal',$this->apellidos_personal);
+						$resultado->bindParam(':telefono_personal',$this->telefono_personal);
+						$resultado->bindParam(':cargo_personal',$this->cargo_personal);
+						$resultado->bindParam(':direccion_personal',$this->direccion_personal);
+		
+						$resultado->execute();
 
-				}catch(Exception $e){
-					return $e->getMessage();
+						$accion= "Ha regitrado un nuevo Personal de club";
+
+						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+
+						return  $this->consultar($rol_usuario, $cedula_bitacora,$modulo);
+
+					}catch(Exception $e){
+						return $e->getMessage();
+					}
+
 				}
-
+				else{
+					return "Ya existe un Personal con esta cedula";
+				}
+			}else{
+				return "ingrese datos correctamente";
 			}
-			else{
-				return "Ya existe un Personal con esta cedula";
-			}
-		}else{
-			return "ingrese datos correctamente";
+		}else {
+			return "no tiene permiso para registrar";
 		}
 	}
 
 	public function modificar($rol_usuario, $cedula_bitacora,$modulo){
- 
-		$co = $this->conecta();
-		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$valor = $this->permisos($rol_usuario); //rol del usuario
+		if($valor[2]=="true"){
+			$co = $this->conecta();
+			$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		if($this->validar()){
-			if($this->existe($this->cedula_personal)){
-	
-				try{
+			if($this->validar()){
+				if($this->existe($this->cedula_personal)){
+		
+					try{
 
-					$resultado = $co->prepare("Update personal set
-						id_club = :club_personal,
-						cedula = :cedula_personal,
-						nombre = :nombres_personal,
-						apellido = :apellidos_personal,
-						telefono = :telefono_personal,
-						cargo = :cargo_personal,
-						direccion = :direccion_personal
-						where cedula = :cedula_personal");
-					
-					//SE ENCRIPTA LA INFORMACION
-					$this->direccion_personal = parent::encriptar($this->direccion_personal);
-
-					$resultado->bindParam(':club_personal',$this->club_personal);
-					$resultado->bindParam(':cedula_personal',$this->cedula_personal);
-					$resultado->bindParam(':nombres_personal',$this->nombres_personal);
-					$resultado->bindParam(':apellidos_personal',$this->apellidos_personal);
-					$resultado->bindParam(':telefono_personal',$this->telefono_personal);
-					$resultado->bindParam(':cargo_personal',$this->cargo_personal);
-					$resultado->bindParam(':direccion_personal',$this->direccion_personal);
-
-					$resultado->execute();	
-
-					$accion= "Ha modificado un Personal de club";
-
-					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+						$resultado = $co->prepare("Update personal set
+							id_club = :club_personal,
+							cedula = :cedula_personal,
+							nombre = :nombres_personal,
+							apellido = :apellidos_personal,
+							telefono = :telefono_personal,
+							cargo = :cargo_personal,
+							direccion = :direccion_personal
+							where cedula = :cedula_personal");
 						
-					return $this->consultar($rol_usuario, $cedula_bitacora,$modulo);
-					
-				} catch(Exception $e) {
-					return $e->getMessage();
-				}
-			}
-			else {
-				return "Personal no registrado";
-			}
-		}else{
-			return "ingrese datos correctamente";
-		}
+						//SE ENCRIPTA LA INFORMACION
+						$this->direccion_personal = parent::encriptar($this->direccion_personal);
 
-	}
+						$resultado->bindParam(':club_personal',$this->club_personal);
+						$resultado->bindParam(':cedula_personal',$this->cedula_personal);
+						$resultado->bindParam(':nombres_personal',$this->nombres_personal);
+						$resultado->bindParam(':apellidos_personal',$this->apellidos_personal);
+						$resultado->bindParam(':telefono_personal',$this->telefono_personal);
+						$resultado->bindParam(':cargo_personal',$this->cargo_personal);
+						$resultado->bindParam(':direccion_personal',$this->direccion_personal);
 
-	public function eliminar($cedula_bitacora,$modulo){
-		$co = $this->conecta();
-		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+						$resultado->execute();	
 
-		if(preg_match_all('/^[0-9\b]{7,8}$/',$this->cedula_personal)){
-			if($this->existe($this->cedula_personal)){
-
-				try{
-
-					$resultado = $co->prepare("Delete from personal where cedula = :cedula_personal");
-
-					$resultado->bindParam(':cedula_personal',$this->cedula_personal);
-
-					$resultado->execute();	
-
-					if ($resultado) {
-						$accion= "Ha eliminado un Personal de un club";
+						$accion= "Ha modificado un Personal de club";
 
 						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-						return "eliminado";
+							
+						return $this->consultar($rol_usuario, $cedula_bitacora,$modulo);
+						
+					} catch(Exception $e) {
+						return $e->getMessage();
 					}
-					else{
-						return "no eliminado";
-					}
-				}catch(Exception $e) {
-					return $e->getMessage();
 				}
+				else {
+					return "Personal no registrado";
+				}
+			}else{
+				return "ingrese datos correctamente";
 			}
-			else {
-				return "Personal no registrado";
+		}else {
+			return "no tiene permiso para modificar";
+		}
+	}
+
+	public function eliminar($cedula_bitacora,$modulo,$rol_usuario){
+		$valor = $this->permisos($rol_usuario); //rol del usuario
+		if($valor[3]=="true"){
+			$co = $this->conecta();
+			$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+			if(preg_match_all('/^[0-9\b]{7,8}$/',$this->cedula_personal)){
+				if($this->existe($this->cedula_personal)){
+
+					try{
+
+						$resultado = $co->prepare("Delete from personal where cedula = :cedula_personal");
+
+						$resultado->bindParam(':cedula_personal',$this->cedula_personal);
+
+						$resultado->execute();	
+
+						if ($resultado) {
+							$accion= "Ha eliminado un Personal de un club";
+
+							parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+							return "eliminado";
+						}
+						else{
+							return "no eliminado";
+						}
+					}catch(Exception $e) {
+						return $e->getMessage();
+					}
+				}
+				else {
+					return "Personal no registrado";
+				}
+			}else{
+				return "ingrese datos correctamente";
 			}
-		}else{
-			return "ingrese datos correctamente";
+		}else {
+			return "no tiene permiso para registrar";
 		}
 	}
 
