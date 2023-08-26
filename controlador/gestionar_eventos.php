@@ -32,7 +32,7 @@
 
 			if($accion=='eliminar_evento'){
 				$objeto->set_nombre_evento($_POST['nombre_evento']);
-				echo $objeto->eliminar($cedula_bitacora,$modulo);
+				echo $objeto->eliminar($cedula_bitacora,$modulo,$rol_usuario);
 			}
 			else{
 
