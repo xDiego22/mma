@@ -10,6 +10,15 @@ order allow,deny
 deny from all
 </files>
 
+<files private.key>
+order allow,deny
+deny from all
+</files>
+
+<files public.key>
+order allow,deny
+deny from all
+</files>
 # denegar acceso a robots maliciosos, extractores de webs y navegadores offline
 RewriteBase /
 RewriteCond %{HTTP_USER_AGENT} ^Anarchie [OR]
