@@ -31,7 +31,7 @@
 
 			if($accion=='eliminar_club'){
 				$objeto->set_codigo_club($_POST['codigo_club']);
-				echo $objeto->eliminar($cedula_bitacora,$modulo);
+				echo $objeto->eliminar($cedula_bitacora,$modulo,$rol_usuario,);
 				
 			}else{
 				  
