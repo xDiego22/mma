@@ -79,7 +79,7 @@
 		$permisos = $objeto->permisos($rol_usuario);
 
 		if($permisos[0] == "true"){
-			$objeto->registrar_bitacora($cedula_bitacora,"Ha visualizado Inscripcion a Eventos",$modulo);
+			//$objeto->registrar_bitacora($cedula_bitacora,"Ha visualizado Inscripcion a Eventos",$modulo);
 			require_once("vista/".$pagina.".php");
 		}else{
 			echo "<center>No tienes acceso para consultar este modulo</center>";

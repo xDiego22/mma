@@ -71,7 +71,7 @@
 
         if($permisos[0] == "true"){ 
 
-			$objeto->registrar_bitacora($cedula_bitacora,"Ha visualizado Emparejamientos y Combates",$modulo);
+			//$objeto->registrar_bitacora($cedula_bitacora,"Ha visualizado Emparejamientos y Combates",$modulo);
 			require_once("vista/".$pagina.".php");
 		}else{
 			echo "<center>No tienes acceso para consultar este modulo</center>";
