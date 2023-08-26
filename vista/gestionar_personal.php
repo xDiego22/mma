@@ -26,7 +26,7 @@
 
 				<div class="container-fluid border my-4 shadow bg-white rounded" style="width:95%;">
 			
-					<div class="container-fluid mt-4 mb-3">
+					<div class="mt-4 mb-3">
 						<div class="row">
 							<div class="col-auto mr-auto mb-2">
 								<div class="h4 text-dark">Gestionar Personal</div>
@@ -45,53 +45,53 @@
 						</div>
 					</div>
 						
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-md-12" >
-								<div class="table-responsive">
-									<table class="table table-striped table-hover table-borderless" id="tablaconsulta" width="100%" cellspacing="0">
-										<thead class="thead-dark">
-											<tr> 
-												<th>Club</th>
-												<th style="display:none">id_club</th>
-												<th>Cedula</th>
-												<th>Nombre</th>
-												<th>Telefono</th>
-												<th>Cargo</th>
-												<th>Direccion</th>
-												<th>Acciones</th>
-												<th style="display:none">nombre</th>
-												<th style="display:none">apellido</th>
+					
+					<div class="row">
+						<div class="col-md-12" >
+							<div class="table-responsive">
+								<table class="table table-striped table-hover table-borderless" id="tablaconsulta" width="100%" cellspacing="0">
+									<thead class="thead-dark">
+										<tr> 
+											<th>Club</th>
+											<th style="display:none">id_club</th>
+											<th>Cedula</th>
+											<th>Nombre</th>
+											<th>Telefono</th>
+											<th>Cargo</th>
+											<th>Direccion</th>
+											<th>Acciones</th>
+											<th style="display:none">nombre</th>
+											<th style="display:none">apellido</th>
+										</tr>
+									</thead>
+									<tbody id="resultadoconsulta">
+										<?php 
+											if(!empty ($listaconsulta)){
+												echo $listaconsulta;
+											}else{
+										?>
+											<tr>											
+												<td colspan="10">No hay informacion</td>
+												<td style="display:none"></td>
+												<td style="display:none"></td>
+												<td style="display:none"></td>
+												<td style="display:none"></td>
+												<td style="display:none"></td>
+												<td style="display:none"></td>
+												<td style="display:none"></td>
+												<td style="display:none"></td>
+												<td style="display:none"></td>
 											</tr>
-										</thead>
-										<tbody id="resultadoconsulta">
-											<?php 
-												if(!empty ($listaconsulta)){
-													echo $listaconsulta;
-												}else{
-											?>
-												<tr>											
-													<td colspan="10">No hay informacion</td>
-													<td style="display:none"></td>
-													<td style="display:none"></td>
-													<td style="display:none"></td>
-													<td style="display:none"></td>
-													<td style="display:none"></td>
-													<td style="display:none"></td>
-													<td style="display:none"></td>
-													<td style="display:none"></td>
-													<td style="display:none"></td>
-												</tr>
-											<?php 
-												}
-											?>
-										</tbody>
-									</table>
-								</div>
-								
+										<?php 
+											}
+										?>
+									</tbody>
+								</table>
 							</div>
+							
 						</div>
 					</div>
+					
 					
 				</div>
 			</div>
