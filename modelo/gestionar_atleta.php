@@ -139,48 +139,115 @@ class gestionar_atleta extends conexion{
  
 	//metodos
 	public function registrar($rol_usuario,$cedula_bitacora,$modulo){
-		if($this->validar()){
-			if(!$this->existe($this->cedula_atleta)){
+		$valor = $this->permisos($rol_usuario); //rol del usuario
+		if($valor[1]=="true"){
+		
+			if($this->validar()){
+				if(!$this->existe($this->cedula_atleta)){
 
+					
+					$co = $this->conecta();
+					$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					//se añaden atributos a la conección para poder controlar los errores
+					//atributos para poder manejar los posibles errores
+					
+						try{
+
+							$resultado = $co->prepare("INSERT into atletas(
+								id_club,
+								cedula,
+								nombre,
+								apellido,
+								peso,
+								estatura,
+								fechadenacimiento,
+								telefono,
+								sexo,
+								deportebase,
+								categoria,
+								fechaingresoclub,
+								entrenador)
+								Values(
+								:club_atleta,
+								:cedula_atleta,
+								:nombres_atleta,
+								:apellidos_atleta,
+								:peso_atleta,
+								:estatura_atleta,
+								:fecha_atleta,
+								:telefono_atleta,
+								:sexo_atleta,
+								:deporte_atleta,
+								:categoria_atleta,
+								:fecha_ingreso_atleta,
+								:entrenador_atleta)");
+
+							$resultado->bindParam(':club_atleta',$this->club_atleta);
+							$resultado->bindParam(':cedula_atleta',$this->cedula_atleta);
+							$resultado->bindParam(':nombres_atleta',$this->nombres_atleta);
+							$resultado->bindParam(':apellidos_atleta',$this->apellidos_atleta);
+							$resultado->bindParam(':peso_atleta',$this->peso_atleta);
+							$resultado->bindParam(':estatura_atleta',$this->estatura_atleta);
+							$resultado->bindParam(':fecha_atleta',$this->fecha_atleta);
+							$resultado->bindParam(':telefono_atleta',$this->telefono_atleta);
+							$resultado->bindParam(':sexo_atleta',$this->sexo_atleta);
+							$resultado->bindParam(':deporte_atleta',$this->deporte_atleta);
+							$resultado->bindParam(':categoria_atleta',$this->categoria_atleta);
+							$resultado->bindParam(':fecha_ingreso_atleta',$this->fecha_ingreso_atleta);
+							$resultado->bindParam(':entrenador_atleta',$this->entrenador_atleta);
+							
+							$resultado->execute();
+
+							$accion= "Ha regitrado un nuevo Atleta";
+
+							parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+
+							return $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
+
+						}catch(Exception $e){
+							return $e->getMessage();
+						}
+					
+				} 
+				else {
+					return "Ya existe atleta con la cedula que desea ingresar";
+				}
+			}else{
+				return 'ingrese datos correctamente';
+			}
+		}else {
+			return "no tiene permiso para registrar";
+		}
+	}
+
+	public function modificar($rol_usuario,$cedula_bitacora,$modulo){
+		$valor = $this->permisos($rol_usuario); //rol del usuario
+		if($valor[2]=="true"){
+			$co = $this->conecta();
+			$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			
+			if($this->validar()){
 				
-				$co = $this->conecta();
-				$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				//se añaden atributos a la conección para poder controlar los errores
-				//atributos para poder manejar los posibles errores
-				
+				if($this->existe($this->cedula_atleta)){
+
 					try{
 
-						$resultado = $co->prepare("INSERT into atletas(
-							id_club,
-							cedula,
-							nombre,
-							apellido,
-							peso,
-							estatura,
-							fechadenacimiento,
-							telefono,
-							sexo,
-							deportebase,
-							categoria,
-							fechaingresoclub,
-							entrenador)
-							Values(
-							:club_atleta,
-							:cedula_atleta,
-							:nombres_atleta,
-							:apellidos_atleta,
-							:peso_atleta,
-							:estatura_atleta,
-							:fecha_atleta,
-							:telefono_atleta,
-							:sexo_atleta,
-							:deporte_atleta,
-							:categoria_atleta,
-							:fecha_ingreso_atleta,
-							:entrenador_atleta)");
+						$resultado = $co->prepare("UPDATE atletas set
+							id_club = :club_atleta,
+							nombre = :nombres_atleta,
+							apellido = :apellidos_atleta,
+							peso = :peso_atleta,
+							estatura = :estatura_atleta,
+							fechadenacimiento = :fecha_atleta,
+							telefono = :telefono_atleta,
+							sexo = :sexo_atleta,
+							deportebase = :deporte_atleta,
+							categoria = :categoria_atleta,
+							fechaingresoclub = :fecha_ingreso_atleta,
+							entrenador =:entrenador_atleta
+							where cedula = :cedula_atleta");
 
 						$resultado->bindParam(':club_atleta',$this->club_atleta);
-						$resultado->bindParam(':cedula_atleta',$this->cedula_atleta);
 						$resultado->bindParam(':nombres_atleta',$this->nombres_atleta);
 						$resultado->bindParam(':apellidos_atleta',$this->apellidos_atleta);
 						$resultado->bindParam(':peso_atleta',$this->peso_atleta);
@@ -192,122 +259,71 @@ class gestionar_atleta extends conexion{
 						$resultado->bindParam(':categoria_atleta',$this->categoria_atleta);
 						$resultado->bindParam(':fecha_ingreso_atleta',$this->fecha_ingreso_atleta);
 						$resultado->bindParam(':entrenador_atleta',$this->entrenador_atleta);
-						
-						$resultado->execute();
+						$resultado->bindParam(':cedula_atleta',$this->cedula_atleta);
 
-						$accion= "Ha regitrado un nuevo Atleta";
+						$resultado->execute();
+						
+						$accion= "Ha modificado un Atleta";
 
 						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-
+							
 						return $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
 
-					}catch(Exception $e){
+					} catch(Exception $e) {
 						return $e->getMessage();
 					}
-				
-			} 
-			else {
-				return "Ya existe atleta con la cedula que desea ingresar";
+				}
+				else {
+					return "Atleta no registrado";
+				}
+			}else{
+				return 'ingrese datos correctamente';
 			}
-		}else{
-			return 'ingrese datos correctamente';
+		}else {
+			return "no tiene permiso para modificar";
 		}
 	}
 
-	public function modificar($rol_usuario,$cedula_bitacora,$modulo){
+	public function eliminar($cedula_bitacora,$modulo,$rol_usuario){
 
-		$co = $this->conecta();
-		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		
-		if($this->validar()){
-			
-			if($this->existe($this->cedula_atleta)){
+		$valor = $this->permisos($rol_usuario); //rol del usuario
+		if($valor[3]=="true"){
+			$co = $this->conecta();
+			$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-				try{
+			if(preg_match_all('/^[0-9\b]{7,8}$/',$this->cedula_atleta)){
 
-					$resultado = $co->prepare("UPDATE atletas set
-						id_club = :club_atleta,
-						nombre = :nombres_atleta,
-						apellido = :apellidos_atleta,
-						peso = :peso_atleta,
-						estatura = :estatura_atleta,
-						fechadenacimiento = :fecha_atleta,
-						telefono = :telefono_atleta,
-						sexo = :sexo_atleta,
-						deportebase = :deporte_atleta,
-						categoria = :categoria_atleta,
-						fechaingresoclub = :fecha_ingreso_atleta,
-						entrenador =:entrenador_atleta
-						where cedula = :cedula_atleta");
+				if($this->existe($this->cedula_atleta)){
 
-					$resultado->bindParam(':club_atleta',$this->club_atleta);
-					$resultado->bindParam(':nombres_atleta',$this->nombres_atleta);
-					$resultado->bindParam(':apellidos_atleta',$this->apellidos_atleta);
-					$resultado->bindParam(':peso_atleta',$this->peso_atleta);
-					$resultado->bindParam(':estatura_atleta',$this->estatura_atleta);
-					$resultado->bindParam(':fecha_atleta',$this->fecha_atleta);
-					$resultado->bindParam(':telefono_atleta',$this->telefono_atleta);
-					$resultado->bindParam(':sexo_atleta',$this->sexo_atleta);
-					$resultado->bindParam(':deporte_atleta',$this->deporte_atleta);
-					$resultado->bindParam(':categoria_atleta',$this->categoria_atleta);
-					$resultado->bindParam(':fecha_ingreso_atleta',$this->fecha_ingreso_atleta);
-					$resultado->bindParam(':entrenador_atleta',$this->entrenador_atleta);
-					$resultado->bindParam(':cedula_atleta',$this->cedula_atleta);
+					try{
 
-					$resultado->execute();
-					
-					$accion= "Ha modificado un Atleta";
+						$resultado = $co->prepare("DELETE from atletas where cedula = :cedula_atleta");
 
-					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-						
-					return $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
+						$resultado->bindParam(':cedula_atleta',$this->cedula_atleta);
 
-				} catch(Exception $e) {
-					return $e->getMessage();
-				}
-			}
-			else {
-				return "Atleta no registrado";
-			}
-		}else{
-			return 'ingrese datos correctamente';
-		}
-	}
+						$resultado->execute();
 
-	public function eliminar($cedula_bitacora,$modulo){
-		$co = $this->conecta();
-		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+						if ($resultado) {
+							$accion= "Ha eliminado un Atleta";
 
-		if(preg_match_all('/^[0-9\b]{7,8}$/',$this->cedula_atleta)){
-
-			if($this->existe($this->cedula_atleta)){
-
-				try{
-
-					$resultado = $co->prepare("DELETE from atletas where cedula = :cedula_atleta");
-
-					$resultado->bindParam(':cedula_atleta',$this->cedula_atleta);
-
-					$resultado->execute();
-
-					if ($resultado) {
-						$accion= "Ha eliminado un Atleta";
-
-						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-						return "eliminado";
+							parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+							return "eliminado";
+						}
+						else{
+							return "no eliminado";
+						}
+					} catch(Exception $e) {
+						return $e->getMessage();
 					}
-					else{
-						return "no eliminado";
-					}
-				} catch(Exception $e) {
-					return $e->getMessage();
 				}
+				else {
+					return "Atleta no registrado";
+				}
+			}else{
+				return "ingrese datos correctamente";
 			}
-			else {
-				return "Atleta no registrado";
-			}
-		}else{
-			return "ingrese datos correctamente";
+		}else {
+			return "no tiene permiso para eliminar";
 		}
 	}
 
@@ -428,7 +444,6 @@ class gestionar_atleta extends conexion{
 		}
 
 	}
-
 
 	private function existe($cedula_atleta){
 		$co = $this->conecta();
