@@ -418,7 +418,7 @@ class gestionar_atleta extends conexion{
 								$respuesta = $respuesta.$r[11];
 							$respuesta = $respuesta."</td>";
 
-							$respuesta = $respuesta."<td>";
+							$respuesta = $respuesta."<td class='d-flex'>";
 								if ($valor[2]=="true") {
 									$respuesta = $respuesta."<button type='button' class='btn btn-primary mb-1 mr-1' data-toggle='modal' data-target='#modal_gestion' onclick='modalmodificar(this)' id='boton_modificar'><i class='bi bi-pencil-fill'></i></button>";
 								}
