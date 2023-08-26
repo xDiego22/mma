@@ -108,165 +108,175 @@ class gestionar_eventos extends conexion{
  
 	public function registrar($rol_usuario, $cedula_bitacora,$modulo){
 
-		
-		if($this->validar()){
-			if(!$this->existe($this->nombre_evento)){
-			
-				$co = $this->conecta();
-				$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				//se añaden atributos a la conección para poder controlar los errores
-				//atributos para poder manejar los posibles errores
+		$valor = $this->permisos($rol_usuario); //rol del usuario
+		if ($valor[1]=="true") {
+			if($this->validar()){
+				if(!$this->existe($this->nombre_evento)){
+				
+					$co = $this->conecta();
+					$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					//se añaden atributos a la conección para poder controlar los errores
+					//atributos para poder manejar los posibles errores
 
-				try {
+					try {
 
-					$resultado = $co->prepare("INSERT into eventos(
-							nombre,
-							fecha,
-							hora,
-							id_club,
-							monto,
-							direccion,
-							juez1,
-							juez2,
-							juez3)
-							Values(
-							:nombre_evento,
-							:fecha_evento,
-							:hora_evento,
-							:club_responsable_evento,
-							:monto_evento,
-							:direccion_evento,
-							:juez1,
-							:juez2,
-							:juez3)");
+						$resultado = $co->prepare("INSERT into eventos(
+								nombre,
+								fecha,
+								hora,
+								id_club,
+								monto,
+								direccion,
+								juez1,
+								juez2,
+								juez3)
+								Values(
+								:nombre_evento,
+								:fecha_evento,
+								:hora_evento,
+								:club_responsable_evento,
+								:monto_evento,
+								:direccion_evento,
+								:juez1,
+								:juez2,
+								:juez3)");
 
-					$resultado->bindParam(':nombre_evento',$this->nombre_evento);
-					$resultado->bindParam(':fecha_evento',$this->fecha_evento);
-					$resultado->bindParam(':hora_evento',$this->hora_evento);
-					$resultado->bindParam(':club_responsable_evento',$this->club_responsable_evento);
-					$resultado->bindParam(':monto_evento',$this->monto_evento);
-					$resultado->bindParam(':direccion_evento',$this->direccion_evento);
-					$resultado->bindParam(':juez1',$this->juez1);
-					$resultado->bindParam(':juez2',$this->juez2);
-					$resultado->bindParam(':juez3',$this->juez3);
+						$resultado->bindParam(':nombre_evento',$this->nombre_evento);
+						$resultado->bindParam(':fecha_evento',$this->fecha_evento);
+						$resultado->bindParam(':hora_evento',$this->hora_evento);
+						$resultado->bindParam(':club_responsable_evento',$this->club_responsable_evento);
+						$resultado->bindParam(':monto_evento',$this->monto_evento);
+						$resultado->bindParam(':direccion_evento',$this->direccion_evento);
+						$resultado->bindParam(':juez1',$this->juez1);
+						$resultado->bindParam(':juez2',$this->juez2);
+						$resultado->bindParam(':juez3',$this->juez3);
 
-					$resultado->execute();
+						$resultado->execute();
 
-					$accion= "Ha regitrado un nuevo Evento";
+						$accion= "Ha regitrado un nuevo Evento";
 
-					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
 
-					return  $this->consultar($rol_usuario,  $cedula_bitacora,$modulo);
-					
-				} catch (Exception $e) {
-					return $e->getMessage();
+						return  $this->consultar($rol_usuario,  $cedula_bitacora,$modulo);
+						
+					} catch (Exception $e) {
+						return $e->getMessage();
+					}
+
 				}
-
+				else{
+					return "Ya existe evento con este nombre";
+				}
+			}else{
+				return "ingrese datos correctamente";
 			}
-			else{
-				return "Ya existe evento con este nombre";
-			}
-		}else{
-			return "ingrese datos correctamente";
+		}else {
+			return "no tiene permiso para registrar";
 		}
-		
 	
 	}
 
 	public function modificar($rol_usuario, $cedula_bitacora,$modulo){
+		$valor = $this->permisos($rol_usuario); //rol del usuario
+		if ($valor[2]=="true") {
+			if($this->validar()){
+				if($this->existe($this->nombre_evento)){
 
-		if($this->validar()){
-			if($this->existe($this->nombre_evento)){
-
-				$co = $this->conecta();
-				$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				
-
-				try {
-
-					$resultado = $co->prepare("UPDATE eventos set
-						nombre = :nombre_evento,
-						fecha = :fecha_evento,
-						hora = :hora_evento,
-						id_club = :club_responsable_evento,
-						monto = :monto_evento,
-						direccion = :direccion_evento,
-						juez1 = :juez1,
-						juez2 = :juez2,
-						juez3 = :juez3
-						where nombre = :nombre_evento");
-
-					$resultado->bindParam(':nombre_evento',$this->nombre_evento);
-					$resultado->bindParam(':fecha_evento',$this->fecha_evento);
-					$resultado->bindParam(':hora_evento',$this->hora_evento);
-					$resultado->bindParam(':club_responsable_evento',$this->club_responsable_evento);
-					$resultado->bindParam(':monto_evento',$this->monto_evento);
-					$resultado->bindParam(':direccion_evento',$this->direccion_evento);
-					$resultado->bindParam(':juez1',$this->juez1);
-					$resultado->bindParam(':juez2',$this->juez2);
-					$resultado->bindParam(':juez3',$this->juez3);
-
-					$resultado->execute();
-
-					$accion= "Ha modificado un Evento";
-
-					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-
-					return  $this->consultar($rol_usuario, $cedula_bitacora,$modulo);
+					$co = $this->conecta();
+					$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					
-				} catch (Exception $e) {
-					return $e->getMessage();
-				}
-				
-			}
-			else{
-				return "Evento no registrado";
-			}	
-		}else{
-			return "ingrese datos correctamente";
-		}
-		
-	} 
 
-	public function eliminar($cedula_bitacora,$modulo){
-		if(preg_match_all('/^[A-Za-z0-9 ]{5,40}$/',$this->nombre_evento)){
-			if($this->existe($this->nombre_evento)){
+					try {
 
-				$co = $this->conecta();
-				$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				
+						$resultado = $co->prepare("UPDATE eventos set
+							nombre = :nombre_evento,
+							fecha = :fecha_evento,
+							hora = :hora_evento,
+							id_club = :club_responsable_evento,
+							monto = :monto_evento,
+							direccion = :direccion_evento,
+							juez1 = :juez1,
+							juez2 = :juez2,
+							juez3 = :juez3
+							where nombre = :nombre_evento");
 
-				try {
+						$resultado->bindParam(':nombre_evento',$this->nombre_evento);
+						$resultado->bindParam(':fecha_evento',$this->fecha_evento);
+						$resultado->bindParam(':hora_evento',$this->hora_evento);
+						$resultado->bindParam(':club_responsable_evento',$this->club_responsable_evento);
+						$resultado->bindParam(':monto_evento',$this->monto_evento);
+						$resultado->bindParam(':direccion_evento',$this->direccion_evento);
+						$resultado->bindParam(':juez1',$this->juez1);
+						$resultado->bindParam(':juez2',$this->juez2);
+						$resultado->bindParam(':juez3',$this->juez3);
 
-					$resultado = $co->prepare("Delete from eventos where nombre = :nombre_evento");
+						$resultado->execute();
 
-					$resultado->bindParam(':nombre_evento',$this->nombre_evento);
-
-					$resultado->execute();
-
-					
-					if ($resultado) {
-						$accion= "Ha eliminado un Evento";
+						$accion= "Ha modificado un Evento";
 
 						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-						return "eliminado";
-					}
-					else{
-						return "no eliminado";
+
+						return  $this->consultar($rol_usuario, $cedula_bitacora,$modulo);
+						
+					} catch (Exception $e) {
+						return $e->getMessage();
 					}
 					
-				} catch (Exception $e) {
-					return $e->getMessage();
 				}
-				
-			} 
-			else{
-				return "Evento no registrado";
+				else{
+					return "Evento no registrado";
+				}	
+			}else{
+				return "ingrese datos correctamente";
 			}
-		}else{
-			return "ingrese datos correctamente";
+		}else {
+			return "no tiene permiso para modificar";
 		}
-		
+	} 
+
+	public function eliminar($cedula_bitacora,$modulo,$rol_usuario){
+		$valor = $this->permisos($rol_usuario); //rol del usuario
+		if ($valor[3]=="true") {
+			if(preg_match_all('/^[A-Za-z0-9 ]{5,40}$/',$this->nombre_evento)){
+				if($this->existe($this->nombre_evento)){
+
+					$co = $this->conecta();
+					$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					
+
+					try {
+
+						$resultado = $co->prepare("Delete from eventos where nombre = :nombre_evento");
+
+						$resultado->bindParam(':nombre_evento',$this->nombre_evento);
+
+						$resultado->execute();
+
+						
+						if ($resultado) {
+							$accion= "Ha eliminado un Evento";
+
+							parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+							return "eliminado";
+						}
+						else{
+							return "no eliminado";
+						}
+						
+					} catch (Exception $e) {
+						return $e->getMessage();
+					}
+					
+				} 
+				else{
+					return "Evento no registrado";
+				}
+			}else{
+				return "ingrese datos correctamente";
+			}
+		}else {
+			return "no tiene permiso para eliminar";
+		}
 	}
 
 	public function consultar($rol_usuario,  $cedula_bitacora,$modulo){
@@ -314,7 +324,7 @@ class gestionar_eventos extends conexion{
 								$respuesta = $respuesta.$r[5];
 							$respuesta = $respuesta."</td>";
 
-							$respuesta = $respuesta."<td style='display:none;'>";
+							$respuesta = $respuesta."<td>";
 								$respuesta = $respuesta.$r[6];
 							$respuesta = $respuesta."</td>";
 
@@ -330,7 +340,7 @@ class gestionar_eventos extends conexion{
 								$respuesta = $respuesta.$r[9];
 							$respuesta = $respuesta."</td>";
 
-							$respuesta = $respuesta."<td>";
+							$respuesta = $respuesta."<td class='d-flex'>";
 								if ($valor[2]=="true") {
 									$respuesta = $respuesta."<button type='button' class='btn btn-primary mb-1 mr-1' data-toggle='modal' data-target='#modal_gestion' onclick='modalmodificar(this)' id='boton_modificar'><i class='bi bi-pencil-fill'></i></button>";
 								}
