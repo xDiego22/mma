@@ -116,6 +116,9 @@ class gestionar_personal extends conexion{
 						:telefono_personal,
 						:cargo_personal,
 						:direccion_personal)");
+					
+					//SE ENCRIPTA LA INFORMACION
+					$this->direccion_personal = parent::encriptar($this->direccion_personal);
 
 					$resultado->bindParam(':club_personal',$this->club_personal);
 					$resultado->bindParam(':cedula_personal',$this->cedula_personal);
@@ -165,6 +168,9 @@ class gestionar_personal extends conexion{
 						cargo = :cargo_personal,
 						direccion = :direccion_personal
 						where cedula = :cedula_personal");
+					
+					//SE ENCRIPTA LA INFORMACION
+					$this->direccion_personal = parent::encriptar($this->direccion_personal);
 
 					$resultado->bindParam(':club_personal',$this->club_personal);
 					$resultado->bindParam(':cedula_personal',$this->cedula_personal);
@@ -247,8 +253,8 @@ class gestionar_personal extends conexion{
 
 				$respuesta = '';
 				//ciclo foreach se usa para recorrer los resultados de las consultas
+				
 				foreach($resultado as $r){
-					
 					$valor = $this->permisos($rol_usuario); //rol del usuario
 
 					if ($valor[0]=="true") {
@@ -278,10 +284,10 @@ class gestionar_personal extends conexion{
 							$respuesta = $respuesta."</td>";
 
 							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[4];
+								$respuesta = $respuesta.parent::desencriptar($r[4]);
 							$respuesta = $respuesta."</td>";
 
-							$respuesta = $respuesta."<td>";
+							$respuesta = $respuesta."<td class='d-flex'>";
 								if ($valor[2]=="true") {
 									$respuesta = $respuesta."<button type='button' class='btn btn-primary mb-1 mr-1' data-toggle='modal' data-target='#modal_gestion' onclick='modalmodificar(this)' id='boton_modificar'><i class='bi bi-pencil-fill'></i></button>";
 								}
