@@ -76,159 +76,170 @@ class gestionar_usuarios extends conexion{
 	
 	//metodos
 	public function registrar($rol_usuario, $cedula_bitacora,$modulo){
-
-		if($this->validar()){
-			if(!$this->existe($this->cedula_usuarios)){
-				if(!$this->existeCorreo()){
-					$co = $this->conecta();
-					$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-					
-					try{
-						$contrasena_hash = password_hash($this->contrasena_usuarios,PASSWORD_DEFAULT,['cost'=>12]);
+		$valor = $this->permisos($rol_usuario);//rol del usuario
+		if ($valor[1]=="true") {
+			if($this->validar()){
+				if(!$this->existe($this->cedula_usuarios)){
+					if(!$this->existeCorreo()){
+						$co = $this->conecta();
+						$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 						
-						//generacion de token de usuario
-						$token = md5(uniqid(mt_rand(),false));
+						try{
+							$contrasena_hash = password_hash($this->contrasena_usuarios,PASSWORD_DEFAULT,['cost'=>12]);
+							
+							//generacion de token de usuario
+							$token = md5(uniqid(mt_rand(),false));
 
-						$resultado = $co->prepare("INSERT into usuarios(
-							cedula,
-							nombre,
-							contrasena,
-							id_rol,
-							correo,
-							token)
-							Values(
-							:cedula_usuarios,
-							:nombre_usuarios,
-							:contrasena_usuarios,
-							:rol_usuario,
-							:correo_usuarios,
-							:token)");
+							$resultado = $co->prepare("INSERT into usuarios(
+								cedula,
+								nombre,
+								contrasena,
+								id_rol,
+								correo,
+								token)
+								Values(
+								:cedula_usuarios,
+								:nombre_usuarios,
+								:contrasena_usuarios,
+								:rol_usuario,
+								:correo_usuarios,
+								:token)");
 
-						$resultado->bindParam(':cedula_usuarios',$this->cedula_usuarios);
-						$resultado->bindParam(':nombre_usuarios',$this->nombre_usuarios);
-						$resultado->bindParam(':contrasena_usuarios',$contrasena_hash);
-						$resultado->bindParam(':rol_usuario',$this->rol_usuario);
-						$resultado->bindParam(':correo_usuarios',$this->correo_usuarios);
-						$resultado->bindParam(':token',$token);
+							$resultado->bindParam(':cedula_usuarios',$this->cedula_usuarios);
+							$resultado->bindParam(':nombre_usuarios',$this->nombre_usuarios);
+							$resultado->bindParam(':contrasena_usuarios',$contrasena_hash);
+							$resultado->bindParam(':rol_usuario',$this->rol_usuario);
+							$resultado->bindParam(':correo_usuarios',$this->correo_usuarios);
+							$resultado->bindParam(':token',$token);
 
-						$resultado->execute();
-						
-						$accion= "Ha regitrado un nuevo Usuario";
+							$resultado->execute();
+							
+							$accion= "Ha regitrado un nuevo Usuario";
 
-						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+							parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
 
-						return  $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
-					}catch(Exception $e){
-						return $e->getMessage();
+							return  $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
+						}catch(Exception $e){
+							return $e->getMessage();
+						}
+					} else{ 
+						return "Error: el correo ya pertenece a otro usuario";
 					}
-				} else{ 
-					return "Error: el correo ya pertenece a otro usuario";
+					
+				} 
+				else {
+					return "Error: ya existe usuario con la cedula que desea ingresar";
 				}
-				
-			} 
-			else {
-				return "Error: ya existe usuario con la cedula que desea ingresar";
+			}else{
+				return "Error: ingrese datos correctamente";
 			}
-		}else{
-			return "Error: ingrese datos correctamente";
+		}else {
+			return "no tiene permiso para registrar";
 		}
-		
 	}
 
 	public function modificar($rol_usuario, $cedula_bitacora,$modulo){
+		$valor = $this->permisos($rol_usuario);//rol del usuario
+		if ($valor[2]=="true") {
 
-		$co = $this->conecta();
-		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$co = $this->conecta();
+			$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		if($this->validar()){
-			if($this->existe($this->cedula_usuarios)){
-				if(!$this->existeCorreo()){
+			if($this->validar()){
+				if($this->existe($this->cedula_usuarios)){
+					if(!$this->existeCorreo() || $this->cedula_usuarios == $this->propietarioCorreo()){
+						
+						try{
+							$contrasena_hash = password_hash($this->contrasena_usuarios,PASSWORD_DEFAULT,['cost'=>12]);
+		
+							//generacion de token de usuario
+							$token = md5(uniqid(mt_rand(),false));
+		
+							$resultado = $co->prepare("UPDATE usuarios set
+								cedula = :cedula_usuarios,
+								nombre = :nombre_usuarios,
+								contrasena = :contrasena_usuarios,
+								id_rol = :rol_usuario,
+								correo = :correo_usuarios,
+								token = :token
+								where cedula = :cedula_usuarios");
+		
+							$resultado->bindParam(':cedula_usuarios',$this->cedula_usuarios);
+							$resultado->bindParam(':nombre_usuarios',$this->nombre_usuarios);
+							$resultado->bindParam(':contrasena_usuarios',$contrasena_hash);
+							$resultado->bindParam(':rol_usuario',$this->rol_usuario);
+							$resultado->bindParam(':correo_usuarios',$this->correo_usuarios);
+							$resultado->bindParam(':token',$token);
+							$resultado->execute();
+							
+							//registro de bitacora
 					
-					try{
-						$contrasena_hash = password_hash($this->contrasena_usuarios,PASSWORD_DEFAULT,['cost'=>12]);
-	
-						//generacion de token de usuario
-						$token = md5(uniqid(mt_rand(),false));
-	
-						$resultado = $co->prepare("UPDATE usuarios set
-							cedula = :cedula_usuarios,
-							nombre = :nombre_usuarios,
-							contrasena = :contrasena_usuarios,
-							id_rol = :rol_usuario,
-							correo = :correo_usuarios,
-							token = :token
-							where cedula = :cedula_usuarios");
-	
-						$resultado->bindParam(':cedula_usuarios',$this->cedula_usuarios);
-						$resultado->bindParam(':nombre_usuarios',$this->nombre_usuarios);
-						$resultado->bindParam(':contrasena_usuarios',$contrasena_hash);
-						$resultado->bindParam(':rol_usuario',$this->rol_usuario);
-						$resultado->bindParam(':correo_usuarios',$this->correo_usuarios);
-						$resultado->bindParam(':token',$token);
-						$resultado->execute();
-						
-						//registro de bitacora
-				
-						$accion= "Ha modificado un Usuario";
-						
-						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-	
-						return  $this->consultar($rol_usuario, $cedula_bitacora,$modulo);
-	
-					} catch(Exception $e) {
-						return $e->getMessage();
+							$accion= "Ha modificado un Usuario";
+							
+							parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+		
+							return  $this->consultar($rol_usuario, $cedula_bitacora,$modulo);
+		
+						} catch(Exception $e) {
+							return $e->getMessage();
+						}
+					}else{
+						return "Error: el correo ya pertenece a otro usuario";
 					}
-				}else{
-					return "Error: el correo ya pertenece a otro usuario";
 				}
+				else {
+					return "Error: usuario no registrado";
+				}
+			}else{
+				return "Error: ingrese datos correctamente";
 			}
-			else {
-				return "Error: usuario no registrado";
-			}
-		}else{
-			return "Error: ingrese datos correctamente";
+		}else {
+			return "no tiene permiso para modificar";
 		}
 	}
 
-	public function eliminar($cedula_bitacora,$modulo){
+	public function eliminar($cedula_bitacora,$modulo,$rol_usuario){
+		$valor = $this->permisos($rol_usuario);//rol del usuario
+		if ($valor[3]=="true") {
+			$co = $this->conecta();
+			$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			
+			if(preg_match_all('/^[0-9\b]{7,8}$/',$this->cedula_usuarios)){
+				if($this->existe($this->cedula_usuarios)){
 
-		$co = $this->conecta();
-		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		
-		if(preg_match_all('/^[0-9\b]{7,8}$/',$this->cedula_usuarios)){
-			if($this->existe($this->cedula_usuarios)){
+					try{
 
-				try{
+						$resultado = $co->prepare("DELETE from usuarios where cedula = :cedula_usuarios");
 
-					$resultado = $co->prepare("DELETE from usuarios where cedula = :cedula_usuarios");
+						$resultado->bindParam(':cedula_usuarios',$this->cedula_usuarios);
 
-					$resultado->bindParam(':cedula_usuarios',$this->cedula_usuarios);
+						$resultado->execute();
 
-					$resultado->execute();
+						
+						
+						if ($resultado) {
+							$accion= "Ha eliminado un Usuario";
+						
+							parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+							return "eliminado";
+						}
+						else{
+							return "no eliminado";
+						}
 
-					
-					
-					if ($resultado) {
-						$accion= "Ha eliminado un Usuario";
-					
-						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-						return "eliminado";
+					}catch(Exception $e) {
+						return $e->getMessage();
 					}
-					else{
-						return "no eliminado";
-					}
-
-				}catch(Exception $e) {
-					return $e->getMessage();
 				}
-			}
-			else {
-				return "Error: usuario no registrado";
-			}
-		}else{
-			return "Error: ingrese datos correctamente";
-		}	
-		
+				else {
+					return "Error: usuario no registrado";
+				}
+			}else{
+				return "Error: ingrese datos correctamente";
+			}	
+		}else {
+			return "no tiene permiso para eliminar";
+		}
 	}
  
 	public function consultar($rol_usuario, $cedula_bitacora,$modulo){
@@ -245,7 +256,7 @@ class gestionar_usuarios extends conexion{
 			if($resultado){
 
 				$respuesta = '';
-				//ciclo foreach se usa casi siempre para recorrer los resultados de las consultas
+				
 				foreach($resultado as $r){
 					//se le coloca $r para no confundirse, sigue siendo el mismo $resultado solo que con otro nombre
 					$valor = $this->permisos($rol_usuario);//rol del usuario
@@ -279,7 +290,7 @@ class gestionar_usuarios extends conexion{
 							$respuesta = $respuesta.$r[3];//id de rol
 						$respuesta = $respuesta."</td>";
  
-						$respuesta = $respuesta."<td>";
+						$respuesta = $respuesta."<td class='d-flex'>";
 							if ($valor[2]=="true") {
 							$respuesta = $respuesta."<button type='button' class='btn btn-primary mb-1 mr-1' data-toggle='modal' data-target='#modal_gestion' onclick='modalmodificar(this)' id='boton_modificar'><i class='bi bi-pencil-fill'></i></button>";
 							}if ($valor[3]=="true"){
@@ -457,6 +468,32 @@ class gestionar_usuarios extends conexion{
 			
 		}catch(Exception $e){
 			return $e->getMessage();
+		}
+	}
+
+	private function propietarioCorreo(){
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+		try {
+ 
+			$stmt = $co->prepare("SELECT cedula from usuarios where correo = :correo");
+
+			$stmt->bindParam(':correo',$this->correo_usuarios);
+
+			$stmt->execute();
+
+			$fila = $stmt->fetchAll(PDO::FETCH_BOTH);
+
+			if($fila){ 
+				return $fila[0][0]; 
+			}
+			else{
+				return false; 
+			}
+			
+		}catch(Exception $e){
+			return false;
 		}
 	}
 
