@@ -1,20 +1,5 @@
 $(document).ready(function () {
 
-	//accion de datatable js
-	
-	$('#tablaconsulta').DataTable( {
-        language: {
-            url: '//cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json'
-		},
-		lengthMenu: [
-            [10, 20, 30],
-            [10, 20, 30]
-		],
-		
-		"ordering": false,
-        "info":     false
-    } );
-	
 	//control de input para mostrar imagen 
 	$("#archivo").on("change",function(){
 		mostrarImagen(this);
