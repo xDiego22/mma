@@ -36,7 +36,7 @@
 			if($accion=='eliminar_usuarios'){
 				$objeto->set_cedula_usuarios($_POST['cedula_usuarios']);
 
-				echo $objeto->eliminar($cedula_bitacora,$modulo);
+				echo $objeto->eliminar($cedula_bitacora,$modulo,$rol_usuario);
 
 			} else{
  
