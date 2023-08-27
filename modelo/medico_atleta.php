@@ -94,164 +94,175 @@ class medico_atleta extends conexion{
 	}
 
     public function registrar($rol_usuario, $cedula_bitacora,$modulo){
+		$valor = $this->permisos($rol_usuario); //rol del usuario
+		if ($valor[1]=="true") {
+			if($this->validar()){
+				if(!$this->existe($this->nombre_atleta)){
 
-		if($this->validar()){
-			if(!$this->existe($this->nombre_atleta)){
+					$co = $this->conecta();
+					$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-				$co = $this->conecta();
-				$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				//se añaden atributos a la conección para poder controlar los errores
-				//atributos para poder manejar los posibles errores
+					try{
 
-				try{
+						$resultado = $co->prepare("INSERT into informacion_medica(
+							id_atleta,
+							medicamento,
+							enfermedad,
+							discapacidad,
+							dieta,
+							enfermedades_pasadas,
+							nombre_parentesco,
+							telefono_parentesco,
+							tipo_parentesco)
+							Values(
+							:nombre_atleta,
+							:medicamento_atleta,
+							:enfermedad_atleta,
+							:discapacidad_atleta,
+							:dieta_atleta,
+							:enfermedades_pasadas,
+							:nombre_parentesco,
+							:telefono_parentesco,
+							:relacion_parentesco)");
 
-					$resultado = $co->prepare("INSERT into informacion_medica(
-						id_atleta,
-						medicamento,
-						enfermedad,
-						discapacidad,
-						dieta,
-						enfermedades_pasadas,
-						nombre_parentesco,
-						telefono_parentesco,
-						tipo_parentesco)
-						Values(
-						:nombre_atleta,
-						:medicamento_atleta,
-						:enfermedad_atleta,
-						:discapacidad_atleta,
-						:dieta_atleta,
-						:enfermedades_pasadas,
-						:nombre_parentesco,
-						:telefono_parentesco,
-						:relacion_parentesco)");
+						//datos a encriptar
+						$this->enfermedad_atleta = parent::encriptar($this->enfermedad_atleta);
+						$this->discapacidad_atleta = parent::encriptar($this->discapacidad_atleta);
+						$this->enfermedades_pasadas = parent::encriptar($this->enfermedades_pasadas);
+						//<----  ----->
 
-					
-					//nuevo medico
-					$resultado->bindParam(':nombre_atleta',$this->nombre_atleta);
+						$resultado->bindParam(':nombre_atleta',$this->nombre_atleta);
+						$resultado->bindParam(':medicamento_atleta',$this->medicamento_atleta);
+						$resultado->bindParam(':enfermedad_atleta',$this->enfermedad_atleta);
+						$resultado->bindParam(':discapacidad_atleta',$this->discapacidad_atleta);
+						$resultado->bindParam(':dieta_atleta',$this->dieta_atleta);
+						$resultado->bindParam(':enfermedades_pasadas',$this->enfermedades_pasadas);
+						$resultado->bindParam(':nombre_parentesco',$this->nombre_parentesco);
+						$resultado->bindParam(':telefono_parentesco',$this->telefono_parentesco);
+						$resultado->bindParam(':relacion_parentesco',$this->relacion_parentesco);
+						
+						$resultado->execute();
 
-					$resultado->bindParam(':medicamento_atleta',$this->medicamento_atleta);
-					$resultado->bindParam(':enfermedad_atleta',$this->enfermedad_atleta);
+						$accion= "Ha registrado Datos Medicos de un Atleta";
 
-					$resultado->bindParam(':discapacidad_atleta',$this->discapacidad_atleta);
-					$resultado->bindParam(':dieta_atleta',$this->dieta_atleta);
+						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
 
-					$resultado->bindParam(':enfermedades_pasadas',$this->enfermedades_pasadas);
-					$resultado->bindParam(':nombre_parentesco',$this->nombre_parentesco);
+						return  $this->consultar($rol_usuario, $cedula_bitacora,$modulo);
+					}catch(Exception $e){
+						return $e->getMessage();
+					}
 
-					$resultado->bindParam(':telefono_parentesco',$this->telefono_parentesco);
-					$resultado->bindParam(':relacion_parentesco',$this->relacion_parentesco);
-					
-					
-					$resultado->execute();
-
-					$accion= "Ha registrado Datos Medicos de un Atleta";
-
-					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-
-					return  $this->consultar($rol_usuario, $cedula_bitacora,$modulo);
-				}catch(Exception $e){
-					return $e->getMessage();
+				}else {
+					return "Ya existe atleta con la informacion que desea ingresar";
 				}
-
-			}else {
-				return "Ya existe atleta con la informacion que desea ingresar";
+			}else{
+				return 'ingrese datos correctamente';
 			}
-		}else{
-			return 'ingrese datos correctamente';
+		}else {
+			return "no tiene permiso para registrar";
 		}
     }
 
     public function modificar($rol_usuario, $cedula_bitacora,$modulo){
+		$valor = $this->permisos($rol_usuario); //rol del usuario
+		if ($valor[2]=="true") {
+			$co = $this->conecta();
+			$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			if($this->validar()){
+				if($this->existe($this->nombre_atleta)){
 
-		$co = $this->conecta();
-		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		if($this->validar()){
-			if($this->existe($this->nombre_atleta)){
+					try{
 
-				try{
+						$resultado = $co->prepare("UPDATE informacion_medica set
+							id_atleta = :nombre_atleta,
+							medicamento = :medicamento_atleta,
+							enfermedad = :enfermedad_atleta,
+							discapacidad = :discapacidad_atleta,
+							dieta = :dieta_atleta,
+							enfermedades_pasadas = :enfermedades_pasadas,
+							nombre_parentesco = :nombre_parentesco,
+							telefono_parentesco = :telefono_parentesco,
+							tipo_parentesco = :relacion_parentesco
+							where id_atleta = :nombre_atleta");
 
-					$resultado = $co->prepare("UPDATE informacion_medica set
-						id_atleta = :nombre_atleta,
-						medicamento = :medicamento_atleta,
-						enfermedad = :enfermedad_atleta,
-						discapacidad = :discapacidad_atleta,
-						dieta = :dieta_atleta,
-						enfermedades_pasadas = :enfermedades_pasadas,
-						nombre_parentesco = :nombre_parentesco,
-						telefono_parentesco = :telefono_parentesco,
-						tipo_parentesco = :relacion_parentesco
-						where id_atleta = :nombre_atleta");
-
-					
-					//nuevo medico 
-					$resultado->bindParam(':nombre_atleta',$this->nombre_atleta);
-					$resultado->bindParam(':medicamento_atleta',$this->medicamento_atleta);
-					$resultado->bindParam(':enfermedad_atleta',$this->enfermedad_atleta);
-
-					$resultado->bindParam(':discapacidad_atleta',$this->discapacidad_atleta);
-					$resultado->bindParam(':dieta_atleta',$this->dieta_atleta);
-
-					$resultado->bindParam(':enfermedades_pasadas',$this->enfermedades_pasadas);
-					$resultado->bindParam(':nombre_parentesco',$this->nombre_parentesco);
-
-					$resultado->bindParam(':telefono_parentesco',$this->telefono_parentesco);
-					$resultado->bindParam(':relacion_parentesco',$this->relacion_parentesco);
-
-
-					$resultado->execute();	
-					
-					$accion= "Ha modificado Datos Medicos de un Atleta";
-
-					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
 						
-					return  $this->consultar($rol_usuario, $cedula_bitacora,$modulo);
+						//datos a encriptar
+						$this->enfermedad_atleta = parent::encriptar($this->enfermedad_atleta);
+						$this->discapacidad_atleta = parent::encriptar($this->discapacidad_atleta);
+						$this->enfermedades_pasadas = parent::encriptar($this->enfermedades_pasadas);
+						//<----  ----->
+						
+						$resultado->bindParam(':nombre_atleta',$this->nombre_atleta);
+						$resultado->bindParam(':medicamento_atleta',$this->medicamento_atleta);
+						$resultado->bindParam(':enfermedad_atleta',$this->enfermedad_atleta);
+						$resultado->bindParam(':discapacidad_atleta',$this->discapacidad_atleta);
+						$resultado->bindParam(':dieta_atleta',$this->dieta_atleta);
+						$resultado->bindParam(':enfermedades_pasadas',$this->enfermedades_pasadas);
+						$resultado->bindParam(':nombre_parentesco',$this->nombre_parentesco);
+						$resultado->bindParam(':telefono_parentesco',$this->telefono_parentesco);
+						$resultado->bindParam(':relacion_parentesco',$this->relacion_parentesco);
 
-				} catch(Exception $e) {
-					return $e->getMessage();
+						$resultado->execute();	
+						
+						$accion= "Ha modificado Datos Medicos de un Atleta";
+
+						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+							
+						return  $this->consultar($rol_usuario, $cedula_bitacora,$modulo);
+
+					} catch(Exception $e) {
+						return $e->getMessage();
+					}
 				}
+				else {
+					return "No registrado";
+				}
+			}else{
+				return 'ingrese datos correctamente';
 			}
-			else {
-				return "No registrado";
-			}
-		}else{
-			return 'ingrese datos correctamente';
+		}else {
+			return "no tiene permiso para modificar";
 		}
 	}
 
-    public function eliminar($cedula_bitacora,$modulo){
-		$co = $this->conecta();
-		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		if(preg_match_all('/^[0-9\b]{1,10}$/',$this->nombre_atleta)){
-			if($this->existe($this->nombre_atleta)){
+    public function eliminar($cedula_bitacora,$modulo,$rol_usuario){
+		$valor = $this->permisos($rol_usuario); //rol del usuario
+		if ($valor[3]=="true") {
+			$co = $this->conecta();
+			$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			if(preg_match_all('/^[0-9\b]{1,10}$/',$this->nombre_atleta)){
+				if($this->existe($this->nombre_atleta)){
 
-				try{
+					try{
 
-					$resultado = $co->prepare("DELETE from informacion_medica where id_atleta = :nombre_atleta");
+						$resultado = $co->prepare("DELETE from informacion_medica where id_atleta = :nombre_atleta");
 
-					$resultado->bindParam(':nombre_atleta',$this->nombre_atleta);
+						$resultado->bindParam(':nombre_atleta',$this->nombre_atleta);
 
-					$resultado->execute();	
+						$resultado->execute();	
 
-					if ($resultado) {
-						$accion= "Ha eliminado Datos Medica de un Atleta";
+						if ($resultado) {
+							$accion= "Ha eliminado Datos Medica de un Atleta";
 
-						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-						return "eliminado";
+							parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+							return "eliminado";
+						}
+						else{
+							return "no eliminado";
+						}
+
+					} catch(Exception $e) {
+						return $e->getMessage();
 					}
-					else{
-						return "no eliminado";
-					}
-
-				} catch(Exception $e) {
-					return $e->getMessage();
 				}
+				else {
+					return "No registrado";
+				}
+			}else{
+				return 'ingrese datos correctamente';
 			}
-			else {
-				return "No registrado";
-			}
-		}else{
-			return 'ingrese datos correctamente';
+		}else {
+			return "no tiene permiso para eliminar";
 		}
 	}
 
@@ -296,11 +307,11 @@ class medico_atleta extends conexion{
 						$respuesta = $respuesta."</td>";
 
 						$respuesta = $respuesta."<td>";
-							$respuesta = $respuesta.$r[1];
+							$respuesta = $respuesta.parent::desencriptar($r[1]);
 						$respuesta = $respuesta."</td>";
 
 						$respuesta = $respuesta."<td>";
-							$respuesta = $respuesta.$r[2];
+							$respuesta = $respuesta.parent::desencriptar($r[2]);
 						$respuesta = $respuesta."</td>";
 						
 						$respuesta = $respuesta."<td>";
@@ -308,7 +319,7 @@ class medico_atleta extends conexion{
 						$respuesta = $respuesta."</td>";
 
 						$respuesta = $respuesta."<td>";
-							$respuesta = $respuesta.$r[4];
+							$respuesta = $respuesta.parent::desencriptar($r[4]);
 						$respuesta = $respuesta."</td>";
 
 						$respuesta = $respuesta."<td>";
@@ -323,7 +334,7 @@ class medico_atleta extends conexion{
 							$respuesta = $respuesta.$r[7];
 						$respuesta = $respuesta."</td>";
 
-						$respuesta = $respuesta."<td>";
+						$respuesta = $respuesta."<td class='d-flex'>";
 							if ($valor[2]=="true") {
 									$respuesta = $respuesta."<button type='button' class='btn btn-primary mb-1 mr-1' data-toggle='modal' data-target='#modal_gestion' onclick='modalmodificar(this)' id='boton_modificar'><i class='bi bi-pencil-fill'></i></button>";
 								}
