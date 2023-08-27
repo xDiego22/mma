@@ -91,3 +91,21 @@ bloqueo de usuarios por intentos erroneos implentado en inicio de sesion
 se implemento recaptcha v2 de google al inicio de sesion
  
 se modifico estilos.css para el inicio de sesion ya que se le agregó el captcha
+
+se modifica metodo de bitacora en conexion.php, se vuelve protegida y se modifica para encriptar los datos
+
+consulta de bitacora de usuario se desencripta la informacion
+
+se crean llaves publicas y privadas con el controlador generar_llaves.php
+
+se elimina metodo de registrar bitacora desde controlador en emparejamiento e inscripcion
+
+base de datos modificada para datos encriptados, de varchar a text en personal bitacora clubes informacion medica 
+
+se agrega permiso en registrar modificar y eliminar en modelo de personal,clubes, atletas, eventos usuarios informacion medica informacion socioeconomica
+
+se encriptan datos en personal, bitacora, clubes, informacion medica
+
+se añade metodo propietarioCorreo en gestion de usuarios para buscar a quien pertenece correo y poder modificar un usuario con correo existente
+
+se agrega la base de datos con datos encritados y opcional se deja la que no tiene datos encriptados
