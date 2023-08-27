@@ -30,7 +30,7 @@
 
 			if($accion=='eliminar'){
 				$objeto->set_nombre_atleta($_POST['nombre_atleta']);
-				echo $objeto->eliminar($cedula_bitacora,$modulo);
+				echo $objeto->eliminar($cedula_bitacora,$modulo,$rol_usuario);
 				
 			}
             else{
