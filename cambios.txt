@@ -109,3 +109,11 @@ se encriptan datos en personal, bitacora, clubes, informacion medica
 se añade metodo propietarioCorreo en gestion de usuarios para buscar a quien pertenece correo y poder modificar un usuario con correo existente
 
 se agrega la base de datos con datos encritados y opcional se deja la que no tiene datos encriptados
+
+se elimina datatable js de inscripcion a eventos para que no salga bug que no se vea la informacion
+
+se agrega reset de captcha en inicio de sesion js para limpiar el formulario
+
+se añade validacion inicio sesion controlador si el usuario tiene una solicitud de cambio de contrasena y en caso de 3 veces erroneo le pide cambiar contrasena
+
+metodo nuevos para comprobar solicitud de cambio contrasena en inicio de sesion modelo
