@@ -104,4 +104,5 @@ function enviaAjax(datos){
 function limpia_formulario(){
 	$("#cedula_inicio").val('');
 	$("#contrasena_inicio").val('');
+	grecaptcha.reset(0);
 }
