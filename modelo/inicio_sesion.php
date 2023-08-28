@@ -201,6 +201,54 @@ class inicio_sesion extends conexion{
 		}
 	}
 
+	public function buscaSolicitud(){
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		if(preg_match_all('/^[0-9]{7,8}$/',$this->cedula_inicio) ){
+			try{
+				
+				$resultado = $co->prepare("SELECT  usuarios.solicitud_contrasena from usuarios where cedula = :cedula_inicio and solicitud_contrasena = 1 limit 1");
+				
+				$resultado->bindParam(':cedula_inicio',$this->cedula_inicio);
+				
+				$resultado->execute();
+				
+				$fila = $resultado->fetchAll(PDO::FETCH_BOTH);
+				
+				if($fila){
+					return true;
+				}
+				else{
+					
+					return false;
+				}
+				
+			}catch(Exception $e){
+				return $e->getMessage();
+			}
+		}else{
+			return "ingrese cedula correctamente";
+		}
+	}
+
+	public function solicitarCambioContrasena(){
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
+		try{
+			$resultado = $co->prepare("UPDATE usuarios set
+				solicitud_contrasena = 1
+				where cedula = :cedula_inicio");
+    
+			$resultado->bindParam(':cedula_inicio',$this->cedula_inicio);
+			$resultado->execute();
+			return true;
+		}catch(Exception $e){
+			return $e->getMessage();
+		}
+		
+	}
+
 }
 
 ?>
