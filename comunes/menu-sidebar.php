@@ -352,7 +352,7 @@
                 
                 if($emparejamientos_combates == "11"){
             ?>
-                <a class="collapse-item" href="?pagina=emparejamiento_combates">
+                <a class="collapse-item text-wrap" href="?pagina=emparejamiento_combates">
                     <img src="img/iconos/ring.png" style="width:30px;">
                     Emparejamientos y Combates
                 </a>
@@ -361,7 +361,7 @@
                 
                 if($resultados_eventos == "12"){
             ?>
-                <a class="collapse-item" href="?pagina=resultados_eventos">
+                <a class="collapse-item text-wrap" href="?pagina=resultados_eventos">
                     <img src="img/iconos/ganador.png" style="width:30px">
                     Resultados de Eventos
                 </a>
@@ -409,22 +409,22 @@
                     Reporte de Eventos
                 </a>
                 
-                <a class="collapse-item" href="?pagina=reporte_resultados">
+                <a class="collapse-item text-wrap" href="?pagina=reporte_resultados">
                     <img src="img/iconos/reporte.png" style="width:30px;">
                     Reporte de Resultados Eventos
                 </a>
                 
-                <a class="collapse-item" href="?pagina=reporte_historial_atleta">
+                <a class="collapse-item text-wrap" href="?pagina=reporte_historial_atleta">
                     <img src="img/iconos/reporte.png" style="width:30px;">
                     Reporte de Historial de Atletas
                 </a>
 
-                <a class="collapse-item" href="?pagina=reporte_cantidad_participantes">
+                <a class="collapse-item text-wrap" href="?pagina=reporte_cantidad_participantes">
                     <img src="img/iconos/reporte.png" style="width:30px;">
                     Reporte Estadistico de Cantidad de Participantes
                 </a>
 
-                <a class="collapse-item" href="?pagina=reporte_cantidad_vivienda">
+                <a class="collapse-item text-wrap" href="?pagina=reporte_cantidad_vivienda">
                     <img src="img/iconos/reporte.png" style="width:30px;">
                     Reporte Estadistico de Cantidad Zona de Vivienda
                 </a>
