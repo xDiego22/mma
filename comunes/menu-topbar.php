@@ -11,14 +11,7 @@
     <?php 
         if($usuario!==""){
     ?>
-        <!-- Nav Item - Alerts -->
-        <li class="nav-item mx-1">
-            <a class="nav-link " href="#" data-target="#modal_notificaciones" role="button"
-                data-toggle="modal" aria-haspopup="true" aria-expanded="false">
-                <i class="bi bi-bell-fill"></i>               
-            </a>
-        </li>
-
+        
         <!-- Nav Item - Messages -->
         <li class="nav-item mx-1">
             <a class="nav-link" href="#" data-toggle="modal" data-target="#modal_mensajes" role="button" aria-haspopup="true" aria-expanded="false">
