@@ -1,25 +1,25 @@
-25/07/2023
+ï»¿25/07/2023
 1- elimine el session start del controlador de modal socket
 2- la cabecera se modifico y se dejo solo css y se creo archivo en comunes scripts.php para colocarlo en la parte inferior de todos los documentos 
 3- gracias a script.php se soluciono el problema de los nombres por php 
 4- se cambio el bootstrap por uno modificado para el sidebar
-5- se le añadieron iconos font awesome para los iconos del sidebar que trae por defecto
-6- se le añadio el script.php a todas las vistas
+5- se le aï¿½adieron iconos font awesome para los iconos del sidebar que trae por defecto
+6- se le aï¿½adio el script.php a todas las vistas
 
 
 bug 
 06/08/2023
-se añade clase ".texto" a cada uno de los span de los input para que al darle click al modal de modificar y añadir en JavaScript no se elimine lo que contenga, el bug elimina todo el contenido de los span. a todos los modulos que contengan modalregistrar y modalmodificar
+se aï¿½ade clase ".texto" a cada uno de los span de los input para que al darle click al modal de modificar y aï¿½adir en JavaScript no se elimine lo que contenga, el bug elimina todo el contenido de los span. a todos los modulos que contengan modalregistrar y modalmodificar
 
 comprobar si el socket funciona en otra pc que no sea la de diego
 
-se le añaden maxlength a campos
+se le aï¿½aden maxlength a campos
 
 se creo campo correo en base de datos tabla usuarios
 
-se añadio boton de recuperar contraseña en el inicio
+se aï¿½adio boton de recuperar contraseï¿½a en el inicio
 
-se creo vista de recuperar contraseña
+se creo vista de recuperar contraseï¿½a
 
 se creo campo token y correo en tabla usuarios en la base de datos y la vista
 
@@ -33,7 +33,7 @@ se agregan campos en bd de token_contrasena y solicitud_contrasena a tabla usuar
 
 se agrega campo de registro y de modificar solicitud_contrasena en gestion de usuarios
 
-php mailer envia datos al correo para modificar contraseña
+php mailer envia datos al correo para modificar contraseï¿½a
 
 se crea funcion para existeCorreo en gestion usuarios para comprobar si algun usuario posee el correo a registrar
 
@@ -42,16 +42,16 @@ se crea funcion para existeCorreo en gestion usuarios para comprobar si algun us
 cambios de Luis:
 
 
-1- Se modificó el rango de las validaciones backend de gestionar_clubes.
+1- Se modificï¿½ el rango de las validaciones backend de gestionar_clubes.
 
 
-2- Se modificó el rango de las validaciones backend de gestionar_eventos.
+2- Se modificï¿½ el rango de las validaciones backend de gestionar_eventos.
 
 
-3- Se modificó el rango de las validaciones frontend de gestionar_usuarios.
+3- Se modificï¿½ el rango de las validaciones frontend de gestionar_usuarios.
 
 
-4- Se modificó el rango de las validaciones backend de gestionar_usuarios.
+4- Se modificï¿½ el rango de las validaciones backend de gestionar_usuarios.
 
 
 
@@ -64,7 +64,7 @@ Cambios de Luis:
 
 13/08/2023
 
-se termina restaurar contraseña, terminando de crear los modulos de cambiar_contrasena.php
+se termina restaurar contraseï¿½a, terminando de crear los modulos de cambiar_contrasena.php
 
 16/08/2023
 
@@ -80,9 +80,9 @@ se soluciona bug de roles y permisos al actualizar permisos
 
 se modifica la bd en foranea de bitacora, cedula usuario en cascada
 
-controlador de principal y acerca se le añade session start para que se reanude la sesion
+controlador de principal y acerca se le aï¿½ade session start para que se reanude la sesion
 
-base de datos tabla de usuarios en token contraseña y solicitud contraseña se modifica y se vuelve valor predeterminado NULL
+base de datos tabla de usuarios en token contraseï¿½a y solicitud contraseï¿½a se modifica y se vuelve valor predeterminado NULL
 
 se modifica index para redireccionar usuarios si no se han loggeado
 
@@ -90,7 +90,7 @@ bloqueo de usuarios por intentos erroneos implentado en inicio de sesion
 
 se implemento recaptcha v2 de google al inicio de sesion
  
-se modifico estilos.css para el inicio de sesion ya que se le agregó el captcha
+se modifico estilos.css para el inicio de sesion ya que se le agregï¿½ el captcha
 
 se modifica metodo de bitacora en conexion.php, se vuelve protegida y se modifica para encriptar los datos
 
@@ -106,7 +106,7 @@ se agrega permiso en registrar modificar y eliminar en modelo de personal,clubes
 
 se encriptan datos en personal, bitacora, clubes, informacion medica
 
-se añade metodo propietarioCorreo en gestion de usuarios para buscar a quien pertenece correo y poder modificar un usuario con correo existente
+se aï¿½ade metodo propietarioCorreo en gestion de usuarios para buscar a quien pertenece correo y poder modificar un usuario con correo existente
 
 se agrega la base de datos con datos encritados y opcional se deja la que no tiene datos encriptados
 
@@ -114,6 +114,14 @@ se elimina datatable js de inscripcion a eventos para que no salga bug que no se
 
 se agrega reset de captcha en inicio de sesion js para limpiar el formulario
 
-se añade validacion inicio sesion controlador si el usuario tiene una solicitud de cambio de contrasena y en caso de 3 veces erroneo le pide cambiar contrasena
+se aï¿½ade validacion inicio sesion controlador si el usuario tiene una solicitud de cambio de contrasena y en caso de 3 veces erroneo le pide cambiar contrasena
 
 metodo nuevos para comprobar solicitud de cambio contrasena en inicio de sesion modelo
+
+se creo modulo de perfil
+
+lateral se ajustan items largos colocandoles clases para acortar
+
+Pruebas unitarias
+
+Modulo listas: atletas, bitacora, clubes, eventos
