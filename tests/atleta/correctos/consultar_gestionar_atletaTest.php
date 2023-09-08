@@ -56,10 +56,10 @@ class consultar_gestionar_atletaTest extends TestCase{
 
     public function tearDown():void {
         $this->atleta->set_cedula_atleta('3345123');
-        $this->atleta->eliminar('29831184','1'); 
+        $this->atleta->eliminar('1','29831184','1'); 
 
         $this->clubes->set_codigo_club('asdfgh');
-        $this->clubes->eliminar('29831184','1');
+        $this->clubes->eliminar('1','29831184','1');
     }
 
     public function testConsultarAtleta(){
