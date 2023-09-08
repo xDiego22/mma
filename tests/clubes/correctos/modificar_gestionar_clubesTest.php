@@ -1,10 +1,9 @@
 <?php 
 use PHPUnit\Framework\TestCase;
 
-use modelo\conexion;
 use modelo\gestionar_clubes;
 
-class consultar_gestionar_clubesTest extends TestCase{
+class modificar_gestionar_clubesTest extends TestCase{
     private $clubes;
 
     public function setUp():void{
@@ -21,14 +20,20 @@ class consultar_gestionar_clubesTest extends TestCase{
 
     public function tearDown():void {
         $this->clubes->set_codigo_club('qwertyuiop');
-        $this->clubes->eliminar('29831184','1'); 
+        $this->clubes->eliminar('29831184','1','1'); 
     }
 
-    public function testConsultarClubes(){
+    public function testModificarClubes(){
+        
+        $this->clubes->set_codigo_club('qwertyuiop');
+        $this->clubes->set_nombre_club('tortugas peleadoras 2023');
+        $this->clubes->set_telefono_club('04249876754');
+        $this->clubes->set_deporte_club('karate');
+        $this->clubes->set_direccion_club('carora');
 
-        $consultar = $this->clubes->consultar('1','29831184','1');
+        $modificar = $this->clubes->modificar('1','29831184','1');
 
-        $this->assertStringStartsWith('<tr>', $consultar);
+        $this->assertStringStartsWith('<tr>', $modificar);
     }
 }
 ?>

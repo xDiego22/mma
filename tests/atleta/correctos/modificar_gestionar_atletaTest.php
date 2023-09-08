@@ -72,17 +72,17 @@ class modificar_gestionar_atletaTest extends TestCase{
         $this->atleta->set_fecha_ingreso_atleta('2023-02-12');
         $this->atleta->set_entrenador_atleta('carlos jimenez');
 
-        $modificar = $this->atleta->modificar('1','29831184','1');
+        $modificar = $this->atleta->modificar('1','29831184','3');
     
         $this->assertStringStartsWith('<tr>', $modificar);
       
     }
     public function tearDown():void {
         $this->atleta->set_cedula_atleta('3345123');
-        $this->atleta->eliminar('1','29831184','1'); 
+        $this->atleta->eliminar('29831184','3','1'); 
 
         $this->clubes->set_codigo_club('asdfgh');
-        $this->clubes->eliminar('1','29831184','1');
+        $this->clubes->eliminar('29831184','1','1');
     }
 }
 

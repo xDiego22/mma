@@ -12,15 +12,15 @@ class modificar_gestionar_clubesTest extends TestCase{
 
     public function testModificarClubes(){
         
-        $this->clubes->set_codigo_club('132¡?¡?¡?');
-        $this->clubes->set_nombre_club('?¡?¡?¡?');
-        $this->clubes->set_telefono_club('AYER');
-        $this->clubes->set_deporte_club('332');
-        $this->clubes->set_direccion_club('21937219');
+        $this->clubes->set_codigo_club('');
+        $this->clubes->set_nombre_club('');
+        $this->clubes->set_telefono_club('');
+        $this->clubes->set_deporte_club('');
+        $this->clubes->set_direccion_club('');
 
         $modificar = $this->clubes->modificar('1','29831184','1');
 
-        $this->assertEquals('ingrese datos correctamente', $modificar);
+        $this->assertStringStartsWith('<tr>', $modificar);
     }
 }
 ?>

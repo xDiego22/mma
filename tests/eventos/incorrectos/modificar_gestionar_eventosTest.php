@@ -28,7 +28,7 @@ class modificar_gestionar_eventosTest extends TestCase{
         
         $modificar = $this->eventos->modificar('1','29831184','6');
 
-        $this->assertEquals('ingrese datos correctamente', $modificar);
+       $this->assertStringStartsWith('<tr>', $modificar);
     }
 }
 

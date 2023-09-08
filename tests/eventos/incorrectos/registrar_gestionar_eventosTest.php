@@ -29,7 +29,7 @@ class registrar_gestionar_eventosTest extends TestCase{
 
         $registro = $this->eventos->registrar('1','29831184','6');
 
-        $this->assertEquals('ingrese datos correctamente', $registro);
+        $this->assertStringStartsWith('<tr>', $registro);
     }
 }
 

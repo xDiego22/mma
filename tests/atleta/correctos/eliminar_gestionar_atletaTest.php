@@ -57,13 +57,13 @@ class eliminar_gestionar_atletaTest extends TestCase{
         $cedula_atleta = self::$pdo->query('SELECT cedula from atletas where cedula="3345123"')->fetch(\PDO::FETCH_ASSOC)['cedula'];
 
         $this->atleta->set_cedula_atleta($cedula_atleta);
-        $this->assertEquals('eliminado',$this->atleta->eliminar('1','29831184','1'));
+        $this->assertEquals('eliminado',$this->atleta->eliminar('29831184','3','1'));
     }
 
     public function tearDown():void {
 
         $this->clubes->set_codigo_club('asdfgh');
-        $this->clubes->eliminar('1','29831184','1');
+        $this->clubes->eliminar('29831184','1','1');
     }
 }
 

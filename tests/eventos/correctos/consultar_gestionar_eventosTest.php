@@ -51,10 +51,10 @@ class consultar_gestionar_eventosTest extends TestCase{
 
     public function tearDown():void {
         $this->eventos->set_nombre_evento('evento deportivo miami 2023');
-        $this->eventos->eliminar('29831184','6'); 
+        $this->eventos->eliminar('29831184','6','1'); 
 
         $this->clubes->set_codigo_club('qwertyuiop');
-        $this->clubes->eliminar('29831184','1');
+        $this->clubes->eliminar('29831184','1','1');
     }
 
     public function testConsultarEventos(){

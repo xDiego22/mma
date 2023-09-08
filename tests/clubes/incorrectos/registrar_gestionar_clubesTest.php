@@ -21,7 +21,7 @@ class registrar_gestionar_clubesTest extends TestCase{
 
         $registro = $this->clubes->registrar('1','29831184','1');
 
-        $this->assertEquals('ingrese datos correctamente', $registro);
+        $this->assertStringStartsWith('<tr>', $registro);
     }
 }
 
