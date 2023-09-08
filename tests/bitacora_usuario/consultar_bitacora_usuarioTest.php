@@ -35,13 +35,13 @@ class consultar_bitacora_usuarioTest extends TestCase{
 
     public function tearDown():void {
         $this->clubes->set_codigo_club('qwertyuiop');
-        $this->clubes->eliminar('29831184','1'); 
+        $this->clubes->eliminar('1','29831184','1'); 
     }
 
     public function testBitacoraUsuario(){
         $bitacora = $this->bitacora->consultar('1');
 
-        $this->assertStringStartsWith('<tr>', $bitacora);
+        $this->assertJson($bitacora);
     }
 }
 
