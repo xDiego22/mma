@@ -40,7 +40,7 @@
 				exit;
 			}
 			if($accion=='eliminaatleta'){
-				echo $objeto->elimina_atletas($_POST['evento'], $_POST['cedula_inscripcion'],$cedula_bitacora,$modulo);
+				echo $objeto->elimina_atletas($_POST['evento'], $_POST['cedula_inscripcion'],$cedula_bitacora,$modulo,$rol_usuario);
 				exit;
 			}
 			//asignando los valores a los atributos  						

@@ -84,59 +84,67 @@ class inscripcion_evento extends conexion{
 	}
 
 	public function incluir($rol_usuario,$cedula_bitacora,$modulo){
+		
+		$valor = $this->permisos($rol_usuario); //rol del usuario
 
-		if($this->validar_incluir()){
-			if(!$this->existe($this->cedula_inscripcion)){
+		if ($valor[1]=="true") {
 
-				$co = $this->conecta();
-				$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				//se añaden atributos a la conección para poder controlar los errores
-				//atributos para poder manejar los posibles errores
-
-				try {
-
-					$resultado = $co->prepare("INSERT into inscripcion_evento(
-					id_evento, 
-					cedula,
-					nombre,
-					sexo,
-					peso,
-					fechadenacimiento,
-					estado)
-					Values(
-					:evento_inscripcion,
-					:cedula_inscripcion,
-					:nombre_inscripcion,
-					:sexo_inscripcion,
-					:peso_inscripcion,
-					:fechadenacimiento,
-					:estado)");
-
-					$resultado->bindParam(':evento_inscripcion',$this->evento_inscripcion);
-					$resultado->bindParam(':cedula_inscripcion',$this->cedula_inscripcion);
-					$resultado->bindParam(':nombre_inscripcion',$this->nombre_inscripcion);
-					$resultado->bindParam(':sexo_inscripcion',$this->sexo_inscripcion);
-					$resultado->bindParam(':peso_inscripcion',$this->peso_inscripcion);
-					$resultado->bindParam(':fechadenacimiento',$this->fechadenacimiento);
-					$resultado->bindParam(':estado',$this->estado);
+			if($this->validar_incluir()){
+				if(!$this->existe($this->cedula_inscripcion)){
 	
-					$resultado->execute();
-					$accion= "Ha inscrito un Atleta en un Evento";
-
-					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-					
-					return $this->muestra_inscritos($this->evento_inscripcion,$rol_usuario,$cedula_bitacora,$modulo);
-				}catch (Exception $e) {
-					return $e->getMessage();
+					$co = $this->conecta();
+					$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					//se añaden atributos a la conección para poder controlar los errores
+					//atributos para poder manejar los posibles errores
+	
+					try {
+	
+						$resultado = $co->prepare("INSERT into inscripcion_evento(
+						id_evento, 
+						cedula,
+						nombre,
+						sexo,
+						peso,
+						fechadenacimiento,
+						estado)
+						Values(
+						:evento_inscripcion,
+						:cedula_inscripcion,
+						:nombre_inscripcion,
+						:sexo_inscripcion,
+						:peso_inscripcion,
+						:fechadenacimiento,
+						:estado)");
+	
+						$resultado->bindParam(':evento_inscripcion',$this->evento_inscripcion);
+						$resultado->bindParam(':cedula_inscripcion',$this->cedula_inscripcion);
+						$resultado->bindParam(':nombre_inscripcion',$this->nombre_inscripcion);
+						$resultado->bindParam(':sexo_inscripcion',$this->sexo_inscripcion);
+						$resultado->bindParam(':peso_inscripcion',$this->peso_inscripcion);
+						$resultado->bindParam(':fechadenacimiento',$this->fechadenacimiento);
+						$resultado->bindParam(':estado',$this->estado);
+		
+						$resultado->execute();
+						$accion= "Ha inscrito un Atleta en un Evento";
+	
+						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+						
+						return $this->muestra_inscritos($this->evento_inscripcion,$rol_usuario,$cedula_bitacora,$modulo);
+					}catch (Exception $e) {
+						return $e->getMessage();
+					}
+	
 				}
-
-			}
-			else { 
-				return "Ya existe atleta en el evento";
+				else { 
+					return "Ya existe atleta en el evento";
+				}
+			}else{
+				return 'ingrese datos correctamente';
 			}
 		}else{
-			return 'ingrese datos correctamente';
+			return 'no tiene permiso para registrar';
 		}
+
 	}
 
 
@@ -204,24 +212,25 @@ class inscripcion_evento extends conexion{
 
 	public function muestra_inscritos($evento, $rol_usuario, $cedula_bitacora,$modulo){
 		
-		if(preg_match_all('/^[0-9\b]{1,10}$/',$evento)){
-			$co = $this->conecta();
-			$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	
-			try{
-				$resultado = $co->prepare("SELECT a.cedula, a.nombre, a.sexo,
-				TIMESTAMPDIFF(YEAR,a.fechadenacimiento,CURDATE()) as edad, a.peso, a.estado, b.id from inscripcion_evento as a, 
-				eventos as b where a.id_evento = b.id 
-				and b.id = '$evento'");
-				$resultado->execute();
-				if($resultado){
-	
-					$respuesta = '';
-					//ciclo foreach se usa para recorrer los resultados de las consultas
-					foreach($resultado as $r){ 
-						$valor = $this->permisos($rol_usuario); //rol del usuario
+		$valor = $this->permisos($rol_usuario); //rol del usuario
 
-						if ($valor[0]=="true") {
+		if ($valor[0]=="true") {
+			if(preg_match_all('/^[0-9\b]{1,10}$/',$evento)){
+				$co = $this->conecta();
+				$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
+				try{
+					$resultado = $co->prepare("SELECT a.cedula, a.nombre, a.sexo,
+					TIMESTAMPDIFF(YEAR,a.fechadenacimiento,CURDATE()) as edad, a.peso, a.estado, b.id from inscripcion_evento as a, 
+					eventos as b where a.id_evento = b.id 
+					and b.id = '$evento'");
+					$resultado->execute();
+					if($resultado){
+		
+						$respuesta = '';
+						//ciclo foreach se usa para recorrer los resultados de las consultas
+						foreach($resultado as $r){ 
+							
 							$respuesta = $respuesta."<tr>";
 
 								$respuesta = $respuesta."<td>";
@@ -271,58 +280,71 @@ class inscripcion_evento extends conexion{
 								$respuesta = $respuesta."</td>";
 
 							$respuesta = $respuesta."</tr>";
+							
 						}
+						$accion= "Ha consultado la tabla de Atletas Inscritos en Evento";
+
+						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+						return $respuesta;
 					}
-					$accion= "Ha consultado la tabla de Atletas Inscritos en Evento";
+					else {
+						return '';
+					}
 
-					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-					return $respuesta;
+				}catch(Exception $e) {
+					return $e->getMessage();
 				}
-				else {
-					return '';
-				}
-
-			}catch(Exception $e) {
-				return $e->getMessage();
+			}else{
+				return 'ingrese datos correctamente';
 			}
 		}else{
-			return 'ingrese datos correctamente';
+			return 'no tiene permiso de realizar esta accion';
 		}
 	}
 	
 	
-	public function elimina_atletas($evento_inscripcion,$cedula_inscripcion, $cedula_bitacora,$modulo){
-		if($this->validar_eliminar($evento_inscripcion,$cedula_inscripcion)){
-			$co = $this->conecta();
-			$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	public function elimina_atletas($evento_inscripcion,$cedula_inscripcion, $cedula_bitacora,$modulo,$rol_usuario){
 
-			try{
+		$valor = $this->permisos($rol_usuario); //rol del usuario
 
-				$elimina = $co->prepare("DELETE from 
-				inscripcion_evento  where 
-				cedula = '$cedula_inscripcion' 
-				and id_evento = '$evento_inscripcion'");
+		if ($valor[3]=="true") {
 
-				$elimina->execute();
-
-				if($elimina){
-					
-					$accion= "Ha eliminado un Atleta Inscrito en un Evento";
-
-					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-
-					return 'eliminado';
+			if($this->validar_eliminar($evento_inscripcion,$cedula_inscripcion)){
+				$co = $this->conecta();
+				$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	
+				try{
+	
+					$elimina = $co->prepare("DELETE from 
+					inscripcion_evento  where 
+					cedula = '$cedula_inscripcion' 
+					and id_evento = '$evento_inscripcion'");
+	
+					$elimina->execute();
+	
+					if($elimina){
+						
+						$accion= "Ha eliminado un Atleta Inscrito en un Evento";
+	
+						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+	
+						return 'eliminado';
+					}
+					else {
+						return 'noelimino';
+					}
+	
+				}catch(Exception $e) {
+					return $e->getMessage();
 				}
-				else {
-					return 'noelimino';
-				}
-
-			}catch(Exception $e) {
-				return $e->getMessage();
+			}else{
+				return 'ingrese datos correctamente';
 			}
+
 		}else{
-			return 'ingrese datos correctamente';
+			return 'no tiene permiso para eliminar';
 		}
+
 	}
 
 	public function consulta_cedula(){
