@@ -122,15 +122,15 @@ class consultar_resultados_eventosTest extends TestCase{
         $this->resultados->set_ronda('1');
         $this->resultados->set_forma_ganar('sumision');
         
-        $this->resultados->eliminar('29831184','12');
+        $this->resultados->eliminar('29831184','12','1');
 
-        $this->inscripcion->elimina_atletas($id_evento,'12092167','29831184','10'); 
+        $this->inscripcion->elimina_atletas($id_evento,'12092167','29831184','10','1'); 
 
         $this->eventos->set_nombre_evento('torneo peleas furiosas 1999');
-        $this->eventos->eliminar('29831184','6'); 
+        $this->eventos->eliminar('29831184','6','1'); 
 
         $this->clubes->set_codigo_club('qwertyuiop');
-        $this->clubes->eliminar('29831184','1');
+        $this->clubes->eliminar('29831184','1','1');
     }
 
     public function testConsultarResultadosEventos(){

@@ -102,7 +102,7 @@ se elimina metodo de registrar bitacora desde controlador en emparejamiento e in
 
 base de datos modificada para datos encriptados, de varchar a text en personal bitacora clubes informacion medica 
 
-se agrega permiso en registrar modificar y eliminar en modelo de personal,clubes, atletas, eventos usuarios informacion medica informacion socioeconomica roles y permisos
+se agrega permiso en registrar modificar y eliminar en modelo de personal,clubes, atletas, eventos usuarios informacion medica informacion socioeconomica roles y permisos, resultados eventos, inscripcion 
 
 se encriptan datos en personal, bitacora, clubes, informacion medica
 
@@ -124,4 +124,4 @@ lateral se ajustan items largos colocandoles clases para acortar
 
 Pruebas unitarias
 
-Modulo listas: atletas, bitacora, clubes, eventos, personal, usuarios, roles permisos, historial atletas, emparejamiento, informacion medica y socioeconomica, inscripcion
+Modulo listas: atletas, bitacora, clubes, eventos, personal, usuarios, roles permisos, historial atletas, emparejamiento, informacion medica y socioeconomica, inscripcion, resultados eventos
