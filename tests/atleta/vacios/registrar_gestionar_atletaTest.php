@@ -30,7 +30,7 @@ class registrar_gestionar_atletaTest extends TestCase{
 
         $registro = $this->atleta->registrar('1','29831184','1');
 
-        $this->assertStringStartsWith('<tr>', $registro);
+        $this->assertEquals('ingrese datos correctamente', $registro);
     }
 }
 

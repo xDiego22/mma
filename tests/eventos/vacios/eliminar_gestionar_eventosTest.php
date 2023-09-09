@@ -14,7 +14,7 @@ class eliminar_gestionar_eventosTest extends TestCase{
     public function testEliminarEventos(){
         $this->eventos->set_nombre_evento('');
         
-        $this->assertEquals('eliminado',$this->eventos->eliminar('29831184','6','1'));
+         $this->assertEquals('ingrese datos correctamente',$this->eventos->eliminar('29831184','6','1'));
     }
 }
 
