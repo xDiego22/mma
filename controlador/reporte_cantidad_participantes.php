@@ -41,7 +41,6 @@
 		$permisos = $objeto->permisos($rol_usuario);
 
 		if($permisos[0] == "true"){
-			$objeto->registrar_bitacora($cedula_bitacora,"Ha visualizado reportes estadisticos de cantidad de participantes",$modulo);
 			require_once("vista/".$pagina.".php");
 		}else{
 			echo "<center>No tienes acceso para consultar este modulo</center>";
