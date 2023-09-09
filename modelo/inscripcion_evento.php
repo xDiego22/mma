@@ -212,9 +212,6 @@ class inscripcion_evento extends conexion{
 
 	public function muestra_inscritos($evento, $rol_usuario, $cedula_bitacora,$modulo){
 		
-		$valor = $this->permisos($rol_usuario); //rol del usuario
-
-		if ($valor[0]=="true") {
 			if(preg_match_all('/^[0-9\b]{1,10}$/',$evento)){
 				$co = $this->conecta();
 				$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -230,57 +227,59 @@ class inscripcion_evento extends conexion{
 						$respuesta = '';
 						//ciclo foreach se usa para recorrer los resultados de las consultas
 						foreach($resultado as $r){ 
-							
-							$respuesta = $respuesta."<tr>";
+							$valor = $this->permisos($rol_usuario); //rol del usuario
 
-								$respuesta = $respuesta."<td>";
-									if(is_file("img/atletas/".$r[0].".png")){
-										$foto = 	"img/atletas/".$r[0].".png";
-									}
-									else{
-										$foto = "img/atletas/icono_persona.png";	
-									} 
-									$respuesta = $respuesta."
-									<img src='".$foto."' style='width:55px' 
-									class='rounded-circle' />";
-								$respuesta = $respuesta."</td>";
+							if ($valor[0]=="true") {
+								$respuesta = $respuesta."<tr>";
 
-								$respuesta = $respuesta."<td>";
-									$respuesta = $respuesta.$r[0];
-								$respuesta = $respuesta."</td>";
+									$respuesta = $respuesta."<td>";
+										if(is_file("img/atletas/".$r[0].".png")){
+											$foto = 	"img/atletas/".$r[0].".png";
+										}
+										else{
+											$foto = "img/atletas/icono_persona.png";	
+										} 
+										$respuesta = $respuesta."
+										<img src='".$foto."' style='width:55px' 
+										class='rounded-circle' />";
+									$respuesta = $respuesta."</td>";
 
-								$respuesta = $respuesta."<td>";
-									$respuesta = $respuesta.$r[1];
-								$respuesta = $respuesta."</td>";
+									$respuesta = $respuesta."<td>";
+										$respuesta = $respuesta.$r[0];
+									$respuesta = $respuesta."</td>";
 
-								$respuesta = $respuesta."<td>";
-									$respuesta = $respuesta.$r[2];
-								$respuesta = $respuesta."</td>";
+									$respuesta = $respuesta."<td>";
+										$respuesta = $respuesta.$r[1];
+									$respuesta = $respuesta."</td>";
 
-								$respuesta = $respuesta."<td>";
-									$respuesta = $respuesta.$r[3];
-								$respuesta = $respuesta."</td>";
+									$respuesta = $respuesta."<td>";
+										$respuesta = $respuesta.$r[2];
+									$respuesta = $respuesta."</td>";
 
-								$respuesta = $respuesta."<td>";
-									$respuesta = $respuesta.$r[4];
-								$respuesta = $respuesta."</td>";
+									$respuesta = $respuesta."<td>";
+										$respuesta = $respuesta.$r[3];
+									$respuesta = $respuesta."</td>";
 
-								$respuesta = $respuesta."<td>";
-									$respuesta = $respuesta.$r[5];
-								$respuesta = $respuesta."</td>";
+									$respuesta = $respuesta."<td>";
+										$respuesta = $respuesta.$r[4];
+									$respuesta = $respuesta."</td>";
 
-								$respuesta = $respuesta."<td>";
-									if ($valor[3]=="true"){
-										$respuesta = $respuesta."<button type='button' class='btn btn-danger mb-1' onclick='elimina(this)'><i class='bi bi-x-lg'></i></button>";
-									}
-								$respuesta = $respuesta."</td>";
+									$respuesta = $respuesta."<td>";
+										$respuesta = $respuesta.$r[5];
+									$respuesta = $respuesta."</td>";
 
-								$respuesta = $respuesta."<td style='display:none;'>";
-									$respuesta = $respuesta.$r[6];
-								$respuesta = $respuesta."</td>";
+									$respuesta = $respuesta."<td>";
+										if ($valor[3]=="true"){
+											$respuesta = $respuesta."<button type='button' class='btn btn-danger mb-1' onclick='elimina(this)'><i class='bi bi-x-lg'></i></button>";
+										}
+									$respuesta = $respuesta."</td>";
 
-							$respuesta = $respuesta."</tr>";
-							
+									$respuesta = $respuesta."<td style='display:none;'>";
+										$respuesta = $respuesta.$r[6];
+									$respuesta = $respuesta."</td>";
+
+								$respuesta = $respuesta."</tr>";
+							}
 						}
 						$accion= "Ha consultado la tabla de Atletas Inscritos en Evento";
 
@@ -297,9 +296,6 @@ class inscripcion_evento extends conexion{
 			}else{
 				return 'ingrese datos correctamente';
 			}
-		}else{
-			return 'no tiene permiso de realizar esta accion';
-		}
 	}
 	
 	

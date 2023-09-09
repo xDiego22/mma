@@ -73,93 +73,104 @@ class resultados_eventos extends conexion{
 
 	public function registrar($rol_usuario,$cedula_bitacora,$modulo){
 
-		if($this->validar()){
-			if(!$this->existe($this->nombre_evento,$this->atleta_ganador,$this->atleta_perdedor,$this->forma_ganar,$this->ronda)){
+		$valor = $this->permisos($rol_usuario); //rol del usuario
+		if($valor[1]=="true"){
 
-				$co = $this->conecta();
-				$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				
-				try{
-					$resultado = $co->prepare("INSERT into resultados(
-						id_evento,
-						atleta1, 
-						atleta2,
-						forma_ganar, 
-						ronda)
-						Values(
-						:nombre_evento,
-						:atleta_ganador,
-						:atleta_perdedor,
-						:forma_ganar,
-						:ronda)");
+			if($this->validar()){
+				if(!$this->existe($this->nombre_evento,$this->atleta_ganador,$this->atleta_perdedor,$this->forma_ganar,$this->ronda)){
 
-					$resultado->bindParam(':nombre_evento',$this->nombre_evento);
-					$resultado->bindParam(':atleta_ganador',$this->atleta_ganador);
-					$resultado->bindParam(':atleta_perdedor',$this->atleta_perdedor);
-					$resultado->bindParam(':forma_ganar',$this->forma_ganar);
-					$resultado->bindParam(':ronda',$this->ronda);
-	
-					$resultado->execute();
+					$co = $this->conecta();
+					$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					
+					try{
+						$resultado = $co->prepare("INSERT into resultados(
+							id_evento,
+							atleta1, 
+							atleta2,
+							forma_ganar, 
+							ronda)
+							Values(
+							:nombre_evento,
+							:atleta_ganador,
+							:atleta_perdedor,
+							:forma_ganar,
+							:ronda)");
 
-					$accion= "Ha registrado un resultado de eventos";
+						$resultado->bindParam(':nombre_evento',$this->nombre_evento);
+						$resultado->bindParam(':atleta_ganador',$this->atleta_ganador);
+						$resultado->bindParam(':atleta_perdedor',$this->atleta_perdedor);
+						$resultado->bindParam(':forma_ganar',$this->forma_ganar);
+						$resultado->bindParam(':ronda',$this->ronda);
+		
+						$resultado->execute();
 
-					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-					return $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
+						$accion= "Ha registrado un resultado de eventos";
 
-				}catch(Exception $e){
-					return $e->getMessage();
+						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+						return $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
+
+					}catch(Exception $e){
+						return $e->getMessage();
+					}
 				}
+				else{
+					return "Ya existe un ganador en este combate";
+				}
+			}else{
+				return "ingrese datos correctamente";
 			}
-			else{
-				return "Ya existe un ganador en este combate";
-			}
-		}else{
-			return "ingrese datos correctamente";
+		}else {
+			return "no tiene permiso para registrar";
 		}
 
 	}
 
-	public function eliminar($cedula_bitacora,$modulo){
-		if($this->validar()){
-			$co = $this->conecta();
-			$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	public function eliminar($cedula_bitacora,$modulo,$rol_usuario){
+		$valor = $this->permisos($rol_usuario); //rol del usuario
+		if($valor[3]=="true"){
+			if($this->validar()){
+				$co = $this->conecta();
+				$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-			if($this->existe($this->nombre_evento,$this->atleta_ganador,$this->atleta_perdedor,$this->forma_ganar,$this->ronda)){
+				if($this->existe($this->nombre_evento,$this->atleta_ganador,$this->atleta_perdedor,$this->forma_ganar,$this->ronda)){
 
-				try{
+					try{
 
-					$resultado = $co->prepare("DELETE from resultados where id_evento = :nombre_evento 
-					and atleta1 = :atleta_ganador 
-					and atleta2 = :atleta_perdedor 
-					and forma_ganar = :forma_ganar 
-					and ronda = :ronda");
+						$resultado = $co->prepare("DELETE from resultados where id_evento = :nombre_evento 
+						and atleta1 = :atleta_ganador 
+						and atleta2 = :atleta_perdedor 
+						and forma_ganar = :forma_ganar 
+						and ronda = :ronda");
 
-					$resultado->bindParam(':nombre_evento',$this->nombre_evento);
-					$resultado->bindParam(':atleta_ganador',$this->atleta_ganador);
-					$resultado->bindParam(':atleta_perdedor',$this->atleta_perdedor);
-					$resultado->bindParam(':forma_ganar',$this->forma_ganar);
-					$resultado->bindParam(':ronda',$this->ronda);
-					
-					$resultado->execute();
+						$resultado->bindParam(':nombre_evento',$this->nombre_evento);
+						$resultado->bindParam(':atleta_ganador',$this->atleta_ganador);
+						$resultado->bindParam(':atleta_perdedor',$this->atleta_perdedor);
+						$resultado->bindParam(':forma_ganar',$this->forma_ganar);
+						$resultado->bindParam(':ronda',$this->ronda);
 						
-					if ($resultado) {
-						$accion= "Ha eliminado un resultado de evento";
+						$resultado->execute();
+							
+						if ($resultado) {
+							$accion= "Ha eliminado un resultado de evento";
 
-						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-						return "eliminado";
+							parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+							return "eliminado";
+						}
+						else{
+							return "no eliminado";
+						}
+					}catch(Exception $e) {
+						return $e->getMessage();
 					}
-					else{
-						return "no eliminado";
-					}
-				}catch(Exception $e) {
-					return $e->getMessage();
 				}
+				else {
+					return "Resultado no registrado";
+				}
+			}else{
+				return "ingrese datos correctamente";
 			}
-			else {
-				return "Resultado no registrado";
-			}
-		}else{
-			return "ingrese datos correctamente";
+		}else {
+			return "no tiene permiso para eliminar";
 		}
 	}
 
@@ -169,8 +180,6 @@ class resultados_eventos extends conexion{
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		try{
-			//no prestar atencion a este sql del comentario
-			//SELECT b.nombre,b.id,(select DISTINCT c.nombre from inscripcion_evento as c, resultados as d, eventos as e where c.id = d.atleta1 and b.id = e.id) as nombre1,(select DISTINCT c.nombre from inscripcion_evento as c, resultados as d, eventos as e where c.id = d.atleta2 and b.id = e.id) as nombre2,a.ronda, a.forma_ganar, a.atleta1, a.atleta2, a.id from resultados as a ,eventos as b where b.id = a.id_evento
 
 			$resultado = $co->prepare("SELECT DISTINCT eventos.nombre,eventos.id,resultados.atleta1 as nombre1,resultados.atleta2 as nombre2, resultados.ronda, resultados.forma_ganar, resultados.atleta1, resultados.atleta2, resultados.id from resultados ,eventos, inscripcion_evento where eventos.id = resultados.id_evento");
 			$resultado->execute();
@@ -178,52 +187,54 @@ class resultados_eventos extends conexion{
 			if($resultado){
  
 				$respuesta = '';
-				//ciclo foreach se usa casi siempre para recorrer los resultados de las consultas
+				
 				foreach($resultado as $r){
-					//se le coloca $r para no confundirse, sigue siendo el mismo $resultado solo que con otro nombre
+					
 					$valor = $this->permisos($rol_usuario); //rol del usuario
+					if ($valor[0]=="true") {
 
-					$respuesta = $respuesta."<tr>";
-						$respuesta = $respuesta."<td>";
-							$respuesta = $respuesta.$r[0];
-						$respuesta = $respuesta."</td>";
+						$respuesta = $respuesta."<tr>";
+							$respuesta = $respuesta."<td>";
+								$respuesta = $respuesta.$r[0];
+							$respuesta = $respuesta."</td>";
 
-						$respuesta = $respuesta."<td style='display:none'>";
-							$respuesta = $respuesta.$r[1];
-						$respuesta = $respuesta."</td>";
- 
-						$respuesta = $respuesta."<td>";
-							$respuesta = $respuesta.$r[2];
-						$respuesta = $respuesta."</td>";
+							$respuesta = $respuesta."<td style='display:none'>";
+								$respuesta = $respuesta.$r[1];
+							$respuesta = $respuesta."</td>";
+	
+							$respuesta = $respuesta."<td>";
+								$respuesta = $respuesta.$r[2];
+							$respuesta = $respuesta."</td>";
 
-						$respuesta = $respuesta."<td>";
-							$respuesta = $respuesta.$r[3];
-						$respuesta = $respuesta."</td>";
+							$respuesta = $respuesta."<td>";
+								$respuesta = $respuesta.$r[3];
+							$respuesta = $respuesta."</td>";
 
-						$respuesta = $respuesta."<td>";
-							$respuesta = $respuesta.$r[4];
-						$respuesta = $respuesta."</td>";
+							$respuesta = $respuesta."<td>";
+								$respuesta = $respuesta.$r[4];
+							$respuesta = $respuesta."</td>";
 
-						$respuesta = $respuesta."<td>";
-							$respuesta = $respuesta.$r[5];
-						$respuesta = $respuesta."</td>";
+							$respuesta = $respuesta."<td>";
+								$respuesta = $respuesta.$r[5];
+							$respuesta = $respuesta."</td>";
 
-						$respuesta = $respuesta."<td style='display:none'>";
-							$respuesta = $respuesta.$r[6];
-						$respuesta = $respuesta."</td>";
+							$respuesta = $respuesta."<td style='display:none'>";
+								$respuesta = $respuesta.$r[6];
+							$respuesta = $respuesta."</td>";
 
-						$respuesta = $respuesta."<td style='display:none'>";
-							$respuesta = $respuesta.$r[7];
-						$respuesta = $respuesta."</td>";
+							$respuesta = $respuesta."<td style='display:none'>";
+								$respuesta = $respuesta.$r[7];
+							$respuesta = $respuesta."</td>";
 
-						$respuesta = $respuesta."<td>";
-							
-							if ($valor[3]=="true"){
-								$respuesta = $respuesta."<button type='button' class='btn btn-danger mb-1 ' onclick='elimina(this)'><i class='bi bi-x-lg'></i></button>";
-							}
-						$respuesta = $respuesta."</td>";
+							$respuesta = $respuesta."<td>";
+								
+								if ($valor[3]=="true"){
+									$respuesta = $respuesta."<button type='button' class='btn btn-danger mb-1 ' onclick='elimina(this)'><i class='bi bi-x-lg'></i></button>";
+								}
+							$respuesta = $respuesta."</td>";
 
-					$respuesta = $respuesta."</tr>";
+						$respuesta = $respuesta."</tr>";
+					}
 				}
 				$accion= "Ha consultado la tabla de Resultados de Eventos";
 				

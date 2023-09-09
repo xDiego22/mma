@@ -45,7 +45,7 @@
 				$objeto->set_ronda($_POST['ronda']);
 				$objeto->set_forma_ganar($_POST['forma_ganar']);
 			
-				echo $objeto->eliminar($cedula_bitacora,$modulo); 
+				echo $objeto->eliminar($cedula_bitacora,$modulo,$rol_usuario); 
 			} 
 			else{
 				$objeto->set_nombre_evento($_POST['nombre_evento']);
