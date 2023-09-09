@@ -122,6 +122,8 @@ se creo modulo de perfil
 
 lateral se ajustan items largos colocandoles clases para acortar
 
+se elimina metodo registro bitacora en reposte de cantidades
+
 Pruebas unitarias
 
 Modulo listas: atletas, bitacora, clubes, eventos, personal, usuarios, roles permisos, historial atletas, emparejamiento, informacion medica y socioeconomica, inscripcion, resultados eventos
