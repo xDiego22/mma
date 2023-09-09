@@ -2,7 +2,6 @@
 
 use PHPUnit\Framework\TestCase;
 
-use modelo\conexion;
 use modelo\gestionar_usuarios;
 
 class consultar_gestionar_usuariosTest extends TestCase{
@@ -15,13 +14,14 @@ class consultar_gestionar_usuariosTest extends TestCase{
         $this->usuarios->set_nombre_usuarios('victor gutierrez');
         $this->usuarios->set_contrasena_usuarios('gutie123');
         $this->usuarios->set_rol_usuario('1');
+        $this->usuarios->set_correo_usuarios('roswins12.11@outlook.com');
 
         $this->usuarios->registrar('1','29831184','7');
     }
 
     public function tearDown():void {
         $this->usuarios->set_cedula_usuarios('7852258');
-        $this->usuarios->eliminar('29831184','7'); 
+        $this->usuarios->eliminar('29831184','7','1'); 
     }
 
     public function testConsultarUsuarios(){

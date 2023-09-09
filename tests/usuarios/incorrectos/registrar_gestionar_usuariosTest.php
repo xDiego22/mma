@@ -17,10 +17,11 @@ class registrar_gestionar_usuariosTest extends TestCase{
         $this->usuarios->set_nombre_usuarios('?¡?¡?¡?¡?312');
         $this->usuarios->set_contrasena_usuarios('**{}{}{}{');
         $this->usuarios->set_rol_usuario('a');
+        $this->usuarios->set_correo_usuarios('ds+1$%/():12');
 
         $registro = $this->usuarios->registrar('1','29831184','7');
 
-        $this->assertEquals('ingrese datos correctamente', $registro);
+        $this->assertEquals('Error: ingrese datos correctamente', $registro);
     }
 }
 
