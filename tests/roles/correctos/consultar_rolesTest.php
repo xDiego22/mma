@@ -34,7 +34,7 @@ class consultar_rolesTest extends TestCase{
 
     public function tearDown():void {
         $this->rol->set_nombre('rol de prueba');
-        $this->rol->eliminar('29831184','9'); 
+        $this->rol->eliminar('29831184','9','1'); 
     }
 
     public function testConsultarRol(){
