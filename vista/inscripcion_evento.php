@@ -161,33 +161,33 @@
 								Atletas inscritos en el evento 
 							</div>
 						</div>
-						<div class="container-fluid">
-							<div class="row">
-								<div class="col-md-12  mb-7">
-									<div class="table-responsive">
-										<table class="table table-striped table-hover table-borderless" id="tablaconsulta" width="100%" cellspacing="0">
-											<thead class="thead-dark">
-												<tr> 
-													<th>Foto</th>
-													<th>Cedula</th>
-													<th>Nombre</th>
-													<th>Sexo</th>
-													<th>Edad</th>
-													<th>Peso</th>
-													<th>Estado</th>
-													<th>Accion</th>
-													<th style="display:none;">id_evento</th>
-													
-												</tr>
-											</thead>
-											<tbody id="lista_inscritos">
+						
+						<div class="row">
+							<div class="col-md-12  mb-7">
+								<div class="table-responsive">
+									<table class="table table-striped table-hover table-borderless" id="tablaconsulta" width="100%" cellspacing="0">
+										<thead class="thead-dark">
+											<tr> 
+												<th>Foto</th>
+												<th>Cedula</th>
+												<th>Nombre</th>
+												<th>Sexo</th>
+												<th>Edad</th>
+												<th>Peso</th>
+												<th>Estado</th>
+												<th>Accion</th>
+												<th style="display:none;">id_evento</th>
 												
-											</tbody>
-										</table>
-									</div>
+											</tr>
+										</thead>
+										<tbody id="lista_inscritos">
+											
+										</tbody>
+									</table>
 								</div>
 							</div>
 						</div>
+						
 						
 					</form>
 				</div>
