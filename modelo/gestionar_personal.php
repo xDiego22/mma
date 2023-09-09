@@ -246,7 +246,7 @@ class gestionar_personal extends conexion{
 				return "ingrese datos correctamente";
 			}
 		}else {
-			return "no tiene permiso para registrar";
+			return "no tiene permiso para eliminar";
 		}
 	}
 
