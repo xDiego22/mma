@@ -172,312 +172,326 @@
 
         public function registrar($rol_usuario,$cedula_bitacora,$modulo){	
             
-            $co = $this->conecta();
-            $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            //se añaden atributos a la conexión para poder controlar los errores
-            //atributos para poder manejar los posibles errores
-            if($this->validar_registrar()){
-                if(!$this->existe($this->nombre)){
-                    try{
-                        
-                        $resultado = $co->prepare("INSERT into roles(
-                            nombre,
-                            descripcion)
-                            Values(
-                            :nombre_rol,
-                            :descripcion_rol)");
+            $valor = $this->permisos($rol_usuario); //rol del usuario
+		    if($valor[1]=="true"){
+                $co = $this->conecta();
+                $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                
+                if($this->validar_registrar()){
+                    if(!$this->existe($this->nombre)){
+                        try{
+                            
+                            $resultado = $co->prepare("INSERT into roles(
+                                nombre,
+                                descripcion)
+                                Values(
+                                :nombre_rol,
+                                :descripcion_rol)");
 
-                        $resultado->bindParam(':nombre_rol',$this->nombre);
-                        $resultado->bindParam(':descripcion_rol',$this->descripcion);
+                            $resultado->bindParam(':nombre_rol',$this->nombre);
+                            $resultado->bindParam(':descripcion_rol',$this->descripcion);
 
-                        $resultado->execute();
-
-                        $id_nuevo_rol = $co->lastInsertId();//toma el ultimo id que se registro
-
-                        if ($this->modulo_club == "true") {
-                            $valor_permiso = "false";
-                            $id_modulo = "1";
-                            $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
-
-                            $resultado->bindParam(':rol',$id_nuevo_rol);
-                            $resultado->bindParam(':modulo',$id_modulo);
-                            $resultado->bindParam(':consultar',$valor_permiso);
-                            $resultado->bindParam(':registrar',$valor_permiso);
-                            $resultado->bindParam(':modificar',$valor_permiso);
-                            $resultado->bindParam(':eliminar',$valor_permiso);
                             $resultado->execute();
+
+                            $id_nuevo_rol = $co->lastInsertId();//toma el ultimo id que se registro
+
+                            if ($this->modulo_club == "true") {
+                                $valor_permiso = "false";
+                                $id_modulo = "1";
+                                $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
+
+                                $resultado->bindParam(':rol',$id_nuevo_rol);
+                                $resultado->bindParam(':modulo',$id_modulo);
+                                $resultado->bindParam(':consultar',$valor_permiso);
+                                $resultado->bindParam(':registrar',$valor_permiso);
+                                $resultado->bindParam(':modificar',$valor_permiso);
+                                $resultado->bindParam(':eliminar',$valor_permiso);
+                                $resultado->execute();
+                            }
+
+                            if ($this->modulo_personal == "true") {
+                                $valor_permiso = "false";
+                                $id_modulo = "2";
+                                $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
+
+                                $resultado->bindParam(':rol',$id_nuevo_rol);
+                                $resultado->bindParam(':modulo',$id_modulo);
+                                $resultado->bindParam(':consultar',$valor_permiso);
+                                $resultado->bindParam(':registrar',$valor_permiso);
+                                $resultado->bindParam(':modificar',$valor_permiso);
+                                $resultado->bindParam(':eliminar',$valor_permiso);
+                                $resultado->execute();
+                            }
+
+                            if ($this->modulo_atletas == "true") {
+                                $valor_permiso = "false";
+                                $id_modulo = "3";
+                                $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
+
+                                $resultado->bindParam(':rol',$id_nuevo_rol);
+                                $resultado->bindParam(':modulo',$id_modulo);
+                                $resultado->bindParam(':consultar',$valor_permiso);
+                                $resultado->bindParam(':registrar',$valor_permiso);
+                                $resultado->bindParam(':modificar',$valor_permiso);
+                                $resultado->bindParam(':eliminar',$valor_permiso);
+                                $resultado->execute();
+                            }
+
+                            if ($this->modulo_medicos == "true") {
+                                $valor_permiso = "false";
+                                $id_modulo = "4";
+                                $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
+
+                                $resultado->bindParam(':rol',$id_nuevo_rol);
+                                $resultado->bindParam(':modulo',$id_modulo);
+                                $resultado->bindParam(':consultar',$valor_permiso);
+                                $resultado->bindParam(':registrar',$valor_permiso);
+                                $resultado->bindParam(':modificar',$valor_permiso);
+                                $resultado->bindParam(':eliminar',$valor_permiso);
+                                $resultado->execute();
+                            }
+
+                            if ($this->modulo_socioeconomicos == "true") {
+                                $valor_permiso = "false";
+                                $id_modulo = "5";
+                                $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
+
+                                $resultado->bindParam(':rol',$id_nuevo_rol);
+                                $resultado->bindParam(':modulo',$id_modulo);
+                                $resultado->bindParam(':consultar',$valor_permiso);
+                                $resultado->bindParam(':registrar',$valor_permiso);
+                                $resultado->bindParam(':modificar',$valor_permiso);
+                                $resultado->bindParam(':eliminar',$valor_permiso);
+                                $resultado->execute();
+                            }
+
+                            if ($this->modulo_eventos == "true") {
+                                $valor_permiso = "false";
+                                $id_modulo = "6";
+                                $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
+
+                                $resultado->bindParam(':rol',$id_nuevo_rol);
+                                $resultado->bindParam(':modulo',$id_modulo);
+                                $resultado->bindParam(':consultar',$valor_permiso);
+                                $resultado->bindParam(':registrar',$valor_permiso);
+                                $resultado->bindParam(':modificar',$valor_permiso);
+                                $resultado->bindParam(':eliminar',$valor_permiso);
+                                $resultado->execute();
+                            }
+
+                            if ($this->modulo_usuarios == "true") {
+                                $valor_permiso = "false";
+                                $id_modulo = "7";
+                                $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
+
+                                $resultado->bindParam(':rol',$id_nuevo_rol);
+                                $resultado->bindParam(':modulo',$id_modulo);
+                                $resultado->bindParam(':consultar',$valor_permiso);
+                                $resultado->bindParam(':registrar',$valor_permiso);
+                                $resultado->bindParam(':modificar',$valor_permiso);
+                                $resultado->bindParam(':eliminar',$valor_permiso);
+                                $resultado->execute();
+                            }
+
+                            if ($this->modulo_bitacora == "true") {
+                                $valor_permiso = "false";
+                                $id_modulo = "8";
+                                $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
+
+                                $resultado->bindParam(':rol',$id_nuevo_rol);
+                                $resultado->bindParam(':modulo',$id_modulo);
+                                $resultado->bindParam(':consultar',$valor_permiso);
+                                $resultado->bindParam(':registrar',$valor_permiso);
+                                $resultado->bindParam(':modificar',$valor_permiso);
+                                $resultado->bindParam(':eliminar',$valor_permiso);
+                                $resultado->execute();
+                            }
+                            if ($this->modulo_roles == "true") {
+                                $valor_permiso = "false";
+                                $id_modulo = "9";
+                                $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
+
+                                $resultado->bindParam(':rol',$id_nuevo_rol);
+                                $resultado->bindParam(':modulo',$id_modulo);
+                                $resultado->bindParam(':consultar',$valor_permiso);
+                                $resultado->bindParam(':registrar',$valor_permiso);
+                                $resultado->bindParam(':modificar',$valor_permiso);
+                                $resultado->bindParam(':eliminar',$valor_permiso);
+                                $resultado->execute();
+                            }
+
+                            if ($this->modulo_inscripcion == "true") {
+                                $valor_permiso = "false";
+                                $id_modulo = "10";
+                                $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
+
+                                $resultado->bindParam(':rol',$id_nuevo_rol);
+                                $resultado->bindParam(':modulo',$id_modulo);
+                                $resultado->bindParam(':consultar',$valor_permiso);
+                                $resultado->bindParam(':registrar',$valor_permiso);
+                                $resultado->bindParam(':modificar',$valor_permiso);
+                                $resultado->bindParam(':eliminar',$valor_permiso);
+                                $resultado->execute();
+                            }
+
+                            if ($this->modulo_emparejamientos == "true") {
+                                $valor_permiso = "false";
+                                $id_modulo = "11";
+                                $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
+
+                                $resultado->bindParam(':rol',$id_nuevo_rol);
+                                $resultado->bindParam(':modulo',$id_modulo);
+                                $resultado->bindParam(':consultar',$valor_permiso);
+                                $resultado->bindParam(':registrar',$valor_permiso);
+                                $resultado->bindParam(':modificar',$valor_permiso);
+                                $resultado->bindParam(':eliminar',$valor_permiso);
+                                $resultado->execute();
+                            }
+
+                            if ($this->modulo_resultados == "true") {
+                                $valor_permiso = "false";
+                                $id_modulo = "12";
+                                $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
+
+                                $resultado->bindParam(':rol',$id_nuevo_rol);
+                                $resultado->bindParam(':modulo',$id_modulo);
+                                $resultado->bindParam(':consultar',$valor_permiso);
+                                $resultado->bindParam(':registrar',$valor_permiso);
+                                $resultado->bindParam(':modificar',$valor_permiso);
+                                $resultado->bindParam(':eliminar',$valor_permiso);
+                                $resultado->execute();
+                            }
+
+                            if ($this->modulo_historial == "true") {
+                                $valor_permiso = "false";
+                                $id_modulo = "13";
+                                $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
+
+                                $resultado->bindParam(':rol',$id_nuevo_rol);
+                                $resultado->bindParam(':modulo',$id_modulo);
+                                $resultado->bindParam(':consultar',$valor_permiso);
+                                $resultado->bindParam(':registrar',$valor_permiso);
+                                $resultado->bindParam(':modificar',$valor_permiso);
+                                $resultado->bindParam(':eliminar',$valor_permiso);
+                                $resultado->execute();
+                            }
+
+
+                            if ($this->modulo_reportes == "true") {
+                                $valor_permiso = "false";
+                                $id_modulo = "15";
+                                $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
+
+                                $resultado->bindParam(':rol',$id_nuevo_rol);
+                                $resultado->bindParam(':modulo',$id_modulo);
+                                $resultado->bindParam(':consultar',$valor_permiso);
+                                $resultado->bindParam(':registrar',$valor_permiso);
+                                $resultado->bindParam(':modificar',$valor_permiso);
+                                $resultado->bindParam(':eliminar',$valor_permiso);
+                                $resultado->execute();
+                            }
+
+
+
+                            $accion= "Ha regitrado un nuevo Rol";
+                            parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+
+                            return $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
+                            
+                        }catch(Exception $e){
+                            return $e->getMessage();
                         }
-
-                        if ($this->modulo_personal == "true") {
-                            $valor_permiso = "false";
-                            $id_modulo = "2";
-                            $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
-
-                            $resultado->bindParam(':rol',$id_nuevo_rol);
-                            $resultado->bindParam(':modulo',$id_modulo);
-                            $resultado->bindParam(':consultar',$valor_permiso);
-                            $resultado->bindParam(':registrar',$valor_permiso);
-                            $resultado->bindParam(':modificar',$valor_permiso);
-                            $resultado->bindParam(':eliminar',$valor_permiso);
-                            $resultado->execute();
-                        }
-
-                        if ($this->modulo_atletas == "true") {
-                            $valor_permiso = "false";
-                            $id_modulo = "3";
-                            $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
-
-                            $resultado->bindParam(':rol',$id_nuevo_rol);
-                            $resultado->bindParam(':modulo',$id_modulo);
-                            $resultado->bindParam(':consultar',$valor_permiso);
-                            $resultado->bindParam(':registrar',$valor_permiso);
-                            $resultado->bindParam(':modificar',$valor_permiso);
-                            $resultado->bindParam(':eliminar',$valor_permiso);
-                            $resultado->execute();
-                        }
-
-                        if ($this->modulo_medicos == "true") {
-                            $valor_permiso = "false";
-                            $id_modulo = "4";
-                            $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
-
-                            $resultado->bindParam(':rol',$id_nuevo_rol);
-                            $resultado->bindParam(':modulo',$id_modulo);
-                            $resultado->bindParam(':consultar',$valor_permiso);
-                            $resultado->bindParam(':registrar',$valor_permiso);
-                            $resultado->bindParam(':modificar',$valor_permiso);
-                            $resultado->bindParam(':eliminar',$valor_permiso);
-                            $resultado->execute();
-                        }
-
-                        if ($this->modulo_socioeconomicos == "true") {
-                            $valor_permiso = "false";
-                            $id_modulo = "5";
-                            $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
-
-                            $resultado->bindParam(':rol',$id_nuevo_rol);
-                            $resultado->bindParam(':modulo',$id_modulo);
-                            $resultado->bindParam(':consultar',$valor_permiso);
-                            $resultado->bindParam(':registrar',$valor_permiso);
-                            $resultado->bindParam(':modificar',$valor_permiso);
-                            $resultado->bindParam(':eliminar',$valor_permiso);
-                            $resultado->execute();
-                        }
-
-                        if ($this->modulo_eventos == "true") {
-                            $valor_permiso = "false";
-                            $id_modulo = "6";
-                            $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
-
-                            $resultado->bindParam(':rol',$id_nuevo_rol);
-                            $resultado->bindParam(':modulo',$id_modulo);
-                            $resultado->bindParam(':consultar',$valor_permiso);
-                            $resultado->bindParam(':registrar',$valor_permiso);
-                            $resultado->bindParam(':modificar',$valor_permiso);
-                            $resultado->bindParam(':eliminar',$valor_permiso);
-                            $resultado->execute();
-                        }
-
-                        if ($this->modulo_usuarios == "true") {
-                            $valor_permiso = "false";
-                            $id_modulo = "7";
-                            $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
-
-                            $resultado->bindParam(':rol',$id_nuevo_rol);
-                            $resultado->bindParam(':modulo',$id_modulo);
-                            $resultado->bindParam(':consultar',$valor_permiso);
-                            $resultado->bindParam(':registrar',$valor_permiso);
-                            $resultado->bindParam(':modificar',$valor_permiso);
-                            $resultado->bindParam(':eliminar',$valor_permiso);
-                            $resultado->execute();
-                        }
-
-                        if ($this->modulo_bitacora == "true") {
-                            $valor_permiso = "false";
-                            $id_modulo = "8";
-                            $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
-
-                            $resultado->bindParam(':rol',$id_nuevo_rol);
-                            $resultado->bindParam(':modulo',$id_modulo);
-                            $resultado->bindParam(':consultar',$valor_permiso);
-                            $resultado->bindParam(':registrar',$valor_permiso);
-                            $resultado->bindParam(':modificar',$valor_permiso);
-                            $resultado->bindParam(':eliminar',$valor_permiso);
-                            $resultado->execute();
-                        }
-                        if ($this->modulo_roles == "true") {
-                            $valor_permiso = "false";
-                            $id_modulo = "9";
-                            $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
-
-                            $resultado->bindParam(':rol',$id_nuevo_rol);
-                            $resultado->bindParam(':modulo',$id_modulo);
-                            $resultado->bindParam(':consultar',$valor_permiso);
-                            $resultado->bindParam(':registrar',$valor_permiso);
-                            $resultado->bindParam(':modificar',$valor_permiso);
-                            $resultado->bindParam(':eliminar',$valor_permiso);
-                            $resultado->execute();
-                        }
-
-                        if ($this->modulo_inscripcion == "true") {
-                            $valor_permiso = "false";
-                            $id_modulo = "10";
-                            $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
-
-                            $resultado->bindParam(':rol',$id_nuevo_rol);
-                            $resultado->bindParam(':modulo',$id_modulo);
-                            $resultado->bindParam(':consultar',$valor_permiso);
-                            $resultado->bindParam(':registrar',$valor_permiso);
-                            $resultado->bindParam(':modificar',$valor_permiso);
-                            $resultado->bindParam(':eliminar',$valor_permiso);
-                            $resultado->execute();
-                        }
-
-                        if ($this->modulo_emparejamientos == "true") {
-                            $valor_permiso = "false";
-                            $id_modulo = "11";
-                            $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
-
-                            $resultado->bindParam(':rol',$id_nuevo_rol);
-                            $resultado->bindParam(':modulo',$id_modulo);
-                            $resultado->bindParam(':consultar',$valor_permiso);
-                            $resultado->bindParam(':registrar',$valor_permiso);
-                            $resultado->bindParam(':modificar',$valor_permiso);
-                            $resultado->bindParam(':eliminar',$valor_permiso);
-                            $resultado->execute();
-                        }
-
-                        if ($this->modulo_resultados == "true") {
-                            $valor_permiso = "false";
-                            $id_modulo = "12";
-                            $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
-
-                            $resultado->bindParam(':rol',$id_nuevo_rol);
-                            $resultado->bindParam(':modulo',$id_modulo);
-                            $resultado->bindParam(':consultar',$valor_permiso);
-                            $resultado->bindParam(':registrar',$valor_permiso);
-                            $resultado->bindParam(':modificar',$valor_permiso);
-                            $resultado->bindParam(':eliminar',$valor_permiso);
-                            $resultado->execute();
-                        }
-
-                        if ($this->modulo_historial == "true") {
-                            $valor_permiso = "false";
-                            $id_modulo = "13";
-                            $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
-
-                            $resultado->bindParam(':rol',$id_nuevo_rol);
-                            $resultado->bindParam(':modulo',$id_modulo);
-                            $resultado->bindParam(':consultar',$valor_permiso);
-                            $resultado->bindParam(':registrar',$valor_permiso);
-                            $resultado->bindParam(':modificar',$valor_permiso);
-                            $resultado->bindParam(':eliminar',$valor_permiso);
-                            $resultado->execute();
-                        }
-
-
-                        if ($this->modulo_reportes == "true") {
-                            $valor_permiso = "false";
-                            $id_modulo = "15";
-                            $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
-
-                            $resultado->bindParam(':rol',$id_nuevo_rol);
-                            $resultado->bindParam(':modulo',$id_modulo);
-                            $resultado->bindParam(':consultar',$valor_permiso);
-                            $resultado->bindParam(':registrar',$valor_permiso);
-                            $resultado->bindParam(':modificar',$valor_permiso);
-                            $resultado->bindParam(':eliminar',$valor_permiso);
-                            $resultado->execute();
-                        }
-
-
-
-                        $accion= "Ha regitrado un nuevo Rol";
-                        parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-
-                        return $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
-                        
-                    }catch(Exception $e){
-                        return $e->getMessage();
                     }
+                    else {
+                        return "Ya existe el rol que desea registrar";
+                    }   
+                }else{
+                    return "ingrese datos correctamente";
                 }
-                else {
-                    return "Ya existe el rol que desea registrar";
-                }   
-            }else{
-                return "ingrese datos correctamente";
-            }
+            }else {
+			    return "no tiene permiso para registrar";
+		    }
 		} 
 
-        public function modificar($rol_usuario,$cedula_bitacora,$modulo){	
+        public function modificar($rol_usuario,$cedula_bitacora,$modulo){
             
-            $co = $this->conecta();
-            $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            //se añaden atributos a la conexión para poder controlar los errores
-            //atributos para poder manejar los posibles errores
-            if($this->validar_modificar()){
-                if($this->existe($this->nombre)){
-                    try{
-                        
-                        $resultado = $co->prepare("UPDATE roles SET
-                            nombre = :nombre_rol,
-                            descripcion = :descripcion_rol
-                            WHERE nombre = :nombre_rol");
+            $valor = $this->permisos($rol_usuario); //rol del usuario
+		    if($valor[2]=="true"){
+            
+                $co = $this->conecta();
+                $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                
+                if($this->validar_modificar()){
+                    if($this->existe($this->nombre)){
+                        try{
+                            
+                            $resultado = $co->prepare("UPDATE roles SET
+                                nombre = :nombre_rol,
+                                descripcion = :descripcion_rol
+                                WHERE nombre = :nombre_rol");
 
-                        $resultado->bindParam(':nombre_rol',$this->nombre);
-                        $resultado->bindParam(':descripcion_rol',$this->descripcion);
+                            $resultado->bindParam(':nombre_rol',$this->nombre);
+                            $resultado->bindParam(':descripcion_rol',$this->descripcion);
 
-                        $resultado->execute();
+                            $resultado->execute();
 
-                        $accion= "Ha modificado un Rol";
-                        parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+                            $accion= "Ha modificado un Rol";
+                            parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
 
-                        return $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
-                        
-                    }catch(Exception $e){
-                        return $e->getMessage();
+                            return $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
+                            
+                        }catch(Exception $e){
+                            return $e->getMessage();
+                        }
                     }
+                    else {
+                        return "Rol no registrado";
+                    }
+                }else{
+                    return "ingrese datos correctamente";
                 }
-                else {
-                    return "Rol no registrado";
-                }
-            }else{
-                return "ingrese datos correctamente";
-            }
+            }else {
+			    return "no tiene permiso para modificar";
+		    }
 		}
 
-        public function eliminar($cedula_bitacora,$modulo){
+        public function eliminar($cedula_bitacora,$modulo,$rol_usuario){
 
-            $co = $this->conecta();
-            $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            if(preg_match_all('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ -]{5,30}$/',$this->nombre)){
-                if($this->existe($this->nombre)){
-                    try{
+            $valor = $this->permisos($rol_usuario); //rol del usuario
+            if($valor[3]=="true"){
+                $co = $this->conecta();
+                $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                if(preg_match_all('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ -]{5,30}$/',$this->nombre)){
+                    if($this->existe($this->nombre)){
+                        try{
 
-                        $resultado = $co->prepare("DELETE from roles where nombre = :nombre_rol");
+                            $resultado = $co->prepare("DELETE from roles where nombre = :nombre_rol");
 
-                        $resultado->bindParam(':nombre_rol',$this->nombre);
+                            $resultado->bindParam(':nombre_rol',$this->nombre);
 
-                        $resultado->execute();		
+                            $resultado->execute();		
 
-                        if ($resultado) {
-                            $accion= "Ha eliminado un Rol";
-                            parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-                            return "eliminado";
+                            if ($resultado) {
+                                $accion= "Ha eliminado un Rol";
+                                parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+                                return "eliminado";
+                            }
+                            else{
+                                return "no eliminado";
+                            }
+                            
+                        }catch(Exception $e) {
+                            return $e->getMessage();
                         }
-                        else{
-                            return "no eliminado";
-                        }
-                        
-                    }catch(Exception $e) {
-                        return $e->getMessage();
                     }
+                    else {
+                        return "Club no registrado";
+                    }
+                }else{
+                    return "ingrese datos correctamente";
                 }
-                else {
-                    return "Club no registrado";
-                }
-            }else{
-                return "ingrese datos correctamente";
+            }else {
+                return "no tiene permiso para eliminar";
             }
             
         }
@@ -643,39 +657,45 @@
             }
         }
 
-        public function actualizar_permisos($id_modulo,$registrar,$consultar,$modificar,$eliminar){
-            $co = $this->conecta();
-            $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            
-            if($this->validar_actualizar($id_modulo,$registrar,$consultar,$modificar,$eliminar)){
+        public function actualizar_permisos($id_modulo,$registrar,$consultar,$modificar,$eliminar,$rol_usuario){
+
+            $valor = $this->permisos($rol_usuario); //rol del usuario
+		    if($valor[1]=="true"){
+                $co = $this->conecta();
+                $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 
-                try {
-
-                    $resultado = $co->prepare("UPDATE intermediaria set 
-                    consultar = :consultar,
-                    registrar = :registrar,
-                    modificar = :modificar,
-                    eliminar = :eliminar
-                    where id_modulos = :id_modulos and id_rol = :rol2");
-
-                    $resultado->bindParam(':rol2',$this->rol_2);
-                    $resultado->bindParam(':id_modulos',$id_modulo);	
-                    $resultado->bindParam(':consultar',$consultar);
-                    $resultado->bindParam(':registrar',$registrar);
-                    $resultado->bindParam(':modificar',$modificar);
-                    $resultado->bindParam(':eliminar',$eliminar);
+                if($this->validar_actualizar($id_modulo,$registrar,$consultar,$modificar,$eliminar)){
                     
-                    $resultado->execute();
+                    try {
 
-                    return "permiso actualizado";
+                        $resultado = $co->prepare("UPDATE intermediaria set 
+                        consultar = :consultar,
+                        registrar = :registrar,
+                        modificar = :modificar,
+                        eliminar = :eliminar
+                        where id_modulos = :id_modulos and id_rol = :rol2");
+
+                        $resultado->bindParam(':rol2',$this->rol_2);
+                        $resultado->bindParam(':id_modulos',$id_modulo);	
+                        $resultado->bindParam(':consultar',$consultar);
+                        $resultado->bindParam(':registrar',$registrar);
+                        $resultado->bindParam(':modificar',$modificar);
+                        $resultado->bindParam(':eliminar',$eliminar);
                         
-                } catch(Exception $e) {
-                    return $e->getMessage();
-                }
+                        $resultado->execute();
 
-            }else{
-                return "ingrese datos correctamente";
-            }
+                        return "permiso actualizado";
+                            
+                    } catch(Exception $e) {
+                        return $e->getMessage();
+                    }
+
+                }else{
+                    return "ingrese datos correctamente";
+                }
+            }else {
+			    return "no tiene permiso para actualizar permisos";
+		    }
         }
 
         public function validar_registrar(){
