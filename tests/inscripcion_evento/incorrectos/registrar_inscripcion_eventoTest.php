@@ -6,10 +6,8 @@ use modelo\inscripcion_evento;
 
 class registrar_inscripcion_eventoTest extends TestCase{
     private $inscripcion;
-    protected static $pdo;
-
+   
     public function setUp():void{
-        
         $this->inscripcion = new inscripcion_evento();
     }
 

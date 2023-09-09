@@ -6,8 +6,7 @@ use modelo\socioeconomico_atleta;
 
 class registrar_informacion_socioeconomicaTest extends TestCase{
     private $socioeconomica;
-    protected static $pdo;
-
+    
     public function setUp():void{
         $this->socioeconomico = new socioeconomico_atleta();
     }

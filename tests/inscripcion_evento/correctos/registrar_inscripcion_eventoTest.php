@@ -7,7 +7,7 @@ use modelo\gestionar_clubes;
 use modelo\gestionar_eventos;
 use modelo\inscripcion_evento;
 
-class consultar_inscripcion_eventoTest extends TestCase{
+class registrar_inscripcion_eventoTest extends TestCase{
     private $eventos;
     private $clubes;
     private $inscripcion;
@@ -50,7 +50,23 @@ class consultar_inscripcion_eventoTest extends TestCase{
         $this->eventos->set_juez3('luis perdomo');
 
         $this->eventos->registrar('1','29831184','6');
+        
+    }
 
+    public function tearDown():void {
+        $id_evento = self::$pdo->query('SELECT id from eventos where nombre="torneo peleas furiosas 1999"')->fetch(\PDO::FETCH_ASSOC)['id'];
+
+        $this->inscripcion->elimina_atletas($id_evento,'12092167','29831184','10','1'); 
+
+        $this->eventos->set_nombre_evento('torneo peleas furiosas 1999','1');
+        $this->eventos->eliminar('29831184','6','1'); 
+
+        $this->clubes->set_codigo_club('qwertyuiop');
+        $this->clubes->eliminar('29831184','1','1');
+    }
+
+    public function testRegistrarInscripcionEvento(){
+    
         $id_evento = self::$pdo->query('SELECT id from eventos where nombre="torneo peleas furiosas 1999"')->fetch(\PDO::FETCH_ASSOC)['id'];
 
         $this->inscripcion->set_evento_inscripcion($id_evento);
@@ -61,29 +77,9 @@ class consultar_inscripcion_eventoTest extends TestCase{
         $this->inscripcion->set_fechadenacimiento('1974-10-31');
         $this->inscripcion->set_estado('Lara');
 
-        $this->inscripcion->incluir('1','29831184','10');
-    }
+        $registrar = $this->inscripcion->incluir('1','29831184','10');
 
-    public function tearDown():void {
-        $id_evento = self::$pdo->query('SELECT id from eventos where nombre="torneo peleas furiosas 1999"')->fetch(\PDO::FETCH_ASSOC)['id'];
-
-        $this->inscripcion->elimina_atletas($id_evento,'12092167','29831184','10'); 
-
-        $this->eventos->set_nombre_evento('torneo peleas furiosas 1999');
-        $this->eventos->eliminar('29831184','6'); 
-
-        $this->clubes->set_codigo_club('qwertyuiop');
-        $this->clubes->eliminar('29831184','1');
-    }
-
-    public function testConsultarInscripcionEvento(){
-    
-        $id_evento = self::$pdo->query('SELECT id from eventos where nombre="torneo peleas furiosas 1999"')->fetch(\PDO::FETCH_ASSOC)['id'];
-
-        
-        $consultar = $this->inscripcion->muestra_inscritos($id_evento,'1','29831184','10');
-
-        $this->assertStringStartsWith('<tr>', $consultar);
+        $this->assertStringStartsWith('<tr>', $registrar);
     }
 }
 

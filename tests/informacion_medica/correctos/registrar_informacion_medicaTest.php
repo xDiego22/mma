@@ -7,7 +7,7 @@ use modelo\gestionar_clubes;
 use modelo\gestionar_atleta;
 use modelo\medico_atleta;
 
-class consultar_informacion_medicaTest extends TestCase{
+class registrar_informacion_medicaTest extends TestCase{
     private $atleta;
     private $clubes;
     private $medico;
@@ -54,7 +54,24 @@ class consultar_informacion_medicaTest extends TestCase{
         $this->atleta->set_entrenador_atleta('carlos rodriguez');
 
         $this->atleta->registrar('1','29831184','3');
+        
+    }
 
+    public function tearDown():void {
+        $id_atleta = self::$pdo->query('SELECT  id from atletas where cedula="3345123"')->fetch(\PDO::FETCH_ASSOC)['id']; 
+        
+        $this->medico->set_nombre_atleta($id_atleta);
+        $this->medico->eliminar('29831184','4','1');
+
+        $this->atleta->set_cedula_atleta('3345123');
+        $this->atleta->eliminar('29831184','3','1'); 
+
+        $this->clubes->set_codigo_club('asdfgh');
+        $this->clubes->eliminar('29831184','1','1');
+    }
+
+    public function testRegistrarMedicoAtleta(){
+    
         $id_atleta = self::$pdo->query('SELECT  id from atletas where cedula="3345123"')->fetch(\PDO::FETCH_ASSOC)['id']; 
         
         $this->medico->set_nombre_atleta($id_atleta);
@@ -70,28 +87,9 @@ class consultar_informacion_medicaTest extends TestCase{
         $this->medico->set_telefono_parentesco('04163789843');
         $this->medico->set_relacion_parentesco('familiar');
 
-        $this->medico->registrar('1','29831184','4');
-        
-    }
+        $registro = $this->medico->registrar('1','29831184','4');
 
-    public function tearDown():void {
-        $id_atleta = self::$pdo->query('SELECT  id from atletas where cedula="3345123"')->fetch(\PDO::FETCH_ASSOC)['id']; 
-        
-        $this->medico->set_nombre_atleta($id_atleta);
-        $this->medico->eliminar('29831184','4');
-
-        $this->atleta->set_cedula_atleta('3345123');
-        $this->atleta->eliminar('29831184','3'); 
-
-        $this->clubes->set_codigo_club('asdfgh');
-        $this->clubes->eliminar('29831184','1');
-    }
-
-    public function testConsultarMedicoAtleta(){
-       
-        $consultar = $this->medico->consultar('1','29831184','4');
-
-        $this->assertStringStartsWith('<tr>', $consultar);
+        $this->assertStringStartsWith('<tr>', $registro);
     }
 }
 

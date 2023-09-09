@@ -6,12 +6,9 @@ use modelo\socioeconomico_atleta;
 
 class modificar_informacion_socioeconomicaTest extends TestCase{
     private $socioeconomico;
-    protected static $pdo;
     
     public function setUp():void{
-
         $this->socioeconomico = new socioeconomico_atleta();
-        
     }
 
     public function testModificarSocioeconomicoAtleta(){
