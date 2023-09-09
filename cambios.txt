@@ -124,4 +124,4 @@ lateral se ajustan items largos colocandoles clases para acortar
 
 Pruebas unitarias
 
-Modulo listas: atletas, bitacora, clubes, eventos
+Modulo listas: atletas, bitacora, clubes, eventos, personal
