@@ -40,7 +40,7 @@
 
 			if($accion=='eliminar'){
 				$objeto->set_nombre($_POST['nombre_rol']);
-				echo $objeto->eliminar($cedula_bitacora,$modulo);
+				echo $objeto->eliminar($cedula_bitacora,$modulo,$rol_usuario);
 				exit;
 			}  
 			if($accion=='registrar'){
@@ -94,7 +94,7 @@
 					$modificar = verifica2($_POST['modificar'.$i]);
 					$eliminar =verifica2($_POST['eliminar'.$i]);
 					
-					echo $objeto->actualizar_permisos($modulo_2[$i],$registrar,$consultar,$modificar,$eliminar);
+					echo $objeto->actualizar_permisos($modulo_2[$i],$registrar,$consultar,$modificar,$eliminar,$rol_usuario);
 				}
 
 				$objeto->registrar_bitacora($cedula_bitacora,"Ha actualizado permisos",$modulo);
