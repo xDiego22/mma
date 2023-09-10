@@ -96,8 +96,6 @@
 					
 					echo $objeto->actualizar_permisos($modulo_2[$i],$registrar,$consultar,$modificar,$eliminar,$rol_usuario);
 				}
-
-				$objeto->registrar_bitacora($cedula_bitacora,"Ha actualizado permisos",$modulo);
 			
 				exit;
 			}
