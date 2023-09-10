@@ -14,7 +14,7 @@ class eliminar_inscripcion_eventoTest extends TestCase{
 
     public function testEliminarInscripcionEvento(){
 
-        $this->assertEquals('ingrese datos correctamente',$this->inscripcion->elimina_atletas('!"$!2s-.','12092167','29831184','10'));
+        $this->assertEquals('ingrese datos correctamente',$this->inscripcion->elimina_atletas('!"$!2s-.','12092167','29831184','10','1'));
     }
 }
 
