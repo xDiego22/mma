@@ -98,7 +98,7 @@ consulta de bitacora de usuario se desencripta la informacion
 
 se crean llaves publicas y privadas con el controlador generar_llaves.php
 
-se elimina metodo de registrar bitacora desde controlador en emparejamiento e inscripcion
+se elimina metodo de registrar bitacora desde controlador en emparejamiento e inscripcion y roles permisos bitacora en reposte de cantidades
 
 base de datos modificada para datos encriptados, de varchar a text en personal bitacora clubes informacion medica 
 
@@ -122,7 +122,6 @@ se creo modulo de perfil
 
 lateral se ajustan items largos colocandoles clases para acortar
 
-se elimina metodo registro bitacora en reposte de cantidades
 
 Pruebas unitarias
 
