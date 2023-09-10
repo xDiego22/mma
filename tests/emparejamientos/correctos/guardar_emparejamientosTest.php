@@ -72,7 +72,7 @@ class guardar_emparejamientosTest extends TestCase{
 
         $id_evento = self::$pdo->query('SELECT id from eventos where nombre="torneo peleas furiosas 1999"')->fetch(\PDO::FETCH_ASSOC)['id'];
 
-        $this->inscripcion->elimina_atletas($id_evento,'12092167','29831184','10'); 
+        $this->inscripcion->elimina_atletas($id_evento,'12092167','29831184','10','1'); 
 
         $this->eventos->set_nombre_evento('torneo peleas furiosas 1999');
         $this->eventos->eliminar('29831184','6','1'); 
