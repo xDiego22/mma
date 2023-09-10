@@ -16,7 +16,7 @@ class permisos_rolesTest extends TestCase{
         $this->rol->set_rol_2('dwed2');
 
         
-        $this->assertEquals('ingrese datos correctamente',$this->rol->actualizar_permisos('1','false','true','false','false','1'));
+        $this->assertEquals('ingrese datos correctamente',$this->rol->actualizar_permisos('3d43$%','d#%R&&:;','#$:)=','##$%:;¡','#E#!/($','1'));
     }
 }
 
