@@ -76,13 +76,13 @@ class consultar_informacion_socioeconomicaTest extends TestCase{
         $id_atleta = self::$pdo->query('SELECT  id from atletas where cedula="3345123"')->fetch(\PDO::FETCH_ASSOC)['id']; 
         
         $this->socioeconomico->set_nombre_atleta($id_atleta);
-        $this->socioeconomico->eliminar('29831184','5');
+        $this->socioeconomico->eliminar('29831184','5','1');
 
         $this->atleta->set_cedula_atleta('3345123');
-        $this->atleta->eliminar('29831184','3'); 
+        $this->atleta->eliminar('29831184','3','1'); 
 
         $this->clubes->set_codigo_club('asdfgh');
-        $this->clubes->eliminar('29831184','1');
+        $this->clubes->eliminar('29831184','1','1');
     }
 
     public function testConsultarSocioeconomicoAtleta(){
