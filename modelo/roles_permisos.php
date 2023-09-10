@@ -140,7 +140,7 @@
                                     $respuesta = $respuesta.$r['descripcion'];
                                 $respuesta = $respuesta."</td>";
 
-                                $respuesta = $respuesta."<td>";
+                                $respuesta = $respuesta."<td class='d-flex'>";
                                     if($valor[1]=="true"){
                                     $respuesta = $respuesta."<button type='button' class='btn btn-dark mb-1 mr-1' data-toggle='modal' data-target='#modal_permisos' onclick='envia_rol(".$r['id'].")'><i class='bi bi-key-fill'></i></button>";
                                     }
