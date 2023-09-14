@@ -122,6 +122,10 @@ se creo modulo de perfil
 
 lateral se ajustan items largos colocandoles clases para acortar
 
+se termina modulo de perfil
+
+se ajustan maxlength en gestion usuarios y cambiar contrasena, y en el js se ajustan las validaciones 
+
 
 Pruebas unitarias
 
