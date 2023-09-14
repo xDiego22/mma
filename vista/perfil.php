@@ -4,6 +4,8 @@
 	<?php  require_once('comunes/cabecera.php');?>
 </head>
 <body id="page-top">
+	
+	<?php require_once('comunes/modal.php') ?>
 
 	<div id="wrapper">	
 		<?php require_once('comunes/menu-sidebar.php')?>
@@ -25,7 +27,7 @@
 								</button>
 								
 								<button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#modal_perfil" id="boton_editar" >
-									<i class="bi bi-pencil-fill mr-1"></i>Editar perfil
+									<i class="bi bi-pencil-fill mr-1"></i>Editar
 								</button>
 								
 							</div>
@@ -34,22 +36,22 @@
 					</div>
 
                     <div class="mt-4">
+						
+							<div class='h2 text-center mb-4'><span id='nombre_info'></span></div>
+						
+							<div class="row mb-3">
+								<div class="col-md-12">
+									Cedula: <span id='cedula_info'></span>
+								</div>
+								
+							</div>
+							
+							<div class="row mb-3">
+								<div class="col-md-12 text-wrap text-truncate">
+									Correo Electronico: <span id='correo_info'></span>
+								</div>
+							</div>
                        
-                        <div class='h2 text-center mb-4'><span>Diego Aguilar</span></div>
-                       
-                        <div class="row mb-3">
-                            <div class="col-md-12">
-                                Cedula: <span>29831184</span>
-                            </div>
-                            
-                        </div>
-                        
-                        <div class="row mb-3">
-                            <div class="col-md-12 text-wrap text-truncate">
-                                Correo Electronico: <span>diegoaguilar221202@gmail.com</span>
-                            </div>
-                        </div>
-                         
                     </div>
                 </div>
 			</div>
@@ -113,7 +115,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<label for="contrasena_actual">Contraseña actual</label>
-								<input class="form-control" maxlength="8" type="text" name="contrasena_actual" id="contrasena_actual">
+								<input class="form-control" maxlength="15" type="text" name="contrasena_actual" id="contrasena_actual">
 								<span class="texto" id="scontrasena_actual" style="color: #ff0000;"></span>
 							</div>
 						</div>
@@ -121,15 +123,15 @@
 						<div class="row">
 							<div class="col-md-12">
 								<label for="contrasena_nueva">Contraseña Nueva</label>
-								<input class="form-control" maxlength="8" type="text" name="contrasena_nueva" id="contrasena_nueva">
+								<input class="form-control" maxlength="15" type="text" name="contrasena_nueva" id="contrasena_nueva">
 								<span class="texto" id="scontrasena_nueva" style="color: #ff0000;"></span>
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="col-md-12">
-								<label for="contraseña_repetir">Repetir Contraseña</label>
-								<input class="form-control" maxlength="8" type="text" name="contraseña_repetir" id="contraseña_repetir">
+								<label for="contrasena_repetir">Repetir Contraseña</label>
+								<input class="form-control" maxlength="15" type="text" name="contrasena_repetir" id="contrasena_repetir">
 								<span class="texto" id="scontrasena_repetir" style="color: #ff0000;"></span>
 							</div>
 						</div>
@@ -151,5 +153,6 @@
         <i class="fas fa-angle-up"></i>
     </a>
 	<?php require_once('comunes/scripts.php')?>
+	<script type="text/javascript" src="js/perfil.js"></script>
 </body>
 </html>
