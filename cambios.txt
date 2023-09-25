@@ -130,3 +130,5 @@ se ajustan maxlength en gestion usuarios y cambiar contrasena, y en el js se aju
 Pruebas unitarias
 
 Modulo listas: atletas, bitacora, clubes, eventos, personal, usuarios, roles permisos, historial atletas, emparejamiento, informacion medica y socioeconomica, inscripcion, resultados eventos
+
+reporte personal se implementa metodo para descifrar informacion de la tabla
