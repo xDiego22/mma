@@ -138,41 +138,102 @@ function mensajemodal(mensaje){
 
 function validarboton () {
 	//ningun campo completado
-	if (validarkeyup(/^[0-9]{7,8}$/, $("#cedula_usuarios"), $("#scedula_usuarios"), "Debe ser formato (15345987)") == false &&
-		validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,20}$/, $("#contrasena_usuarios"), $("#scontrasena_usuarios"), "Ingrese contraseña correctamente") == false &&
-		validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,20}$/, $("#contrasena2_usuarios"), $("#scontrasena2_usuarios"), "Ingrese confirmacion de contraseña correctamente") == false &&
-		$("#rol_usuario").val()=="" && validarkeyup(/^[0-9A-Za-z_.\u00f1\u00d1\u00E0-\u00FC-]{3,30}[@]{1}[A-Za-z0-9]{3,8}[.]{1}[A-Za-z]{2,3}$/,$("#correo_usuarios"),$("#scorreo_usuarios"),"ERROR EN CORREO") == false) {
-		mensajemodal("NINGUN CAMPO HA SIDO COMPLETADO");
-		return false;
-	}
-
-	//solo cedula
-	else if (validarkeyup(/^[0-9]{7,8}$/, $("#cedula_usuarios"),$("#scedula_usuarios"),"Debe ser formato (15345987)")==false) {
-		mensajemodal("ERROR EN CEDULA");
-		return false;
-	}
-
-	//solo nombre
-	else if (validarkeyup(/^[A-Za-z\b\s\u00e1\u00c1\u00e9\u00c9\u00ed\u00cd\u00f3\u00d3\u00fa\u00da\u00f1\u00d1]{2,25}$/, $("#nombre_usuarios"),$("#scedula_usuarios"),"Debe ser formato (15345987)")==false) {
-		mensajemodal("ERROR EN NOMBRE");
-		return false;
-	}
-
-	//solo contraseña
-	else if (validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,20}$/,$("#contrasena_usuarios"),$("#scontrasena_usuarios"),"Ingrese contraseña correctamente")==false) {
-		mensajemodal("ERROR EN CONTRASEÑA");
-		return false;
-	}
-
-	//solo confirmacion de contraseña
-	else if (validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,20}$/,$("#contrasena2_usuarios"),$("#scontrasena2_usuarios"),"Solo debe ser A-Z a-z 0-9 _ . - entre 6 a 20 caracteres")==false) {
-		mensajemodal("ERROR EN CONFIRMACION DE CONTRASEÑA");
-		return false;
-	}
-		
-	else if (validarkeyup(/^[0-9A-Za-z_.\u00f1\u00d1\u00E0-\u00FC-]{3,30}[@]{1}[A-Za-z0-9]{3,8}[.]{1}[A-Za-z]{2,3}$/,$("#correo_usuarios"),$("#scorreo_usuarios"),"formato de correo incorrecto") == false
+	if (
+    validarkeyup(
+      /^[0-9]{7,8}$/,
+      $("#cedula_usuarios"),
+      $("#scedula_usuarios"),
+      "Debe ser formato (15345987)"
+    ) == false &&
+    validarkeyup(
+      /^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,20}$/,
+      $("#contrasena_usuarios"),
+      $("#scontrasena_usuarios"),
+      "Ingrese contraseña correctamente"
+    ) == false &&
+    validarkeyup(
+      /^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,20}$/,
+      $("#contrasena2_usuarios"),
+      $("#scontrasena2_usuarios"),
+      "Ingrese confirmacion de contraseña correctamente"
+    ) == false &&
+    $("#rol_usuario").val() == "" &&
+    validarkeyup(
+      /^[0-9A-Za-z_.\u00f1\u00d1\u00E0-\u00FC-]{3,30}[@]{1}[A-Za-z0-9]{3,8}[.]{1}[A-Za-z]{2,3}$/,
+      $("#correo_usuarios"),
+      $("#scorreo_usuarios"),
+      "ERROR EN CORREO"
+    ) == false &&
+    validarkeyup(
+      /^[A-Za-z\b\s\u00e1\u00c1\u00e9\u00c9\u00ed\u00cd\u00f3\u00d3\u00fa\u00da\u00f1\u00d1]{2,25}$/,
+      $("#nombre_usuarios"),
+      $("#snombre_usuarios"),
+      "Introduzca nombre de manera correcta"
+    ) == false
   ) {
-	mensajemodal("ERROR EN CORREO");
+    mensajemodal("NINGUN CAMPO HA SIDO COMPLETADO");
+    return false;
+  }
+
+  //solo cedula
+  else if (
+    validarkeyup(
+      /^[0-9]{7,8}$/,
+      $("#cedula_usuarios"),
+      $("#scedula_usuarios"),
+      "Debe ser formato (15345987)"
+    ) == false
+  ) {
+    mensajemodal("ERROR EN CEDULA");
+    return false;
+  }
+
+  //solo nombre
+  else if (
+    validarkeyup(
+      /^[A-Za-z\b\s\u00e1\u00c1\u00e9\u00c9\u00ed\u00cd\u00f3\u00d3\u00fa\u00da\u00f1\u00d1]{2,25}$/,
+      $("#nombre_usuarios"),
+      $("#snombre_usuarios"),
+      "Introduzca nombre de manera correcta"
+    ) == false
+  ) {
+    mensajemodal("ERROR EN NOMBRE");
+    return false;
+  }
+
+  //solo contraseña
+  else if (
+    validarkeyup(
+      /^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,20}$/,
+      $("#contrasena_usuarios"),
+      $("#scontrasena_usuarios"),
+      "Ingrese contraseña correctamente"
+    ) == false
+  ) {
+    mensajemodal("ERROR EN CONTRASEÑA");
+    return false;
+  }
+
+  //solo confirmacion de contraseña
+  else if (
+    validarkeyup(
+      /^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,20}$/,
+      $("#contrasena2_usuarios"),
+      $("#scontrasena2_usuarios"),
+      "Solo debe ser A-Z a-z 0-9 _ . - entre 6 a 20 caracteres"
+    ) == false
+  ) {
+    mensajemodal("ERROR EN CONFIRMACION DE CONTRASEÑA");
+    return false;
+  } else if (
+    validarkeyup(
+      /^[0-9A-Za-z_.\u00f1\u00d1\u00E0-\u00FC-]{3,30}[@]{1}[A-Za-z0-9]{3,8}[.]{1}[A-Za-z]{2,3}$/,
+      $("#correo_usuarios"),
+      $("#scorreo_usuarios"),
+      "formato de correo incorrecto"
+    ) == false
+  ) {
+    mensajemodal("ERROR EN CORREO");
   }
 
   //tipo de usuario

@@ -104,7 +104,7 @@ class reporte_personal extends conexion{
 					$html = $html."<td style='text-align:center'>".$f['3']."</td>";
 					$html = $html."<td style='text-align:center'>".$f['4']."</td>";
 					$html = $html."<td style='text-align:center'>".$f['5']."</td>";
-					$html = $html."<td style='text-align:center'>".$f['6']."</td>";
+					$html = $html."<td style='text-align:center'>".parent::desencriptar($f['6'])."</td>";
 					$html = $html."</tr>";
 				}
 

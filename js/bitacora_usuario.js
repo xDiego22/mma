@@ -3,21 +3,24 @@ $(document).ready(function () {
   //accion de datatable js
 
   tabla = $("#tablaconsulta").DataTable({
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json",
+    },
     ajax: {
       url: "",
       type: "POST",
-      data: { accion: 'consultar' },
+      data: { accion: "consultar" },
     },
     columns: [
-        { data: 'cedula' },
-        { data: 'nombre'},
-        { data: 'modulo' },
-        { data: 'fecha' },
-        { data: 'hora' },
-        { data: 'accion' },
+      { data: "cedula" },
+      { data: "nombre" },
+      { data: "modulo" },
+      { data: "fecha" },
+      { data: "hora" },
+      { data: "accion" },
     ],
 
-   "ordering": false,
+    ordering: false,
     lengthMenu: [
       [5, 10, 15, 20, -1],
       [5, 10, 15, 20, "Todos"],

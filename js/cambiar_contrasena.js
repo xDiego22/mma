@@ -129,7 +129,7 @@ function validarboton () {
 	//ningun campo completado
 	if (validarkeyup(/^[0-9]{7,8}$/, $("#cedula"), $("#scedula"), "") == false &&
 		validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,20}$/, $("#contrasena"), $("#scontrasena"), "Ingrese contraseña correctamente") == false &&
-		validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,20}$/, $("#contrasena2"), $("#scontrasena2"), "") == false) {
+		validarkeyup(/^[A-Za-z0-9-_./@$!%*?&#\b\u00f1\u00d1]{6,20}$/, $("#contrasena2"), $("#scontrasena2"), "Ingrese contraseña correctamente") == false) {
 		mensajemodal("NINGUN CAMPO HA SIDO COMPLETADO");
 		return false;
     }
