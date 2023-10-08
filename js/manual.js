@@ -1,4 +1,11 @@
 $(document).ready(function () {
+    $("#modalform").on("click", function () {
+        mensajemodal("Aqui se abrira el formulario para registrar el nuevo club");
+    });
+});
+
+
+$(document).ready(function () {
     $("#registrar").on("click", function () {
         mensajemodal("Registrado Correctamente");
     });
@@ -104,6 +111,12 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $("#registrar6").on("click", function () {
+        mensajemodal("Registrado Correctamente");
+    });
+});
+
+$(document).ready(function () {
+    $("#registrarins").on("click", function () {
         mensajemodal("Registrado Correctamente");
     });
 });
