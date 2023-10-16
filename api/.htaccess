@@ -1,4 +1,20 @@
+Options All -Indexes
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [QSA,L]
+
+<files .htaccess>
+order allow,deny
+deny from all
+</files>
+
+<files privateAPP.key>
+order allow,deny
+deny from all
+</files>
+
+<files publicAPP.pem>
+order allow,deny
+deny from all
+</files>
