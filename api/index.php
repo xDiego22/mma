@@ -1,17 +1,26 @@
 <?php
 
-require('../vendor/autoload.php'); // Asegúrate de que la ruta sea correcta
+require('../vendor/autoload.php');
+//inicializacion de instancia env
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-Flight::register('db', 'PDO', array('mysql:host=localhost;dbname=bdmma','root',''),function ($db){
+//configuracion de la base de datos
+$ip = $_ENV['DB_HOST'];
+$bd = $_ENV['DB_NAME'];
+$usuario = $_ENV['DB_USER'];
+$contrasena = $_ENV['DB_PASSWORD'];
+
+Flight::register('db', 'PDO', array("mysql:host=".$ip.";dbname=".$bd."",$usuario,$contrasena),function ($db){
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 });
 
 function encriptar ($mensaje){
 
-    $publicKey = openssl_pkey_get_public(file_get_contents('keys/publicAPP.pem'));
+    $publicKey = openssl_pkey_get_public(file_get_contents($_ENV['PATH_PUBLIC_KEY_APP']));
 
     openssl_public_encrypt(json_encode($mensaje),$encriptado,$publicKey);
 
@@ -20,7 +29,7 @@ function encriptar ($mensaje){
 }
 
 function desencriptar ($mensajeEncriptado) {
-    $privateKey = file_get_contents('keys/privateAPP.key');
+    $privateKey = file_get_contents($_ENV['PATH_PRIVATE_KEY_APP']);
 
     openssl_private_decrypt(base64_decode($mensajeEncriptado), $dataDesencriptado, $privateKey);
 
@@ -48,7 +57,7 @@ Flight::route('POST /auth', function(){
         
                     if(password_verify($contrasena, $usuario['contrasena'])){
         
-                        $key = 'Key_JWT_MMA';
+                        $key = $_ENV['JWT_SECRET_KEY'];
             
                         $payload = [
                             'iat' => time(), //tiempo de emision del token
