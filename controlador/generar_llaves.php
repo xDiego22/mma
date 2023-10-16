@@ -6,7 +6,7 @@
     }
     /* parametros de configuracion para generar las llaves*/
     $parametros = array(
-        "config" => "keys/openssl.cnf",
+        "config" => "C:/xampp/php/extras/openssl/openssl.cnf",
         "private_key_bits" => 2048,
         "default_md" => "sha256",
     );
