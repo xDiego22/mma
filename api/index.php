@@ -1,5 +1,5 @@
 <?php
-// namespace modelo;
+
 require('../vendor/autoload.php'); // Asegúrate de que la ruta sea correcta
 
 use Firebase\JWT\JWT;
@@ -9,13 +9,33 @@ Flight::register('db', 'PDO', array('mysql:host=localhost;dbname=bdmma','root','
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 });
 
+function encriptar ($mensaje){
+
+    $publicKey = openssl_pkey_get_public(file_get_contents('keys/publicAPP.pem'));
+
+    openssl_public_encrypt(json_encode($mensaje),$encriptado,$publicKey);
+
+    return base64_encode($encriptado);
+    
+}
+
+function desencriptar ($mensajeEncriptado) {
+    $privateKey = file_get_contents('keys/privateAPP.key');
+
+    openssl_private_decrypt(base64_decode($mensajeEncriptado), $dataDesencriptado, $privateKey);
+
+    return json_decode($dataDesencriptado,true);
+    
+}
 
 Flight::route('POST /auth', function(){
 
-    
     $db = Flight::db();
-    $cedula = Flight::request()->data->cedula;
-    $contrasena = Flight::request()->data->contrasena;
+
+    $datos = desencriptar(Flight::request()->data->data);
+
+    $cedula = $datos['cedula'];
+    $contrasena = $datos['contrasena'];
 
     if(preg_match_all('/^[0-9]{7,8}$/',$cedula)){
         if(preg_match_all('/^[A-Za-z0-9ñÑ_.@$!%*?&#\/\b-]{6,70}$/',$contrasena)){
@@ -33,21 +53,21 @@ Flight::route('POST /auth', function(){
                         $payload = [
                             'iat' => time(), //tiempo de emision del token
                             'exp' => time() + 3600,//tiempo de expiracion del token (1 hora)
-                            'data' => ''
+                            'data' => $usuario['cedula']
                         ];
+
                         $jwt = JWT::encode($payload, $key, 'HS256');
-            
+
                         $array = [
-                            'success' => true,
-                            'statusCode' => 200,
-                            'message' => 'Credential is valid',
-                            'data' => [
-                                'token' => $jwt,
+                            
+                            'token' => encriptar($jwt),
+                            'data' =>encriptar([
+                                
                                 'cedula' => $usuario['cedula'],
                                 'nombre' => $usuario['nombre'],
                                 'correo' => $usuario['correo'],
                                 'rol' => $usuario['id_rol']
-                            ]
+                            ])
                         ];
                     }else{
                         $array = [
