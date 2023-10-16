@@ -5,17 +5,11 @@ use PDO;
 use Exception;
 
 class conexion{
-
-    // private $ip = "sql102.0hi.me";//tambien 127.0.0.1 al ser servidor local phpmyadmin
-    // private $bd = "0hi_33815300_bdmma";//nombre de la base de datos
-    // private $usuario = "0hi_33815300";
-    // private $contrasena = "mmalara123";
-
     
-    private $ip = "localhost";
-    private $bd = "bdmma";
-    private $usuario = "root";
-    private $contrasena = "";
+    private $ip = DB_HOST;
+    private $bd = DB_NAME;
+    private $usuario = DB_USER;
+    private $contrasena = DB_PASSWORD;
 
 
     //metodo para conectar la base de datos
@@ -44,7 +38,7 @@ class conexion{
     }
 
     protected function encriptar($texto){
-        $publicKey = openssl_pkey_get_public(file_get_contents('keys/public.key'));
+        $publicKey = openssl_pkey_get_public(file_get_contents(PATH_PUBLIC_KEY));
 
         openssl_public_encrypt($texto,$textoEncriptado,$publicKey);
 
@@ -52,7 +46,7 @@ class conexion{
     }
 
     protected function desencriptar($texto){
-        $privateKey = openssl_pkey_get_private(file_get_contents('keys/private.key'));
+        $privateKey = openssl_pkey_get_private(file_get_contents(PATH_PRIVATE_KEY));
 
         openssl_private_decrypt(base64_decode($texto),$textoDesencriptado,$privateKey);
 
