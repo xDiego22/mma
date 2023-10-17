@@ -71,7 +71,7 @@ Flight::route('POST /auth', function(){
                             
                             'token' => encriptar($jwt),
                             'data' =>encriptar([
-                                
+                                'status' => 'success',
                                 'cedula' => $usuario['cedula'],
                                 'nombre' => $usuario['nombre'],
                                 'correo' => $usuario['correo'],
@@ -80,29 +80,39 @@ Flight::route('POST /auth', function(){
                         ];
                     }else{
                         $array = [
-                            'error' => 'datos incorrectos , intente de nuevo',
-                            'status' => 'error'
+                            'data'=>encriptar([
+
+                                'error' => 'Datos incorrectos , intente de nuevo',
+                                'status' => 'error'
+                            ])
                         ];
                     }
                 }
                 else {
                     $array = [
-                        'error' => 'usuario no existe , intente de nuevo',
-                        'status' => 'error'
+                        'data' =>encriptar([
+                            'error' => 'Usuario no existe , intente de nuevo',
+                            'status' => 'error'
+                        ])
                     ];
                 }
             }
         }
         else{
             $array = [
-                'error' => 'Error en contraseña, intente de nuevo',
-                'status' => 'error'
+
+                'data' => encriptar([
+                    'error' => 'Error en contraseña, intente de nuevo',
+                    'status' => 'error'
+                ])
             ];
         }
     }else{
         $array = [
-            'error' => 'Error en cedula, intente de nuevo',
-            'status' => 'error'
+            'data' => encriptar([
+                'status' => 'error',
+                'error' => 'Error en cedula, intente de nuevo',
+            ])
         ];
     }
 
