@@ -120,4 +120,50 @@ Flight::route('POST /auth', function(){
     Flight::json($array);
 });
 
+Flight::route('GET /atletas', function(){
+
+    $db = Flight::db();
+    
+    $stmt = $db->prepare("SELECT id_club, cedula, nombre, apellido, peso, estatura, fechadenacimiento, telefono, sexo, deportebase, categoria, fechaingresoclub, entrenador FROM atletas");
+
+    $stmt->execute();
+
+    // Obtiene todos los resultados como un array asociativo sin duplicaciones
+    $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    Flight::json($resultados);
+});
+
+Flight::route('GET /eventos', function() {
+    try {
+        $db = Flight::db();
+
+        $query = "SELECT b.id, a.nombre, a.fecha, a.hora, a.monto, b.nombre AS club_nombre, a.direccion, a.juez1, a.juez2, a.juez3 FROM eventos AS a, clubes AS b WHERE a.id_club = b.id";
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+
+        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        Flight::json($resultados);
+    } catch (PDOException $e) {
+        Flight::halt(500, 'Error en la base de datos: ' . $e->getMessage());
+    }
+});
+
+Flight::route('GET /resultados', function() {
+    try {
+        $db = Flight::db();
+
+        $query = "SELECT DISTINCT eventos.nombre, eventos.id, resultados.atleta1 as nombre1, resultados.atleta2 as nombre2, resultados.ronda, resultados.forma_ganar, resultados.atleta1, resultados.atleta2, resultados.id FROM resultados, eventos, inscripcion_evento WHERE eventos.id = resultados.id_evento";
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+
+        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        Flight::json($resultados);
+    } catch (PDOException $e) {
+        Flight::halt(500, 'Error en la base de datos: ' . $e->getMessage());
+    }
+});
+
 Flight::start();
