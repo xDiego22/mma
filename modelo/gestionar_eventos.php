@@ -4,6 +4,8 @@ use modelo\conexion as conexion;
 use PDO;
 use Exception;
 
+use flight;
+
 class gestionar_eventos extends conexion{
  
 	//atributos privados
@@ -518,6 +520,25 @@ class gestionar_eventos extends conexion{
 		}
 	}
 
+	/*---- APP ----*/
+	public function eventosApp(){
+		try{
+
+			$db = $this->conecta();
+    
+			$query = "SELECT b.id, a.nombre, a.fecha, a.hora, a.monto, b.nombre AS club_nombre, a.direccion, a.juez1, a.juez2, a.juez3 FROM eventos AS a, clubes AS b WHERE a.id_club = b.id";
+			
+			$stmt = $db->prepare($query);
+			$stmt->execute();
+
+			$resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+			Flight::json($resultados);
+
+		}catch(Exception $e) {
+			echo $e->getMessage();
+		}
+	}
 }
 
 ?>

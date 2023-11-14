@@ -4,6 +4,10 @@ use modelo\conexion as conexion;
 use PDO;
 use Exception;
 
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+use flight;
+
 class inicio_sesion extends conexion{
   
 	private $cedula_inicio;
@@ -247,6 +251,105 @@ class inicio_sesion extends conexion{
 			return $e->getMessage();
 		}
 		
+	}
+
+	public function authentication(){
+		try {
+			$db = $this->conecta();
+			
+			$datos = $this->decryptApp(Flight::request()->data->data);
+	
+			$cedula = $datos['cedula'];
+			$contrasena = $datos['contrasena'];
+	
+			if(preg_match_all('/^[0-9]{7,8}$/',$cedula)){
+				if(preg_match_all('/^[A-Za-z0-9ñÑ_.@$!%*?&#\/\b-]{6,70}$/',$contrasena)){
+					
+					$query = $db->prepare('SELECT * from usuarios where cedula = :cedula');
+				
+					if($query->execute([':cedula' => $cedula])){
+						$usuario = $query->fetch();
+						if ($usuario['cedula']){
+				
+							if(password_verify($contrasena, $usuario['contrasena'])){
+				
+								$key = $_ENV['JWT_SECRET_KEY'];
+					
+								$payload = [
+									'iat' => time(), //tiempo de emision del token
+									'exp' => time() + 3600,//tiempo de expiracion del token (1 hora)
+									'data' => $usuario['cedula']
+								];
+	
+								$jwt = JWT::encode($payload, $key, 'HS256');
+	
+								$array = [
+									
+									'token' => $this->encryptApp($jwt),
+									'data' =>$this->encryptApp([
+										'status' => 'success',
+										'cedula' => $usuario['cedula'],
+										'nombre' => $usuario['nombre'],
+										'correo' => $usuario['correo'],
+										'rol' => $usuario['id_rol']
+									])
+								];
+							}else{
+								$array = [
+									'data'=>$this->encryptApp([
+	
+										'error' => 'Datos incorrectos , intente de nuevo',
+										'status' => 'error'
+									])
+								];
+							}
+						}
+						else {
+							$array = [
+								'data' =>$this->encryptApp([
+									'error' => 'Usuario no existe , intente de nuevo',
+									'status' => 'error'
+								])
+							];
+						}
+					}
+				}
+				else{
+					$array = [
+	
+						'data' => $this->encryptApp([
+							'error' => 'Error en contraseña, intente de nuevo',
+							'status' => 'error'
+						])
+					];
+				}
+			}else{
+				$array = [
+					'data' => $this->encryptApp([
+						'status' => 'error',
+						'error' => 'Error en cedula, intente de nuevo',
+					])
+				];
+			}
+			Flight::json($array);
+
+		}catch(Exception $e){
+			echo $e->getMessage();
+		}
+	}
+
+	private function decryptApp($mensajeEncriptado){
+		$privateKey = file_get_contents($_ENV['PATH_PRIVATE_KEY_APP']);
+
+		openssl_private_decrypt(base64_decode($mensajeEncriptado), $dataDesencriptado, $privateKey);
+
+		return json_decode($dataDesencriptado,true);
+	}
+
+	private function encryptApp($mensaje){
+		$publicKey = openssl_pkey_get_public(file_get_contents($_ENV['PATH_PUBLIC_KEY_APP']));
+		openssl_public_encrypt(json_encode($mensaje),$encriptado,$publicKey);
+		return base64_encode($encriptado);
 	}
 
 }

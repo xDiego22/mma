@@ -4,6 +4,8 @@ namespace modelo;
 use modelo\conexion as conexion;
 use PDO;
 use Exception;
+
+use flight;
  
 class resultados_eventos extends conexion{
  
@@ -465,6 +467,26 @@ class resultados_eventos extends conexion{
 		}
 		else{
 			return true;
+		}
+	}
+
+	/* ---- APP ---- */
+	public function resultadosApp(){
+		try{
+
+			$db = $this->conecta();
+    
+			$query = "SELECT DISTINCT eventos.nombre, eventos.id, resultados.atleta1 as nombre1, resultados.atleta2 as nombre2, resultados.ronda, resultados.forma_ganar, resultados.atleta1, resultados.atleta2, resultados.id FROM resultados, eventos, inscripcion_evento WHERE eventos.id = resultados.id_evento";
+
+			$stmt = $db->prepare($query);
+			$stmt->execute();
+
+			$resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+			Flight::json($resultados);
+
+		}catch(Exception $e) {
+			echo $e->getMessage();
 		}
 	}
 

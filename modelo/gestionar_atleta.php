@@ -3,6 +3,9 @@ namespace modelo;
 use modelo\conexion as conexion;
 use PDO;
 use Exception;
+
+use flight;
+
 class gestionar_atleta extends conexion{
 
 	//atributos privados
@@ -618,6 +621,25 @@ class gestionar_atleta extends conexion{
 		}
 		else{
 			return true;
+		}
+	}
+
+	/*---- APP ----*/
+	public function atletasApp(){
+		try{
+
+			$db = $this->conecta();
+    
+			$stmt = $db->prepare("SELECT id_club, cedula, nombre, apellido, peso, estatura, fechadenacimiento, telefono, sexo, deportebase, categoria, fechaingresoclub, entrenador FROM atletas");
+
+			$stmt->execute();
+
+			// Obtiene todos los resultados como un array asociativo sin duplicaciones
+			$resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+			Flight::json($resultados);
+		}catch(Exception $e) {
+			echo $e->getMessage();
 		}
 	}
 
