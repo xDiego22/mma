@@ -256,6 +256,7 @@ class inicio_sesion extends conexion{
 	public function authentication(){
 		try {
 			$db = $this->conecta();
+			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			
 			$datos = $this->decryptApp(Flight::request()->data->data);
 	
@@ -287,6 +288,7 @@ class inicio_sesion extends conexion{
 									
 									'token' => $this->encryptApp($jwt),
 									'data' =>$this->encryptApp([
+										'exp' => time() + 3600,
 										'status' => 'success',
 										'cedula' => $usuario['cedula'],
 										'nombre' => $usuario['nombre'],
