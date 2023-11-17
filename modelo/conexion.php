@@ -4,6 +4,11 @@ namespace modelo;
 use PDO;
 use Exception;
 
+/* APP */
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+use flight;
+
 class conexion{
     
     private $ip = DB_HOST;
@@ -51,6 +56,47 @@ class conexion{
         openssl_private_decrypt(base64_decode($texto),$textoDesencriptado,$privateKey);
 
         return $textoDesencriptado;
+    }
+
+    /* ---- APP ----*/
+    protected function getTokenApp(){
+        //obtener headers http 
+        $headers = apache_request_headers();
+        if(!isset($headers['Authorization'])){
+            Flight::halt(403,json_encode([
+                'error' => 'Unauthenticated request',
+                'status' => 'error'
+            ]));
+        }
+        
+        $authorization = $headers['Authorization'];
+        //separacion de valores de autorizacion en un array
+        $authorizationArray = explode(" ", $authorization);
+
+        $token = $authorizationArray[1];
+
+        try {
+            return JWT::decode($token,new Key($_ENV['JWT_SECRET_KEY'],'HS256'));
+        } catch (\Throwable $th) {
+            //cualquier error al decoder se presentara en el message
+            Flight::halt(403,json_encode([
+                'error' => $th->getMessage(),
+                'status' => 'error'
+            ]));
+        }
+
+    }
+    
+    protected function validarTokenApp(){
+        $info = $this->getTokenApp();
+        $db = $this->conecta();
+		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $query = $db->prepare('SELECT cedula FROM usuarios WHERE cedula = :cedula');
+        //data que proveniente de la creacion del token
+        $query->execute([":cedula" => $info->data]);
+        $rows = $query->fetchColumn();
+        return $rows;
     }
 		
 }
