@@ -627,9 +627,15 @@ class gestionar_atleta extends conexion{
 	/*---- APP ----*/
 	public function atletasApp(){
 		try{
-
+			if(!$this->validarTokenApp()){
+				Flight::halt(403,json_encode([
+					'error' => 'Unauthorized',
+					'status' => 'error'
+				]));
+			}
 			$db = $this->conecta();
-    
+			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			
 			$stmt = $db->prepare("SELECT id_club, cedula, nombre, apellido, peso, estatura, fechadenacimiento, telefono, sexo, deportebase, categoria, fechaingresoclub, entrenador FROM atletas");
 
 			$stmt->execute();

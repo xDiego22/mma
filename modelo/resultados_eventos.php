@@ -473,9 +473,15 @@ class resultados_eventos extends conexion{
 	/* ---- APP ---- */
 	public function resultadosApp(){
 		try{
-
+			if(!$this->validarTokenApp()){
+				Flight::halt(403,json_encode([
+					'error' => 'Unauthorized',
+					'status' => 'error'
+				]));
+			}
 			$db = $this->conecta();
-    
+			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			
 			$query = "SELECT DISTINCT eventos.nombre, eventos.id, resultados.atleta1 as nombre1, resultados.atleta2 as nombre2, resultados.ronda, resultados.forma_ganar, resultados.atleta1, resultados.atleta2, resultados.id FROM resultados, eventos, inscripcion_evento WHERE eventos.id = resultados.id_evento";
 
 			$stmt = $db->prepare($query);

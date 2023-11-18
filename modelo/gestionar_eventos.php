@@ -524,8 +524,16 @@ class gestionar_eventos extends conexion{
 	public function eventosApp(){
 		try{
 
+			if(!$this->validarTokenApp()){
+				Flight::halt(403,json_encode([
+					'error' => 'Unauthorized',
+					'status' => 'error'
+				]));
+			}
+
 			$db = $this->conecta();
-    
+			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			
 			$query = "SELECT b.id, a.nombre, a.fecha, a.hora, a.monto, b.nombre AS club_nombre, a.direccion, a.juez1, a.juez2, a.juez3 FROM eventos AS a, clubes AS b WHERE a.id_club = b.id";
 			
 			$stmt = $db->prepare($query);
