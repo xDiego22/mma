@@ -91,12 +91,12 @@ class historial_atleta extends conexion {
     public function mostrarApp($atleta) {
         try {
 
-            /*if(!$this->validarTokenApp()){
+            if(!$this->validarTokenApp()){
 				Flight::halt(403,json_encode([
 					'error' => 'Unauthorized',
 					'status' => 'error'
 				]));
-			}*/
+			}
 
             $db = $this->conecta();
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
