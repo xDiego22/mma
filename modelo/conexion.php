@@ -62,21 +62,17 @@ class conexion{
     protected function getTokenApp(){
         //obtener headers http 
         $headers = apache_request_headers();
-        if(!isset($headers['Authorization'])){
+        if(!isset($headers['jwt'])){
             Flight::halt(403,json_encode([
                 'error' => 'Unauthenticated request',
                 'status' => 'error'
             ]));
         }
         
-        $authorization = $headers['Authorization'];
-        //separacion de valores de autorizacion en un array
-        $authorizationArray = explode(" ", $authorization);
-
-        $token = $authorizationArray[1];
+        $jwt = explode(" ", $headers['jwt'])[1];
 
         try {
-            return JWT::decode($token,new Key($_ENV['JWT_SECRET_KEY'],'HS256'));
+            return JWT::decode($jwt,new Key($_ENV['JWT_SECRET_KEY'],'HS256'));
         } catch (\Throwable $th) {
             //cualquier error al decoder se presentara en el message
             Flight::halt(403,json_encode([
