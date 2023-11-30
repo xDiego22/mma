@@ -82,6 +82,8 @@ class historial_atleta extends conexion {
             $stmt->execute();
 
             $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            Flight::json($resultados);
+
 
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -95,6 +97,13 @@ class historial_atleta extends conexion {
             if(!$this->validarTokenApp()){
 				Flight::halt(403,json_encode([
 					'error' => 'Unauthorized',
+					'status' => 'error'
+				]));
+			}
+
+            if(!preg_match_all('/^[0-9\b]{1,9}$/', $atleta)){
+				Flight::halt(400,json_encode([
+					'error' => 'Bad Request',
 					'status' => 'error'
 				]));
 			}
