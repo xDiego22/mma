@@ -27,6 +27,6 @@ Flight::route('GET /resultados',array($resultados, 'resultadosApp'));
 
 Flight::route('GET /historial',array($historial, 'consultaApp'));
 
-Flight::route('GET /historial-atleta/@atleta',array($historial, 'mostrarApp'));
+Flight::route('GET /historial-atleta/@atleta:[0-9]{1,9}',array($historial, 'mostrarApp'));
 
 Flight::start();
