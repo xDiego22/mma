@@ -633,10 +633,13 @@ class gestionar_atleta extends conexion{
 					'status' => 'error'
 				]));
 			}
+
 			$db = $this->conecta();
 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			
-			$stmt = $db->prepare("SELECT id_club, cedula, nombre, apellido, peso, estatura, fechadenacimiento, telefono, sexo, deportebase, categoria, fechaingresoclub, entrenador FROM atletas");
+			$stmt = $db->prepare("SELECT a.id_club, c.nombre AS nombre_club, a.cedula, a.nombre, a.apellido, a.peso, a.estatura, a.fechadenacimiento, a.telefono, a.sexo, a.deportebase, a.categoria, a.fechaingresoclub, a.entrenador
+                     FROM atletas AS a
+                     LEFT JOIN clubes AS c ON a.id_club = c.id");
 
 			$stmt->execute();
 
