@@ -65,6 +65,14 @@ class historial_atleta extends conexion {
 
     public function consultaApp() {
         try {
+
+            if(!$this->validarTokenApp()){
+				Flight::halt(403,json_encode([
+					'error' => 'Unauthorized',
+					'status' => 'error'
+				]));
+			}
+
             $db = $this->conecta();
 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -80,28 +88,38 @@ class historial_atleta extends conexion {
         }
     }
 
-public function mostrarApp() {
-	try {
-		$db = $this->conecta();
-		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    public function mostrarApp($atleta) {
+        try {
 
-		$query = "SELECT e.nombre AS nombre_evento, GROUP_CONCAT(' ', r.ronda) AS resultado_ronda
-		FROM resultados AS r
-		LEFT JOIN eventos AS e ON r.id_evento = e.id 
-		WHERE r.atleta1 = :atleta
-		GROUP BY e.id";
+            /*if(!$this->validarTokenApp()){
+				Flight::halt(403,json_encode([
+					'error' => 'Unauthorized',
+					'status' => 'error'
+				]));
+			}*/
 
-		$stmt = $db->prepare($query);
-		$stmt->execute();
-
-		$resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-		Flight::json($resultados);
-
-	} catch (Exception $e) {
-		echo $e->getMessage();
-		}
-	}
-
+            $db = $this->conecta();
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+            $query = "SELECT e.nombre AS nombre_evento, GROUP_CONCAT(' ', r.ronda) AS resultado_ronda
+            FROM resultados AS r
+            LEFT JOIN eventos AS e ON r.id_evento = e.id 
+            WHERE r.atleta1 = :atletaid
+            GROUP BY e.id
+            ";
+    
+            $stmt = $db->prepare($query);
+            $stmt->bindParam(':atletaid', $atleta, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            Flight::json($resultados);
+    
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+    
 }
 ?>
