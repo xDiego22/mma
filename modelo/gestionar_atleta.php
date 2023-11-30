@@ -641,7 +641,6 @@ class gestionar_atleta extends conexion{
                      FROM atletas AS a
                      LEFT JOIN clubes AS c ON a.id_club = c.id");
 
-
 			$stmt->execute();
 
 			// Obtiene todos los resultados como un array asociativo sin duplicaciones

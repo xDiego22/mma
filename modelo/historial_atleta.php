@@ -88,6 +88,7 @@ class historial_atleta extends conexion {
         }
     }
 
+
     public function mostrarApp($atleta) {
         try {
 
