@@ -35,7 +35,7 @@
 					<span class="form_line"></span>
 				</div>
 
-				<div class="g-recaptcha" data-sitekey="6LcEU7wnAAAAAB43ll7nNTrzfjg-LNjk_0QNgRmi"></div>
+				<div class="g-recaptcha" data-sitekey="6LcEU7wnAAAAAB43ll7nNTrzfjg-LNjk_0QNgRmi" data-size='normal'></div>
 
 				<button type="button" class="form_submit" id="iniciar_sesion" name="iniciar_sesion">Ingresar</button>
 

@@ -1,4 +1,6 @@
-$(document).ready(function(){
+$(document).ready(function () {
+	
+	resizeRecaptcha();
 
 	//Seccion para mostrar lo enviado en el modal mensaje//
 
@@ -105,4 +107,14 @@ function limpia_formulario(){
 	$("#cedula_inicio").val('');
 	$("#contrasena_inicio").val('');
 	grecaptcha.reset(0);
+}
+
+function resizeRecaptcha() {
+  const recaptcha = $(".g-recaptcha");
+
+  if ($(window).width() <= 768) {
+    recaptcha.attr("data-size", "compact");
+  } else {
+    recaptcha.attr("data-size", "normal");
+  }
 }
