@@ -142,3 +142,7 @@ comproser json implementado config.php para cargar al iniciar
 creacion de archivo config.php para crear variables constantes que contiene informacion de variables de entorno
 
 clase conexion se modifican valores de conexion a la base de datos y ubicacion de llaves publicas y privadas... variables de entorno
+
+inicio de sesion se modifica en js para que captcha sea resposive
+
+htaccess se implementa error 403 como pagina de redireccionamiento
