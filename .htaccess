@@ -19,6 +19,7 @@ deny from all
 order allow,deny
 deny from all
 </files>
+ErrorDocument 403/ http://localhost/trayecto4/mma/?pagina=error403
 # denegar acceso a robots maliciosos, extractores de webs y navegadores offline
 RewriteBase /
 RewriteCond %{HTTP_USER_AGENT} ^Anarchie [OR]
