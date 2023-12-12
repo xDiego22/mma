@@ -43,6 +43,24 @@
 			</div>
 		</div>
  	</div>
+
+	<!-- Modal spinner-->
+	<div class="modal fade" id="loadingSpinner" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="loadingSpinnerLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				
+				<div class="modal-body text-center my-5">
+					<div class="spinner-border text-danger" style="width: 3rem; height: 3rem;" role="status">
+						<span class="sr-only">Loading...</span>
+					</div>	
+					<div class="mt-4">
+						<span>Cargando...</span>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
 	<?php require_once('comunes/scripts.php')?>
 	<script type="text/javascript" src="js/inicio_sesion.js"></script>
 	

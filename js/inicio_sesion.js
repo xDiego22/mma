@@ -1,6 +1,9 @@
+resizeRecaptcha();
 $(document).ready(function () {
 	
-	resizeRecaptcha();
+	$(window).on('resize', () => {
+		resizeRecaptcha();
+	});
 
 	//Seccion para mostrar lo enviado en el modal mensaje//
 
@@ -86,18 +89,25 @@ function enviaAjax(datos){
             data: datos,
 			processData: false,
 	        cache: false,
+			beforeSend: function() {
+				$("#loadingSpinner").modal({ focus: false }).show();
+			},
             success: function(respuesta) {//si resulto exitosa la transmision
             	//aqui el envio es diferente porque se envia la localizacion por aqui
             	if (respuesta=='ok') {
             		location = "?pagina=principal";
 				}
 				else {
+					$("#loadingSpinner").modal("hide");
 			   		mensajemodal(respuesta);
 			   	}
             },
             error: function(){
+				$("#loadingSpinner").modal("hide");
 			   mensajemodal("Error con ajax");	
-            }
+            },complete: function() {
+				$("#loadingSpinner").modal("hide");
+			},
 			
     }); 
 	
