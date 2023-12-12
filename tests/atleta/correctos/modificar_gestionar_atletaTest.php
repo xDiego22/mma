@@ -74,7 +74,7 @@ class modificar_gestionar_atletaTest extends TestCase{
 
         $modificar = $this->atleta->modificar('1','29831184','3');
     
-        $this->assertStringStartsWith('<tr>', $modificar);
+        $this->assertEquals('Modificado Correctamente', $modificar);
       
     }
     public function tearDown():void {

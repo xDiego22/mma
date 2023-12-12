@@ -54,7 +54,7 @@ class registrar_gestionar_atletaTest extends TestCase{
 
         $registro = $this->atleta->registrar('1','29831184','3');
 
-        $this->assertStringStartsWith('<tr>', $registro);
+        $this->assertEquals('Registrado Correctamente', $registro);
     }
 
     public function tearDown():void {

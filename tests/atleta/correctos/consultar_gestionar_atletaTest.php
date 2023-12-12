@@ -65,7 +65,7 @@ class consultar_gestionar_atletaTest extends TestCase{
     public function testConsultarAtleta(){
     
        $consultar = $this->atleta->consultar('1','29831184','3');
-        $this->assertStringStartsWith('<tr>', $consultar);
+        $this->assertJson($consultar);
     }
 }
 

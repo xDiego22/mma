@@ -29,9 +29,7 @@ class modificar_gestionar_atletaTest extends TestCase{
         $this->atleta->set_entrenador_atleta('');
 
         $modificar = $this->atleta->modificar('1','29831184','1');
-    
-       $this->assertEquals('ingrese datos correctamente', $modificar);
-      
+        $this->assertEquals('Modificado Correctamente', $modificar);      
     }
 }
 

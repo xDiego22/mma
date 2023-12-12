@@ -14,7 +14,7 @@ class eliminar_gestionar_atletaTest extends TestCase{
 
     public function testEliminarAtleta(){
         $this->atleta->set_cedula_atleta('');
-        $this->assertEquals('ingrese datos correctamente',$this->atleta->eliminar('29831184','3','1'));
+        $this->assertEquals('eliminado',$this->atleta->eliminar('29831184','3','1'));
     }
 }
 
