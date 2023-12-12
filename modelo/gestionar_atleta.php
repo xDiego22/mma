@@ -22,9 +22,14 @@ class gestionar_atleta extends conexion{
 	private $categoria_atleta;
 	private $fecha_ingreso_atleta;
 	private $entrenador_atleta;
+
+	private $foto = null;
 	
 	private $permiso;
 	
+	public function set_foto($valor){
+		$this->foto = $valor;
+	}
 	public function set_club_atleta($valor){
 		$this->club_atleta = $valor;
 	}
@@ -205,7 +210,7 @@ class gestionar_atleta extends conexion{
 
 							parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
 
-							return $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
+							return "Registrado Correctamente";
 
 						}catch(Exception $e){
 							return $e->getMessage();
@@ -270,7 +275,7 @@ class gestionar_atleta extends conexion{
 
 						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
 							
-						return $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
+						return "Modificado Correctamente";
 
 					} catch(Exception $e) {
 						return $e->getMessage();
@@ -310,6 +315,9 @@ class gestionar_atleta extends conexion{
 							$accion= "Ha eliminado un Atleta";
 
 							parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+							if(is_file("img/atletas/".$this->cedula_atleta.".png")){
+								unlink("img/atletas/".$this->cedula_atleta.".png");
+							}
 							return "eliminado";
 						}
 						else{
@@ -331,115 +339,68 @@ class gestionar_atleta extends conexion{
 	}
 
 	public function consultar($rol_usuario,$cedula_bitacora,$modulo){
+		
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		try{
 
-			$resultado = $co->prepare("SELECT a.cedula, a.nombre, a.apellido,
-				a.peso, a.estatura, a.fechadenacimiento,
-				a.telefono, a.sexo, a.deportebase,
-				a.categoria, a.fechaingresoclub, a.entrenador,
-				b.id, b.nombre 
-			    from atletas as a, clubes as b where a.id_club = b.id");
+			$valor = $this->permisos($rol_usuario); //rol del usuario
+			$datos = array();
+			if ($valor[0]=="true") {
 
-			$resultado->execute();
-
-			if($resultado){
-
-				$respuesta = '';
+				$stmt = $co->prepare("SELECT a.cedula,a.nombre, a.apellido,a.peso,a.estatura,a.fechadenacimiento,a.telefono,a.sexo,a.deportebase,a.categoria,a.fechaingresoclub,a.entrenador,b.id,b.nombre from atletas as a, clubes as b where a.id_club = b.id");
+	
+				$stmt->execute();
+				$resultado = $stmt->fetchAll(PDO::FETCH_NUM);
 				
-				foreach($resultado as $r){
-					
-					$valor = $this->permisos($rol_usuario); //rol del usuario
-					if ($valor[0]=="true") {
-						$respuesta = $respuesta."<tr>";
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[13];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td style='display:none'>";
-								$respuesta = $respuesta.$r[12];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								if(is_file("img/atletas/".$r[0].".png")){
-									$foto = 	"img/atletas/".$r[0].".png";
-								}
-								else{
-									$foto = "img/atletas/icono_persona.png";	
-								} 
-								$respuesta = $respuesta."
-								<img src='".$foto."' style='width:50px'class='rounded-circle' />";
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[0];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[1];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[2];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[3];
-							$respuesta = $respuesta."</td>";
-							
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[4];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[5];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[6];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[7];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[8];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[9];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[10];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[11];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td class='d-flex'>";
-								if ($valor[2]=="true") {
-									$respuesta = $respuesta."<button type='button' class='btn btn-primary mb-1 mr-1' data-toggle='modal' data-target='#modal_gestion' onclick='modalmodificar(this)' id='boton_modificar'><i class='bi bi-pencil-fill'></i></button>";
-								}
-								if ($valor[3]=="true"){
-									$respuesta = $respuesta."<button type='button' class='btn btn-danger mb-1 ' onclick='elimina(this)'><i class='bi bi-x-lg'></i></button>";
-								}
-							$respuesta = $respuesta."</td>";
-						$respuesta = $respuesta."</tr>";
-					}
+				$opciones="";
+	
+				if ($valor[2]=="true") {
+					$opciones = $opciones."<button type='button' class='btn btn-primary mb-1 mr-1' data-toggle='modal' data-target='#modal_gestion' onclick='modalmodificar(this)' id='boton_modificar'><i class='bi bi-pencil-fill'></i></button>";
 				}
+				if ($valor[3]=="true"){
+					$opciones = $opciones."<button type='button' class='btn btn-danger mb-1 ' onclick='elimina(this)'><i class='bi bi-x-lg'></i></button>";
+				}
+	
+				foreach($resultado as $fila){
+	
+					if(is_file("img/atletas/".$fila[0].".png")){
+						$foto = 	"$fila[0]";
+					}
+					else{
+						$foto = "icono_persona";	
+					} 
+					$subarray=array();
+					$subarray['cedula']=$fila[0];
+					$subarray['nombre']=$fila[1];
+					$subarray['apellido']=$fila[2];
+					$subarray['peso']=$fila[3];
+					$subarray['estatura']=$fila[4];
+					$subarray['fechadenacimiento']=$fila[5];
+					$subarray['telefono']=$fila[6];
+					$subarray['sexo']=$fila[7];
+					$subarray['deportebase']=$fila[8];
+					$subarray['categoria']=$fila[9];
+					$subarray['fechaingresoclub']=$fila[10];
+					$subarray['entrenador']=$fila[11];
+					$subarray['idclub']=$fila[12];
+					$subarray['nombre_club']=$fila[13];
+					$subarray['img']=$foto;
+					$subarray['opciones']=$opciones;
 
+					$datos[] = $subarray;
+				}
+				$json = array(
+					"data" => $datos
+				);
+				
 				$accion= "Ha consultado la tabla de Atletas";
-
 				parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-				return $respuesta;
-			}
-			else {
-				return '';
+	
+				return json_encode($json);
+			}else{
+				return 'No tiene permiso de realizar esta accion';
 			}
 
 		}catch(Exception $e) {

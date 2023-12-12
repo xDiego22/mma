@@ -146,3 +146,9 @@ clase conexion se modifican valores de conexion a la base de datos y ubicacion d
 inicio de sesion se modifica en js para que captcha sea resposive
 
 htaccess se implementa error 403 como pagina de redireccionamiento
+
+correccion de captcha para tamaño moviles 
+
+implementacion de datatable a atletas modificando controlador js y modelo para visualicion correcta de las tablas
+
+se corrijen pruebas unitarias de atletas

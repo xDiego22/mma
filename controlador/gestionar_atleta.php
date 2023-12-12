@@ -27,6 +27,10 @@
 		if(isset($_POST['accion_atletas'])){
 
 			$accion = $_POST['accion_atletas'];
+			if($accion=='consultar'){
+				echo $objeto->consultar($rol_usuario,$cedula_bitacora,$modulo);
+				exit;
+			}
 
 			if($accion=='eliminar_atletas'){
 				$objeto->set_cedula_atleta($_POST['cedula_atleta']);
@@ -51,36 +55,35 @@
 				
 				
 				if($accion=='registrar_atletas'){
-					echo $objeto->registrar($rol_usuario,$cedula_bitacora,$modulo);
 					
 					if(isset($_FILES['imagenarchivo'])){	
-					
+						
 						if (($_FILES['imagenarchivo']['size'] / 1024) < 1024) {
-
+							
 							move_uploaded_file($_FILES['imagenarchivo']['tmp_name'],'img/atletas/'.$_POST['cedula_atleta'].'.png');
 						} 
 					}
+					echo $objeto->registrar($rol_usuario,$cedula_bitacora,$modulo);
 					
 				}
 				elseif($accion=='modificar_atletas'){
-					echo $objeto->modificar($rol_usuario, $cedula_bitacora,$modulo);
-
 					if(isset($_FILES['imagenarchivo'])){	
-					
+						
 						if (($_FILES['imagenarchivo']['size'] / 1024) < 1024) {
-
+							
 							move_uploaded_file($_FILES['imagenarchivo']['tmp_name'],'img/atletas/'.$_POST['cedula_atleta'].'.png');
 						} 
 					}
-					
+					echo $objeto->modificar($rol_usuario, $cedula_bitacora,$modulo);
 				}	  	
 			}
+			
 
 			exit;
 
 		}
  
-		$listaconsulta = $objeto->consultar($rol_usuario,$cedula_bitacora,$modulo);
+		// $listaconsulta = $objeto->consultar($rol_usuario,$cedula_bitacora,$modulo);
 		$consulta_clubes = $objeto->consulta_clubes();//metodo de mostrar los clubes en el option
 		$permisos = $objeto->permisos($rol_usuario);
 

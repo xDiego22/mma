@@ -55,7 +55,7 @@ function enviaAjax(datos, accion) {
     success: function (respuesta) {
       if (accion == "recargar") {
         try {
-          tabla.ajax.reload();
+          tabla.ajax.reload(null,false);
         } catch (e) {
           mensajemodal("Error en Ajax " + e.name + " !!!");
         }
