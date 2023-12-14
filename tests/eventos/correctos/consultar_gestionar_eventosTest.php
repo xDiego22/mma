@@ -61,7 +61,7 @@ class consultar_gestionar_eventosTest extends TestCase{
         
         $consultar = $this->eventos->consultar('1','29831184','6');
 
-        $this->assertStringStartsWith('<tr>', $consultar);
+        $this->assertJson($consultar);
     }
 }
 
