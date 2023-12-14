@@ -110,7 +110,7 @@ class gestionar_clubes extends conexion{
 
 					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
 					
-					return $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
+					return "Registrado Correctamente";
 					
 					}catch(Exception $e){
 						return $e->getMessage();
@@ -163,7 +163,7 @@ class gestionar_clubes extends conexion{
 						$accion= "Ha modificado un Club";
 
 						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-						return $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
+						return "Modificado Correctamente";
 
 					} catch(Exception $e) {
 						return $e->getMessage();
@@ -231,58 +231,44 @@ class gestionar_clubes extends conexion{
 
 		try{
 
-			$resultado = $co->prepare("SELECT * from clubes");
-			$resultado->execute();
-			if($resultado){
+			$valor = $this->permisos($rol_usuario); //rol del usuario
+			$datos = array();
+			if ($valor[0]=="true") {
 
-				$respuesta = '';
+				$stmt = $co->prepare("SELECT * from clubes");
+				$stmt->execute();
+				$resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				
-				
-				foreach($resultado as $r){
-					
-					$valor = $this->permisos($rol_usuario); //rol del usuario
-					if ($valor[0]=="true") {
-						$respuesta = $respuesta."<tr>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r['codigo'];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r['nombre'];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.parent::desencriptar($r['telefono']);
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.parent::desencriptar($r['deportebase']);
-							$respuesta = $respuesta."</td>";
-							
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.parent::desencriptar($r['direccion']);
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td class='d-flex'>";
-								if ($valor[2]=="true") {
-									$respuesta = $respuesta."<button type='button' class='btn btn-primary mb-1 mr-1' data-toggle='modal' data-target='#modal_gestion' onclick='modalmodificar(this)' id='boton_modificar'><i class='bi bi-pencil-fill'></i></button>";
-								}
-								if ($valor[3]=="true"){
-									$respuesta = $respuesta."<button type='button' class='btn btn-danger mb-1 ' onclick='elimina(this)'><i class='bi bi-x-lg'></i></button>";
-								} 
-							$respuesta = $respuesta."</td>";
-						$respuesta = $respuesta."</tr>";
-					}
+				$opciones="";
+	
+				if ($valor[2]=="true") {
+					$opciones = $opciones."<button type='button' class='btn btn-primary mb-1 mr-1' data-toggle='modal' data-target='#modal_gestion' onclick='modalmodificar(this)' id='boton_modificar'><i class='bi bi-pencil-fill'></i></button>";
+				}
+				if ($valor[3]=="true"){
+					$opciones = $opciones."<button type='button' class='btn btn-danger mb-1 ' onclick='elimina(this)'><i class='bi bi-x-lg'></i></button>";
 				}
 
-				$accion= "Ha consultado la tabla de Clubes";
+				foreach($resultado as $fila){
+					$subarray=array();
+					$subarray['codigo'] = $fila['codigo'];
+					$subarray['nombre'] = $fila['nombre'];
+					$subarray['telefono'] = parent::desencriptar($fila['telefono']);
+					$subarray['deportebase'] = parent::desencriptar($fila['deportebase']);
+					$subarray['direccion'] = parent::desencriptar($fila['direccion']);
+					$subarray['opciones'] = $opciones;
+
+					$datos[] = $subarray;
+				}
+				$json = array(
+					"data" => $datos
+				);
 				
+				$accion= "Ha consultado la tabla de Clubes";
 				parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-				return $respuesta;
-			}
-			else {
-				return '';
+	
+				return json_encode($json);
+			} else{
+				return 'No tiene permiso de realizar esta accion';
 			}
 
 		}catch(Exception $e) {

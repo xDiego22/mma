@@ -61,24 +61,7 @@
 											
 										</tr>
 									</thead>
-									<tbody id="resultadoconsulta">
-										<?php 
-											if(!empty ($listaconsulta)){
-												echo $listaconsulta;
-											}else{
-										?>
-											<tr>
-												<td colspan="7">No hay informacion</td>
-												<td style="display:none;"></td>
-												<td style="display:none;"></td>
-												<td style="display:none;"></td>
-												<td style="display:none;"></td>
-												<td style="display:none;"></td>
-											</tr>
-										<?php 
-											}
-										?>
-									</tbody>
+									
 								</table>
 							</div>
 							

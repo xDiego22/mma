@@ -1,19 +1,39 @@
+var tabla;
 $(document).ready(function () {
 	
 	//accion de datatable js
 	 
-	$('#tablaconsulta').DataTable( {
-        language: {
-            url: '//cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json'
-		},
-		lengthMenu: [
-            [5, 10, 15],
-            [5, 10, 15]
-		],
-		
-		"ordering": false,
-        "info":     false
-    } );
+	tabla = $("#tablaconsulta").DataTable({
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json",
+    },
+    ajax: {
+      url: "",
+      type: "POST",
+      data: { accion_club: "consultar" },
+    },
+    columns: [
+      { data: "codigo" },
+      { data: "nombre" },
+      { data: "telefono" },
+      { data: "deportebase" },
+      { data: "direccion" },
+      { data: "opciones" },
+    ],
+    columnDefs: [
+      {
+        target: -1,
+        searchable: false,
+      },
+    ],
+    lengthMenu: [
+      [5, 10, 15],
+      [5, 10, 15],
+    ],
+
+    ordering: false,
+    info: false,
+  });
 
 	//Seccion para mostrar lo enviado en el modal mensaje//
 
@@ -176,30 +196,14 @@ function enviaAjax(datos,accion){
             data: datos,
 			processData: false,
 	        cache: false,
-            success: function(respuesta) {//si resulto exitosa la transmision
-            	//aqui el envio es diferente porque se envia la localizacion por aqui
-				if(accion=='eliminar_club'){
+            success: function(respuesta) {
+				
+				if(accion=='registrar_club'){
 					try{
-						if(respuesta=='eliminado'){
-							mensajemodal("Eliminado correctamente");
+						if (respuesta === "Registrado Correctamente") {
+							tabla.ajax.reload(null, false);
+							mensajemodal(respuesta);
 						} else {
-							mensajemodal("No se pudo eliminar debido a informacion dependiente en otra tabla");
-							setTimeout(function() {
-								window.location.reload();
-								},2000);
-						}
-					}
-					catch(e){
-						mensajemodal("Error en Ajax "+e.name+" !!!");
-					}
-				}else if(accion=='registrar_club'){
-					try{
-						let fila = respuesta.indexOf('<tr>');
-						if(fila !== -1){
-							$("#resultadoconsulta").html(respuesta);
-							mensajemodal("Registrado Correctamente");
-						}
-						else{
 							mensajemodal(respuesta);
 						}
 					}
@@ -208,12 +212,10 @@ function enviaAjax(datos,accion){
 					}
 				}else if(accion=='modificar_club'){
 					try{
-						let fila = respuesta.indexOf('<tr>');
-						if(fila !== -1){
-							$("#resultadoconsulta").html(respuesta);
-							mensajemodal("Modificado Correctamente");
-						}
-						else{
+						if (respuesta === "Modificado Correctamente") {
+							tabla.ajax.reload(null, false);
+							mensajemodal(respuesta);
+						} else {
 							mensajemodal(respuesta);
 						}
 					}
@@ -271,7 +273,34 @@ function elimina(fila){
 	var datos = new FormData();
 	datos.append('accion_club','eliminar_club');
 	datos.append('codigo_club',codigo.text());
-	enviaAjax(datos,'eliminar_club');
 	
-	linea.remove();	
+	$.ajax({
+		async: true,
+		url: "", //la pagina a donde se envia por estar en mvc, se omite la ruta ya que siempre estaremos en la misma pagina
+		type: "POST", 
+		contentType: false,
+		data: datos,
+		processData: false,
+		cache: false,
+		success: function (respuesta) {
+		
+			try {
+				if (respuesta == "eliminado") {
+					tabla.row(linea).remove().draw(false);
+					mensajemodal("Eliminado correctamente");
+				} else {
+					mensajemodal(respuesta);
+					setTimeout(function () {
+					window.location.reload();
+					}, 2000);
+				}
+			} catch (e) {
+			mensajemodal("Error en Ajax " + e.name + " !!!");
+			}
+		},
+		error: function () {
+		mensajemodal("Error con ajax");
+		},
+	});
+	
 }

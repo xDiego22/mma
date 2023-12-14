@@ -29,6 +29,11 @@
 			
 			$accion = $_POST['accion_club'];
 
+			if($accion=='consultar'){
+				echo $objeto->consultar($rol_usuario,$cedula_bitacora,$modulo);
+				exit;
+			}
+
 			if($accion=='eliminar_club'){
 				$objeto->set_codigo_club($_POST['codigo_club']);
 				echo $objeto->eliminar($cedula_bitacora,$modulo,$rol_usuario);
@@ -54,7 +59,7 @@
 
 		}
 
-		$listaconsulta = $objeto->consultar($rol_usuario,$cedula_bitacora,$modulo);
+		// $listaconsulta = $objeto->consultar($rol_usuario,$cedula_bitacora,$modulo);
 		$permisos = $objeto->permisos($rol_usuario);
 
 		if($permisos[0] == "true"){
