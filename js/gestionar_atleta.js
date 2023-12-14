@@ -453,31 +453,31 @@ function enviaAjax(datos, accion) {
     processData: false,
     cache: false,
     success: function (respuesta) {
-       if (accion == "registrar_atletas") {
-			try {
-				if (respuesta === "Registrado Correctamente") {
-					tabla.ajax.reload();
-					mensajemodal(respuesta);
-				} else {
-					mensajemodal(respuesta);
-				}
-			} catch (e) {
-			mensajemodal("Error en Ajax " + e.name + " !!!");
-			}
+      if (accion == "registrar_atletas") {
+        try {
+          if (respuesta === "Registrado Correctamente") {
+            tabla.ajax.reload(null, false);
+            mensajemodal(respuesta);
+          } else {
+            mensajemodal(respuesta);
+          }
+        } catch (e) {
+			    mensajemodal("Error en Ajax " + e.name + " !!!");
+			  }
       } else if (accion == "modificar_atletas") {
-			try {
-				if (respuesta === "Modificado Correctamente") {
-					tabla.ajax.reload(null, false);
-					mensajemodal(respuesta);
-				} else {
-					mensajemodal(respuesta);
-				}
-			} catch (e) {
-			mensajemodal("Error en Ajax " + e.name + " !!!");
-			}
+        try {
+          if (respuesta === "Modificado Correctamente") {
+            tabla.ajax.reload(null, false);
+            mensajemodal(respuesta);
+          } else {
+            mensajemodal(respuesta);
+          }
+        } catch (e) {
+          mensajemodal("Error en Ajax " + e.name + " !!!");
+        }
       } else {
-        	limpia_formulario();
-        	mensajemodal(respuesta);
+        limpia_formulario();
+        mensajemodal(respuesta);
       }
     },
     error: function () {
@@ -554,7 +554,7 @@ function elimina(fila) {
 		
 			try {
 				if (respuesta == "eliminado") {
-					tabla.row(linea).remove().draw();
+					tabla.row(linea).remove().draw(false);
 					mensajemodal("Eliminado correctamente");
 				} else {
 					mensajemodal(respuesta);
