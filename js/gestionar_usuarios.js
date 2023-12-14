@@ -1,11 +1,29 @@
-$(document).ready(function(){
+var tabla;
+$(document).ready(function () {
 
-	//accion de datatable js
-	 
-	$('#tablaconsulta').DataTable( {
+	//accion de datatable js	 
+	tabla = $('#tablaconsulta').DataTable( {
         language: {
             url: '//cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json'
 		},
+		ajax: {
+			url: "",
+			type: "POST",
+			data: { accion_usuarios: "consultar" },
+		},
+		columns: [
+			{ data: "cedula" },
+			{ data: "nombre" },
+			{ data: "correo" },
+			{ data: "contrasena"},
+			{ data: "contrasena",className: "d-none" },
+			{ data: "rol" },
+			{ data: "id_rol",className: "d-none"  },
+			{ data: "opciones" },
+		],
+		columnDefs: [
+			{	target: -1,searchable: false,},
+		],
 		lengthMenu: [
             [5, 10, 15],
             [5, 10, 15]
@@ -265,28 +283,12 @@ function enviaAjax(datos,accion){
 			processData: false,
 	        cache: false,
             success: function(respuesta) {//si resulto exitosa la transmision
-            	if(accion=='eliminar_usuarios'){
+            	if(accion=='registrar_usuarios'){
 					try{
-						if(respuesta=='eliminado'){
-							mensajemodal("Eliminado correctamente");
+						if (respuesta === "Registrado Correctamente") {
+							tabla.ajax.reload(null, false);
+							mensajemodal(respuesta);
 						} else {
-							mensajemodal("No se pudo eliminar debido a informacion dependiente en otra tabla");
-							setTimeout(function() {
-								window.location.reload();
-								},2000);
-						}
-					}
-					catch(e){
-						mensajemodal("Error en Ajax "+e.name+" !!!");
-					}
-				}else if(accion=='registrar_usuarios'){
-					try{
-						let fila = respuesta.indexOf('<tr>');
-						if(fila !== -1){
-							$("#resultadoconsulta").html(respuesta);
-							mensajemodal("Registrado Correctamente");
-						}
-						else{
 							mensajemodal(respuesta);
 						}
 					}
@@ -295,12 +297,10 @@ function enviaAjax(datos,accion){
 					}
 				}else if(accion=='modificar_usuarios'){
 					try{
-						let fila = respuesta.indexOf('<tr>');
-						if(fila !== -1){
-							$("#resultadoconsulta").html(respuesta);
-							mensajemodal("Modificado Correctamente");
-						}
-						else{
+						if (respuesta === "Modificado Correctamente") {
+							tabla.ajax.reload(null, false);
+							mensajemodal(respuesta);
+						} else {
 							mensajemodal(respuesta);
 						}
 					}
@@ -361,8 +361,34 @@ function elimina(fila){
 	
 	var datos = new FormData();
 	datos.append('accion_usuarios','eliminar_usuarios');
-	datos.append('cedula_usuarios',cedula.text());
-	enviaAjax(datos,'eliminar_usuarios');
+	datos.append('cedula_usuarios', cedula.text());
 	
-	linea.remove();	
+	$.ajax({
+		async: true,
+		url: "", //la pagina a donde se envia por estar en mvc, se omite la ruta ya que siempre estaremos en la misma pagina
+		type: "POST", 
+		contentType: false,
+		data: datos,
+		processData: false,
+		cache: false,
+		success: function (respuesta) {
+		
+			try {
+				if (respuesta == "eliminado") {
+					tabla.row(linea).remove().draw(false);
+					mensajemodal("Eliminado correctamente");
+				} else {
+					mensajemodal(respuesta);
+					setTimeout(function () {
+					window.location.reload();
+					}, 2000);
+				}
+			} catch (e) {
+			mensajemodal("Error en Ajax " + e.name + " !!!");
+			}
+		},
+		error: function () {
+		mensajemodal("Error con ajax");
+		},
+	});	
 }
