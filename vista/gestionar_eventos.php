@@ -51,7 +51,7 @@
 							<div class="table-responsive">
 								<table class="table table-striped table-hover table-borderless" id="tablaconsulta" width="100%" cellspacing="0">
 									<thead class="thead-dark">
-										<th style="display:none;">id_club</th>
+										<th>id_club</th>
 										<th>Nombre</th>
 										<th>Fecha</th>
 										<th>Hora</th>
@@ -64,29 +64,6 @@
 										<th>Acciones</th>
 										
 									</thead>
-									<tbody id="resultadoconsulta">
-										<?php 
-											if(!empty ($listaconsulta)){
-												echo $listaconsulta;
-											}else{
-										?>
-											<tr>
-												<td colspan="9">No hay informacion</td>
-												<td style="display:none;"></td>
-												<td style="display:none;"></td>
-												<td style="display:none;"></td>
-												<td style="display:none;"></td>
-												<td style="display:none;"></td>
-												<td style="display:none;"></td>
-												<td style="display:none;"></td>
-												<td style="display:none;"></td>
-												<td style="display:none;"></td>
-												<td style="display:none;"></td>
-											</tr>
-										<?php 
-											}
-										?>
-									</tbody>
 								</table>
 							</div>
 							

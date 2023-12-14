@@ -159,7 +159,7 @@ class gestionar_eventos extends conexion{
 
 						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
 
-						return  $this->consultar($rol_usuario,  $cedula_bitacora,$modulo);
+						return "Registrado Correctamente";
 						
 					} catch (Exception $e) {
 						return $e->getMessage();
@@ -218,8 +218,8 @@ class gestionar_eventos extends conexion{
 
 						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
 
-						return  $this->consultar($rol_usuario, $cedula_bitacora,$modulo);
-						
+						return "Modificado Correctamente";
+
 					} catch (Exception $e) {
 						return $e->getMessage();
 					}
@@ -288,80 +288,52 @@ class gestionar_eventos extends conexion{
 
 		try{
 
-			$resultado = $co->prepare("SELECT b.id, a.nombre, a.fecha,a.hora, a.monto, b.nombre, a.direccion, a.juez1, a.juez2, a.juez3 from eventos as a, clubes as b where a.id_club = b.id");
+			$valor = $this->permisos($rol_usuario); //rol del usuario
+			$datos = array();
+			if ($valor[0]=="true") {
 
-			$resultado->execute();
-			
-			if($resultado){
+				$stmt = $co->prepare("SELECT b.id, a.nombre, a.fecha,a.hora, a.monto, b.nombre, a.direccion, a.juez1, a.juez2, a.juez3 from eventos as a, clubes as b where a.id_club = b.id");
 
-				$respuesta = '';
+				$stmt->execute();
+				$resultado = $stmt->fetchAll(PDO::FETCH_NUM);
 				
-				foreach($resultado as $r){
-					
-					$valor = $this->permisos($rol_usuario); //rol del usuario
-					if ($valor[0]=="true") {
-						$respuesta = $respuesta."<tr>";
-
-							$respuesta = $respuesta."<td style='display:none;'>";
-								$respuesta = $respuesta.$r[0];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[1];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[2];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[3];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[4];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[5];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[6];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[7];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[8];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[9];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td class='d-flex'>";
-								if ($valor[2]=="true") {
-									$respuesta = $respuesta."<button type='button' class='btn btn-primary mb-1 mr-1' data-toggle='modal' data-target='#modal_gestion' onclick='modalmodificar(this)' id='boton_modificar'><i class='bi bi-pencil-fill'></i></button>";
-								}
-								if ($valor[3]=="true"){
-									$respuesta = $respuesta."<button type='button' class='btn btn-danger mb-1 ' onclick='elimina(this)'><i class='bi bi-x-lg'></i></button>";
-								}
-							$respuesta = $respuesta."</td>";
-							
-
-						$respuesta = $respuesta."</tr>";
-					}
+				$opciones="";
+	
+				if ($valor[2]=="true") {
+					$opciones = $opciones."<button type='button' class='btn btn-primary mb-1 mr-1' data-toggle='modal' data-target='#modal_gestion' onclick='modalmodificar(this)' id='boton_modificar'><i class='bi bi-pencil-fill'></i></button>";
 				}
+				if ($valor[3]=="true"){
+					$opciones = $opciones."<button type='button' class='btn btn-danger mb-1 ' onclick='elimina(this)'><i class='bi bi-x-lg'></i></button>";
+				}
+
+				foreach($resultado as $fila){
+	
+					$subarray=array();
+					$subarray['id_club']=$fila[0];
+					$subarray['nombre_evento']=$fila[1];
+					$subarray['fecha']=$fila[2];
+					$subarray['hora']=$fila[3];
+					$subarray['monto']=$fila[4];
+					$subarray['club']=$fila[5];
+					$subarray['direccion']=$fila[6];
+					$subarray['juez1']=$fila[7];
+					$subarray['juez2']=$fila[8];
+					$subarray['juez3']=$fila[9];
+					$subarray['opciones']=$opciones;
+
+					$datos[] = $subarray;
+				}
+				$json = array(
+					"data" => $datos
+				);
+				
 				$accion= "Ha consultado la tabla de Eventos";
 
 				parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-				return $respuesta;
-			}
-			else {
-				return '';
+	
+				return json_encode($json);
+			} else {
+				return 'No tiene permiso de realizar esta accion';
 			}
 
 		}catch(Exception $e) {

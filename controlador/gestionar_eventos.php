@@ -30,6 +30,11 @@
  
 			$accion = $_POST['accion_evento'];
 
+			if($accion=='consultar'){
+				echo $objeto->consultar($rol_usuario,$cedula_bitacora,$modulo);
+				exit;
+			}
+
 			if($accion=='eliminar_evento'){
 				$objeto->set_nombre_evento($_POST['nombre_evento']);
 				echo $objeto->eliminar($cedula_bitacora,$modulo,$rol_usuario);
@@ -59,7 +64,6 @@
 
 		}
  
-		$listaconsulta = $objeto->consultar($rol_usuario,$cedula_bitacora,$modulo);
         $consulta_clubes = $objeto->consulta_clubes();//metodo de mostrar los clubes en el option
 		
 		$permisos = $objeto->permisos($rol_usuario);
