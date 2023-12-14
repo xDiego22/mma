@@ -33,7 +33,7 @@ class modificar_gestionar_clubesTest extends TestCase{
 
         $modificar = $this->clubes->modificar('1','29831184','1');
 
-        $this->assertStringStartsWith('<tr>', $modificar);
+        $this->assertEquals('Modificado Correctamente', $modificar);
     }
 }
 ?>

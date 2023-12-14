@@ -27,7 +27,7 @@ class consultar_gestionar_clubesTest extends TestCase{
 
         $consultar = $this->clubes->consultar('1','29831184','1');
 
-        $this->assertStringStartsWith('<tr>', $consultar);
+        $this->assertJson($consultar);
     }
 }
 ?>

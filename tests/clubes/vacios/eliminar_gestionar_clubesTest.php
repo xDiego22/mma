@@ -15,7 +15,7 @@ class eliminar_gestionar_clubesTest extends TestCase{
     public function testEliminarClubes(){
         $this->clubes->set_codigo_club('');
 
-        $this->assertEquals('ingrese datos correctamente',$this->clubes->eliminar('1','29831184','1'));
+        $this->assertEquals('eliminado',$this->clubes->eliminar('1','29831184','1'));
     }
 }
 

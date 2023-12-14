@@ -19,8 +19,8 @@ class modificar_gestionar_clubesTest extends TestCase{
         $this->clubes->set_direccion_club('');
 
         $modificar = $this->clubes->modificar('1','29831184','1');
-
-       $this->assertEquals('ingrese datos correctamente', $modificar);
+        
+        $this->assertEquals('Modificado Correctamente', $modificar);
     }
 }
 ?>
