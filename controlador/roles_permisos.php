@@ -37,7 +37,10 @@
 		if(isset($_POST['accion'])){			
 
 			$accion = $_POST['accion'];
-
+			if($accion=='consultar'){
+				echo $objeto->consultar($rol_usuario,$cedula_bitacora,$modulo);
+				exit;
+			}
 			if($accion=='eliminar'){
 				$objeto->set_nombre($_POST['nombre_rol']);
 				echo $objeto->eliminar($cedula_bitacora,$modulo,$rol_usuario);
@@ -103,7 +106,6 @@
 
 		}
 
-        $listaconsulta = $objeto->consultar($rol_usuario,$cedula_bitacora,$modulo);
 		$permisos = $objeto->permisos($rol_usuario);
 
 		if($permisos[0] == "true"){

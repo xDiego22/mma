@@ -27,7 +27,7 @@
 				
 				<div class="container-fluid border my-4 shadow bg-white rounded" style="width:95%;">
 			
-					<div class="container-fluid mt-4">
+					<div class="mt-4">
 						<div class="row">
 							<div class="col-auto mr-auto mb-2">
 								<div class="h4 text-dark">Roles y Permisos</div>
@@ -59,22 +59,7 @@
 												<th>Accion</th>
 											</tr>
 										</thead>
-										<tbody id="resultadoconsulta">
-											<?php 
-												if(!empty ($listaconsulta)){
-													echo $listaconsulta;
-												}else{
-											?>
-												<tr>
-													<td colspan="4">No hay informacion</td>
-													<td style="display:none;"></td>
-													<td style="display:none;"></td>
-													<td style="display:none;"></td>
-												</tr>
-											<?php 
-												}
-											?>
-										</tbody>
+			
 									</table>
 								</div>
 								

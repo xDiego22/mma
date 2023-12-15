@@ -1,11 +1,29 @@
+var tabla;
 $(document).ready(function () {
 
     //accion de datatable js
 	
-    $('#tablaconsulta').DataTable({
+    tabla = $('#tablaconsulta').DataTable({
         language: {
             url: '//cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json'
-        },  
+		},  
+		ajax: {
+			url: "",
+			type: "POST",
+			data: { accion: "consultar" },
+		},
+		columns: [
+			{ data: "id" },
+			{ data: "nombre" },
+			{ data: "descripcion" },
+			{ data: "opciones", className: 'd-flex'},
+		],
+		columnDefs: [
+			{
+				target: -1,
+				searchable: false,
+			},
+		],
         lengthMenu: [
             [5, 10, 15],
             [5, 10, 15]
@@ -249,6 +267,23 @@ function validar_checkbox () {
 	}
 }
 
+function limpiarCheckbox() {
+	$("#modulo_club").prop("checked", false);
+	$("#modulo_personal").prop("checked", false);
+	$("#modulo_atletas").prop("checked", false);
+	$("#modulo_medicos").prop("checked", false); 
+	$("#modulo_socioeconomicos").prop("checked", false);
+	$("#modulo_eventos").prop("checked", false);
+	$("#modulo_usuarios").prop("checked", false); 
+	$("#modulo_bitacora").prop("checked", false);
+	$("#modulo_roles").prop("checked", false);
+	$("#modulo_inscripcion").prop("checked", false);
+	$("#modulo_emparejamientos").prop("checked", false); 
+	$("#modulo_resultados").prop("checked", false);
+	$("#modulo_historial").prop("checked", false);
+    $("#modulo_reportes").prop("checked", false);
+}
+
 function validarboton () {
 	
 	//ningun campo completado
@@ -309,26 +344,12 @@ function enviaAjax(datos,accion){
 			processData: false,
 	        cache: false,
             success: function(respuesta) {
-				if(accion=='eliminar'){
+				if(accion=='registrar'){
 					try{
-						if(respuesta=='eliminado'){
-							mensajemodal("Eliminado correctamente");
+						if (respuesta === "Registrado Correctamente") {
+							tabla.ajax.reload(null, false);
+							mensajemodal(respuesta);
 						} else {
-							mensajemodal('debe eliminar antes los usuarios registrados con este rol');
-							setTimeout(function() {window.location.reload();},2000);
-						}
-					}
-					catch(e){
-						mensajemodal("Error en Ajax "+e.name+" !!!");
-					}
-				}else if(accion=='registrar'){
-					try{
-						let fila = respuesta.indexOf('<tr>');
-						if(fila !== -1){
-							$("#resultadoconsulta").html(respuesta);
-							mensajemodal("Registrado Correctamente");
-						}
-						else{
 							mensajemodal(respuesta);
 						}
 					}
@@ -337,12 +358,10 @@ function enviaAjax(datos,accion){
 					}
 				}else if(accion=='modificar'){
 					try{
-						let fila = respuesta.indexOf('<tr>');
-						if(fila !== -1){
-							$("#resultadoconsulta").html(respuesta);
-							mensajemodal("Modificado Correctamente");
-						}
-						else{
+						if (respuesta === "Modificado Correctamente") {
+							tabla.ajax.reload(null, false);
+							mensajemodal(respuesta);
+						} else {
 							mensajemodal(respuesta);
 						}
 					}
@@ -396,7 +415,8 @@ function limpia_formulario(){
 function modalregistrar() {
 	$("#modal_gestionlabel").html("Registrar");
 	$(".texto").html('') ;
-	limpia_formulario()
+	limpia_formulario();
+	limpiarCheckbox();
 	$("#registrar").show();
 	$("#modificar").hide();
 }
@@ -417,7 +437,34 @@ function elimina(fila){
 	var datos = new FormData();
 	datos.append('accion','eliminar');
 	datos.append('nombre_rol',nombre.text());
-	enviaAjax(datos,'eliminar');
-	
-	linea.remove();	
+	$.ajax({
+		async: true,
+		url: "", //la pagina a donde se envia por estar en mvc, se omite la ruta ya que siempre estaremos en la misma pagina
+		type: "POST", 
+		contentType: false,
+		data: datos,
+		processData: false,
+		cache: false,
+		success: function (respuesta) {
+		
+			try {
+				if (respuesta == "eliminado") {
+					tabla.row(linea).remove().draw(false);
+					mensajemodal("Eliminado correctamente");
+				} else {
+					// mensajemodal('debe eliminar antes los usuarios registrados con este rol');
+					mensajemodal(respuesta);
+					
+					setTimeout(function () {
+					window.location.reload();
+					}, 2000);
+				}
+			} catch (e) {
+			mensajemodal("Error en Ajax " + e.name + " !!!");
+			}
+		},
+		error: function () {
+		mensajemodal("Error con ajax");
+		},
+	});	
 }

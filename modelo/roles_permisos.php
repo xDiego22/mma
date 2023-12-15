@@ -115,54 +115,51 @@
             $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             try{
-                $resultado = $co->prepare("SELECT * from roles");
-                $resultado->execute();
-                
-                if($resultado){
 
-                    $respuesta = '';
+                $valor = $this->permisos($rol_usuario); //rol del usuario
+			    $datos = array();
+			    if ($valor[0]=="true") {
+
+                    $stmt = $co->prepare("SELECT * from roles");
+
+                    $stmt->execute();
+                    $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     
-                    foreach($resultado as $r){
-                        
-                        $valor = $this->permisos($rol_usuario); //rol del usuario
-					    if ($valor[0]=="true") {
-                            $respuesta = $respuesta."<tr>";
+                    
+                    foreach($resultado as $fila){
+                        $opciones="";
 
-                                $respuesta = $respuesta."<td value = ".$r['id'].">";
-                                    $respuesta = $respuesta.$r['id'];
-                                $respuesta = $respuesta."</td>";
-
-                                $respuesta = $respuesta."<td>";
-                                    $respuesta = $respuesta.$r['nombre'];
-                                $respuesta = $respuesta."</td>";
-
-                                $respuesta = $respuesta."<td>";
-                                    $respuesta = $respuesta.$r['descripcion'];
-                                $respuesta = $respuesta."</td>";
-
-                                $respuesta = $respuesta."<td class='d-flex'>";
-                                    if($valor[1]=="true"){
-                                    $respuesta = $respuesta."<button type='button' class='btn btn-dark mb-1 mr-1' data-toggle='modal' data-target='#modal_permisos' onclick='envia_rol(".$r['id'].")'><i class='bi bi-key-fill'></i></button>";
-                                    }
-                                    if ($valor[2]=="true") {
-                                    $respuesta = $respuesta."<button type='button' class='btn btn-primary mb-1 mr-1' data-toggle='modal' data-target='#modal_modificar' onclick='modalmodificar(this)' id='boton_modificar'><i class='bi bi-pencil-fill'></i></button>";
-                                    }
-                                    if ($valor[3]=="true"){
-                                        $respuesta = $respuesta."<button type='button' class='btn btn-danger mb-1 ' onclick='elimina(this)'><i class='bi bi-x-lg'></i></button>";
-                                    }
-                                $respuesta = $respuesta."</td>";
-                                
-
-                            $respuesta = $respuesta."</tr>";
+                        if($valor[1]=="true"){
+                            $opciones = $opciones."<button type='button' class='btn btn-dark mb-1 mr-1' data-toggle='modal' data-target='#modal_permisos' onclick='envia_rol(".$fila['id'].")'><i class='bi bi-key-fill'></i></button>";
                         }
+            
+                        if ($valor[2]=="true") {
+                            $opciones = $opciones."<button type='button' class='btn btn-primary mb-1 mr-1' data-toggle='modal' data-target='#modal_modificar' onclick='modalmodificar(this)' id='boton_modificar'><i class='bi bi-pencil-fill'></i></button>";
+                        }
+                        if ($valor[3]=="true"){
+                            $opciones = $opciones."<button type='button' class='btn btn-danger mb-1 ' onclick='elimina(this)'><i class='bi bi-x-lg'></i></button>";
+                        }
+	
+                        $subarray=array();
+                        $subarray['id']=$fila['id'];
+                        $subarray['nombre']=$fila['nombre'];
+                        $subarray['descripcion']=$fila['descripcion'];
+                        $subarray['opciones']=$opciones;
+
+                        $datos[] = $subarray;
                     }
 
                     $accion= "Ha consultado tabla Roles y Permisos";
                     parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-                    return $respuesta;
-                }
-                else {
-                    return '';
+
+                    $json = array(
+                        "data" => $datos
+                    );
+
+    				return json_encode($json);
+
+                } else {
+                    return 'No tiene permiso de realizar esta accion';
                 }
 
             }catch(Exception $e) {
@@ -396,7 +393,7 @@
                             $accion= "Ha regitrado un nuevo Rol";
                             parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
 
-                            return $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
+                           return "Registrado Correctamente";
                             
                         }catch(Exception $e){
                             return $e->getMessage();
@@ -438,7 +435,7 @@
                             $accion= "Ha modificado un Rol";
                             parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
 
-                            return $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
+                            return "Modificado Correctamente";
                             
                         }catch(Exception $e){
                             return $e->getMessage();
@@ -461,7 +458,7 @@
             if($valor[3]=="true"){
                 $co = $this->conecta();
                 $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                if(preg_match_all('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ -]{5,30}$/',$this->nombre)){
+                if(preg_match_all('/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{5,30}$/',$this->nombre)){
                     if($this->existe($this->nombre)){
                         try{
 
@@ -704,10 +701,10 @@
             
             $this->nombre = trim($this->nombre);//elimina espacios en blanco
 
-            if(!preg_match_all('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ -]{5,30}$/',$this->nombre)){
+            if(!preg_match_all('/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{5,30}$/',$this->nombre)){
 			    return false;
 		    }
-            else if(!preg_match_all('/^[a-zA-Z ]{5,50}$/',$this->descripcion)){
+            else if(!preg_match_all('/^[0-9a-zA-Z ]{5,50}$/',$this->descripcion)){
 			    return false;
 		    }
 
@@ -764,10 +761,10 @@
             
             $this->nombre = trim($this->nombre);//elimina espacios en blanco
 
-            if(!preg_match_all('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ -]{5,30}$/',$this->nombre)){
+            if(!preg_match_all('/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{5,30}$/',$this->nombre)){
 			    return false;
 		    }
-            else if(!preg_match_all('/^[a-zA-Z ]{5,50}$/',$this->descripcion)){
+            else if(!preg_match_all('/^[a-z0-9A-Z ]{5,50}$/',$this->descripcion)){
 			    return false;
 		    }
             else{
