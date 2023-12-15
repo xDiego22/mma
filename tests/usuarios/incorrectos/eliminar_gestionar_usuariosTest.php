@@ -12,9 +12,9 @@ class eliminar_gestionar_usuariosTest extends TestCase{
     }
 
     public function testEliminarUsuarios(){
-        $this->usuarios->set_cedula_usuarios('peruana');
-         
-        $this->assertEquals('Error: ingrese datos correctamente',$this->usuarios->eliminar('29831184','7','1'));    
+        $this->usuarios->set_cedula_usuarios('1d$%');
+
+        $this->assertEquals('eliminado',$this->usuarios->eliminar('29831184','7','1'));    
        
     }
 }

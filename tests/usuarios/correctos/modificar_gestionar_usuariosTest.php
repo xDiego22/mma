@@ -34,7 +34,7 @@ class modificar_gestionar_usuariosTest extends TestCase{
 
         $modificar = $this->usuarios->modificar('1','29831184','7');
 
-        $this->assertStringStartsWith('<tr>', $modificar);
+        $this->assertEquals('Modificado Correctamente', $modificar);
     }
 }
 

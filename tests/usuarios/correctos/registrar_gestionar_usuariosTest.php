@@ -25,7 +25,7 @@ class registrar_gestionar_usuariosTest extends TestCase{
 
         $registro = $this->usuarios->registrar('1','29831184','7');
 
-        $this->assertStringStartsWith('<tr>', $registro);
+        $this->assertEquals('Registrado Correctamente', $registro);
     }
 }
 

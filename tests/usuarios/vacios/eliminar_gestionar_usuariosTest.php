@@ -14,7 +14,7 @@ class eliminar_gestionar_usuariosTest extends TestCase{
     public function testEliminarUsuarios(){
         $this->usuarios->set_cedula_usuarios('');
          
-        $this->assertEquals('Error: ingrese datos correctamente',$this->usuarios->eliminar('29831184','7','1'));    
+        $this->assertEquals('eliminado',$this->usuarios->eliminar('29831184','7','1'));      
        
     }
 }

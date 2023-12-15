@@ -27,7 +27,7 @@ class consultar_gestionar_usuariosTest extends TestCase{
     public function testConsultarUsuarios(){
         $consultar = $this->usuarios->consultar('1','29831184','7');
 
-        $this->assertStringStartsWith('<tr>', $consultar);
+        $this->assertJson($consultar);
     }
 }
 

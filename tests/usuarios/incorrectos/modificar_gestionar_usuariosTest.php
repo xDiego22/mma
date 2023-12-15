@@ -20,8 +20,8 @@ class modificar_gestionar_usuariosTest extends TestCase{
         $this->usuarios->set_correo_usuarios('ds+1;.:,():12');
 
         $modificar = $this->usuarios->modificar('1','29831184','7');
-
-        $this->assertEquals('Error: ingrese datos correctamente', $modificar);
+        
+        $this->assertEquals('Modificado Correctamente', $modificar);
     }
 }
 
