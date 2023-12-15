@@ -40,7 +40,7 @@ class consultar_rolesTest extends TestCase{
     public function testConsultarRol(){
 
         $consultar = $this->rol->consultar('1','29831184','9');
-        $this->assertStringStartsWith('<tr>', $consultar);
+        $this->assertjson($consultar);
     }
 }
 

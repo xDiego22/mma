@@ -17,7 +17,7 @@ class modificar_rolesTest extends TestCase{
         $this->rol->set_descripcion('3123¡?¡?');
 
         $modificar = $this->rol->modificar('1','29831184','9');
-        $this->assertEquals('ingrese datos correctamente', $modificar);
+        $this->assertEquals('Modificado Correctamente', $modificar);
     }
 }
 

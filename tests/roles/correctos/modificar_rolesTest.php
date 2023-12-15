@@ -43,7 +43,7 @@ class modificar_rolesTest extends TestCase{
         $this->rol->set_descripcion('rol para pruebas phpunit modificado');
 
         $modificar = $this->rol->modificar('1','29831184','9');
-        $this->assertStringStartsWith('<tr>', $modificar);
+        $this->assertEquals('Modificado Correctamente', $modificar);
     }
 }
 

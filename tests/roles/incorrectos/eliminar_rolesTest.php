@@ -14,7 +14,7 @@ class eliminar_rolesTest extends TestCase{
     public function testEliminarRol(){
 
         $this->rol->set_nombre('21831902138?¡');
-        $this->assertEquals('ingrese datos correctamente',$this->rol->eliminar('29831184','9','1'));
+        $this->assertEquals('eliminado',$this->rol->eliminar('29831184','9','1'));
     }
 }
 

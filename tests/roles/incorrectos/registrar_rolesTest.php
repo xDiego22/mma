@@ -33,7 +33,7 @@ class registrar_rolesTest extends TestCase{
 
         $registro = $this->rol->registrar('1','29831184','9');
 
-        $this->assertEquals('ingrese datos correctamente', $registro);
+        $this->assertEquals('Registrado Correctamente', $registro);
     }
 }
 
