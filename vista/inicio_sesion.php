@@ -46,7 +46,7 @@
 
 	<!-- Modal spinner-->
 	<div class="modal fade" id="loadingSpinner" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="loadingSpinnerLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-dialog modal-sm modal-dialog-centered">
 			<div class="modal-content">
 				
 				<div class="modal-body text-center my-5">
