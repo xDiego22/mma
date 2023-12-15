@@ -151,4 +151,4 @@ correccion de captcha para tamaño moviles
 
 implementacion de datatable a atletas, clubes,eventos, usuarios modificando controlador js y modelo para visualicion correcta de las tablas
 
-se corrijen pruebas unitarias de atletas, clubes, eventos
+se corrijen pruebas unitarias de atletas, clubes, eventos, usuarios
