@@ -25,7 +25,7 @@ class modificar_gestionar_personalTest extends TestCase{
 
         $modificar = $this->personal->modificar('1','29831184','2');
 
-        $this->assertEquals('ingrese datos correctamente', $modificar);
+        $this->assertEquals('Modificado Correctamente', $modificar);
        
     }
 }

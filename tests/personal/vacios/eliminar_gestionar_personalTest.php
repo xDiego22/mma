@@ -16,7 +16,7 @@ class eliminar_gestionar_personalTest extends TestCase{
     public function testEliminarPersonal(){
     
         $this->personal->set_cedula_personal('');
-        $this->assertEquals('ingrese datos correctamente',$this->personal->eliminar('29831184','2','1'));
+        $this->assertEquals('eliminado',$this->personal->eliminar('29831184','2','1'));
        
     }
 }

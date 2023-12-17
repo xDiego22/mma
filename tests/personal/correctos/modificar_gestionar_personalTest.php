@@ -70,7 +70,7 @@ class modificar_gestionar_personalTest extends TestCase{
 
         $modificar = $this->personal->modificar('1','29831184','2');
 
-        $this->assertStringStartsWith('<tr>', $modificar);
+        $this->assertEquals('Modificado Correctamente', $modificar);
        
     }
 }

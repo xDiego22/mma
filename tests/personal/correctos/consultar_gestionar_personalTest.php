@@ -57,7 +57,7 @@ class consultar_gestionar_personalTest extends TestCase{
 
     public function testConsultarPersonal(){
         $consultar = $this->personal->consultar('1','29831184','2');
-        $this->assertStringStartsWith('<tr>', $consultar);
+        $this->assertJson($consultar);
     }
 }
 

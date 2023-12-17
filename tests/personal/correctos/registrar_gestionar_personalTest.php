@@ -58,7 +58,7 @@ class registrar_gestionar_personalTest extends TestCase{
 
         $registro = $this->personal->registrar('1','29831184','2');
 
-        $this->assertStringStartsWith('<tr>', $registro);
+        $this->assertEquals('Registrado Correctamente', $registro);
     }
 }
 
