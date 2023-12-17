@@ -136,7 +136,7 @@ class gestionar_personal extends conexion{
 
 						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
 
-						return  $this->consultar($rol_usuario, $cedula_bitacora,$modulo);
+						return "Registrado Correctamente";
 
 					}catch(Exception $e){
 						return $e->getMessage();
@@ -192,7 +192,7 @@ class gestionar_personal extends conexion{
 
 						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
 							
-						return $this->consultar($rol_usuario, $cedula_bitacora,$modulo);
+						return "Modificado Correctamente";
 						
 					} catch(Exception $e) {
 						return $e->getMessage();
@@ -257,76 +257,54 @@ class gestionar_personal extends conexion{
 
 		try{
 
-			$resultado = $co->prepare("SELECT a.cedula, CONCAT(a.nombre,' ',a.apellido),
-				a.telefono, a.cargo, a.direccion, b.id,
-				b.nombre, a.nombre , a.apellido from personal as a, clubes as b 
-				where a.id_club = b.id");
-			$resultado->execute();
-			if($resultado){
+			$valor = $this->permisos($rol_usuario); //rol del usuario
+			$datos = array();
+			if ($valor[0]=="true") {
 
-				$respuesta = '';
-				//ciclo foreach se usa para recorrer los resultados de las consultas
+				$stmt = $co->prepare("SELECT a.cedula, CONCAT(a.nombre,' ',a.apellido),a.telefono, a.cargo, a.direccion, b.id,	b.nombre, a.nombre , a.apellido from personal as a, clubes as b where a.id_club = b.id");
+
+				$stmt->execute();
 				
-				foreach($resultado as $r){
-					$valor = $this->permisos($rol_usuario); //rol del usuario
-
-					if ($valor[0]=="true") {
-						$respuesta = $respuesta."<tr>";
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[6];
-							$respuesta = $respuesta."</td>";
-							
-							$respuesta = $respuesta."<td style='display:none'>";
-								$respuesta = $respuesta.$r[5];
-							$respuesta = $respuesta."</td>";
-							
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[0];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[1];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[2];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[3];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.parent::desencriptar($r[4]);
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td class='d-flex'>";
-								if ($valor[2]=="true") {
-									$respuesta = $respuesta."<button type='button' class='btn btn-primary mb-1 mr-1' data-toggle='modal' data-target='#modal_gestion' onclick='modalmodificar(this)' id='boton_modificar'><i class='bi bi-pencil-fill'></i></button>";
-								}
-								if ($valor[3]=="true"){
-									$respuesta = $respuesta."<button type='button' class='btn btn-danger mb-1 ' onclick='elimina(this)'><i class='bi bi-x-lg'></i></button>";
-								}
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td style='display:none'>";
-								$respuesta = $respuesta.$r[7];
-							$respuesta = $respuesta."</td>";
-							
-							$respuesta = $respuesta."<td style='display:none'>";
-								$respuesta = $respuesta.$r[8];
-							$respuesta = $respuesta."</td>";
-						$respuesta = $respuesta."</tr>";
-					}
+				$resultado = $stmt->fetchAll(PDO::FETCH_NUM);
+				
+				$opciones="";
+	
+				if ($valor[2]=="true") {
+					$opciones = $opciones."<button type='button' class='btn btn-primary mb-1 mr-1' data-toggle='modal' data-target='#modal_gestion' onclick='modalmodificar(this)' id='boton_modificar'><i class='bi bi-pencil-fill'></i></button>";
 				}
+				if ($valor[3]=="true"){
+					$opciones = $opciones."<button type='button' class='btn btn-danger mb-1 ' onclick='elimina(this)'><i class='bi bi-x-lg'></i></button>";
+				}
+
+				foreach($resultado as $fila){
+	
+					$subarray=array();
+					$subarray['nombre_club'] = $fila[6];
+					$subarray['id_club'] = $fila[5];
+					$subarray['cedula'] = $fila[0];
+					$subarray['nombre_completo'] = $fila[1];
+					$subarray['telefono'] = $fila[2];
+					$subarray['cargo'] = $fila[3];
+					$subarray['direccion'] = parent::desencriptar($fila[4]);
+					$subarray['nombre'] = $fila[7];
+					$subarray['apellido'] = $fila[8];
+					$subarray['opciones'] = $opciones;
+
+					$datos[] = $subarray;
+				}
+				$json = array(
+					"data" => $datos
+				);
 
 				$accion= "Ha consultado la tabla de Personal";
 
 				parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-				return $respuesta;
-			}
-			else {
-				return '';
+
+				return json_encode($json);
+
+
+			}else{
+				return 'No tiene permiso de realizar esta accion';
 			}
 
 		}catch(Exception $e) {

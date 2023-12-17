@@ -53,39 +53,17 @@
 									<thead class="thead-dark">
 										<tr> 
 											<th>Club</th>
-											<th style="display:none">id_club</th>
+											<th>id_club</th>
 											<th>Cedula</th>
 											<th>Nombre</th>
 											<th>Telefono</th>
 											<th>Cargo</th>
 											<th>Direccion</th>
 											<th>Acciones</th>
-											<th style="display:none">nombre</th>
-											<th style="display:none">apellido</th>
+											<th >nombre</th>
+											<th>apellido</th>
 										</tr>
 									</thead>
-									<tbody id="resultadoconsulta">
-										<?php 
-											if(!empty ($listaconsulta)){
-												echo $listaconsulta;
-											}else{
-										?>
-											<tr>											
-												<td colspan="10">No hay informacion</td>
-												<td style="display:none"></td>
-												<td style="display:none"></td>
-												<td style="display:none"></td>
-												<td style="display:none"></td>
-												<td style="display:none"></td>
-												<td style="display:none"></td>
-												<td style="display:none"></td>
-												<td style="display:none"></td>
-												<td style="display:none"></td>
-											</tr>
-										<?php 
-											}
-										?>
-									</tbody>
 								</table>
 							</div>
 							

@@ -29,6 +29,11 @@
 		if(isset($_POST['accion_personal'])){			
 
 			$accion = $_POST['accion_personal'];
+
+			if($accion=='consultar'){
+				echo $objeto->consultar($rol_usuario,$cedula_bitacora,$modulo);
+				exit;
+			}
  
 			if($accion=='eliminar_personal'){
 				$objeto->set_cedula_personal($_POST['cedula_personal']);
@@ -54,8 +59,7 @@
 			exit;
 
 		} 
-
-		$listaconsulta = $objeto->consultar($rol_usuario,$cedula_bitacora,$modulo);
+		
         $consulta_clubes = $objeto->consulta_clubes();
 
 		$permisos = $objeto->permisos($rol_usuario);

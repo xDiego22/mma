@@ -1,11 +1,29 @@
+var tabla;
 $(document).ready(function () {
 	
 	//accion de datatable js
 	
-	$('#tablaconsulta').DataTable( {
+	tabla = $('#tablaconsulta').DataTable( {
         language: {
             url: '//cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json'
 		},
+		ajax: {
+			url: "",
+			type: "POST",
+			data: { accion_personal: "consultar" },
+		},
+		columns: [
+			{ data: "nombre_club" },
+			{ data: "id_club" , className: 'd-none'},
+			{ data: "cedula" },
+			{ data: "nombre_completo" },
+			{ data: "telefono" },
+			{ data: "cargo" },
+			{ data: "direccion" },
+			{ data: "opciones" ,searchable: false},
+			{ data: "nombre", className: 'd-none' },
+			{ data: "apellido", className: 'd-none' },
+		],
 		lengthMenu: [
             [5, 10, 15],
             [5, 10, 15]
@@ -189,30 +207,13 @@ function enviaAjax(datos,accion){
             data: datos,
 			processData: false,   
 	        cache: false,  
-            success: function(respuesta) {//si resulto exitosa la transmision
-            	//aqui el envio es diferente porque se envia la localizacion por aqui
-				if(accion=='eliminar_personal'){
+            success: function(respuesta) { 
+				if(accion=='registrar_personal'){
 					try{
-						if(respuesta=='eliminado'){
-							mensajemodal("Eliminado correctamente");
+						if (respuesta === "Registrado Correctamente") {
+							tabla.ajax.reload(null, false);
+							mensajemodal(respuesta);
 						} else {
-							mensajemodal("No se pudo eliminar debido a informacion dependiente en otra tabla");
-							setTimeout(function() {
-								window.location.reload();
-								},2000);
-						}
-					}
-					catch(e){
-						mensajemodal("Error en Ajax "+e.name+" !!!");
-					}
-				}else if(accion=='registrar_personal'){
-					try{
-						let fila = respuesta.indexOf('<tr>');
-						if(fila !== -1){
-							$("#resultadoconsulta").html(respuesta);
-							mensajemodal("Registrado Correctamente");
-						}
-						else{
 							mensajemodal(respuesta);
 						}
 					}
@@ -221,12 +222,10 @@ function enviaAjax(datos,accion){
 					}
 				}else if(accion=='modificar_personal'){
 					try{
-						let fila = respuesta.indexOf('<tr>');
-						if(fila !== -1){
-							$("#resultadoconsulta").html(respuesta);
-							mensajemodal("Modificado Correctamente");
-						}
-						else{
+						if (respuesta === "Modificado Correctamente") {
+							tabla.ajax.reload(null, false);
+							mensajemodal(respuesta);
+						} else {
 							mensajemodal(respuesta);
 						}
 					}
@@ -289,7 +288,36 @@ function elimina(fila){
 	var datos = new FormData();
 	datos.append('accion_personal','eliminar_personal');
 	datos.append('cedula_personal',cedula.text());
-	enviaAjax(datos,'eliminar_personal');
 	
-	linea.remove();	
+
+	$.ajax({
+		async: true,
+		url: "", //la pagina a donde se envia por estar en mvc, se omite la ruta ya que siempre estaremos en la misma pagina
+		type: "POST", 
+		contentType: false,
+		data: datos,
+		processData: false,
+		cache: false,
+		success: function (respuesta) {
+		
+			try {
+				if (respuesta == "eliminado") {
+					tabla.row(linea).remove().draw(false);
+					mensajemodal("Eliminado correctamente");
+				} else {
+					mensajemodal(respuesta);
+					setTimeout(function () {
+					window.location.reload();
+					}, 2000);
+				}
+			} catch (e) {
+			mensajemodal("Error en Ajax " + e.name + " !!!");
+			}
+		},
+		error: function () {
+		mensajemodal("Error con ajax");
+		},
+	});
+	
+	
 }
