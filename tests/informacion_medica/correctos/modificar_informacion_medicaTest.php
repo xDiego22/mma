@@ -108,7 +108,7 @@ class modificar_informacion_medicaTest extends TestCase{
        
         $modificar = $this->medico->modificar('1','29831184','4');
 
-        $this->assertStringStartsWith('<tr>', $modificar);
+        $this->assertEquals('Modificado Correctamente', $modificar);
     }
 }
 

@@ -88,7 +88,7 @@ class consultar_informacion_medicaTest extends TestCase{
        
         $consultar = $this->medico->consultar('1','29831184','4');
 
-        $this->assertStringStartsWith('<tr>', $consultar);
+        $this->assertJson($consultar);
     }
 }
 

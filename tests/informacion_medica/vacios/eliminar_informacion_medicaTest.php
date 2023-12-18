@@ -14,7 +14,7 @@ class eliminar_informacion_medicaTest extends TestCase{
     public function testEliminarMedicoAtleta(){
         
         $this->medico->set_nombre_atleta('');
-        $this->assertEquals('ingrese datos correctamente',$this->medico->eliminar('29831184','4','1'));
+        $this->assertEquals('eliminado',$this->medico->eliminar('29831184','4','1'));
 
     }
 }

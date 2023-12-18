@@ -89,7 +89,7 @@ class registrar_informacion_medicaTest extends TestCase{
 
         $registro = $this->medico->registrar('1','29831184','4');
 
-        $this->assertStringStartsWith('<tr>', $registro);
+        $this->assertEquals('Registrado Correctamente', $registro);
     }
 }
 
