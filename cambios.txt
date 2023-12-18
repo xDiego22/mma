@@ -151,7 +151,7 @@ correccion de captcha para tamaño moviles
 
 correccion roles_permisos limpiarCheckbox al abrir modal
 
-implementacion de datatable a atletas, clubes,eventos, usuarios, roles_permisos, personal, medico atleta modificando controlador js y modelo para visualicion correcta de las tablas
+implementacion de datatable a atletas, clubes,eventos, usuarios, roles_permisos, personal, medico atleta, socioeconomico atleta modificando controlador js y modelo para visualicion correcta de las tablas
 
 se corrijen pruebas unitarias de atletas, clubes, eventos, usuarios, roles_permisos, personal, medico atleta
 

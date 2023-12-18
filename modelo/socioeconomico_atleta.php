@@ -161,7 +161,7 @@ class socioeconomico_atleta extends conexion{
 
 						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
 
-						return  $this->consultar($rol_usuario, $cedula_bitacora,$modulo);
+						return 'Registrado Correctamente';
 					}catch(Exception $e){
 						return $e->getMessage();
 					}
@@ -223,7 +223,8 @@ class socioeconomico_atleta extends conexion{
 
 						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
 							
-						return  $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
+						return 'Modificado Correctamente';
+						
 					} catch(Exception $e) {
 						return $e->getMessage();
 					}
@@ -287,7 +288,11 @@ class socioeconomico_atleta extends conexion{
 
 		try{ 
 
-			$resultado = $co->prepare("SELECT 
+			$valor = $this->permisos($rol_usuario); //rol del usuario
+			$datos = array();
+			if ($valor[0]=="true") {
+
+				$stmt = $co->prepare("SELECT 
                 b.id, 
                 b.cedula, 
                 CONCAT(b.nombre,' ',b.apellido), 
@@ -301,85 +306,52 @@ class socioeconomico_atleta extends conexion{
                 a.telefono_residencial,
 				a.cable 
                 from informacion_socioeconomica as a, atletas as b where a.id_atleta = b.id");
-			$resultado->execute();
 
-			if($resultado){
-
-				$respuesta = '';
-				//ciclo foreach se usa para recorrer los resultados de las consultas
-				foreach($resultado as $r){
-					
-					$valor = $this->permisos($rol_usuario); //rol del usuario
-					if ($valor[0]=="true") {
-						$respuesta = $respuesta."<tr>";
-
-							$respuesta = $respuesta."<td style='display:none'>";
-								$respuesta = $respuesta.$r[0];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[1];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[2];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[3];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[4];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[5];
-							$respuesta = $respuesta."</td>";
-							
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[6];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[7];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[8];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[9];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[10];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[11];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td class='d-flex'>";
-								if ($valor[2]=="true") {
-									$respuesta = $respuesta."<button type='button' class='btn btn-primary mb-1 mr-1' data-toggle='modal' data-target='#modal_gestion' onclick='modalmodificar(this)' id='boton_modificar'><i class='bi bi-pencil-fill'></i></button>";
-								}
-								if ($valor[3]=="true"){
-									$respuesta = $respuesta."<button type='button' class='btn btn-danger mb-1 ' onclick='elimina(this)'><i class='bi bi-x-lg'></i></button>";
-								}
-							$respuesta = $respuesta."</td>";
-
-						$respuesta = $respuesta."</tr>";
-					}
+				$stmt->execute();
+				
+				$resultado = $stmt->fetchAll(PDO::FETCH_NUM);
+				
+				$opciones="";
+	
+				if ($valor[2]=="true") {
+					$opciones = $opciones."<button type='button' class='btn btn-primary mb-1 mr-1' data-toggle='modal' data-target='#modal_gestion' onclick='modalmodificar(this)' id='boton_modificar'><i class='bi bi-pencil-fill'></i></button>";
 				}
+				if ($valor[3]=="true"){
+					$opciones = $opciones."<button type='button' class='btn btn-danger mb-1 ' onclick='elimina(this)'><i class='bi bi-x-lg'></i></button>";
+				}
+
+				foreach($resultado as $fila){
+	
+					$subarray=array();
+					$subarray['id_atleta'] = $fila[0];
+					$subarray['cedula'] = $fila[1];
+					$subarray['nombre'] = $fila[2];
+					$subarray['tipo_vivienda'] = $fila[3];
+					$subarray['zona_vivienda'] = $fila[4];
+					$subarray['habitantes_hogar'] = $fila[5];
+					$subarray['propiedad_vivienda'] = $fila[6];
+					$subarray['internet'] = $fila[7];
+					$subarray['agua'] = $fila[8];
+					$subarray['luz'] = $fila[9];
+					$subarray['telefono_residencial'] = $fila[10];
+					$subarray['cable'] = $fila[11];
+					$subarray['opciones'] = $opciones;
+
+					$datos[] = $subarray;
+				}
+				$json = array(
+					"data" => $datos
+				);
+
 				$accion= "Ha consultado la tabla de Datos Socioeconomicos";
 
 				parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-				return $respuesta;
-			}
-			else {
-				return '';
+
+				return json_encode($json);
+
+
+			}else{
+				return 'No tiene permiso de realizar esta accion';
 			}
 
 		}catch(Exception $e) {
