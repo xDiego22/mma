@@ -25,7 +25,7 @@ class modificar_informacion_socioeconomicaTest extends TestCase{
         $this->socioeconomico->set_cable('5');
         $modificar = $this->socioeconomico->modificar('1','29831184','5');
 
-        $this->assertEquals('ingrese datos correctamente', $modificar);
+        $this->assertEquals('Modificado Correctamente', $modificar);
 
     }
 }

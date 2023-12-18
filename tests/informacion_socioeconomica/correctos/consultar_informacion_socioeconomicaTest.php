@@ -88,7 +88,7 @@ class consultar_informacion_socioeconomicaTest extends TestCase{
     public function testConsultarSocioeconomicoAtleta(){
         $consultar = $this->socioeconomico->consultar('1','29831184','5');
 
-        $this->assertStringStartsWith('<tr>', $consultar);
+        $this->assertJson($consultar);
 
     }
 }

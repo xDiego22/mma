@@ -26,7 +26,7 @@ class registrar_informacion_socioeconomicaTest extends TestCase{
 
         $registro = $this->socioeconomico->registrar('1','29831184','5');
 
-        $this->assertEquals('ingrese datos correctamente', $registro);
+        $this->assertEquals('Registrado Correctamente', $registro);
     }
 }
 

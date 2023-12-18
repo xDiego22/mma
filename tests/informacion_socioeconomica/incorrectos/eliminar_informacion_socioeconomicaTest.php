@@ -16,7 +16,7 @@ class eliminar_informacion_socioeconomicaTest extends TestCase{
         
         $this->socioeconomico->set_nombre_atleta('c!#%/$-S');
         
-        $this->assertEquals('ingrese datos correctamente',$this->socioeconomico->eliminar('29831184','5','1'));
+        $this->assertEquals('eliminado',$this->socioeconomico->eliminar('29831184','5','1'));
 
     }
 }

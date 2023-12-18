@@ -101,7 +101,7 @@ class modificar_informacion_socioeconomicaTest extends TestCase{
         $this->socioeconomico->set_cable('NO POSEE');
         $modificar = $this->socioeconomico->modificar('1','29831184','5');
 
-        $this->assertStringStartsWith('<tr>', $modificar);
+        $this->assertEquals('Modificado Correctamente', $modificar);
 
     }
 }
