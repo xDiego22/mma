@@ -183,7 +183,21 @@ class resultados_eventos extends conexion{
 
 		try{
 
-			$resultado = $co->prepare("SELECT DISTINCT eventos.nombre,eventos.id,resultados.atleta1 as nombre1,resultados.atleta2 as nombre2, resultados.ronda, resultados.forma_ganar, resultados.atleta1, resultados.atleta2, resultados.id from resultados ,eventos, inscripcion_evento where eventos.id = resultados.id_evento");
+			$resultado = $co->prepare("SELECT DISTINCT
+			eventos.nombre,
+			eventos.id,
+			a1.nombre AS nombre1,
+			a2.nombre AS nombre2,
+			resultados.ronda,
+			resultados.forma_ganar,
+			resultados.atleta1,
+			resultados.atleta2,
+			resultados.id
+			FROM resultados
+			JOIN eventos ON eventos.id = resultados.id_evento
+			LEFT JOIN inscripcion_evento a1 ON resultados.atleta1 = a1.id
+			LEFT JOIN inscripcion_evento a2 ON resultados.atleta2 = a2.id;");
+			
 			$resultado->execute();
    
 			if($resultado){
@@ -473,16 +487,30 @@ class resultados_eventos extends conexion{
 	/* ---- APP ---- */
 	public function resultadosApp(){
 		try{
-			if(!$this->validarTokenApp()){
+			/*if(!$this->validarTokenApp()){
 				Flight::halt(403,json_encode([
 					'error' => 'Unauthorized',
 					'status' => 'error'
 				]));
-			}
+			}*/
+			
 			$db = $this->conecta();
 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			
-			$query = "SELECT DISTINCT eventos.nombre, eventos.id, resultados.atleta1 as nombre1, resultados.atleta2 as nombre2, resultados.ronda, resultados.forma_ganar, resultados.atleta1, resultados.atleta2, resultados.id FROM resultados, eventos, inscripcion_evento WHERE eventos.id = resultados.id_evento";
+			$query = "SELECT DISTINCT
+			eventos.nombre,
+			eventos.id,
+			a1.nombre AS nombre1,
+			a2.nombre AS nombre2,
+			resultados.ronda,
+			resultados.forma_ganar,
+			resultados.atleta1,
+			resultados.atleta2,
+			resultados.id
+			FROM resultados
+			JOIN eventos ON eventos.id = resultados.id_evento
+			LEFT JOIN inscripcion_evento a1 ON resultados.atleta1 = a1.id
+			LEFT JOIN inscripcion_evento a2 ON resultados.atleta2 = a2.id;";
 
 			$stmt = $db->prepare($query);
 			$stmt->execute();
