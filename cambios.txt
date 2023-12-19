@@ -158,3 +158,5 @@ se corrijen pruebas unitarias de atletas, clubes, eventos, usuarios, roles_permi
 # se elimina campo responsable de tabla eventos ya que no se usa y causa problemas de registro
 
 se instala sweetalert js en carpeta js
+
+solución a error: resultado_eventos modelo consulta corregida para que muestre nombre de ambos atletas correctamente 
