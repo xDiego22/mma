@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-12-2023 a las 21:08:25
+-- Tiempo de generación: 19-12-2023 a las 19:55:25
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -82,15 +82,6 @@ CREATE TABLE `bitacora_usuario` (
   `hora_registro` time NOT NULL COMMENT 'hora que realizo accion el usuario',
   `accion_realizada` text NOT NULL COMMENT 'accion que realizo el usuario'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `bitacora_usuario`
---
-
-INSERT INTO `bitacora_usuario` (`id`, `cedula_usuario`, `id_modulo`, `fecha_registro`, `hora_registro`, `accion_realizada`) VALUES
-(1, 29831184, 7, '2023-12-17', '16:06:42', 'E0gehGo5p/oh3m8EqcFjXoMIJ5oSZN+sYQtu/zAIRM4pjm/BHyZRS80ittZU9Gp1bZmxJ56FxgRVfVLs2ETLRJHL7Z9h1LFbMPFQRmRzGW7B5JT9Bu9pH4wIUk4QSuGNBpuAyr70dWvmaKJ9sJ07jf4/gTEP5HI8ZhX76DykknYCVXsm4jVwHtgrCl0BxwTUY8zDapY2CE/AyBtSS5oF2dgNKH7OdjL5Syw7Q7F+hrm8TPCISNc1GeBieNzK9uZp+16dFFQKblpqNG6C/SM5ktgEuXl/xTQwBTv+WWo4rVd1Sp3J1isiw9QAmslZOwDW8vlSf62ObUOX7nZ24GSGDQ=='),
-(2, 29831184, 7, '2023-12-17', '16:07:14', 'XYP66wZkSIwrln1kclsKCuSZTOzQzoxtYS7KPCf0LvWFezHBi07EvMZaMGYjIrkmx1gIQTmHLiXjHJB200shP99kLGA1ZPuokyjeP6U7h9Gw/uz0vH8uvreZYOjrdEzI3Qsj7GrUwrV5iMQKxPg3J2Vk5SzGiFPY2qRIkVS5GUCqvQ4OJB02fMyXaMhp/ynOCpoDOY47P6Sp6di9zy3rYDbtZH7bhPUT6ZCNxueSbTXYnpCUZoR1eEzH+6FP7x6yTPneQe4Vcl8mYk+Y6yhjAQ4sWFgDAk+ISvw81csOJgU5NMEbOC5HMneKw1UgT7tq1UVyBeNz7iVRriqbUO1X5g=='),
-(3, 29831184, 7, '2023-12-17', '16:07:14', 'SO7SwBV7L/edWucjkV548v87jmJdCfDgCTNenTIxi793ByGUC1AL/8wWjFRkvc38JrnwfGphp45v+QP8OajCTHcQxN4NsG19Q7temP7/2m0nbTzw3f+OsWBO3hhY+LU2iYqKe50StY0p7tAsDQ2SR/SOprD/kPwXDXrJDoNqp7HCWlDUw+d9fhXs9jQX1ZuRQLo2qll/CVgvAHIoTXspDZlzen4KzqICVM4Yjr6OGpsx2/aTLy4thPyIA0EprZy0oS1vI+3jXkw8Beh2d18UF74mG56o7DVLBDzsBZFJp1b8ZAf9RZGVjTkFQCtvwpEDQjzxpBs2hvehlInmfm/tMQ==');
 
 -- --------------------------------------------------------
 
@@ -203,7 +194,7 @@ INSERT INTO `informacion_medica` (`id`, `id_atleta`, `medicamento`, `enfermedad`
 (10, 28, 'Hierro', 'WV5wZVqrTaP8qfj04YBdLTYAZpEVnAINuAXUHwgICdLGuK//19RE5LeE8jhBm5my3i+BUFmk98PpoErlcxcV9lSPKsOqbFJ3lfjM76WXjjp9MQhjkuCJO0vM4BQj19yMdaTN3DsPgfP5iDDp/OdIqSdDTjq+YK/Yn3otrRwrJi8uhDoGuR8Y9KYczdH7lUNIAkceIMl9zEDXjhKIMFE46HEKDGakeEAj+VBj0qyuREFD3kwUyxLX/ia+wUrY1S6O9im8BBUDksbmKMI6wNHLC+LVZZQUjZMlyu/fagmoeiW1vIIdUrURxDaEK+Hm8G1TpsQvdz2e8fc3ek7+kGJP1w==', 'l0yiVTujbF9SefkpJre7GhzpVdPpshhWzKZ7SHMjeV81N/IZJarCsJE5ZeAn74sB+Q5c9PNeDj3LfeCNYLKrNX9W2Fx+fp8dNTOPc8WByRAsxVaAhpoPcPqoHTD7wwQGRUZkRJSKRhfusGs95XX2jNPE3EvPHWzXLi29FVhug6uqkVX0eXZy65Sn0StHIO2XhaaixvjXRGxcRpz/XEZ6Wv2o6RZZjAtomjStCQwKb1t3l3UvK1YAfu3nXn2VS9touWtPV9WQxstUI8WeSX/EfR5FRTmclFP1iplY6YcRaySCyfU399QzdaASaO8WjpU5EUbOJmfl9ttHfCV6A26H3g==', 'Proteina', 'RXsnuhxUWkLeYUxJmIi3GeP03Xk7fDKUj9Wnc6maAVvINjTGIicHxbVMrlvO/TjT3BJk2ZLFSQln/ItepxsIWachP8OtaeVcN5UbY3cL0FZ9jp8C811EZOSEFKKenM54k9P0KFbcjdyyF6fyierualPZVWS7v017N8sgs+VBbw6Qe5q3WfEEvphlss2WFf2TSJsliqDCU98WjsbVedL6kDRos8RUmIGPpcRtJXDdoWEU4kcUNlx3m1fK258SO5uzn5ynQRJrll6tqsdLzvwtxCEOT1cy2aE/E4V2XeKUkpPW5kWBThvfiqm1ITP2jK0cR8jvRpiNWpdBP0NGQmaNHw==', 'Ruangel cuello', '02514477665', 'Hermano'),
 (11, 29, 'Cloritomazol', 'YKau5ADyseVbj0cTdoXUb7T5Feis6B3dCgDxiyfpo+yctQrIDZerqvHNwgVwz+h1k7tAmm054UnUy3qVQlXyo00O5F0aoX9RU5P1bvSSJ2/TB97bne32H2cUcJuTlXSD0ubY9liy1qLse+oZ+5XSbnlWMevvXebZeOnNL5MREXJ2Np3orFdn3zQIvhNMfGYyR1O58OTIvO6zOBA3abnutzbpOhWhq2Te20FPzW8c8I3q9+q9WobgDWpFabyYgB2584t9K4HF1O4659g0KlZnHIRQVUfoKXPywI3aQBloNISHo0tz+Ix+HzpRhoqq5JE0wSn/v3glAb+kzB86I9G4LA==', 'hfcecg4PqC/+BiwdQW3sqS1lK1ZJLi0kmULIeSOJee0lLlPM/m1oTpmPZzc0uq4yWW0M6O9DxUv3mjr9E/RIcmxWKAvhrNnKFca9eYIpf8CWmFOonCtFbJezPvzEh9OptKCXq1/Lzk0DeBoAc0m32iouYtLxkCFX3pLbEoAc+IFW75RWZ4+j7T+JVvm7LXVjv3BJANZuwOBUTp4lDacY8xOS7TybrSCTjF4pmO7FaVBemdHhmBsWnQqQZDdTD2QKY89PrmjiMkfAyZj4Kycrjol36t9MU38gPmrq/xNkkkp/1rja91BadWRyUHO9QynG2hhn1Wk2pViOsh+NjMK3IQ==', 'ninguno', 'D19dxdTUg2/Gg1S+XyLL0sv/PusasG+eK6AxMyeiGQR0EGkgcUHcSmGPaHXPb9st7c/WkS2eL8gR537Xk5Q4wimGp7HzSLmNl6OiUuURPJkFoxE8D8YJnSfQ8tpobkYgSqq65mTBLm3/Qe023NxOtJc10xRPW3kgmVEzgefF8COWNJ59ByETQPblrhDIvzNzv+D6m1vRfw8+p+W0cEm+YFxgCMMubyP+TyBEkb3LI97yuZLaEs/WOwp/mhyZzWGD3bqYF52MO0o7GYoDb+bn6B8GLI1nDE2GMjagHYFniNN3nLTjyOC9DNVvoSaD/UTq9SwF7vYFQIFtgHg/AbYC5w==', 'Ruander', '04245673490', 'Hermano'),
 (12, 30, 'ninguno', 'oSJkSJ0pmGgTT1u9dlQREKsOT4WE1T/P9Xc5kUQCN4f5gSODy87r/nKHvFVVUnqqPOwDS+zb0zSOwQJEvNHF7zaaEtYSAPH/HJoNqpjlEyZv0Eo2WsIDljrUx/55H3CbzocjlxBnLSQmpFg06gweYm3CBqw7vmTN926aGjFFP4dELdtSjYMqEc4tSedC6m478KOOWgteNiBjDl4xpegv9Z97MnH1+1/OyLPPPi1b2owdh2rhHnhKS6jVf0fFIZdCajG1OMc5WvDzenJkDfcl5nCymdPN/XpHKbiPK//D+PqvYOe1YEhLzdx2jWzvgFeJMH5lLFZArVg2lEX46Q5W3g==', 'ix048V5RqMaWjUQmI1IAbpwLY9ypax0W/f9Aa+sBmRGdQnSm6TuGKteLORdAJfEulg7GpL/vzvr7cnnVBc6BB0NMqZ1TZfx5lP/oyjP96N/O7hr57ePNXwVAQ6J1Nik1V0H9HTfNkyy8653I/3MYbasNTDphmclbcymgGHO5vr5Q/l734icGjUaXAolAZrHDiHn4ShDj9uinXy8QDjx5HIZWStqVsm7U8XY7BcLC8Aq4GTN2q8dBdMzStxvccoB2GQgwZZH1ttkSqSWAkFmTSEeDOKk+7ITpnZLyzIAuQTl+zoINT+6aPnUPIdFUw0pMouigV/Y4KDKLIqAoah56gg==', 'Sueros', 'XDdBQd+uiK+ivg7HHeXGlEPCrIJX8ocf4EBs6l1H3bKc9sGvvLeDeT82o+0iKrtKbZE0KuAUrZvYhP/UFtaoPl2z4UoemjEx8exIDmciNLbEcS8f4gCxrnOXgdQGt1OwJ+Ni4liwMSPMYn9LiHEqFWrMga5d+EMp4LC4l4QRi3hS5tkYBnSmmhFA4wafoOG8oxmLv5me9yWlSSf8SZu1/AlGgXSvs+zaihEDpW6kNXqZ06lXzH3028gnfEs0ytd+7ncJv+dN5n0NZfVYXzf7gJUB3bFuj09qLtEiwVsfTvVwGYslCQHx/1u4ZTsizZamKZ3bXldLw7qr9dJ5lmU6+A==', 'Carlos gomeaz', '04245678432', 'Entrenador'),
-(13, 36, 'Ninguno', 'hkxJuby9P/UXwuNnSh4lZFsKYLj+FlFB9kUHlNx3eKogg8vt65D9b6wuyLQNcGu9+DUNw4qHXtB1MfKYbsujKLnky+lH6feihaEs0fJONGF/Hl1jpcUd0NI4k1zoQxomDF2c5i2+unNrLhCEU1lwZbUMDsZ/uZZKeD6kFELAzUEUBA/RaZ9KRT245/+cpjrIi83GZa1LsOIspvIkEHMmFKMX8GwfYNylwUgCiQQLFBO+b4/fdC96ktcYO6jVkgqNtqgX9ooHAwoCP+c7/rRpoitO1NmCUQT8xIYupUsG0E1iYN03ZKwnRa881ywqRS5OiU32BrdLTf9cWYVY/shFCw==', 'T0bPrWARXrroU+h0xFlA64kMefIxt/PgrW4jrU3rdOp7k5aL+yuwxWbEuvpKl4p2QwQtHWlYhtzSQ3Ydzjei9u8jAyk30QpblIOkWymooIXJhs/+v7EHfysEw6+IwIyIjutzOMokK8ARikE1/YR+Hocrdx4cMdy32M3rRJeRCJCG2cDAkAnbqPcBVdGF+2g6C6yaTiYgluwPTFXwmw9Z5lkh8ojAwmtCgVPJis1NO/gkcG9y3Wfb26Vk8zsFc1G+ZoDxp/hHfcVwR1RaP3svAVPSTE9Uq7ralUFqPPUJzDVa5DPgwdmILaIIAENNCGgX/jSsdYBXbqYwLT8AA8HixQ==', 'Vitaminas', 'X0fhdNa4mQV3NBNJzAwuT6ySqapvuE4+ytXURP9GNGbsrpJxSGx6dy+GKsb6baHp8ecxNKjiOX7JSHuniDFqbkTlWpT2Uv7HTJfId0aM6+TVmgg6nw5+iqb6aPJLiBOXgBoPxIOLS4aSJS3h4DVddaC6epLLkjmVqI3LUpeg5KInjTttdfuR+mLT3yjo34ZFPM0sCg0bpyeJ/RvrYKMWIGwmW4PIhmj9zLKCtnxHZhfj0QBLz84xh8kBmRqtZODqDvdkUFPcyW337fxpa3ZGlQnqbK3OsmSYu8/MZ7CdpKpA3rLYD0Gz5ZHNKC/EQJaaWGD3QjvBrB6BsfjMncTBtw==', 'Ricardo', '04245678954', 'Padre'),
+(13, 36, 'Ninguna', 'bHKUQAmFTGl/v7nJyqcys6UG8/lu8gpOb+7m9SJrt1BiSGMEv2+deVbe6hZlM27YhTJGeTwPaBDnIr9anFmbfhuZ0RpgUkwoKTulc6RCyMckKLJ8O3zsq95G568WeFXFZMgKsK1UaTLG9ntxsjaZgtPQeHagFvA9opMbD55ZG90ylZ6kAAYSnlXrFtwv3Vlz6JATWBOmSFjvZilGPYHqa/RUI+okFukVAbkly2WFIKOeH48m8lHc7M623gJcMQsrVESnAHeSBEWzSRQwe9JLkXci6Y1AKvzxEWxO9P9yxQAEvRqy5hk1ctqvymGkC+vnIRirtYAyeUh4IU9mSrcehw==', 'AyKU0D3POOGA+tFzCwFqKl6y6EyNqNMtpBSef07wswKv5kC+IUCuOnlnW9UqiEpJe+T+Hg4KUq3woLoWH6BmHE5LDSXnXrXB7QhjysSHPBPl7VQQwMeIbsWBij20covH+T/+psUfCfjd1I+7whLI6L/7bxboIJzKBnIWTmC69L/A5jdZ9TZj2bmZpnf+7zUFRW5ZdlaavUT/q6R3fb7eEWPHtI9iAeLMTv8TVchQV4PvtqcHqdR5iUtyE7ztMiXTzRxuURlB794CWp3d9Qb5ScswY8nbdjL24rcVPZauCgtvy8jpe4TTbheNmmDofLkBUrvEl1bqftiyBVIU33PyMQ==', 'Vitaminas', 'cmXy9L1Yk/SRQt3xPJ5mhONlcbxreFt41W2x36wL9P4reS0Boi8POyCr9P0tepRd0wiiTQ5rvmLiuCWIO8VhQUmt/AVlbaicwpwBFq/c4hFPokkyciErWeUje9AkwYSVK/MqhvQthFmf/VDTMs4SNA7GVd5No71Pcs6eEWEqx5YoCfDSLYntGtCDhPJKEIjKYmulEP1KE55C+8tt8JE8AsAvjIEL5C1w8my4t7MUI/Iy/FaFpNQi6WM2P/ezGZ51WboWBZb3Xy8XEalpPjG2gyiVWe9d/8tyeHmChhpyFIxcA+t2VB0Xb2uRQmm25rn9MIQpMDll1YlX0beZoYP42w==', 'Ricardo', '04245678954', 'Padre'),
 (14, 33, 'Clorazepan', 'pcCcpM5ED204Jcqlmv5o96iOsH/cw9BuHF642bLU+AQdIY0gECgi7BuRLrXgrLCKp1eEo9tePUtT/qU/6+iV0Y3nhTnD2kviV8qUcOQ7/wnCYR99Jf+wT4paIFByJmxfL6b572DIt4Om0ZDsocbbYoWeZXc3S88Jbj5ymmUbFcAuq4loCU5Ffoy51UwFWvRxLbY1q8+bp9tL+g7IuGQrGQFvwKE5RPZdbLatXQk39Z5wZGiZdxhwWKJcpEwOfVUQ5K3B8nlkhcQLWGLkNMFaCfYaPNrs49p5sRvSCF7uXVaUOaN2610+J9z1s86x7ez7e+DUlBRAHe2cfkEeKIaYyw==', 'a6SOg6g9KH4caog5X4So//jSIxKP7fsxT5GHuT8oDJj4svlw7eoRe3SC3KaW2ORaB4GTptaA2xW2KehVNMnJskFOrT0UElF/3tKME0h8/YL42QbS6dhIgdcwhL3yjCM6nzilnZJAj2JI3C810/0g+Tpez5pp4SH+9Chw7FkbEz+CYfneIKETRSXF6TqYOxLp6YSxKOwIFxCn+Ohn7HFKSPGEmqZ52P7QTKXGhkyOChWb80rszXAq+u3sm74VbqGUn2qjMb1oneuLfidSx1aUjJ+oem67wxhko0o0qKGdofclF0AdOp3eyIpvRQdc610nQ7Sw8qnMFJJYjOsfkuJXbw==', 'alto en calorias', 'Q21F3Kc4TJg4TGnQOsvZlTIHuPgREcG7vdbJcEnu9BCMC/nVdzZeV/RZFRtqi4fmMqUh2FLElHjwzxcQnw6qfBe9UfMvn+Y42eSpUUVmTDSP0Myd7xWU57X4nadgDCzKszKqwTRaGv9LsGizaad8xTcs4KQ0ke5d2cdiCuekqrsmW0BAPP57r02GxfXUhwxgz/uabyB9uHOaxPvSrobU5TRoyk79xsdjUNAvANpYzyxdnxGgToqy3ZKUQwMC85nfAiQT/RXAR6YE7tllooaTYu3jOjdy1KQGRDyAsjPG+MDu+iMbYRsGR5AWOH5lLVS0MVcw/QwTf6yPkFWxEESlvg==', 'Mia ruiz', '04123438238', 'Madre'),
 (15, 42, 'Diclofena', 'Jo0tV0/WBsOhaL/qc/zLQYjPPN+TxgN3XEyoECXznUA2L9jmYpS6FpAS0vOzR93UeYd0G19AR6IAIAMOL9EMGieLfjGJsII4/UH3kykPMuLciArAfeO0vJlu+ocL7M/7f/wm7Hbh1ILbBZB78kAduOfcy/IEmrEnknb92dHiDhd8EM/sRaGWa/JEr0maNaDtLJRfhvftuN87w/iBQ1nuQ4E5gRdsnFVCTvJ1A6K+dzsKiDSU6eOaDWwtIDeyYkyCwrXTRmSYeSUBuglPwocXyIvsgOT1aLkJWwR5U/t+HeCMnN++XPAcsV0KOhrThD9kZzNDYT6W3GLe/AfEuLa4IQ==', 'GwKvF5uLPlY/d3sQB4WXjdTZa/OCowIOfVLOvlJfvj98KG04LTCQTQhkZ9b/OvbPxwEZmo0PL3O+fOp3jam7QVIA4Lxfm/UDj5uk5r7C+Dyn91fp1WVGeIh9R2PHEcDz7K9WPLetQxkgpNW17kQ6Tifgkv/pdynLysSIkJR9VIgnHq6pgsaQA63QvdgrIkPlgcTZa+dgQZOcvvQcw4onaFg81VsPObAB703I1T0LYAN7NlE921J+SuOSAKZr5KngAEks/1O3uy2X6vXsEQ9CTsk9OXPVRV/ZHFgt4F1c5KdL4B22oXWiS/9fbFLUeEvWhSkpPlGL6mZTpDTu940fPg==', 'ninguno', 'GWMVXIYePcCUg4Leo9OG/M2e27u6QAp64JnNTtXDkGqN/tamgzrX4LsOrPtEmxv0atFgiS2zCxLPAgu6jIcjpVVWyCDDTxW6poKBDJRUQHbywjzGZxElqQrCxyxssphzWl7OD+o4Ql+v1eYFcP+6lNVA9elFnYjofLM/oa0r2LRb14LrqVQkBB5MVnOaOm9jrHi4U1Zx3QPR1JMmt1MyED4g+bd7OGbm1Dw+hxYkRpKXn4ZP0p8YRh+FbCcQUrq7Es+mwStg+bXsm8bNawES523wc2CisF18hBfkXgiZRFsmDcSXQryKNgEPwwoOUx24GIVw+Q5BXVyVlPP+6yBu9Q==', 'Maria', '04134546503', 'Madre'),
 (16, 38, 'niguno', 'fHJA/dcZUm1tWjF6XD5CqG9hUB4shJ6O70WWawd3n0qhA+w+QnDsR7WAo9YV3r5EBpn6CMS3whi8J1OysHAq8vtt1jAIEqyHN7PZ5+cK6Qa3boWxE386N+u6WO3ucEn2EjAe8cSKHv997Ej9R0t1E6dh4XmbRP9BVsfJIRjRxpEBPaoProx6fkvBCEYdFiiuNAKn22sv8a8sXmvKErEQjaDuCMM+WLqtH3dlbM7cK/QugbEsuHnkpjqWd4YXZfIg4ydH8aQdZOmhg1cssdg9m2jPTbd4+31vMTFTooRF8YADXjVyv47iNeAlb0o9X5OZNXZFMbwtKqm/3bvwqjcWew==', 'ijYFS8tfXkMjjk1SKBw7lBZ8zLS0pyGKMw4qLE/d3/KWyvFoxU87mSUQcapRd+1VmuwJSS1gyPkyKWszP6Y6qRnypWSOssnT6vA3NwM++jLtBIwr4KYMbbRGv2Q7cjLK+BafKipFEKlaQfo5QM5w23HIrn6h7KEH+H0d8qCnW3Qe1wsWOhhOyMfUb8kdxdUPBcB7F7V/M9vMps2AVNaaS1sWPVlRRdKe0Q91OBk85ncM4WCSjhklf1ZXEWpBcqPyVScg7ixPU0BjZLDoelPHdo4RXvtReFJYUSM0EUFMi0yib7fUdcs4sQVc6jFq0Bv3Bbo7AXRvUXe6ih+hEJW06g==', 'bajo en grasas', 'Wy7RchQwEi386c6N1JyE34J+MB1bfdgHOy5njLI0nO23GF405JncRWjEssMhY0iVKGTgjWXd9CU0BVQdvEVrHGR20tVIhXiNBNARcnIxOIorDIHiKBleP/w9YpsQ8H5hAUy4JAdrdmMDjpCI3xojHJeNmgaXIweSvWSeDuraj0aK3g5JsTJC17+eYjfDojNSoSJmFfzntFx5MsMPV01RFv59Xjkesk06KnMevuyxYr0Vv6hT61GpF+I/eoFlfWamNAq/yTtLzTIQWrdrWbBj1sh/V3iV3GnJNqrxmmtZ5gGyrYWvAUF7qpUEEnUuQ7nKc7heeD0xFFEfHftnu4AZTw==', 'Roberto', '04145623456', 'Padre');
@@ -235,15 +226,15 @@ CREATE TABLE `informacion_socioeconomica` (
 INSERT INTO `informacion_socioeconomica` (`id`, `id_atleta`, `tipo_vivienda`, `zona_vivienda`, `habitantes_hogar`, `internet`, `luz`, `agua`, `telefono_residencial`, `cable`, `propiedad_vivienda`) VALUES
 (1, 3, 'Casa', 'Rural', '4', 'POSEE', 'POSEE', 'POSEE', 'NO POSEE', 'POSEE', 'Propia'),
 (10, 37, 'Departamento', 'Rural', '2', 'POSEE', 'POSEE', 'POSEE', 'POSEE', 'POSEE', 'Propia'),
-(11, 36, 'Casa', 'Urbana', '1', 'POSEE', 'POSEE', 'POSEE', 'NO POSEE', 'NO POSEE', 'Alquilada'),
 (12, 32, 'Apartamento', 'Rural', '4', 'NO POSEE', 'POSEE', 'POSEE', 'NO POSEE', 'NO POSEE', 'Alquilada'),
-(13, 30, 'Casa', 'Rural', '1', 'NO POSEE', 'NO POSEE', 'POSEE', 'NO POSEE', 'NO POSEE', 'Alquilada'),
+(13, 30, 'Casa', 'Rural', '1', 'NO POSEE', 'NO POSEE', 'POSEE', 'NO POSEE', 'POSEE', 'Alquilada'),
 (14, 35, 'Departamento', 'Urbana', '2', 'NO POSEE', 'NO POSEE', 'POSEE', 'NO POSEE', 'NO POSEE', 'Otro'),
 (15, 28, 'Departamento', 'Rural', '7', 'POSEE', 'POSEE', 'POSEE', 'POSEE', 'POSEE', 'Propia'),
 (16, 42, 'Departamento', 'Urbana', '3', 'NO POSEE', 'NO POSEE', 'POSEE', 'NO POSEE', 'NO POSEE', 'Propia'),
 (17, 41, 'Casa', 'Rural', '1', 'POSEE', 'POSEE', 'NO POSEE', 'NO POSEE', 'POSEE', 'Propia'),
 (18, 40, 'Casa', 'Urbana', '6', 'POSEE', 'POSEE', 'POSEE', 'NO POSEE', 'NO POSEE', 'Propia'),
-(19, 39, 'Casa', 'Rural', '3', 'POSEE', 'POSEE', 'POSEE', 'POSEE', 'POSEE', 'Propia');
+(19, 39, 'Casa', 'Rural', '3', 'POSEE', 'POSEE', 'POSEE', 'POSEE', 'POSEE', 'Propia'),
+(20, 36, 'Casa', 'Urbana', '1', 'POSEE', 'POSEE', 'POSEE', 'NO POSEE', 'NO POSEE', 'Alquilada');
 
 -- --------------------------------------------------------
 
@@ -402,10 +393,10 @@ INSERT INTO `personal` (`id`, `id_club`, `cedula`, `nombre`, `apellido`, `telefo
 (10, 88, '15432785', 'Luisa Maria', 'Perez Rangel', '04167589012', 'Secretaria', 'a4P3SOJNXuPXv/aJQGpLfVOfZRGOi7ehiZh49XlQPi9xjrT9Q1k62eVm6U8wf3NBrleqepPxMwMcY2GAVFsy7imIccKfDnLAia/T+LjFdwsb6LrSuqDnqte+F8+07d74lf7/7m2KudSMIUjk2m6TTiMzI8pRep3MsuJF/BDfvMxz24LlBkkh3NC7Nl2al7KbEyzix8th5fWvJLQlsVynTi9uEE1vRc0UrnTvWQIb/ZlIgeEsGmn8/bVKkNkVWPH557XZnyN/IIuljHUYmgSgB5B+2ZZqnhuNvHW5tZeXRtYthQ76EhDYlnv2vMIZcO3+XsIjqDIo5BYEylyG63Z0og=='),
 (11, 87, '7659325', 'Raul Marcos', 'Guimenez Lopez', '04260568894', 'Entrenador', 'bFb/YkCflLTcqogrA/e4ImEaJtWedMBtsDnw5IleO4sXyYcbO+bTPS0cEchyVq6glgOFSgjTrlkj/kD1tEl2eJJciXKxd1dmnq0y9D+vtt05voyoQ7BR/riK0iP/fHBH8BlctBOLoIaYmfCYLtueGWcxJEL179TA7caxcPG82yDX685nHF153VQadk3QDYHU7kQ+o1Uk2qb71RGEfDRj1yD7a7JIJM3g+Crju03V9mHwE/ZufhGf6qytdlhbs6koVjBJ74RM0himnQOGZkBa0LhDhP8bu2IXFXcuysKYcNK5fw2hwnJMF37AW5vUDrmztGfSMEYCyqcT/4LejUzZJA=='),
 (12, 19, '7945745', 'Evanyhelis Sofia', 'Gonzales Lopez', '04145381436', 'Administrador', 'HkpqnSfW7DBF40rP8BKozqZdD0mL6v7WfFCuiQe9bcKFE9xggVZMMvSV/EeJKuyu+t8XcqMlr7wvZ1B5jVcq/LOYohnN3maMLPDf4doy+cjja1zj2GjmnFvobZM3FZRljmYhsVHIzr9b95k8WZ12gLDO4YSkSBELCx26Y0C/iO8nOxJ60TvpjaC3de4fKjfDBdEVrv2JYX9Rl/v+iGeGraHyL+p+zhTS9a2iDZxYydpgO0fC2z61ukpZVMmQGZGrduFykrzqbjiaYPqcKEOb5ruS0nOQVAOgy1xkWzyRNUdpZc1WX417NX/LvNk51Nf3+CZ25heoNhWOOXPME+iX8Q=='),
-(13, 18, '28463265', 'Carlos gomez', 'Suarez', '04123468999', 'Entrenador', 'nxEDOtfAfqrHXUfbwoVuZQhD1rqqCmWVtF4wes3jD0QkAHl/2pfmG6+BuiAVL5829Du/npYB5ciItBrs6RZY6fqHVoZud6mUmz2B+iF6EHNT9Xev3uUMvL9fsHBWRGfDf3VFKlZSkPhdztfDwhLED1EiJd4KjH1Dgs4Wi9P7T4vgbCY5Ky1U6A+dvMkYpTKEwsoD4qJz8E8q4xTKlCWO90VnF/JZ2/yx2CaHjGP+F/3EpCSfOBmhI0jEFzbi54foCakb/BA9v0ZzWCpUnNPAG060qerreId+Y2F1O1bnwGbBomojjSu2scAUxbzwqrewV5ADkMP3QRMgEQ6EWur4JQ=='),
-(14, 19, '7403322', 'Mireya', 'peña', '02514476519', 'Secretaria', 'Qo/ACNPCj5ZAfgLmNHGE6BUbSGwXV6D5nCZw95/rlFYBgEO/VDR/pIXMpx5tD1Ltcssc4rRO02o1MyDJJ5slCXJN7PnPw39of2b7TQg2xzxzhcTIDaLM4KK1tkRtKa2gSCbSuBrPKxk0sGR71cchVY3ZrYEPp0EmbpD541cvLrcu1F457HzB6CJPUVDK3Odvw+fBIUbWwpHZcWuwwUfxjHFTO0PPxqOjtxhTR7NIOISZGSAWsJaK/EWHE3KWSIDBM6NZRMGHgyJuUO0E7wdm0nmp7zOafwsOPY4ndApZaSsuYCNe7aZXMZ6R54Au81a9hrrzLAf2u3bb/Df8O+hrvA=='),
+(13, 18, '28463265', 'Carlos gomez', 'Suarez', '04123468999', 'Entrenador', 'fIkeABDag7I2TdtIVa0rBm9qIlUgLNFyEijSmQpQTyTOTTRybWlSG6xHI+RKTYZs+AQnADjD/wnHdA73kz5d0IeptN4hM+qj35mqksjbvf636/wIsJXPB4O9ZPWob7coqJ9NTvqp1I/3WyT8XFNh7DFvcotI7VQVwY6SFzhp1XAEk/TwrN9jvGL+qskp9fGw1D0/FUqOQsMoH8f3dMIFrqJaRahfFOUNXkUe2e19KzirRSsR2QYaSK6fiPhTQ8VoTEbdGyQcWR/TmcdcKkD/n9Yef2P5zGjDvh2+oQJFQmToY7oklKFCVxpYZVD33TAXi1tG8YVtlRQD0d3tvu2iSQ=='),
+(14, 19, '7403322', 'Mireya', 'peña', '02514476519', 'Secretaria', 'oL71Md21EG0hh0KnC82nSFYlfOGlhQQ5gRHx5sqjAezBgCv2vQI3uX3PEcDOWk5hAe7kgKawIw99pqzSgEBfpmIwbHTZKv73BlMW/8l+a9t7aPfc/zHpYn9niZC48LXHKdrIKBtdrY2w50Uof5HaXXm/AnUHfr0jFfyqeEvtopRB+tiVnD9HvE9rWFAGBm23bRJf62uYgsKSQ/6GFxt96pZVnApw3zbUIexky7alc3l88t/KQWceJhcvsgVGfk5zMb2SIF7e8wRAcrHxeO96nzffwblyVgsYNld5GngH5GZnmFD1CaVjPr88WusEjV6sGmzVMQ8hyR+U+JqYbVJKkQ=='),
 (15, 87, '8543336', 'Vanesa', 'verde', '04145678934', 'Secretaria', 'gpDSIgpXCfKkOtqev01gofTZ0BYDnjck0qqwmvvwG9REqWzh66XTK5mMKiZDZjmMTzGZ+U4StXffOJ6AnUYqA5t5CEduru7HufU3uij6w/mXwVgdUqedbGvc4KruXeOq5ggADOhKTZjhxnjkU7f1FHDv2oD3XefjTrg8C9Qno9hIeJ8h7DXnI444AZCBJx5OyDY56kbdxkHRbzD+W1Z/2GQCxwwz/tie6w+/Aq1RbkfJNm+qgTNn1/r5FFER48LaKUtcGFzs5lXRmQz8xc/S0LzK0t51oij+cAJ0WxCkELNcVHDcmppaT5dj09To6iwmAw2z3FEu1CB752AlLHLCZg=='),
-(16, 88, '17034388', 'Carmen', 'rojas', '04246784566', 'Secretaria', 'el1Tq9BlcdmTOxFfRDE3AIB9umcvwqXtG65sKi9vQTyCDFbPyPDOYhU196Jk/W4+bPrWsDdwpx1OUIhHyin06iAB/EvbGYG1Cb98xjsbwdIPw1InDdJ4hCbVEisISX5x52bFnB6Qkn+hCfeNo9baOkhjvVpKdM/CckPoAz7EHybcbMaMKltEP6BY/DET8Mc6IAYia32NfHw+ZEdjXWMKLV/rd38uv3x3HrQdBVid3Y4fO+XEsAIwrLYN5XOmz6/ocZYfDjyXN4j180HS6neF+blwbTdPMVOtKid6Sb4YA5dt1mbMH8VTZONeXgjY1nf166plEi3LEICpnRFrBO6FHg=='),
+(16, 88, '17034388', 'Carmen', 'rojas', '04246784566', 'Secretaria', 'Qq8RudIdsYtfU977NkD2mdqmybqG3cmKtB9eK62wLW+sgEiIW4+rg5I+1AjyrCJL3n6NpSl5e4PKs2GDqPrVLwSVpwypLbAuS61tGj1AHOHUUpsebet2H/vk0PP8lMnxFVjgZlTBbLd8Bh+WM2XbVuDdFHkS5kcKnf5NJUx5wEg2OJPt050j7/VMIOdzQA3Ea0RNdv2Xp7QaYdovH0mjKBK7xzYOqzNGeWLmnrvYcLgjb0x+LPwFdA8sDPjr2lAdMKdShJqrBhDpG18i9xkWuVZRSYTTZcwIljbq0iNAe78IvUOjiru1UG0/dyUNOta2VfK4P4UJ0TKfDbeDcbQSRA=='),
 (17, 87, '12312311', 'Carlos', 'mujica', '04148658694', 'Administrador', 'N8q5EBiaAsp/Va1ogzZx60y+3jg5b8+xqcgwfP/Cc9c8fSVzM137CbFwcHNp7+NNuduAjdmOIoTyMLeb7WVUEVdEmy1hCn1lwR7UMJ0/SeC9eGgmQ0ugpWknARJxQRfpYHxc1q+Xi7i9T+bB0qIgMT/2d8cMQ8Ptm5uAruXfLzJeG/lJF5XB4Qgazv044TfN63eexNwXR3FqKayH+HKiE+0XIlCsDoLbUx4wZPIL4cG7tiV0BdKUSD7QVZuLFCE5egsreu+r23oTr6DGeOBoJmPf9XAO3s0ZZ00ycr01Cw2ruPJhPKWBH6dOxw0L0NFbQyssonFMrQ1wCVgv536XQw=='),
 (18, 18, '32432533', 'Angel', 'Delgado', '04145696032', 'Entrenador', 'GEu5XbfoRFuYZjXWsdUZog8vB5qdOPPICKC2yp4XDTqd/F7+0g1sPG6ozKwxa7sLA8Wd7BKz1kWTzzseDCJDcVYv4drMbpS4bIJ+25ufVsm/rLARVMZZkJ5yKXl7P5yXTcO6cMYSbpW5JifBsOL/IQcrWTgXJyfXY3W7SgWuBPApcXYPfkeYQDrm8oxaiARX5yx3eIv7XWQt9ETuqg/d4UciDaPMjXqnRLRm/bsvJl7dgViMK7SNyJqSCfVGAJttNQHa2IKnrbPwjLre/8+EnHCMTqOZ1Ot4e5ESwpponoeOtwqdPYW40m1BGMC4vSvmE0+rQpah90/za5GrxtgXcw=='),
 (19, 88, '35236243', 'Cesar', 'verde', '02514478645', 'Administrador', 'sY7j0Wli5WzpPuNzkiG44WOz9wvnrg2/wBsYPSVFZUziM1kF1fXFmq2hMc/reFqJcvT4Yg75clqOv/utjk+/tXPiy8AAtinG7L7yQyf7ir57/nJodtcQMgiUXYcKrP4sYhGmN2QMHa4MqFQHj9RJcG2IPKQXefSsHVyM+oX62o43OTzThB6lG+xLt/Mah3eM1VPqOtmwZzRqgZ4VYGARw/gWbPGVyL4j+XRTSLJsj0kSCiA8xCeOq3kDPZWqnihbvfHPRapYWC0QaIcI+uYkaK1V242Uv0ZR232GHqbgTJW/eizOXiFVBoiEIXv3XDO3ojkxTJ4avG4Q92auMbNhCg=='),
@@ -443,7 +434,7 @@ CREATE TABLE `resultados` (
 --
 
 INSERT INTO `resultados` (`id`, `id_evento`, `atleta1`, `atleta2`, `forma_ganar`, `ronda`) VALUES
-(1, 35, 46, 45, 'rcb', '1');
+(2, 35, 46, 45, 'decision', '1');
 
 -- --------------------------------------------------------
 
@@ -611,19 +602,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `atletas`
 --
 ALTER TABLE `atletas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT de la tabla `bitacora_usuario`
 --
 ALTER TABLE `bitacora_usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `clubes`
 --
 ALTER TABLE `clubes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de tabla clubes', AUTO_INCREMENT=167;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de tabla clubes', AUTO_INCREMENT=168;
 
 --
 -- AUTO_INCREMENT de la tabla `emparejamientos`
@@ -647,19 +638,19 @@ ALTER TABLE `informacion_medica`
 -- AUTO_INCREMENT de la tabla `informacion_socioeconomica`
 --
 ALTER TABLE `informacion_socioeconomica`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `inscripcion_evento`
 --
 ALTER TABLE `inscripcion_evento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT de la tabla `intermediaria`
 --
 ALTER TABLE `intermediaria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT de la tabla `modulos`
@@ -671,19 +662,19 @@ ALTER TABLE `modulos`
 -- AUTO_INCREMENT de la tabla `personal`
 --
 ALTER TABLE `personal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de tabla personal', AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de tabla personal', AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `resultados`
 --
 ALTER TABLE `resultados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Restricciones para tablas volcadas
@@ -718,13 +709,13 @@ ALTER TABLE `eventos`
 -- Filtros para la tabla `informacion_medica`
 --
 ALTER TABLE `informacion_medica`
-  ADD CONSTRAINT `informacion_medica_idfk_1` FOREIGN KEY (`id_atleta`) REFERENCES `atletas` (`id`);
+  ADD CONSTRAINT `informacion_medica_idfk_1` FOREIGN KEY (`id_atleta`) REFERENCES `atletas` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `informacion_socioeconomica`
 --
 ALTER TABLE `informacion_socioeconomica`
-  ADD CONSTRAINT `informacion_socioeconomica_idfk_1` FOREIGN KEY (`id_atleta`) REFERENCES `atletas` (`id`);
+  ADD CONSTRAINT `informacion_socioeconomica_idfk_1` FOREIGN KEY (`id_atleta`) REFERENCES `atletas` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `inscripcion_evento`
