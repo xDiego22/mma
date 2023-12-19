@@ -54,7 +54,7 @@ $(document).ready(function () {
     ],
 
     ordering: false,
-    info: true,
+    info: false,
   });
 
   //control de input para mostrar imagen
@@ -536,40 +536,62 @@ function modalmodificar(fila) {
 }
 
 function elimina(fila) {
-	var linea = $(fila).closest("tr");
-	var cedula = $(linea).find("td:eq(3)");
 
-	var datos = new FormData();
-	datos.append("accion_atletas", "eliminar_atletas");
-	datos.append("cedula_atleta", cedula.text());
-	$.ajax({
-		async: true,
-		url: "", //la pagina a donde se envia por estar en mvc, se omite la ruta ya que siempre estaremos en la misma pagina
-		type: "POST", 
-		contentType: false,
-		data: datos,
-		processData: false,
-		cache: false,
-		success: function (respuesta) {
-		
-			try {
-				if (respuesta == "eliminado") {
-					tabla.row(linea).remove().draw(false);
-					mensajemodal("Eliminado correctamente");
-				} else {
-					mensajemodal(respuesta);
-					setTimeout(function () {
-					window.location.reload();
-					}, 2000);
-				}
-			} catch (e) {
-			mensajemodal("Error en Ajax " + e.name + " !!!");
-			}
-		},
-		error: function () {
-		mensajemodal("Error con ajax");
-		},
-	});
+  Swal.fire({
+    title: "¿Estas Seguro?",
+    text: "¡No podrás revertir esto!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3B71CA",
+    confirmButtonText: "Si, eliminar",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      var linea = $(fila).closest("tr");
+      var cedula = $(linea).find("td:eq(3)");
+
+      var datos = new FormData();
+      datos.append("accion_atletas", "eliminar_atletas");
+      datos.append("cedula_atleta", cedula.text());
+
+      $.ajax({
+        async: true,
+        url: "", //la pagina a donde se envia por estar en mvc, se omite la ruta ya que siempre estaremos en la misma pagina
+        type: "POST", 
+        contentType: false,
+        data: datos,
+        processData: false,
+        cache: false,
+        success: function (respuesta) {
+        
+          try {
+            if (respuesta == "eliminado") {
+              Swal.fire({
+                title: "Eliminado correctamente!",
+                text: "La informacion ha sido eliminada.",
+                icon: "success",
+              });
+              tabla.row(linea).remove().draw(false);
+            } else {
+              mensajemodal(respuesta);
+              setTimeout(function () {
+              window.location.reload();
+              }, 2000);
+            }
+          } catch (e) {
+          mensajemodal("Error en Ajax " + e.name + " !!!");
+          }
+        },
+        error: function () {
+        mensajemodal("Error con ajax");
+        },
+      });
+    
+    }
+  });
+
+    
 }
 
 //funcion para mostrar la imagen antes de subirla al servidor

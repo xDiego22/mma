@@ -233,11 +233,12 @@ class inscripcion_evento extends conexion{
 								$respuesta = $respuesta."<tr>";
 
 									$respuesta = $respuesta."<td>";
+										$timestamp = floor(microtime(true)*1000);
 										if(is_file("img/atletas/".$r[0].".png")){
-											$foto = 	"img/atletas/".$r[0].".png";
+											$foto = 	"img/atletas/".$r[0].".png?{$timestamp}";
 										}
 										else{
-											$foto = "img/atletas/icono_persona.png";	
+											$foto = "img/atletas/icono_persona.png?{$timestamp}";	
 										} 
 										$respuesta = $respuesta."
 										<img src='".$foto."' style='width:55px' 

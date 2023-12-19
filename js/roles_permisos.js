@@ -431,40 +431,56 @@ function modalmodificar(fila) {
 }
 
 function elimina(fila){
-	var linea = $(fila).closest('tr');
-	var nombre = $(linea).find("td:eq(1)");
-	
-	var datos = new FormData();
-	datos.append('accion','eliminar');
-	datos.append('nombre_rol',nombre.text());
-	$.ajax({
-		async: true,
-		url: "", //la pagina a donde se envia por estar en mvc, se omite la ruta ya que siempre estaremos en la misma pagina
-		type: "POST", 
-		contentType: false,
-		data: datos,
-		processData: false,
-		cache: false,
-		success: function (respuesta) {
-		
-			try {
-				if (respuesta == "eliminado") {
-					tabla.row(linea).remove().draw(false);
-					mensajemodal("Eliminado correctamente");
-				} else {
-					// mensajemodal('debe eliminar antes los usuarios registrados con este rol');
-					mensajemodal(respuesta);
-					
-					setTimeout(function () {
-					window.location.reload();
-					}, 2000);
-				}
-			} catch (e) {
-			mensajemodal("Error en Ajax " + e.name + " !!!");
-			}
-		},
-		error: function () {
-		mensajemodal("Error con ajax");
-		},
-	});	
+
+	Swal.fire({
+		title: "¿Estas Seguro?",
+		text: "¡No podrás revertir esto!",
+		icon: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#d33",
+		cancelButtonColor: "#3B71CA",
+		confirmButtonText: "Si, eliminar",
+		cancelButtonText: "Cancelar",
+	}).then((result) => {
+		if (result.isConfirmed) {
+			
+			var linea = $(fila).closest('tr');
+			var nombre = $(linea).find("td:eq(1)");
+			
+			var datos = new FormData();
+			datos.append('accion','eliminar');
+			datos.append('nombre_rol',nombre.text());
+			$.ajax({
+				async: true,
+				url: "", //la pagina a donde se envia por estar en mvc, se omite la ruta ya que siempre estaremos en la misma pagina
+				type: "POST", 
+				contentType: false,
+				data: datos,
+				processData: false,
+				cache: false,
+				success: function (respuesta) {
+				
+					try {
+						if (respuesta == "eliminado") {
+							Swal.fire({
+								title: "Eliminado correctamente!",
+								text: "La informacion ha sido eliminada.",
+								icon: "success",
+							});
+							tabla.row(linea).remove().draw(false);
+						} else {
+							
+							mensajemodal("Error: debe eliminar antes los Usuarios que posean este rol");
+						
+						}
+					} catch (e) {
+					mensajemodal("Error en Ajax " + e.name + " !!!");
+					}
+				},
+				error: function () {
+				mensajemodal("Error con ajax");
+				},
+			});	
+		}
+  	});
 }

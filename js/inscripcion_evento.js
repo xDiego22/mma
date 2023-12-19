@@ -165,16 +165,71 @@ function validarboton (){
 }
 
 function elimina(p){
-	var linea = $(p).closest('tr');
-	var cedula = $(linea).find("td:eq(1)");
-	var id_evento = $(linea).find("td:eq(8)");
-	
-	var datos = new FormData();
-		datos.append('accion_inscripcion','eliminaatleta');
-		datos.append('evento',id_evento.text());
-		datos.append('cedula_inscripcion',cedula.text());
-		enviaAjax(datos,'elimina');
-	linea.remove();	
+
+	Swal.fire({
+		title: "¿Estas Seguro?",
+		text: "¡No podrás revertir esto!",
+		icon: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#d33",
+		cancelButtonColor: "#3B71CA",
+		confirmButtonText: "Si, eliminar",
+		cancelButtonText: "Cancelar",
+	}).then((result) => {
+		if (result.isConfirmed) {
+			
+			
+			var linea = $(p).closest('tr');
+			var cedula = $(linea).find("td:eq(1)");
+			var id_evento = $(linea).find("td:eq(8)");
+			
+			var datos = new FormData();
+			datos.append('accion_inscripcion','eliminaatleta');
+			datos.append('evento',id_evento.text());
+			datos.append('cedula_inscripcion', cedula.text());
+			
+			$.ajax({
+				async: true,
+				url: '', //la pagina a donde se envia por estar en mvc, se omite la ruta ya que siempre estaremos en la misma pagina
+				type: 'POST',//tipo de envio 
+				contentType: false,
+				data: datos,
+				processData: false,
+				cache: false,
+				timeout:10000,
+				success: function(respuesta) {//si resulto exitosa la transmision
+			
+					try{
+						if (respuesta == 'eliminado') {
+							Swal.fire({
+								title: "Atleta eliminado de evento!",
+								text: "La informacion ha sido eliminada.",
+								icon: "success",
+							});
+							linea.remove();
+						} else {
+							Swal.fire({
+								title: "No elimino atleta de evento!",
+								icon: "error",
+							});
+						}
+					}
+					catch(e){
+						mensajemodal("Error en Ajax "+e.name+" !!!");
+					}
+				},
+				error: function(request, status, err){
+		
+					if (status == "timeout") {
+						mensajemodal("Servidor ocupado, intente de nuevo");
+					} else {
+						mensajemodal("ERROR: <br/>" + request + status + err);
+					}
+				},
+					
+			});	
+		}
+  	});
 }
 
 function enviaAjax(datos,accion){
@@ -256,8 +311,6 @@ function enviaAjax(datos,accion){
 			}
 			
     });
-    
-    
 	
 }
 

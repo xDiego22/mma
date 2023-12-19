@@ -160,3 +160,7 @@ se corrijen pruebas unitarias de atletas, clubes, eventos, usuarios, roles_permi
 se instala sweetalert js en carpeta js
 
 solución a error: resultado_eventos modelo consulta corregida para que muestre nombre de ambos atletas correctamente 
+
+bd modificada, socioeconomica y medico foranea son cascada (modificar en web)
+
+se modifica alert con sweetalert de eliminado en cada modulo donde se elimina informacion

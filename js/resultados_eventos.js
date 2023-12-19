@@ -177,24 +177,72 @@ function modalregistrar() {
 
 }
 
-function elimina(fila){
-	let linea = $(fila).closest('tr');
-	let evento = $(linea).find("td:eq(1)");
-	let atleta_ganador = $(linea).find("td:eq(6)");
-	let atleta_perdedor = $(linea).find("td:eq(7)");
-	let ronda = $(linea).find("td:eq(4)");
-	let forma_ganar = $(linea).find("td:eq(5)");
+function elimina(fila) {
 	
-	var datos = new FormData();
-	
-	datos.append('accion_resultados', 'eliminar_resultados');
-	datos.append('nombre_evento',evento.text());
-	datos.append('atleta_ganador',atleta_ganador.text());
-	datos.append('atleta_perdedor',atleta_perdedor.text());
-	datos.append('ronda',ronda.text());
-	datos.append('forma_ganar', forma_ganar.text());
-	enviaAjax(datos, 'eliminar_resultados');
-	
-	
-	linea.remove();	
+
+	Swal.fire({
+		title: "¿Estas Seguro?",
+		text: "¡No podrás revertir esto!",
+		icon: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#d33",
+		cancelButtonColor: "#3B71CA",
+		confirmButtonText: "Si, eliminar",
+		cancelButtonText: "Cancelar",
+	}).then((result) => {
+		if (result.isConfirmed) {
+			
+			
+			let linea = $(fila).closest('tr');
+			let evento = $(linea).find("td:eq(1)");
+			let atleta_ganador = $(linea).find("td:eq(6)");
+			let atleta_perdedor = $(linea).find("td:eq(7)");
+			let ronda = $(linea).find("td:eq(4)");
+			let forma_ganar = $(linea).find("td:eq(5)");
+			
+			var datos = new FormData();
+			
+			datos.append('accion_resultados', 'eliminar_resultados');
+			datos.append('nombre_evento',evento.text());
+			datos.append('atleta_ganador',atleta_ganador.text());
+			datos.append('atleta_perdedor',atleta_perdedor.text());
+			datos.append('ronda',ronda.text());
+			datos.append('forma_ganar', forma_ganar.text());
+		
+			$.ajax({ 
+				async: true,
+				url: '', //la pagina a donde se envia por estar en mvc, se omite la ruta ya que siempre estaremos en la misma pagina
+				type: 'POST',//tipo de envio 
+				contentType: false,
+				data: datos,
+				processData: false,   
+				cache: false,  
+				success: function(respuesta) {
+					
+						try{
+							if (respuesta == 'eliminado') {
+								Swal.fire({
+									title: "Eliminado correctamente!",
+									text: "La informacion ha sido eliminada.",
+									icon: "success",
+								});
+								linea.remove();
+							} else {
+								mensajemodal(respuesta);
+								setTimeout(function() {
+									window.location.reload();
+									},2000);
+							}
+						}
+						catch(e){
+							mensajemodal("Error en Ajax "+e.name+" !!!");
+						}
+				}, 
+				error: function(){
+					mensajemodal("Error con ajax");	
+				}
+					
+			});
+		}
+  	});
 }
