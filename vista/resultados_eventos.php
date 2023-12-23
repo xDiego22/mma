@@ -52,38 +52,16 @@
 									<thead class="thead-dark">
 										<tr> 
 											<th>Nombre del Evento</th>
-											<th style="display:none">id_evento</th>
+											<th>id_evento</th>
 											<th>Atleta Ganador</th>
 											<th>Atleta Perdedor</th>
 											<th>Ronda</th>
 											<th>Forma de Ganar</th>
-											<th style="display:none">atleta1</th>
-											<th style="display:none">atleta2</th>
+											<th>atleta1</th>
+											<th>atleta2</th>
 											<th>Acciones</th>
 										</tr>
 									</thead>
-									<tbody id="resultadoconsulta">
-										<?php 
-											if(!empty ($listaconsulta)){
-												echo $listaconsulta;
-											}else{
-										?>
-											<tr>
-												<td colspan="8">No hay informacion</td>
-												<td style="display:none;"></td>
-												<td style="display:none;"></td>
-												<td style="display:none;"></td>
-												<td style="display:none;"></td>
-												<td style="display:none;"></td>
-												<td style="display:none;"></td>
-												<td style="display:none;"></td>
-												<td style="display:none;"></td>
-		
-											</tr> 
-										<?php 
-											}
-										?>
-									</tbody>
 								</table>
 							</div>
 							

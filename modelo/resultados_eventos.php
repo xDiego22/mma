@@ -109,7 +109,7 @@ class resultados_eventos extends conexion{
 						$accion= "Ha registrado un resultado de eventos";
 
 						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-						return $this->consultar($rol_usuario,$cedula_bitacora,$modulo);
+						return "Registrado Correctamente";
 
 					}catch(Exception $e){
 						return $e->getMessage();
@@ -183,82 +183,60 @@ class resultados_eventos extends conexion{
 
 		try{
 
-			$resultado = $co->prepare("SELECT DISTINCT
-			eventos.nombre,
-			eventos.id,
-			a1.nombre AS nombre1,
-			a2.nombre AS nombre2,
-			resultados.ronda,
-			resultados.forma_ganar,
-			resultados.atleta1,
-			resultados.atleta2,
-			resultados.id
-			FROM resultados
-			JOIN eventos ON eventos.id = resultados.id_evento
-			LEFT JOIN inscripcion_evento a1 ON resultados.atleta1 = a1.id
-			LEFT JOIN inscripcion_evento a2 ON resultados.atleta2 = a2.id;");
-			
-			$resultado->execute();
-   
-			if($resultado){
- 
-				$respuesta = '';
+			$valor = $this->permisos($rol_usuario); //rol del usuario
+			$datos = array();
+			if ($valor[0]=="true") {
+
+				$stmt = $co->prepare("SELECT DISTINCT
+				eventos.nombre,
+				eventos.id,
+				a1.nombre AS nombre1,
+				a2.nombre AS nombre2,
+				resultados.ronda,
+				resultados.forma_ganar,
+				resultados.atleta1,
+				resultados.atleta2,
+				resultados.id
+				FROM resultados
+				JOIN eventos ON eventos.id = resultados.id_evento
+				LEFT JOIN inscripcion_evento a1 ON resultados.atleta1 = a1.id
+				LEFT JOIN inscripcion_evento a2 ON resultados.atleta2 = a2.id;");
+
+				$stmt->execute();
+				$resultado = $stmt->fetchAll(PDO::FETCH_NUM);
 				
-				foreach($resultado as $r){
-					
-					$valor = $this->permisos($rol_usuario); //rol del usuario
-					if ($valor[0]=="true") {
-
-						$respuesta = $respuesta."<tr>";
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[0];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td style='display:none'>";
-								$respuesta = $respuesta.$r[1];
-							$respuesta = $respuesta."</td>";
+				$opciones="";
 	
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[2];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[3];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[4];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								$respuesta = $respuesta.$r[5];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td style='display:none'>";
-								$respuesta = $respuesta.$r[6];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td style='display:none'>";
-								$respuesta = $respuesta.$r[7];
-							$respuesta = $respuesta."</td>";
-
-							$respuesta = $respuesta."<td>";
-								
-								if ($valor[3]=="true"){
-									$respuesta = $respuesta."<button type='button' class='btn btn-danger mb-1 ' onclick='elimina(this)'><i class='bi bi-x-lg'></i></button>";
-								}
-							$respuesta = $respuesta."</td>";
-
-						$respuesta = $respuesta."</tr>";
-					}
+				if ($valor[3]=="true"){
+					$opciones = $opciones."<button type='button' class='btn btn-danger mb-1 ' onclick='elimina(this)'><i class='bi bi-x-lg'></i></button>";
 				}
-				$accion= "Ha consultado la tabla de Resultados de Eventos";
+
+				foreach($resultado as $fila){
+	
+					$subarray=array();
+					$subarray['nombre_evento']=$fila[0];
+					$subarray['id_evento']=$fila[1];
+					$subarray['nombre_atleta1']=$fila[2];
+					$subarray['nombre_atleta2']=$fila[3];
+					$subarray['ronda']=$fila[4];
+					$subarray['forma_ganar']=$fila[5];
+					$subarray['id_atleta1']=$fila[6];
+					$subarray['id_atleta2']=$fila[7];
+					$subarray['opciones']=$opciones;
+
+					$datos[] = $subarray;
+				}
+				$json = array(
+					"data" => $datos
+				);
 				
+				$accion= "Ha consultado la tabla de Resultados de Eventos";
+
 				parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-				return $respuesta;
-			}
-			else {
-				return '';
+	
+				return json_encode($json);
+			} else {
+				return 'No tiene permiso de realizar esta accion';
 			}
 
 		}catch(Exception $e) {

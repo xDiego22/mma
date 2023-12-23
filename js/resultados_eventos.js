@@ -1,9 +1,26 @@
-$(document).ready(function(){
+var tabla;
+$(document).ready(function () {
 
-	$('#tablaconsulta').DataTable( {
+	tabla = $('#tablaconsulta').DataTable( {
         language: {
             url: '//cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json'
 		},
+		ajax: {
+			url: "",
+			type: "POST",
+			data: { accion_resultados: "consultar" },
+		},
+		columns: [
+			{ data: "nombre_evento" },
+			{ data: "id_evento" , className: 'd-none'},
+			{ data: "nombre_atleta1" },
+			{ data: "nombre_atleta2" },
+			{ data: "ronda" },
+			{ data: "forma_ganar" },
+			{ data: "id_atleta1" , className: 'd-none'},
+			{ data: "id_atleta2" , className: 'd-none' },
+			{ data: "opciones" ,searchable: false},
+		],
 		lengthMenu: [
             [5, 10, 15],
             [5, 10, 15]
@@ -111,30 +128,13 @@ function enviaAjax(datos,accion){
             data: datos,
 			processData: false,   
 	        cache: false,  
-            success: function(respuesta) {//si resulto exitosa la transmision
-            	//aqui el envio es diferente  porque se envia la localizacion por aqui
-			   	if(accion=='eliminar_resultados'){
+            success: function(respuesta) {
+            	if(accion=='incluir_resultados'){
 					try{
-						if(respuesta=='eliminado'){
-							mensajemodal("Eliminado correctamente");
-						} else {
+						if (respuesta === "Registrado Correctamente") {
+							tabla.ajax.reload(null, false);
 							mensajemodal(respuesta);
-							setTimeout(function() {
-								window.location.reload();
-								},2000);
-						}
-					}
-					catch(e){
-						mensajemodal("Error en Ajax "+e.name+" !!!");
-					}
-				}else if(accion=='incluir_resultados'){
-					try{
-						let fila = respuesta.indexOf('<tr>');
-						if(fila !== -1){
-							$("#resultadoconsulta").html(respuesta);
-							mensajemodal("Registrado Correctamente");
-						}
-						else{
+						} else {
 							mensajemodal(respuesta);
 						}
 					}
@@ -226,12 +226,10 @@ function elimina(fila) {
 									text: "La informacion ha sido eliminada.",
 									icon: "success",
 								});
-								linea.remove();
+								tabla.row(linea).remove().draw(false);
 							} else {
 								mensajemodal(respuesta);
-								setTimeout(function() {
-									window.location.reload();
-									},2000);
+								
 							}
 						}
 						catch(e){

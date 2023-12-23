@@ -29,6 +29,11 @@
 
 			$accion = $_POST['accion_resultados'];
 
+			if($accion =='consultar'){
+				echo $objeto->consultar($rol_usuario,$cedula_bitacora,$modulo);
+				
+			}
+
 			if($accion =='select_ronda'){
 				echo $objeto->consulta_rondas($_POST['nombre_evento']);
 			}
@@ -47,17 +52,18 @@
 			
 				echo $objeto->eliminar($cedula_bitacora,$modulo,$rol_usuario); 
 			} 
-			else{
+			
+				
+			if($accion=='incluir_resultados'){
 				$objeto->set_nombre_evento($_POST['nombre_evento']);
 				$objeto->set_atleta_ganador($_POST['atleta_ganador']);
 				$objeto->set_atleta_perdedor($_POST['atleta_perdedor']); 
 				$objeto->set_ronda($_POST['ronda']);
 				$objeto->set_forma_ganar($_POST['forma_ganar']);
-			
-				if($accion=='incluir_resultados'){
-					echo $objeto->registrar($rol_usuario,$cedula_bitacora,$modulo);
-				}
+				
+				echo $objeto->registrar($rol_usuario,$cedula_bitacora,$modulo);
 			}
+			
 			
 			exit;
 		}
@@ -65,7 +71,6 @@
 		
 		$consulta_eventos = $objeto->consulta_eventos();
 
-		$listaconsulta = $objeto->consultar($rol_usuario,$cedula_bitacora,$modulo);
 		$permisos = $objeto->permisos($rol_usuario);
 
 		if($permisos[0] == "true"){

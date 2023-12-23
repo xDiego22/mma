@@ -311,23 +311,21 @@ function elimina(fila) {
 				processData: false,
 				cache: false,
 				success: function (respuesta) {
-				try {
-					if (respuesta == "eliminado") {
-						Swal.fire({
-							title: "Eliminado correctamente!",
-							text: "La informacion ha sido eliminada.",
-							icon: "success",
-						});
-						tabla.row(linea).remove().draw(false);
-					} else {
-						mensajemodal(respuesta);
-						setTimeout(function () {
-							window.location.reload();
-						}, 2000);
+					try {
+						if (respuesta == "eliminado") {
+							Swal.fire({
+								title: "Eliminado correctamente!",
+								text: "La informacion ha sido eliminada.",
+								icon: "success",
+							});
+							tabla.row(linea).remove().draw(false);
+						} else {
+							mensajemodal(respuesta);
+							
+						}
+					} catch (e) {
+						mensajemodal("Error en Ajax " + e.name + " !!!");
 					}
-				} catch (e) {
-					mensajemodal("Error en Ajax " + e.name + " !!!");
-				}
 				},
 				error: function () {
 				mensajemodal("Error con ajax");
