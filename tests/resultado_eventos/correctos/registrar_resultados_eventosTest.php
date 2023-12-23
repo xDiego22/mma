@@ -9,7 +9,6 @@ use modelo\inscripcion_evento;
 use modelo\emparejamiento_combates;
 use modelo\resultados_eventos;
 
-
 class registrar_resultados_eventosTest extends TestCase{
     private $eventos;
     private $clubes;
@@ -17,7 +16,6 @@ class registrar_resultados_eventosTest extends TestCase{
     private $emparejamiento;
     private $resultados;
     protected static $pdo;
-    
 
     public static function setUpBeforeClass():void {
         try {
@@ -132,9 +130,8 @@ class registrar_resultados_eventosTest extends TestCase{
         
         $registrar = $this->resultados->registrar('1','29831184','12');
 
-        $this->assertStringStartsWith('<tr>', $registrar);
+        $this->assertEquals('Registrado Correctamente', $registrar);
     }
-
 }
 
 ?>

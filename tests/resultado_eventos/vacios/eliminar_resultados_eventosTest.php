@@ -20,7 +20,7 @@ class eliminar_resultados_eventosTest extends TestCase{
         $this->resultados->set_ronda('');
         $this->resultados->set_forma_ganar('');
         
-        $this->assertEquals('ingrese datos correctamente',$this->resultados->eliminar('29831184','12','1'));
+        $this->assertEquals('eliminado',$this->resultados->eliminar('29831184','12','1'));
 
     }
 

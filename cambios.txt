@@ -151,9 +151,9 @@ correccion de captcha para tamaño moviles
 
 correccion roles_permisos limpiarCheckbox al abrir modal
 
-implementacion de datatable a atletas, clubes,eventos, usuarios, roles_permisos, personal, medico atleta, socioeconomico atleta modificando controlador js y modelo para visualicion correcta de las tablas
+implementacion de datatable a atletas, clubes,eventos, usuarios, roles_permisos, personal, medico atleta, socioeconomico atleta, resultado_eventos modificando controlador js y modelo para visualicion correcta de las tablas
 
-se corrijen pruebas unitarias de atletas, clubes, eventos, usuarios, roles_permisos, personal, medico atleta,socioeconomico atleta
+se corrijen pruebas unitarias de atletas, clubes, eventos, usuarios, roles_permisos, personal, medico atleta,socioeconomico atleta, resultado_eventos
 
 # se elimina campo responsable de tabla eventos ya que no se usa y causa problemas de registro
 

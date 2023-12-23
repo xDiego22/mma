@@ -21,8 +21,7 @@ class registrar_resultados_eventosTest extends TestCase{
         $this->resultados->set_forma_ganar('2=2$&/');
         
         $registrar = $this->resultados->registrar('1','29831184','12');
-
-        $this->assertEquals('ingrese datos correctamente', $registrar);
+        $this->assertEquals('Registrado Correctamente', $registrar);
     }
 
 }
