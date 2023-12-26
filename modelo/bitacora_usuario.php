@@ -65,44 +65,47 @@ class bitacora_usuario extends conexion{
 		
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		
-		try{
-			
-			
-			$stmt = $co->prepare("SELECT consultar, registrar, modificar, eliminar FROM intermediaria WHERE id_rol = :rol and id_modulos = '8' ");
-			
-			$stmt->bindParam(':rol',$rol);
-			$stmt->execute();
-			
-			$consultar="";
-			$registrar="";
-			$modificar="";
-			$eliminar="";
-			
-			foreach($stmt as $r){
-				$consultar = $r['consultar'];
-				$registrar = $r['registrar'];
-				$modificar = $r['modificar'];
-				$eliminar = $r['eliminar'];
-			}
-			
-			$respuesta_permiso=[];
-			
-			$respuesta_permiso[0]=$consultar;
-			$respuesta_permiso[1]=$registrar;
-			$respuesta_permiso[2]=$modificar;
-			$respuesta_permiso[3]=$eliminar;	
-			
-			if(!empty($respuesta_permiso)){
-			
-				return $respuesta_permiso;
+		if(preg_match_all("/^[0-9]{1,10}$/",$rol)){
+			try{
+				
+				
+				$stmt = $co->prepare("SELECT consultar, registrar, modificar, eliminar FROM intermediaria WHERE id_rol = :rol and id_modulos = '8' ");
+				
+				$stmt->bindParam(':rol',$rol);
+				$stmt->execute();
+				
+				$consultar="";
+				$registrar="";
+				$modificar="";
+				$eliminar="";
+				
+				foreach($stmt as $r){
+					$consultar = $r['consultar'];
+					$registrar = $r['registrar'];
+					$modificar = $r['modificar'];
+					$eliminar = $r['eliminar'];
+				}
+				
+				$respuesta_permiso=[];
+				
+				$respuesta_permiso[0]=$consultar;
+				$respuesta_permiso[1]=$registrar;
+				$respuesta_permiso[2]=$modificar;
+				$respuesta_permiso[3]=$eliminar;	
+				
+				if(!empty($respuesta_permiso)){
+				
+					return $respuesta_permiso;
 
-			}else{
-				return "ha ocurrido un error";
+				}else{
+					return "ha ocurrido un error";
+				}
+				
+			}catch(Exception $e){
+				
+				return false;
 			}
-			
-		}catch(Exception $e){
-			
+		}else{
 			return false;
 		}
 	}
