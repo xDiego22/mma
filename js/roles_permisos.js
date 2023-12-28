@@ -13,7 +13,7 @@ $(document).ready(function () {
 			data: { accion: "consultar" },
 		},
 		columns: [
-			{ data: "id" },
+			{ data: "id",className: 'd-none' },
 			{ data: "nombre" },
 			{ data: "descripcion" },
 			{ data: "opciones", className: 'd-flex'},
