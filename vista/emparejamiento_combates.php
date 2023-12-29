@@ -28,6 +28,7 @@
 							<label for="evento_emparejamiento">Eventos</label>
 							<select class="form-control" name="evento_emparejamiento" id="evento_emparejamiento" onchange='select_evento();'>
 								<option value="" hidden="" selected="hidden">Seleccionar Evento</option>
+								<option value=""></option>
 								<?php
 									if(!empty($consulta_eventos)){
 										echo $consulta_eventos;

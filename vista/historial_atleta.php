@@ -34,6 +34,7 @@
 							<label for="atleta">Atleta</label>
 							<select class="selectpicker form-control" name="atleta" id="atleta" name="atleta" title="Seleccione Opcion">
 								<option value="" hidden="" selected="hidden">Seleccionar Opcion</option>
+								<option ></option>
 								<?php
 									if(!empty($consulta_atletas)){
 										echo $consulta_atletas;

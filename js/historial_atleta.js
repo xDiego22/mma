@@ -7,10 +7,12 @@ $(document).ready(function () {
     $("#atleta").on("change",function(){
 		$("#lista_resultado").html('');
 		
-		var datos = new FormData();
-		datos.append('accion_historial','mostrar_resultado');
-		datos.append('atleta',$("#atleta").val());
-		enviaAjax(datos,'muestra');		
+		if ($("#atleta").val() != '') {
+			var datos = new FormData();
+			datos.append('accion_historial', 'mostrar_resultado');
+			datos.append('atleta', $("#atleta").val());
+			enviaAjax(datos, 'muestra');
+		}
 	});
 });
 

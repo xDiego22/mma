@@ -68,69 +68,81 @@ $(document).ready(function () {
 		}
 		
 		$("#lista_coincidentes").html('');
-		var opciones = ['cedula DESC', 'nombre DESC', 'cedula ASC', 'nombre ASC'];
-		var calculo = Math.floor(Math.random() * opciones.length); //calcula valor aleatorio de un array
-		var valor = opciones[calculo];
+		if ($("#evento_emparejamiento").val() != '') {
+			var opciones = ['cedula DESC', 'nombre DESC', 'cedula ASC', 'nombre ASC'];
+			var calculo = Math.floor(Math.random() * opciones.length); //calcula valor aleatorio de un array
+			var valor = opciones[calculo];
 
-		var datos = new FormData();
-		datos.append('accion','mostrar');
-		datos.append('evento',$("#evento_emparejamiento").val());
-		datos.append('sexo',$("#sexo").val());
-		datos.append('edad',$("#edad").val());
-		datos.append('peso', $("#peso").val());
-		datos.append('orden', valor);
+			var datos = new FormData();
+			datos.append('accion', 'mostrar');
+			datos.append('evento', $("#evento_emparejamiento").val());
+			datos.append('sexo', $("#sexo").val());
+			datos.append('edad', $("#edad").val());
+			datos.append('peso', $("#peso").val());
+			datos.append('orden', valor);
 		
-		enviaAjax(datos, 'muestra');
+			enviaAjax(datos, 'muestra');
+		}
 		
 	});
 	
 	$("#peso").on("change", function () {
-		var opciones = ['cedula DESC', 'nombre DESC', 'cedula ASC', 'nombre ASC', 'edad', 'peso'];
-		var calculo = Math.floor(Math.random() * opciones.length); //calcula valor aleatorio de un array
-		var valor = opciones[calculo];
+		if ($("#evento_emparejamiento").val() != '') {
+			var opciones = ['cedula DESC', 'nombre DESC', 'cedula ASC', 'nombre ASC', 'edad', 'peso'];
+			var calculo = Math.floor(Math.random() * opciones.length); //calcula valor aleatorio de un array
+			var valor = opciones[calculo];
 
-		var datos = new FormData();
-		datos.append('accion','mostrar');
-		datos.append('evento',$("#evento_emparejamiento").val());
-		datos.append('sexo',$("#sexo").val());
-		datos.append('edad',$("#edad").val());
-		datos.append('peso', $("#peso").val());
-		datos.append('orden', valor);
+			var datos = new FormData();
+			datos.append('accion', 'mostrar');
+			datos.append('evento', $("#evento_emparejamiento").val());
+			datos.append('sexo', $("#sexo").val());
+			datos.append('edad', $("#edad").val());
+			datos.append('peso', $("#peso").val());
+			datos.append('orden', valor);
 		
-		enviaAjax(datos, 'muestra');
+			enviaAjax(datos, 'muestra');
+		}
 	}); 
 	
 	$("#sexo").on("change", function () {
-		var opciones = ['cedula DESC', 'nombre DESC', 'cedula ASC', 'nombre ASC', 'edad', 'peso'];
-		var calculo = Math.floor(Math.random() * opciones.length); //calcula valor aleatorio de un array
-		var valor = opciones[calculo];
+		if ($("#evento_emparejamiento").val() != '') {
+			var opciones = ['cedula DESC', 'nombre DESC', 'cedula ASC', 'nombre ASC', 'edad', 'peso'];
+			var calculo = Math.floor(Math.random() * opciones.length); //calcula valor aleatorio de un array
+			var valor = opciones[calculo];
 		
-		var datos = new FormData();
-		datos.append('accion','mostrar');
-		datos.append('evento',$("#evento_emparejamiento").val());
-		datos.append('sexo',$("#sexo").val());
-		datos.append('edad',$("#edad").val());
-		datos.append('peso', $("#peso").val());
-		datos.append('orden', valor);
+			var datos = new FormData();
+			datos.append('accion', 'mostrar');
+			datos.append('evento', $("#evento_emparejamiento").val());
+			datos.append('sexo', $("#sexo").val());
+			datos.append('edad', $("#edad").val());
+			datos.append('peso', $("#peso").val());
+			datos.append('orden', valor);
 		
-		enviaAjax(datos, 'muestra');
+			enviaAjax(datos, 'muestra');
+		}
 	});
 
 	$("#evento_emparejamiento").on("change", function () {
-		var opciones = ['cedula DESC', 'nombre DESC', 'cedula ASC', 'nombre ASC', 'edad', 'peso'];
-		var calculo = Math.floor(Math.random() * opciones.length); //calcula valor aleatorio de un array
-		var valor = opciones[calculo];
-
-		var datos = new FormData();
-		datos.append('accion','mostrar');
-		datos.append('evento',$("#evento_emparejamiento").val());
-		datos.append('sexo',$("#sexo").val());
-		datos.append('edad',$("#edad").val());
-		datos.append('peso', $("#peso").val());
-		datos.append('orden', valor);
-		
-		enviaAjax(datos, 'muestra');
-		$("#ronda").val('2');
+		if ($("#evento_emparejamiento").val() != '') {
+			
+			var opciones = ['cedula DESC', 'nombre DESC', 'cedula ASC', 'nombre ASC', 'edad', 'peso'];
+			var calculo = Math.floor(Math.random() * opciones.length); //calcula valor aleatorio de un array
+			var valor = opciones[calculo];
+	
+			var datos = new FormData();
+			datos.append('accion','mostrar');
+			datos.append('evento',$("#evento_emparejamiento").val());
+			datos.append('sexo',$("#sexo").val());
+			datos.append('edad',$("#edad").val());
+			datos.append('peso', $("#peso").val());
+			datos.append('orden', valor);
+			
+			enviaAjax(datos, 'muestra');
+			$("#ronda").val('2');
+		} else {
+			$("#lista_coincidentes").html("");
+			$("#lista_emparejada").html("");
+		}
 	});
 
 	$("#siguiente_ronda").on("click", function() {
