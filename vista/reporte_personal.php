@@ -24,7 +24,7 @@
 			
 						<div class="row">
 							<div class="col-md-12">
-								<label for="club_reporte_personal">Club del Atleta</label>
+								<label for="club_reporte_personal">Club del Personal</label>
 								<select class="selectpicker form-control" name="club_reporte_personal" id="club_reporte_personal" data-live-search="true" title="Seleccione Opcion">
 									<option value="" hidden="" selected="hidden">Seleccione un club</option>
 									<option value=""></option>

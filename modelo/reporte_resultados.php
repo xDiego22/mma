@@ -3,6 +3,8 @@ namespace modelo;
 use modelo\conexion as conexion;
 use PDO;
 use Exception;
+
+require_once('dompdf/vendor/autoload.php'); 
 use Dompdf\Dompdf; 
 
 
@@ -25,24 +27,25 @@ class reporte_resultados extends conexion{
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
  
 		try{
-			
-			/*$resultado = $co->prepare("Select b.nombre,
-			(select a.nombre from inscripcion_evento as a, resultados as b where a.id = b.atleta1) as nombre1,
-			(select a.nombre from inscripcion_evento as a, resultados as b where a.id = b.atleta2) as nombre2,
-			a.ronda, a.forma_ganar 
-			from resultados as a, eventos as b where a.id_evento like :evento_reporte_resultados");*/
 
-			$resultado = $co->prepare("SELECT b.nombre, 
-			(select a.nombre from inscripcion_evento as a, resultados as b where a.id = b.atleta1 LIMIT 1) as nombre1, 
-			(select a.nombre from inscripcion_evento as a, resultados as b where a.id = b.atleta2 LIMIT 1) as nombre2,
-			a.ronda, a.forma_ganar 
-			from resultados as a, eventos as b where a.id_evento like :evento_reporte_resultados and b.id = a.id_evento");
+			$resultado = $co->prepare(
+				"SELECT DISTINCT
+				eventos.nombre,
+				a1.nombre AS nombre1,
+				a2.nombre AS nombre2,
+				resultados.ronda,
+				resultados.forma_ganar
+				FROM resultados
+				JOIN eventos ON eventos.id = resultados.id_evento
+				LEFT JOIN inscripcion_evento a1 ON resultados.atleta1 = a1.id
+				LEFT JOIN inscripcion_evento a2 ON resultados.atleta2 = a2.id
+				WHERE resultados.id_evento LIKE :evento_reporte_resultados;");
 
 			$resultado->bindValue(':evento_reporte_resultados','%'.$this->evento_reporte_resultados.'%');
 
 			$resultado->execute();
 
-			$fila = $resultado->fetchAll(PDO::FETCH_BOTH);
+			$fila = $resultado->fetchAll(PDO::FETCH_NUM);
 
 			$html = "<html><head></head><body>";
 			$html = $html."<table border='1' style='width:100%'>";
