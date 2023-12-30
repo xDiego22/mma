@@ -49,9 +49,9 @@ $(document).ready(function () {
 			datos.append('ronda', $("#ronda").val());
 			datos.append('forma_ganar', $("#forma_ganar").val());
 			enviaAjax(datos,'incluir_resultados');
-			$("#modal_gestion").modal("hide");
-			limpia_formulario();
 		}
+		limpia_formulario();
+		$("#modal_gestion").modal("hide");
 	});
 
 	$('#nombre_evento').on('change', function () {
@@ -86,7 +86,7 @@ function mensajemodal(mensaje){
 }
  
 function validarboton () {
-	if ($("#nombre_evento").val() == "" && $("#atleta_ganador").val() == "" && ("#atleta_perdedor").val() == "" && $("#ronda").val() == "" && $("#forma_ganar").val() == "") {
+	if ($("#nombre_evento").val() == "" && $("#atleta_ganador").val() == "" && $("#atleta_perdedor").val() == "" && $("#ronda").val() == "" && $("#forma_ganar").val() == "") {
 		mensajemodal("NO HA SELECCION NINGUNA OPCION");
 		return false;
 	}
