@@ -217,19 +217,20 @@ class inscripcion_evento extends conexion{
 				$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		
 				try{
-					$resultado = $co->prepare("SELECT a.cedula, a.nombre, a.sexo,
-					TIMESTAMPDIFF(YEAR,a.fechadenacimiento,CURDATE()) as edad, a.peso, a.estado, b.id from inscripcion_evento as a, 
-					eventos as b where a.id_evento = b.id 
-					and b.id = '$evento'");
-					$resultado->execute();
-					if($resultado){
-		
-						$respuesta = '';
-						//ciclo foreach se usa para recorrer los resultados de las consultas
-						foreach($resultado as $r){ 
-							$valor = $this->permisos($rol_usuario); //rol del usuario
+					$valor = $this->permisos($rol_usuario); //rol del usuario
 
-							if ($valor[0]=="true") {
+					if ($valor[0]=="true") {
+						$resultado = $co->prepare("SELECT a.cedula, a.nombre, a.sexo,
+						TIMESTAMPDIFF(YEAR,a.fechadenacimiento,CURDATE()) as edad, a.peso, a.estado, b.id from inscripcion_evento as a, 
+						eventos as b where a.id_evento = b.id 
+						and b.id = '$evento'");
+						$resultado->execute();
+						if($resultado){
+			
+							$respuesta = '';
+							//ciclo foreach se usa para recorrer los resultados de las consultas
+							foreach($resultado as $r){ 
+								
 								$respuesta = $respuesta."<tr>";
 
 									$respuesta = $respuesta."<td>";
@@ -280,15 +281,18 @@ class inscripcion_evento extends conexion{
 									$respuesta = $respuesta."</td>";
 
 								$respuesta = $respuesta."</tr>";
+								
 							}
-						}
-						$accion= "Ha consultado la tabla de Atletas Inscritos en Evento";
+							$accion= "Ha consultado la tabla de Atletas Inscritos en Evento";
 
-						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-						return $respuesta;
-					}
-					else {
-						return '';
+							parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+							return $respuesta;
+						}
+						else {
+							return '';
+						}
+					}else{
+						return 'no tiene permiso de realizar esta accion';
 					}
 
 				}catch(Exception $e) {
