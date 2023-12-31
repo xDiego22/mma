@@ -166,3 +166,5 @@ bd modificada, socioeconomica y medico foranea son cascada (modificar en web)
 se modifica alert con sweetalert de eliminado en cada modulo donde se elimina informacion
 
 se añade validacion a metodos de permisos a modelos
+
+pruebas unitarias modificadas y adaptadas para que fueran mas cortas utilizando datos de la bd

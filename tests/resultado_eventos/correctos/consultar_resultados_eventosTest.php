@@ -1,7 +1,6 @@
- <?php 
+<?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\resultados_eventos;
 
 class consultar_resultados_eventosTest extends TestCase{
@@ -11,7 +10,6 @@ class consultar_resultados_eventosTest extends TestCase{
     public function setUp():void{
         
         $this->resultados = new resultados_eventos();
-        
     }
     public function testConsultarResultadosEventos(){
 
@@ -19,7 +17,6 @@ class consultar_resultados_eventosTest extends TestCase{
         $this->assertJson($consultar);
 
     }
-
 }
 
 ?>

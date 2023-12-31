@@ -1,8 +1,6 @@
 <?php 
 
 use PHPUnit\Framework\TestCase;
-
-use modelo\conexion;
 use modelo\roles_permisos;
 
 class eliminar_rolesTest extends TestCase{

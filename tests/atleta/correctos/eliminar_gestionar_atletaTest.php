@@ -1,41 +1,14 @@
 <?php 
 
 use PHPUnit\Framework\TestCase;
-
-use modelo\conexion;
-use modelo\gestionar_clubes;
 use modelo\gestionar_atleta;
-
 class eliminar_gestionar_atletaTest extends TestCase{
-     private $atleta;
-    private $clubes;
-    protected static $pdo;
+    private $atleta;
     
-    public static function setUpBeforeClass():void {
-        try {
-            $host = 'mysql:host=localhost;dbname=bdmma';
-            self::$pdo = new PDO($host, 'root', '');
-        } catch (\Exception $e) {
-            $this->markTestSkipped('MySQL: No se pudo conectar a la base de datos.');
-        }
-    }
-
     public function setUp():void{
-        
         $this->atleta = new gestionar_atleta();
-        $this->clubes = new gestionar_clubes();
-        
-        $this->clubes->set_codigo_club('asdfgh');
-        $this->clubes->set_nombre_club('aguilas luchadores 2023');
-        $this->clubes->set_telefono_club('04131234567');
-        $this->clubes->set_deporte_club('karate');
-        $this->clubes->set_direccion_club('barquisimeto');
 
-        $this->clubes->registrar('1','29831184','1');
-
-        $id_club = self::$pdo->query('SELECT id from clubes where codigo="asdfgh"')->fetch(\PDO::FETCH_ASSOC)['id']; 
-
-        $this->atleta->set_club_atleta($id_club);
+        $this->atleta->set_club_atleta('88');
         $this->atleta->set_cedula_atleta('3345123');
         $this->atleta->set_nombres_atleta('robert');
         $this->atleta->set_apellidos_atleta('james');
@@ -52,18 +25,9 @@ class eliminar_gestionar_atletaTest extends TestCase{
         $this->atleta->registrar('1','29831184','1');
         
     }
-
     public function testEliminarAtleta(){
-        $cedula_atleta = self::$pdo->query('SELECT cedula from atletas where cedula="3345123"')->fetch(\PDO::FETCH_ASSOC)['cedula'];
-
-        $this->atleta->set_cedula_atleta($cedula_atleta);
+        $this->atleta->set_cedula_atleta('3345123');
         $this->assertEquals('eliminado',$this->atleta->eliminar('29831184','3','1'));
-    }
-
-    public function tearDown():void {
-
-        $this->clubes->set_codigo_club('asdfgh');
-        $this->clubes->eliminar('29831184','1','1');
     }
 }
 

@@ -1,7 +1,6 @@
  <?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\socioeconomico_atleta;
 
 class modificar_informacion_socioeconomicaTest extends TestCase{
@@ -13,17 +12,17 @@ class modificar_informacion_socioeconomicaTest extends TestCase{
 
     public function testModificarSocioeconomicoAtleta(){
 
-        $this->socioeconomico->set_nombre_atleta('1203?¡?¡');
-        $this->socioeconomico->set_tipo_vivienda('132912?¡¡¡');
-        $this->socioeconomico->set_zona_vivienda('8130283?¡?¡?');
-        $this->socioeconomico->set_propiedad_vivienda('43243¡¡¡¡');
-        $this->socioeconomico->set_habitantes_vivienda('fdsdfs');
-        $this->socioeconomico->set_internet('1');
-        $this->socioeconomico->set_luz('2');
-        $this->socioeconomico->set_agua('3');
-        $this->socioeconomico->set_telefono_residencial('4');
-        $this->socioeconomico->set_cable('5');
-        $modificar = $this->socioeconomico->modificar('1','29831184','5');
+        $this->socioeconomico->set_nombre_atleta('r?%%[¡');
+        $this->socioeconomico->set_tipo_vivienda('1.:4f/¡');
+        $this->socioeconomico->set_zona_vivienda('8$%@?');
+        $this->socioeconomico->set_propiedad_vivienda('$f%&?f');
+        $this->socioeconomico->set_habitantes_vivienda('f:-4f@s');
+        $this->socioeconomico->set_internet('G%2+');
+        $this->socioeconomico->set_luz('*{}$ff');
+        $this->socioeconomico->set_agua('$F5?');
+        $this->socioeconomico->set_telefono_residencial('%F5/?');
+        $this->socioeconomico->set_cable('%%G22.');
+        $modificar = $this->socioeconomico->modificar('$[51f','8*[5f4',']-.$r$');
 
         $this->assertEquals('Modificado Correctamente', $modificar);
 

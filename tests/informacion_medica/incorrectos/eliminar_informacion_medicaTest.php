@@ -1,7 +1,6 @@
 <?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\medico_atleta;
 
 class eliminar_informacion_medicaTest extends TestCase{
@@ -14,7 +13,7 @@ class eliminar_informacion_medicaTest extends TestCase{
     public function testEliminarMedicoAtleta(){
         
         $this->medico->set_nombre_atleta(',!12%$');
-        $this->assertEquals('eliminado',$this->medico->eliminar('29831184','4','1'));
+        $this->assertEquals('eliminado',$this->medico->eliminar('43fg&/=','$%dd2','.##!1'));
 
     }
 }

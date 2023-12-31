@@ -1,7 +1,6 @@
  <?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\resultados_eventos;
 
 class eliminar_resultados_eventosTest extends TestCase{
@@ -20,10 +19,9 @@ class eliminar_resultados_eventosTest extends TestCase{
         $this->resultados->set_ronda('a&:;s,2d.');
         $this->resultados->set_forma_ganar('28130218');
         
-        $this->assertEquals('eliminado',$this->resultados->eliminar('29831184','12','1'));
+        $this->assertEquals('eliminado',$this->resultados->eliminar('2.>!$4','1$%f','1$%@.'));
 
     }
-
 }
 
 ?>

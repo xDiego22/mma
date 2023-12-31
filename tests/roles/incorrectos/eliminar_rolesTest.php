@@ -1,7 +1,6 @@
 <?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\roles_permisos;
 
 class eliminar_rolesTest extends TestCase{
@@ -13,8 +12,8 @@ class eliminar_rolesTest extends TestCase{
 
     public function testEliminarRol(){
 
-        $this->rol->set_nombre('21831902138?¡');
-        $this->assertEquals('eliminado',$this->rol->eliminar('29831184','9','1'));
+        $this->rol->set_nombre('218@$#?');
+        $this->assertEquals('eliminado',$this->rol->eliminar('298!#$','4!$','%#%'));
     }
 }
 

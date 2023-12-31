@@ -1,7 +1,6 @@
- <?php 
+<?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\gestionar_atleta;
 
 class eliminar_gestionar_atletaTest extends TestCase{
@@ -13,8 +12,8 @@ class eliminar_gestionar_atletaTest extends TestCase{
     }
 
     public function testEliminarAtleta(){
-        $this->atleta->set_cedula_atleta('sankdhksa');
-       $this->assertEquals('eliminado', $this->atleta->eliminar('29831184','3','1'));
+        $this->atleta->set_cedula_atleta('#$FF14');
+       $this->assertEquals('eliminado', $this->atleta->eliminar('#%1ff44','#@&(()g','$$ccf1'));
     }
 }
 

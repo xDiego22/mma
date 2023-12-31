@@ -1,7 +1,6 @@
 <?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\conexion;
 use modelo\roles_permisos;
 
@@ -48,13 +47,21 @@ class permisos_rolesTest extends TestCase{
     }
 
     public function testPermisosRol(){
-
+        //se busca el id del rol a seleccionar
         $id_rol = self::$pdo->query('SELECT id from roles where nombre="rol de prueba"')->fetch(\PDO::FETCH_ASSOC)['id']; 
 
         $this->rol->set_rol_2($id_rol);
 
-        
-        $this->assertEquals('permiso actualizado',$this->rol->actualizar_permisos('1','false','true','false','false','1'));
+        $id_modulo = '1';
+        $registrar = 'false';
+        $consular= 'true';
+        $modificar = 'false';
+        $eliminar = 'false';
+        $rol_usuario = '1'; 
+
+        $actualizar_permisos = $this->rol->actualizar_permisos($id_modulo,$registrar,$consular,$modificar,$eliminar,$rol_usuario);
+
+        $this->assertEquals('permiso actualizado',$actualizar_permisos);
     }
 }
 

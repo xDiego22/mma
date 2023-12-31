@@ -1,7 +1,6 @@
  <?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\socioeconomico_atleta;
 
 class registrar_informacion_socioeconomicaTest extends TestCase{
@@ -13,18 +12,18 @@ class registrar_informacion_socioeconomicaTest extends TestCase{
 
     public function testRegistrarSocioeconomicoAtleta(){
     
-        $this->socioeconomico->set_nombre_atleta('1203?¡?¡');
-        $this->socioeconomico->set_tipo_vivienda('132912?¡¡¡');
-        $this->socioeconomico->set_zona_vivienda('8130283?¡?¡?');
-        $this->socioeconomico->set_propiedad_vivienda('43243¡¡¡¡');
-        $this->socioeconomico->set_habitantes_vivienda('fdsdfs');
-        $this->socioeconomico->set_internet('1');
-        $this->socioeconomico->set_luz('2');
-        $this->socioeconomico->set_agua('3');
-        $this->socioeconomico->set_telefono_residencial('4');
-        $this->socioeconomico->set_cable('5');
+        $this->socioeconomico->set_nombre_atleta('$%&ff4');
+        $this->socioeconomico->set_tipo_vivienda('13-{T¡');
+        $this->socioeconomico->set_zona_vivienda('81[*65G');
+        $this->socioeconomico->set_propiedad_vivienda('4$5ff*{.');
+        $this->socioeconomico->set_habitantes_vivienda('fd%F52');
+        $this->socioeconomico->set_internet('%ff');
+        $this->socioeconomico->set_luz('T%*.');
+        $this->socioeconomico->set_agua(':@#?');
+        $this->socioeconomico->set_telefono_residencial('/g5*.');
+        $this->socioeconomico->set_cable('%F$56f¿4');
 
-        $registro = $this->socioeconomico->registrar('1','29831184','5');
+        $registro = $this->socioeconomico->registrar('#@f1','21$ff=84','$$63d');
 
         $this->assertEquals('Registrado Correctamente', $registro);
     }

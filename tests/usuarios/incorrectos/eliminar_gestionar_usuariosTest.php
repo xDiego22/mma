@@ -1,7 +1,6 @@
 <?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\gestionar_usuarios;
 
 class eliminar_gestionar_usuariosTest extends TestCase{
@@ -14,8 +13,7 @@ class eliminar_gestionar_usuariosTest extends TestCase{
     public function testEliminarUsuarios(){
         $this->usuarios->set_cedula_usuarios('1d$%');
 
-        $this->assertEquals('eliminado',$this->usuarios->eliminar('29831184','7','1'));    
-       
+        $this->assertEquals('eliminado',$this->usuarios->eliminar('$%ff33','/8f','59D*'));
     }
 }
 

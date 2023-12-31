@@ -1,8 +1,6 @@
 <?php 
 
 use PHPUnit\Framework\TestCase;
-
-use modelo\conexion;
 use modelo\roles_permisos;
 
 class modificar_rolesTest extends TestCase{
@@ -13,7 +11,6 @@ class modificar_rolesTest extends TestCase{
 
         $this->rol->set_nombre('rol de prueba');
         $this->rol->set_descripcion('rol para pruebas phpunit');
- 
         $this->rol->set_modulo_club('true');
         $this->rol->set_modulo_personal('false');
         $this->rol->set_modulo_atletas('false');

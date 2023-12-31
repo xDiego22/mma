@@ -1,12 +1,9 @@
 <?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\gestionar_usuarios;
-
 class registrar_gestionar_usuariosTest extends TestCase{
     private $usuarios;
-
     public function setUp():void{
         $this->usuarios = new gestionar_usuarios();
     }

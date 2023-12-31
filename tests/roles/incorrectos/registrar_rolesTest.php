@@ -1,7 +1,6 @@
 <?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\roles_permisos;
 
 class registrar_rolesTest extends TestCase{
@@ -13,25 +12,24 @@ class registrar_rolesTest extends TestCase{
 
     public function testRegistrarRol(){
         
-        $this->rol->set_nombre('21312?¡?¡');
+        $this->rol->set_nombre('qwer123');
         $this->rol->set_descripcion('2131?¡?¡');
- 
-        $this->rol->set_modulo_club('1');
-        $this->rol->set_modulo_personal('4');
-        $this->rol->set_modulo_atletas('2');
-        $this->rol->set_modulo_medicos('3');
-        $this->rol->set_modulo_socioeconomicos('4');
-        $this->rol->set_modulo_eventos('5');
-        $this->rol->set_modulo_usuarios('3');
-        $this->rol->set_modulo_bitacora('4');
-        $this->rol->set_modulo_roles('5');
-        $this->rol->set_modulo_inscripcion('3');
-        $this->rol->set_modulo_emparejamientos('6');
-        $this->rol->set_modulo_resultados('4');
-        $this->rol->set_modulo_historial('3');
-        $this->rol->set_modulo_reportes('4');
+        $this->rol->set_modulo_club('1d#');
+        $this->rol->set_modulo_personal('e$%1');
+        $this->rol->set_modulo_atletas('/rrd');
+        $this->rol->set_modulo_medicos('!ddw');
+        $this->rol->set_modulo_socioeconomicos('!"#d');
+        $this->rol->set_modulo_eventos('3D$');
+        $this->rol->set_modulo_usuarios('3d3');
+        $this->rol->set_modulo_bitacora('&%f');
+        $this->rol->set_modulo_roles('$fg');
+        $this->rol->set_modulo_inscripcion('7%&&');
+        $this->rol->set_modulo_emparejamientos('@#!q');
+        $this->rol->set_modulo_resultados('33d');
+        $this->rol->set_modulo_historial('gr3#$');
+        $this->rol->set_modulo_reportes('4w!');
 
-        $registro = $this->rol->registrar('1','29831184','9');
+        $registro = $this->rol->registrar('1%&','2983%$2','%&2');
 
         $this->assertEquals('Registrado Correctamente', $registro);
     }

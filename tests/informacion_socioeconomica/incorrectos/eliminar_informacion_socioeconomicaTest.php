@@ -1,7 +1,6 @@
 <?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\socioeconomico_atleta;
 
 class eliminar_informacion_socioeconomicaTest extends TestCase{
@@ -13,10 +12,8 @@ class eliminar_informacion_socioeconomicaTest extends TestCase{
     }
 
     public function testEliminarSocioeconomicoAtleta(){
-        
         $this->socioeconomico->set_nombre_atleta('c!#%/$-S');
-        
-        $this->assertEquals('eliminado',$this->socioeconomico->eliminar('29831184','5','1'));
+        $this->assertEquals('eliminado',$this->socioeconomico->eliminar('r$%f+3','5ff¡¿','ee[3*d'));
 
     }
 }

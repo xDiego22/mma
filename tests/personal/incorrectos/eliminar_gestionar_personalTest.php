@@ -1,12 +1,10 @@
 <?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\gestionar_personal;
 
 class eliminar_gestionar_personalTest extends TestCase{
     private $personal;
-    protected static $pdo;
 
     public function setUp():void{
         
@@ -15,8 +13,8 @@ class eliminar_gestionar_personalTest extends TestCase{
 
     public function testEliminarPersonal(){
     
-        $this->personal->set_cedula_personal('peruana');
-        $this->assertEquals('eliminado',$this->personal->eliminar('29831184','2','1'));
+        $this->personal->set_cedula_personal('$@&/RR');
+        $this->assertEquals('eliminado',$this->personal->eliminar('298&&%@f','2$%(','/($ff5'));
        
     }
 }

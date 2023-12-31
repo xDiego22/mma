@@ -1,7 +1,6 @@
 <?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\gestionar_usuarios;
 
 class registrar_gestionar_usuariosTest extends TestCase{
@@ -10,16 +9,15 @@ class registrar_gestionar_usuariosTest extends TestCase{
     public function setUp():void{
         $this->usuarios = new gestionar_usuarios();
     }
-
     public function testRegistrarUsuarios(){
         
-        $this->usuarios->set_cedula_usuarios('13213');
-        $this->usuarios->set_nombre_usuarios('?¡?¡?¡?¡?312');
-        $this->usuarios->set_contrasena_usuarios('**{}{}{}{');
-        $this->usuarios->set_rol_usuario('a');
-        $this->usuarios->set_correo_usuarios('ds+1$%/():12');
+        $this->usuarios->set_cedula_usuarios('11cd#');
+        $this->usuarios->set_nombre_usuarios('3?!d');
+        $this->usuarios->set_contrasena_usuarios('de-.1?');
+        $this->usuarios->set_rol_usuario('a$');
+        $this->usuarios->set_correo_usuarios('es%.e');
 
-        $registro = $this->usuarios->registrar('1','29831184','7');
+        $registro = $this->usuarios->registrar('d2$','w3&','5r%');
 
         $this->assertEquals('Registrado Correctamente', $registro);
 

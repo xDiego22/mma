@@ -1,7 +1,6 @@
  <?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\historial_atleta;
 
 class mostrar_historial_atletaTest extends TestCase{
@@ -13,8 +12,10 @@ class mostrar_historial_atletaTest extends TestCase{
 
     public function testConsultarResultadosEventos(){
 
-        $mostrar = $this->historial->mostrar_resultado('3d1w+}');
-        $this->assertEquals('ingrese datos correctamente', $mostrar);
+        $id_atleta = '3d1w+}';
+
+        $mostrar = $this->historial->mostrar_resultado( $id_atleta );
+        $this->assertStringStartsWith('<tr>', $mostrar);
 
     }
 

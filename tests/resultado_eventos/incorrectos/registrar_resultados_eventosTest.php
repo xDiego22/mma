@@ -1,7 +1,6 @@
  <?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\resultados_eventos;
 
 class registrar_resultados_eventosTest extends TestCase{
@@ -20,7 +19,7 @@ class registrar_resultados_eventosTest extends TestCase{
         $this->resultados->set_ronda('a&%2d.');
         $this->resultados->set_forma_ganar('2=2$&/');
         
-        $registrar = $this->resultados->registrar('1','29831184','12');
+        $registrar = $this->resultados->registrar('@$dfg.1','2F.&?=','F$5.=?');
         $this->assertEquals('Registrado Correctamente', $registrar);
     }
 

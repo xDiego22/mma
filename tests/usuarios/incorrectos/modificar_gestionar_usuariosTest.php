@@ -1,7 +1,6 @@
 <?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\gestionar_usuarios;
 
 class modificar_gestionar_usuariosTest extends TestCase{
@@ -13,13 +12,13 @@ class modificar_gestionar_usuariosTest extends TestCase{
 
     public function testModificarUsuarios(){
 
-        $this->usuarios->set_cedula_usuarios('marroquie');
-        $this->usuarios->set_nombre_usuarios('123211');
-        $this->usuarios->set_contrasena_usuarios('?¡?¡?¡?¡?');
-        $this->usuarios->set_rol_usuario('fsadd');
-        $this->usuarios->set_correo_usuarios('ds+1;.:,():12');
+        $this->usuarios->set_cedula_usuarios('m234r#');
+        $this->usuarios->set_nombre_usuarios('12#/&');
+        $this->usuarios->set_contrasena_usuarios('dd#@=');
+        $this->usuarios->set_rol_usuario('1EE$()');
+        $this->usuarios->set_correo_usuarios('ffwe@?[');
 
-        $modificar = $this->usuarios->modificar('1','29831184','7');
+        $modificar = $this->usuarios->modificar('d$&','d#$%','%@ff');
         
         $this->assertEquals('Modificado Correctamente', $modificar);
     }

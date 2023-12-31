@@ -1,7 +1,6 @@
 <?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\gestionar_eventos;
 
 class eliminar_gestionar_eventosTest extends TestCase{
@@ -12,9 +11,9 @@ class eliminar_gestionar_eventosTest extends TestCase{
     }
 
     public function testEliminarEventos(){
-        $this->eventos->set_nombre_evento('1238012?¡?¡');
+        $this->eventos->set_nombre_evento('#R44@');
         
-        $this->assertEquals('eliminado',$this->eventos->eliminar('29831184','6','1'));
+        $this->assertEquals('eliminado',$this->eventos->eliminar('2E5=!@','.#4&d','%rff='));
     }
 }
 

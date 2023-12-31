@@ -1,7 +1,6 @@
 <?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\roles_permisos;
 
 class permisos_rolesTest extends TestCase{
@@ -15,8 +14,16 @@ class permisos_rolesTest extends TestCase{
 
         $this->rol->set_rol_2('dwed2');
 
+        $id_modulo = '3d43$%';
+        $registrar = 'd#%R&&:;';
+        $consular= '#$:)=';
+        $modificar = '##$%:;¡';
+        $eliminar = '#E#!/($';
+        $rol_usuario = '$11@'; 
+
+        $actualizar_permisos = $this->rol->actualizar_permisos($id_modulo,$registrar,$consular,$modificar,$eliminar,$rol_usuario);
         
-        $this->assertEquals('permiso actualizado',$this->rol->actualizar_permisos('3d43$%','d#%R&&:;','#$:)=','##$%:;¡','#E#!/($','1'));
+        $this->assertEquals('permiso actualizado',$actualizar_permisos);
     }
 }
 

@@ -1,6 +1,5 @@
 <?php 
 use PHPUnit\Framework\TestCase;
-
 use modelo\gestionar_clubes;
 
 class modificar_gestionar_clubesTest extends TestCase{
@@ -12,13 +11,13 @@ class modificar_gestionar_clubesTest extends TestCase{
 
     public function testModificarClubes(){
         
-        $this->clubes->set_codigo_club('132¡?¡?¡?');
-        $this->clubes->set_nombre_club('?¡?¡?¡?');
-        $this->clubes->set_telefono_club('AYER');
-        $this->clubes->set_deporte_club('332');
-        $this->clubes->set_direccion_club('21937219');
+        $this->clubes->set_codigo_club('132$%@?');
+        $this->clubes->set_nombre_club('?¡$&&');
+        $this->clubes->set_telefono_club('&%fr=');
+        $this->clubes->set_deporte_club('3$%%');
+        $this->clubes->set_direccion_club('%$!ff');
 
-        $modificar = $this->clubes->modificar('1','29831184','1');
+        $modificar = $this->clubes->modificar('#@%&','298!#$@','fr%!');
 
         $this->assertEquals('Modificado Correctamente', $modificar);
     }

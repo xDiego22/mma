@@ -1,7 +1,6 @@
 <?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\roles_permisos;
 
 class modificar_rolesTest extends TestCase{
@@ -13,10 +12,10 @@ class modificar_rolesTest extends TestCase{
 
     public function testModificarRol(){
 
-        $this->rol->set_nombre('371283?¡?¡?');
-        $this->rol->set_descripcion('3123¡?¡?');
+        $this->rol->set_nombre('37%=()');
+        $this->rol->set_descripcion('!R1&/');
 
-        $modificar = $this->rol->modificar('1','29831184','9');
+        $modificar = $this->rol->modificar('1@%$','/&1dd','##$1');
         $this->assertEquals('Modificado Correctamente', $modificar);
     }
 }

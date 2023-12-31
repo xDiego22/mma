@@ -1,7 +1,6 @@
 <?php 
 
 use PHPUnit\Framework\TestCase;
-
 use modelo\gestionar_clubes;
 
 
@@ -13,9 +12,9 @@ class eliminar_gestionar_clubesTest extends TestCase{
     }
 
     public function testEliminarClubes(){
-        $this->clubes->set_codigo_club('?¡?¡?¡?¡?');
+        $this->clubes->set_codigo_club('?¡R#$');
 
-        $this->assertEquals('eliminado',$this->clubes->eliminar('1','29831184','1'));
+        $this->assertEquals('eliminado',$this->clubes->eliminar('2$%&4','%!#','#$%@f'));
     }
 }
 
