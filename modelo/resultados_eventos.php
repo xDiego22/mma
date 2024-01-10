@@ -80,39 +80,44 @@ class resultados_eventos extends conexion{
 
 			if($this->validar()){
 				if(!$this->existe($this->nombre_evento,$this->atleta_ganador,$this->atleta_perdedor,$this->forma_ganar,$this->ronda)){
-
-					$co = $this->conecta();
-					$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					
-					try{
-						$resultado = $co->prepare("INSERT into resultados(
-							id_evento,
-							atleta1, 
-							atleta2,
-							forma_ganar, 
-							ronda)
-							Values(
-							:nombre_evento,
-							:atleta_ganador,
-							:atleta_perdedor,
-							:forma_ganar,
-							:ronda)");
+					if($this->atleta_ganador != $this->atleta_perdedor){
 
-						$resultado->bindParam(':nombre_evento',$this->nombre_evento);
-						$resultado->bindParam(':atleta_ganador',$this->atleta_ganador);
-						$resultado->bindParam(':atleta_perdedor',$this->atleta_perdedor);
-						$resultado->bindParam(':forma_ganar',$this->forma_ganar);
-						$resultado->bindParam(':ronda',$this->ronda);
-		
-						$resultado->execute();
-
-						$accion= "Ha registrado un resultado de eventos";
-
-						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-						return "Registrado Correctamente";
-
-					}catch(Exception $e){
-						return $e->getMessage();
+						$co = $this->conecta();
+						$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+						
+						try{
+							$resultado = $co->prepare("INSERT into resultados(
+								id_evento,
+								atleta1, 
+								atleta2,
+								forma_ganar, 
+								ronda)
+								Values(
+								:nombre_evento,
+								:atleta_ganador,
+								:atleta_perdedor,
+								:forma_ganar,
+								:ronda)");
+	
+							$resultado->bindParam(':nombre_evento',$this->nombre_evento);
+							$resultado->bindParam(':atleta_ganador',$this->atleta_ganador);
+							$resultado->bindParam(':atleta_perdedor',$this->atleta_perdedor);
+							$resultado->bindParam(':forma_ganar',$this->forma_ganar);
+							$resultado->bindParam(':ronda',$this->ronda);
+			
+							$resultado->execute();
+	
+							$accion= "Ha registrado un resultado de eventos";
+	
+							parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+							return "Registrado Correctamente";
+	
+						}catch(Exception $e){
+							return $e->getMessage();
+						}
+					}else{
+						return 'Error: No es posible seleccionar el mismo atleta en ambos campos';
 					}
 				}
 				else{
