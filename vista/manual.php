@@ -17,7 +17,7 @@
    
                <div class="container-fluid border mt-4 shadow p-3 mb-4 bg-white rounded" style="width:95%;">
                   
-                  <div class="container mt-3">	
+                  <div class="container-fluid mt-3">	
                      <div class="h2 text-center">
                         MANUAL INTERACTIVO.
                      </div>
@@ -35,7 +35,7 @@
                      </div>
                   </div>
 
-                  <div class="container-fluid my-4 pt-4 shadow bg-white rounded" style="width:95%;">
+                  <div class="container-fluid my-4 pt-4">
                   <div class="container p3">
    
                      <div class="row mt-3">
@@ -634,7 +634,7 @@
                                     </p>
                                  </div>               
                               </div>
-                  <div class="container p3">
+                  <div class="container-fluid p3">
    
                   <div class="row mt-3">
                      <div class="col-md-12">
@@ -871,7 +871,7 @@
 						</div>
 					</div>
    
-                  <div class="container text-center mt-3">
+                  <div class="container-fluid text-center mt-3">
                      <p class="font-weight-normal text-justify  text-center">
                      El usuario deberá rellenar correctamente cada uno de los espacios en blanco del formulario.
                      </p>
@@ -883,7 +883,7 @@
                      </p>
                   </div>
    
-                  <div class="container text-center mt-3">
+                  <div class="container-fluid text-center mt-3">
                      <p class="font-weight-normal text-justify  text-center">
                      OJO: si tiene un error ya sea en el formulario o en algún dato registrado, se mostrará
                      un mensaje que le dirá dónde está el error y no podrá registrar la información hasta 
@@ -1132,7 +1132,7 @@
                         </div>               
                      </div>
                   </div>
-                  <div class="container p3">
+                  <div class="container-fluid p3">
    
                      
                         <div class="col-md-12">
@@ -1308,7 +1308,7 @@
 					</div>
 					</div>
    
-                     <div class="container text-center mt-3">
+                     <div class="container-fluid text-center mt-3">
                         <p class="font-weight-normal text-justify  text-center">
                         El usuario deberá rellenar correctamente cada uno de los espacios en blanco del formulario.
                         </p>
@@ -1320,7 +1320,7 @@
                         </p>
                      </div>
    
-                     <div class="container text-center mt-3">
+                     <div class="container-fluid text-center mt-3">
                         <p class="font-weight-normal text-justify  text-center">
                         OJO: si tiene un error ya sea en el formulario o en algún dato registrado, se mostrará
                         un mensaje que le dirá dónde está el error y no podrá registrar la información hasta 
@@ -1642,7 +1642,7 @@
 						</div>
 						
 							
-						<div class="row container">
+						<div class="row container-fluid">
 							
 							<div class="col-6">
 							
@@ -1681,7 +1681,7 @@
 						</div>
 					</div>
    
-                        <div class="container text-center mt-3">
+                        <div class="container-fluid text-center mt-3">
                            <p class="font-weight-normal text-justify  text-center">
                            El usuario deberá rellenar correctamente cada uno de los espacios en blanco del formulario.
                            </p>
@@ -1694,7 +1694,7 @@
                            </p>
                         </div>
    
-                        <div class="container text-center mt-3">
+                        <div class="container-fluid text-center mt-3">
                            <p class="font-weight-normal text-justify  text-center">
                            OJO: si tiene un error ya sea en el formulario o en algún dato registrado, se mostrará
                            un mensaje que le dirá dónde está el error y no podrá registrar la información hasta 
@@ -1835,7 +1835,7 @@
 						</div>
 						
 							
-						<div class="row container">
+						<div class="row container-fluid">
 							
 							<div class="col-6">
 							
@@ -2111,7 +2111,7 @@
 						</div>
 					</div>
    
-                        <div class="container text-center mt-3">
+                        <div class="container-fluid text-center mt-3">
                            <p class="font-weight-normal text-justify  text-center">
                            El usuario deberá rellenar correctamente cada uno de los espacios en blanco del formulario.
                            </p>
@@ -2123,7 +2123,7 @@
                            </p>
                         </div>
    
-                        <div class="container text-center mt-3">
+                        <div class="container-fluid text-center mt-3">
                            <p class="font-weight-normal text-justify  text-center">
                            OJO: si tiene un error ya sea en el formulario o en algún dato registrado, se mostrará
                            un mensaje que le dirá dónde está el error y no podrá registrar la información hasta 
@@ -2300,7 +2300,7 @@
                            </div>
                         </div>
    
-            <div class="container-fluid border mt-4 shadow p-3 mb-4 bg-white rounded" style="width:95%;">
+            <div class="container-fluid border mt-4 p-3 mb-4">
 					<form method="post" action="" enctype="multipart/form-data">
 						<div class="container-fluid text-center h4 text-dark my-3">
 							Gestionar Inscripcion a Eventos
@@ -2418,13 +2418,13 @@
                               </div>  
                         </div>
    
-                        <div class="container text-center mt-3">
+                        <div class="container-fluid text-center mt-3">
                            <p class="font-weight-normal text-justify  text-center">
                            Selecciona el evento al cual le va ingresar participantes.
                            </p>
                         </div> 
    
-                        <div class="container text-center mt-3">
+                        <div class="container-fluid text-center mt-3">
                            <p class="font-weight-normal text-justify  text-center">
                            Ingresa los datos del atleta a inscribir en El evento, Al ingresar la cedula del atleta, 
                            El sistema le mostrara un mensaje en pantalla si el atleta no está inscrito
@@ -2437,7 +2437,7 @@
                            </p>
                         </div>
    
-                        <div class="container text-center mt-3">
+                        <div class="container-fluid text-center mt-3">
                            <p class="font-weight-normal text-justify  text-center">
                            El atleta se muestra en la tabla de atletas inscritos 
                         </div> 
@@ -2513,13 +2513,13 @@
                               </p>
                            </div>  
                                           
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                                  <p class="font-weight-normal text-justify  text-center">
                                  Si al ingresar una cedula de algún atleta existente en el sistema, 
                                  El autocompletara de forma automática sus datos, Para agregarlo al nuevo evento: 
                            </div> 
    
-                        <div class="container p3">
+                        <div class="container-fluid p3">
    
                            <div class="row mt-3">
                               <div class="col-md-12">
@@ -2605,20 +2605,20 @@
                                  </div>  
                            </div>
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                               <p class="font-weight-normal text-justify  text-center">
                               Seleccionar el Evento, Donde se realizara el emparejamiento de combate con los atletas inscritos: 
                               </p>
                            </div> 
    
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                               <p class="font-weight-normal text-justify  text-center">
                               Al seleccionar el Evento, El sistema mostrara la lista de los atletas inscritos en ese evento:
                               </p>
                            </div> 
                         
-                           <div class="container-fluid border mt-4 shadow p-3 mb-4 bg-white rounded" style="width:95%;"> 
+                           <div class="container-fluid border mt-4 p-3 mb-4"> 
 
 						<div class="container-fluid">
 							<div class="row"> 
@@ -2668,7 +2668,7 @@
 						
 					</div> <!-- fin de container de emparejar -->		
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                               <p class="font-weight-normal text-justify  text-center">
                                  Debe ingresar los parámetros acordes al emparejamiento que desea obtener, Ingresando el Sexo, Edad y peso: 
                               </p>
@@ -2681,7 +2681,7 @@
                               </p>
                            </div>
    
-                           <div class="container-fluid border mt-4 shadow p-3 mb-4 bg-white rounded" style="width:95%;"> 
+                           <div class="container-fluid border mt-4 p-3 mb-4"> 
 						
 						<div class="container-fluid">
 							<div class="row justify-content-between"> 
@@ -2741,7 +2741,7 @@
                            </div>
                         </div>
    
-                        <div class="container p3">
+                        <div class="container-fluid p3">
    
                            <div class="row mt-3">
                               <div class="col-md-12">
@@ -2890,7 +2890,7 @@
 
 					</div>
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                               <p class="font-weight-normal text-justify  text-center">
                                  El usuario deberá rellenar correctamente cada uno de los espacios, 
                                  Ingresando los resultados del emparejamiento 
@@ -2903,7 +2903,7 @@
                               </p>
                            </div>
    
-                           <div class="container text-center mt-3">
+                           <div class="contcontainer-fluidainer text-center mt-3">
                               <p class="font-weight-normal text-justify  text-center">
                               Una vez registrado los resultados aparecerán en la lista. Donde podrá eliminar su información.
                               </p>
@@ -2954,7 +2954,7 @@
                            </div>
                         </div>
                         
-                        <div class="container p3">
+                        <div class="container-fluid p3">
    
                            <div class="row mt-3">
                               <div class="col-md-12">
@@ -2980,7 +2980,7 @@
                               </div>
                            </div>
    
-                           <div class="container-fluid border mt-4 shadow p-3 mb-4 bg-white rounded" style="width:95%;"> 
+                           <div class="container-fluid border mt-4 p-3 mb-4 "> 
                            <div class="container-fluid text-center h4 text-dark mb-4">
 						Reporte de Atletas
 					</div>
@@ -3079,7 +3079,7 @@
 					</form>
 				</div>
    </div>
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                               <p class="font-weight-normal text-justify  text-center">
                               En esta pantalla el usuario podrá realizar reportes de todos los atletas anteriormente registrados, 
                               siendo así el usuario tiene que rellenar todos los espacios para que el sistema sepa los datos de
@@ -3087,13 +3087,13 @@
                               </p>
                            </div> 
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                               <p class="font-weight-normal text-justify  text-center">
                               Al tener todos los espacios rellenos correctamente el usuario debe presionar el botón <button type="button" id="registrar6" class="btn btn-danger ml-2">GENERAR REPORTE</button> 
                               </p>
                            </div> 
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                                  <p class="font-weight-normal text-justify  text-center">
                                     El sistema creará una página de extensión pdf donde mostrará todo el personal
                                     que coincide con los datos suministrados por el usuario.
@@ -3108,7 +3108,7 @@
                               </div>
                            </div>
    
-                           <div class="container-fluid border mt-4 shadow p-3 mb-4 bg-white rounded" style="width:95%;">
+                           <div class="container-fluid border mt-4 p-3 mb-4">
 					<div class="container-fluid text-center h4 text-dark mb-4">
 						Reporte de Personal  
 					</div>
@@ -3173,20 +3173,20 @@
 					</form>
 				</div>
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                               <p class="font-weight-normal text-justify  text-center">
                               En esta pantalla el usuario podrá realizar reportes del personal de los clubes anteriormente registrados, siendo así el usuario
                                  tiene que rellenar los espacios para que el sistema sepa los datos del personal del cual el usuario quiere realizar el reporte.
                               </p>
                            </div> 
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                                  <p class="font-weight-normal text-justify  text-center">
                                  Al tener todos los espacios rellenos correctamente el usuario debe presionar el botón <button type="button" id="registrar6" class="btn btn-danger ml-2">GENERAR REPORTE</button> 
                                  </p>
                               </div> 
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                                  <p class="font-weight-normal text-justify  text-center">
                                  El sistema creará una página de extensión pdf donde mostrará todo el 
                                  personal que coincide con los datos suministrados por el usuario.
@@ -3201,7 +3201,7 @@
                               </div>
                            </div>
    
-                           <div class="container-fluid border mt-4 shadow p-3 mb-4 bg-white rounded" style="width:95%;">
+                           <div class="container-fluid border mt-4 p-3 mb-4 ">
 					<div class="container-fluid text-center h4 text-dark mb-4">
 						Reporte de Eventos
 					</div>
@@ -3234,20 +3234,20 @@
 					</form>
 				</div>
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                               <p class="font-weight-normal text-justify  text-center">
                               En esta pantalla el usuario podrá realizar reportes de todos los eventos anteriormente registrados por el usuario, 
                               siendo así la persona tiene que rellenar todos los espacios para que el sistema conozca cuales son los datos que puedan coincidir con la búsqueda, para después realizar el reporte.
                               </p>
                            </div> 
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                               <p class="font-weight-normal text-justify  text-center">
                               Al tener todos los espacios rellenos correctamente el usuario debe presionar el botón <button type="button" id="registrar6" class="btn btn-danger ml-2">GENERAR REPORTE</button> 
                               </p>
                            </div> 
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                                  <p class="font-weight-normal text-justify  text-center">
                                  El sistema creará una página de extensión pdf donde mostrará todos los eventos que 
                                  coincidan con los datos suministrados por el usuario.
@@ -3262,7 +3262,7 @@
                               </div>
                            </div>
    
-                           <div class="container-fluid border mt-4 shadow p-3 mb-4 bg-white rounded" style="width:95%;">
+                           <div class="container-fluid border mt-4 p-3 mb-4 ">
 			
          <div class="container-fluid text-center h4 text-dark mb-4">
             Reporte de Resultado de eventos
@@ -3298,20 +3298,20 @@
          </form>
       </div>
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                               <p class="font-weight-normal text-justify  text-center">
                               En esta pantalla el usuario podrá realizar reportes de todos resultados de los eventos anteriormente realizados, 
                               Donde solo debe seleccionar el evento el cual desea generar reporte.
                               </p>
                            </div> 
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                               <p class="font-weight-normal text-justify  text-center">
                               Al tener el Evento seleccionado el usuario debe presionar el botón <button type="button" id="registrar6" class="btn btn-danger ml-2">GENERAR REPORTE</button> 
                               </p>
                            </div> 
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                               <p class="font-weight-normal text-justify  text-center">
                                  El sistema creará una página de extensión pdf donde mostrará todos Resultados de  los eventos que 
                                  coincidan con la seleccion suministrada por el usuario.
@@ -3327,7 +3327,7 @@
                               </div>
                            </div>
    
-                           <div class="container-fluid border mt-4 shadow p-3 mb-4 bg-white rounded" style="width:95%;">
+                           <div class="container-fluid border mt-4 p-3 mb-4 ">
 					<div class="container-fluid text-center h4 text-dark mb-4">
 						Reporte de Historial de Atleta
 					</div>
@@ -3359,14 +3359,14 @@
 					</form>
 				</div>
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                               <p class="font-weight-normal text-justify  text-center">
                               En esta pantalla el usuario podrá realizar reporte del historial del atleta de resultados anteriormente registrados 
                               por el usuario, Seleccionando el atleta para así generar el reporte. 
                               </p>
                            </div> 
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                               <p class="font-weight-normal text-justify  text-center">
                               Al tener el Evento seleccionado el usuario debe presionar el botón <button type="button" id="registrar6" class="btn btn-danger ml-2">GENERAR REPORTE</button> 
                               </p>
@@ -3381,7 +3381,7 @@
                               </div>
                            </div>
    
-                           <div class="container-fluid my-4 pt-4 shadow bg-white rounded" style="width:95%;">
+                           <div class="container-fluid my-4 pt-4 ">
             
             <div class="container-fluid mt-4 mb-3">
                 <div class="row justify-content-between">
@@ -3414,26 +3414,26 @@
 
         
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                               <p class="font-weight-normal text-justify  text-center">
                               En esta pantalla el usuario podrá visualizar la cantidad de todos los participantes registrados en un Evento, 
                               Mediante una grafica, donde solo debe seleccionar el evento:
                               </p>
                            </div> 
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                               <p class="font-weight-normal text-justify  text-center">
                               Luego debe presionar el Evento que desee
                               </p>
                            </div> 
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                                  <p class="font-weight-normal text-justify  text-center">
                                  El sistema mostrará la grafica diferenciando la cantidad de participantes inscritos entre Masculinos y Femeninos.
                                  Diferenciados entre 2 colores.
                            </div> 
    
-                           <div class = "container text-center">
+                           <div class = "container-fluid text-center">
                                  <img src="img/manual/59.jpg" class="img-fluid rounded" alt="Responsive image" width="700px">
                            </div>
    
@@ -3446,18 +3446,18 @@
                               </div>
                            </div>
    
-                           <div class = "container text-center">
+                           <div class = "container-fluid text-center">
                               <img src="img/manual/61.jpg" class="img-fluid rounded" alt="Responsive image" width="700px">
                            </div>
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                               <p class="font-weight-normal text-justify  text-center">
                                  En esta pantalla el usuario podrá visualizar Mediante una grafica, la cantidad de zona de viviendas del total
                                  de participantes.
                               </p>
                            </div> 
    
-                           <div class="container p3">
+                           <div class="container-fluid p3">
    
                               <div class="row mt-3">
                                  <div class="col-md-12">
@@ -3475,7 +3475,7 @@
                                  </div>
                               </div>
    
-                              <div class="container-fluid pt-3 my-4 shadow-lg bg-white rounded" style="width:95%;">
+                              <div class="container-fluid pt-3 my-4 ">
 			
 					<div class="container-fluid mt-4 mb-3">
 						<div class="row justify-content-between">
@@ -3528,13 +3528,13 @@
 					</div>
 					
 				</div>
-                              <div class="container text-center mt-3">
+                              <div class="container-fluid text-center mt-3">
                                  <p class="font-weight-normal text-justify  text-center">
                                  Primero que nada se mostrara una lista, Con las acciones realizadas dentro del sistema con toda la información específica:
                                  </p>
                               </div> 
    
-                              <div class="container text-center mt-3">
+                              <div class="container-fluid text-center mt-3">
                                  <p class="font-weight-normal text-justify  text-center">
                                  En esta pantalla podremos visualizar todo lo que se a realizado dentro del sistema, Todas las acciones y movimientos, Mostrando el usuarios que realizo la opción. 
                                  </p>
@@ -3615,7 +3615,7 @@
 						</div>
 					</div>
    
-                              <div class="container text-center mt-3">
+                              <div class="container-fluid text-center mt-3">
                                  <p class="font-weight-normal text-justify  text-center">
                                  En primer lugar, muestra una lista con los roles y su descripción 
                                  </p>
@@ -3748,7 +3748,7 @@
 
 					</div>
    
-                              <div class="container text-center mt-3">
+                              <div class="container-fluid text-center mt-3">
                                  <p class="font-weight-normal text-justify  text-center">
                                     El usuario deberá rellenar correctamente cada uno de los espacios en blanco del formulario. 
                                  </p>
@@ -3891,7 +3891,7 @@
                                  </div>   
                               </div>
                                  
-          <div class="container-fluid pt-3 my-4 shadow-lg bg-white rounded" style="width:95%;">
+          <div class="container-fluid pt-3 my-4">
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-md-12">
@@ -3990,7 +3990,7 @@
 						</div>
 					</div>
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                               <p class="font-weight-normal text-justify  text-center">
                               En primer lugar, Si hay usuarios registrados, Aparecerán en la lista.
                               </p>
@@ -4056,7 +4056,7 @@
 						</div>
 					</div>
    
-                           <div class="container text-center mt-3">
+                           <div class="container-fluid text-center mt-3">
                                  <p class="font-weight-normal text-justify  text-center">
                                  El usuario deberá rellenar correctamente cada uno de los espacios en blanco del formulario.
                                  </p>
@@ -4246,7 +4246,7 @@
                            </div>
                         </div>
    
-                        <div class="container-fluid border mt-4 shadow p-3 mb-4 bg-white rounded" style="width:95%;">
+                        <div class="container-fluid border mt-4>
 					
 					<div class="card-body">
 						<div class="h5 text-center">
@@ -4286,7 +4286,7 @@
 					
 				</div>
    
-                        <div class="container text-center mt-3">
+                        <div class="container-fluid text-center mt-3">
                            <p class="font-weight-normal text-justify  text-center">
                               Breve reglas de la comunidad
                            </p>
