@@ -1134,11 +1134,11 @@
                   </div>
                   <div class="container p3">
    
-                     <div class="row mt-3">
+                     
                         <div class="col-md-12">
                            <div class="h3 text-dark">GESTIONAR INFORMACION MEDICA DEL ATLETA</div>
                         </div>       
-                     </div>
+                     
    
                      <div class="row">
                         <div class="col">
@@ -1410,14 +1410,13 @@
                         </div>  
                      </div>
    
-                     <div class="container-fluid">
-                     <div class="row mb-3">
+                     <class="row mb-3">
                         <div class="col-md-12">
                            <p class="font-weight-normal text-justify">
                               Para modificar la informacion del Atleta deberá presionar sobre <button type='button' class='btn btn-primary mb-1 mr-1 ml-2' id='boton_modificar'><i class='bi bi-pencil-fill'></i></button>
                            y le aparecera el formulario para modificar los datos medicos de los atletas:</p>
                         </div>   
-                     <div>  
+                      
    
                      <div class="row"> 
 							<div class="col-md-12 mb-2">
@@ -1489,7 +1488,6 @@
 							<span class="texto" id="srelacion_parentesco" style="color: #ff0000;"></span>
 						</div>
 					</div>
-					</div>
    
                      <div class="mt-3">  
                         <p class="font-weight-normal text-justify text-center">
@@ -1510,10 +1508,8 @@
                            <br>Para eliminar un Atleta solo debe presionar sobre el boton y aparecera el siguiente mensaje. <b>Presione el boton</b> <button type='button'  class='btn btn-danger mb-1' id="eliminar3"><i class='bi bi-x-lg'></i></button>
                            </p>
                         </div>               
-                     </div>
-   
-   
-                     <div class="container p3">
+                     </div>			
+						
    
                         <div class="row mt-3">
                            <div class="col-md-12">
@@ -1530,8 +1526,7 @@
                            </div>
                         </div>
    
-                        <div class="row">
-						<div class="col-md-12" >
+                        
 							<div class="table-responsive">
 								<table class="table table-striped table-hover table-borderless" id="tablaconsulta" width="100%" cellspacing="0">
 									<thead class="thead-dark">
@@ -1566,9 +1561,7 @@
 									</tbody>
 								</table>
 							</div>
-							
-						</div>
-					</div>
+					
 					
    
                         <div class="mt-3 mb-5">
@@ -1768,9 +1761,9 @@
 									</tbody>
 								</table>
 							</div>
-						</div>
+						
 					<br>
-			   <div class="container-fluid">
+			   
                         <div class="row mb-2">
                            <div class="col-md-12">
                               <div class="h4 text-dark text-center">Para MODIFICAR</div>
@@ -1784,7 +1777,6 @@
                                y le aparece otra vez un formulario:</p>
                            </div>   
    
-                        <div class="container-fluid">
 						<div class="row mb-2"> 
 							<div class="col-md-12 mb-2">
 									<label for="nombre_atleta">Atleta</label>
@@ -1880,7 +1872,7 @@
 							</div>
 
 						</div>
-					</div>
+					
    
                         <div class="mt-3">  
                            <p class="font-weight-normal text-justify text-center">
@@ -1902,8 +1894,6 @@
                            </div>               
                         </div>
    
-                        <div class="container p3">
-   
                            <div class="row mt-3">
                               <div class="col-md-12">
                                  <div class="h3 text-dark">HISTORIAL DEL ATLETA</div>
@@ -1920,7 +1910,7 @@
                               </div>
                            </div>
    
-                           <div class="container-fluid border mt-4 shadow p-3 mb-4 bg-white rounded" style="width:95%;">
+                           <div class="container-fluid border shadow bg-white rounded">
 					<div class="container-fluid text-center h4 text-dark my-3">
 						Historial de Atleta
 					</div>
@@ -1948,7 +1938,7 @@
 						</div>
 					</div>
 			
-					<div class="container-fluid">
+					
 							<div class="row">
 								<div class="col-md-12  mb-7" style="height: 400px;overflow: auto;">
 									<table class="table table-striped table-hover" width="100%" cellspacing="0">
@@ -1974,8 +1964,6 @@
                                  Selecciona el atleta para ver su historial y aparecerá la información del historial del atleta. 
                               </p>
                            </div>
-                           
-                        <div class="container p3">
    
                         <div class="row mt-3">
                            <div class="col-md-12">
@@ -2296,7 +2284,6 @@
                            </div>             
                         </div>
                                           
-                     <div class="container p3">
    
                         <div class="row mt-3">
                            <div class="col-md-12">
@@ -4087,8 +4074,6 @@
                               </p>
                            </div>
 			
-			<div class="container-fluid mt-4 mb-3">
-			
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12" >
@@ -4190,10 +4175,8 @@
                                  Modifica la informacion y presiona modificar. <b>Presione el boton</b> <button type="button" class="btn btn-danger" id="modifica12"><i class="bi bi-pencil-fill mr-1"></i>Modificar</button>
                               </p>
                            </div>
-
-						   <div class="container-fluid mt-4 mb-3">
 			
-			<div class="container-fluid">
+
 				<div class="row">
 					<div class="col-md-12" >
 						<div class="table-responsive">
