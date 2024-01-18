@@ -33,6 +33,10 @@ $(document).ready(function () {
     enviaAjax(datos, "recargar");
   });
 
+  $("#boton_vaciar").on("click", function () {
+    vaciar();
+  });
+
 });
 
 function recargar() {
@@ -74,4 +78,52 @@ function mensajemodal(mensaje) {
   setTimeout(function () {
     $("#mostrarmodal").modal("hide");
   }, 4000);
+}
+
+function vaciar() {
+  Swal.fire({
+    title: "¿Estas Seguro?",
+    html: "Eliminaras todos los registros de la tabla. <br>¡No podrás revertir esta accion!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3B71CA",
+    confirmButtonText: "Si, vaciar",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      let datos = new FormData();
+      datos.append("accion", "vaciar");
+
+      $.ajax({
+        async: true,
+        url: "", //la pagina a donde se envia por estar en mvc, se omite la ruta ya que siempre estaremos en la misma pagina
+        type: "POST",
+        contentType: false,
+        data: datos,
+        processData: false,
+        cache: false,
+        success: function (respuesta) {
+          try {
+            if (respuesta == "Tabla vaciada correcctamente") {
+              Swal.fire({
+                title: "¡Limpieza Exitosa!",
+                text: "La informacion ha sido eliminada.",
+                icon: "success",
+              });
+              tabla.ajax.reload(null, false);
+            } else {
+             mensajemodal(respuesta);
+              
+            }
+          } catch (e) {
+            mensajemodal(respuesta);
+          }
+        },
+        error: function () {
+          mensajemodal("Error con ajax");
+        },
+      });
+    }
+  });
 }

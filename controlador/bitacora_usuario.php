@@ -31,6 +31,11 @@
 				echo $objeto->consultar($rol_usuario);		
 				exit;
 			}
+			if($accion=='vaciar'){
+
+				echo $objeto->vaciar($rol_usuario);		
+				exit;
+			}
 		}
 
 		$permisos = $objeto->permisos($rol_usuario);

@@ -26,14 +26,19 @@
 				<?php require_once('comunes/menu-topbar.php')?>
 				<div class="container-fluid pt-3 my-4 shadow-lg bg-white rounded" style="width:95%;">
 			
-					<div class="container-fluid mt-4 mb-3">
+					<div class=" mt-4 mb-3">
 						<div class="row justify-content-between">
-							<div class="col-auto mr-auto mb-2">
+							<div class="col-md-auto mr-auto mb-2">
 								<div class="h4 text-dark">Bitacora de Usuarios</div>
 							</div>
 							<div class="col-auto">
+								<button type='button' id="boton_vaciar" class="btn btn-danger mb-1 ">
+									<i class='bi bi-trash3 mr-1'></i>Vaciar
+								</button>
+							</div>
+							<div class="col-auto">
 								<button type="button" class="btn btn-success" id="boton_recargar">
-									<i class="bi bi-arrow-repeat mr-1"></i></i>Actualizar
+									<i class="bi bi-arrow-repeat mr-1"></i>Actualizar
 								</button>
 							</div>
 						</div>

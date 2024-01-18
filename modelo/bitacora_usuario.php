@@ -16,6 +16,48 @@ class bitacora_usuario extends conexion{
 		return $this->permiso;
 	}
 
+	public function vaciar($rol_usuario){
+		
+		try{
+			$co = $this->conecta();
+			$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+			$valor = $this->permisos($rol_usuario); //rol del usuario
+			if ($valor[3]=="true") {
+
+				$stmt = $co->prepare("TRUNCATE TABLE bitacora_usuario;");
+
+				$stmt->execute();
+
+				// Verificar si la tabla se vació correctamente
+				$rowCount = $stmt->rowCount();
+
+				
+				header('Content-Type: text/plain');
+				
+				if ($rowCount == 0) {
+					
+					http_response_code(200);
+					return 'Tabla vaciada correcctamente';
+				} else {
+					
+					http_response_code(500);
+					return 'Error al vaciar la tabla';
+				}
+				
+			}else{
+				header('Content-Type: text/plain');
+				http_response_code(403);
+				return "No tiene permiso para realizar esta tarea";
+			}
+
+		}catch(Exception $e) {
+			header('Content-Type: text/plain');
+			http_response_code(500);
+			return $e->getMessage();
+		}
+	}
+
     public function consultar($rol_usuario){
 
         $co = $this->conecta();
