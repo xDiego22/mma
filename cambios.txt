@@ -168,3 +168,5 @@ se modifica alert con sweetalert de eliminado en cada modulo donde se elimina in
 se añade validacion a metodos de permisos a modelos
 
 pruebas unitarias modificadas y adaptadas para que fueran mas cortas utilizando datos de la bd
+
+creacion de modulo de respaldo de base de datos, se modifico menu para mostrar el modulo, se crearon sus respectivos archivos de mvc y la carpeta backup donde se guardaran los respectivos respaldos. 
