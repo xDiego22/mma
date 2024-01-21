@@ -16,7 +16,7 @@ class bitacora_usuario extends conexion{
 		return $this->permiso;
 	}
 
-	public function vaciar($rol_usuario){
+	public function vaciar($rol_usuario,$cedula_bitacora, $modulo){
 		
 		try{
 			$co = $this->conecta();
@@ -37,6 +37,10 @@ class bitacora_usuario extends conexion{
 				
 				if ($rowCount == 0) {
 					
+					$accion= "Ha vaciado la bitacora";
+
+					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+
 					http_response_code(200);
 					return 'Tabla vaciada correcctamente';
 				} else {

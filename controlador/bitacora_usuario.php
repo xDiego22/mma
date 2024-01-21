@@ -33,7 +33,7 @@
 			}
 			if($accion=='vaciar'){
 
-				echo $objeto->vaciar($rol_usuario);		
+				echo $objeto->vaciar($rol_usuario,$cedula_bitacora, $modulo);		
 				exit;
 			}
 		}
