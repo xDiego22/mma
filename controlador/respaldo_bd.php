@@ -31,12 +31,12 @@
 			}
 			if($accion == 'restore'){
 				$objeto->set_restorePoint($_POST['restorePoint']);
-				echo $objeto->restore();
+				echo $objeto->restore($cedula_bitacora, $modulo);
 			}
 
 			if($accion == 'eliminar'){
 				$objeto->set_restorePoint($_POST['restorePoint']);
-				echo $objeto->eliminarRestorePoint();
+				echo $objeto->eliminarRestorePoint($cedula_bitacora, $modulo);
 			}
 
 			exit;

@@ -103,7 +103,7 @@ class respaldo_bd extends conexion{
 		}
 	}
 
-	public function restore(){
+	public function restore($cedula_bitacora, $modulo){
 		try {
 
 			if(preg_match_all('/^[\w()-.]{20,50}$/',$this->restorePoint)){
@@ -131,6 +131,10 @@ class respaldo_bd extends conexion{
 				$bd->exec("SET FOREIGN_KEY_CHECKS=1");
 	
 				if ($totalErrors <= 0) {
+
+					$accion= "Ha restaurado la base de datos";
+
+					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
 					http_response_code(200);
 					return "Restauración completada con éxito";
 				} else {
@@ -148,7 +152,7 @@ class respaldo_bd extends conexion{
 		}
 	}
 
-	public function eliminarRestorePoint(){
+	public function eliminarRestorePoint($cedula_bitacora, $modulo){
 		try {
 
 			if(preg_match_all('/^[\w()-.]{20,50}$/',$this->restorePoint)){
@@ -158,6 +162,10 @@ class respaldo_bd extends conexion{
 				if(is_file($restorePoint)){
 
 					unlink($restorePoint);
+
+					$accion= "Ha eliminado un punto de respaldo";
+
+					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
 
 					http_response_code(200);
 					return "Eliminado correctamente";
@@ -179,11 +187,11 @@ class respaldo_bd extends conexion{
 
     public function permisos($rol){
 		
-		$co = $this->conecta();
-		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		if(preg_match_all("/^[0-9]{1,10}$/",$rol)){
 			try{
 				
+				$co = $this->conecta();
+				$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				
 				$stmt = $co->prepare("SELECT consultar, registrar, modificar, eliminar FROM intermediaria WHERE id_rol = :rol and id_modulos = '15' ");
 				
