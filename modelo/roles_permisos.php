@@ -393,7 +393,7 @@
 
                             if ($this->modulo_reportes == "true") {
                                 $valor_permiso = "false";
-                                $id_modulo = "15";
+                                $id_modulo = "21";
                                 $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
 
                                 $resultado->bindParam(':rol',$id_nuevo_rol);
