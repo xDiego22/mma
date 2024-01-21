@@ -28,6 +28,22 @@ $(document).ready(function () {
   });
 
   $("#boton_recargar").on("click", function () {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 4000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+    Toast.fire({
+      icon: "info",
+      title: "Procesando solicitud",
+      text: "por favor espere...",
+    });
     var datos = new FormData();
     datos.append("accion", "consultar");
     enviaAjax(datos, "recargar");
@@ -43,7 +59,8 @@ function recargar() {
   setInterval(function () {
     var datos = new FormData();
     datos.append("accion", "recargar");
-    enviaAjax(datos, "recargar");
+    enviaAjax(datos, "recargar_automatico");
+    alert('hola');
   }, 10000);
 }
 
@@ -59,13 +76,35 @@ function enviaAjax(datos, accion) {
     success: function (respuesta) {
       if (accion == "recargar") {
         try {
-          tabla.ajax.reload(null,false);
+
+          tabla.ajax.reload(null, false);
+          
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            },
+          });
+          Toast.fire({
+            icon: "success",
+            title: "Informacion actualizada",
+          });
         } catch (e) {
           mensajemodal("Error en Ajax " + e.name + " !!!");
         }
-      } else {
-        mensajemodal("no boton");
-      }
+      } 
+      if (accion == "recargar_automatico") {
+        try {
+          tabla.ajax.reload(null, false);
+        } catch (e) {
+          mensajemodal("Error en Ajax " + e.name + " !!!");
+        }
+      } 
     },
     error: function () {
       mensajemodal("Error con ajax");
@@ -120,8 +159,11 @@ function vaciar() {
             mensajemodal(respuesta);
           }
         },
-        error: function () {
-          mensajemodal("Error con ajax");
+        error: function (respuesta) {
+          Swal.fire({
+            title: `${respuesta.responseText}`,
+            icon: "error",
+          });
         },
       });
     }
