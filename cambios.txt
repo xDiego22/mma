@@ -170,3 +170,9 @@ se añade validacion a metodos de permisos a modelos
 pruebas unitarias modificadas y adaptadas para que fueran mas cortas utilizando datos de la bd
 
 creacion de modulo de respaldo de base de datos, se modifico menu para mostrar el modulo, se crearon sus respectivos archivos de mvc y la carpeta backup donde se guardaran los respectivos respaldos. 
+
+se añaden permisos para modulo de respaldo.
+
+se creo un metodo para bitacora de vaciarla, y el js manda alerta cuando se actualiza y vacia.
+
+roles y permisos se modifico para añadirle modulo de respaldo.
