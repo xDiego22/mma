@@ -35,52 +35,118 @@
 						</div>
 					</div>
 
-					<button id='respaldar' name='respaldar' class = 'btn btn-primary'>
-						Realizar Backup
-					</button>
+					<div class="row justify-content-center align-items-center">
 
-					<div >
-						<select class='form-control' name="restorePoint" id="restorePoint">
-							<option value="" hidden="" selected="hidden">Seleccionar Opcion</option>
-							<option value=""></option>
+						<div class="col-md-auto mb-2 text-center">
 
-							<?php
+							<button id='respaldar' name='respaldar' class='btn btn-outline-success'>
+								<img src="img/iconos/backup.png" class="img-fluid" alt="backup image">
+								<p class="mt-2 font-size-xl">Realizar Copia de Seguridad</p>
+							</button>
+
+						</div>
+						<div class="col-md-auto mb-2 text-center">
+
+							<button id="boton_restorePoint" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal_restorePoint">
 								
-								$ruta='backup/';
+								<img src="img/iconos/restore.png" class="img-fluid" alt="restore image">
+								<p class="mt-2 font-size-xl">Restaurar Copia de Seguridad</p>
+							</button>
 
-								if(is_dir($ruta)){
-
-									if($aux=opendir($ruta)){
-										while(($archivo = readdir($aux)) !== false){
-											if($archivo!="."&&$archivo!=".."){
-
-												$nombrearchivo=str_replace(".sql", "", $archivo);
-
-												$nombrearchivo=str_replace("-", ":", $nombrearchivo);
-
-												$ruta_completa=$ruta.$archivo;
-												if(!is_dir($ruta_completa)){
-													echo '<option value="'.$ruta_completa.'">'.$nombrearchivo.'</option>';
-												}
-											}
-										}
-										closedir($aux);
-									}
-								}else{
-									echo $ruta." No es ruta válida";
-								}
-							?>
-						</select>
+						</div>
 					</div>
-					
-					<button id='restore' name='restore' class = 'btn btn-primary'>
-						enviar
-					</button>
+
 				</div>
 			</div>
 			
 		</div>
 	</div>
+
+	<!--Modal-->
+	<div class="modal fade" id="modal_restorePoint" tabindex="-1" aria-labelledby="modal_restorePointlabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modal_restorePointlabel">Punto de Restauración</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+					<div class="container-fluid">
+						<div class="row justify-content-center">
+							<div class="col-md-10">
+								<label for="restorePoint">Seleccionar punto de restauracion</label>
+								<div class="d-flex">
+									<select class='form-control' name="restorePoint" id="restorePoint">
+										<option value="" hidden="" selected="hidden">--Seleccionar Opcion--</option>
+										<option value=""></option>
+
+										<?php
+											$ruta='backup/';
+
+											$opciones = array();
+
+											if(is_dir($ruta)){
+
+												if($aux=opendir($ruta)){
+													while(($archivo = readdir($aux)) !== false){
+														if($archivo!="."&&$archivo!=".."){
+
+															$nombrearchivo=str_replace(".sql", "", $archivo);
+
+															$nombrearchivo=str_replace("-", ":", $nombrearchivo);
+
+															$ruta_completa=$ruta.$archivo;
+
+															if(!is_dir($ruta_completa)){
+																 $opciones[$nombrearchivo] = '<option value="'.$archivo.'">'.$nombrearchivo.'</option>';
+															}
+														}
+													}
+													closedir($aux);
+
+													// Ordena el array en orden descendente
+													krsort($opciones);
+
+													foreach ($opciones as $opcion) {
+														echo $opcion;
+													}
+												}
+											}else{
+												echo $ruta." No es ruta válida";
+											}
+										?>
+									</select>
+									<button type='button' id="boton_eliminar" class="btn btn-danger mb-1 ml-2">
+										<i class='bi bi-trash-fill'></i>
+									</button>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row justify-content-center mt-3">
+							
+							<button id='restore' name='restore' class='btn btn-primary'>
+								Restaurar
+							</button>
+							
+						</div>
+					</div>
+
+
+
+				</div>
+				<div class="modal-footer">
+					
+					<button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+							
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Fin Modal regitro-->
 	<a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>

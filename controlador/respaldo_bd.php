@@ -34,6 +34,11 @@
 				echo $objeto->restore();
 			}
 
+			if($accion == 'eliminar'){
+				$objeto->set_restorePoint($_POST['restorePoint']);
+				echo $objeto->eliminarRestorePoint();
+			}
+
 			exit;
 		}
 

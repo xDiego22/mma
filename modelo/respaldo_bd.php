@@ -39,7 +39,7 @@ class respaldo_bd extends conexion{
 				date_default_timezone_set('America/Caracas');
 			
 				$fecha = date("d_m_Y");
-				$hora = date("H-i-s");
+				$hora = date("h-i-sa");
 				$tablas = array();
 
 				// Obtener la lista de tablas
@@ -106,12 +106,12 @@ class respaldo_bd extends conexion{
 	public function restore(){
 		try {
 
-			if(preg_match_all('/^[\w\/()-.]{20,50}$/',$this->restorePoint)){
+			if(preg_match_all('/^[\w()-.]{20,50}$/',$this->restorePoint)){
 
 				$bd = $this->conecta();
 				$bd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	
-				$restorePoint = $this->limpiarCadena($this->restorePoint);
+				$restorePoint = "backup/".$this->limpiarCadena($this->restorePoint);
 				$sql = explode(";", file_get_contents($restorePoint));
 				$totalErrors = 0;
 	
@@ -148,30 +148,34 @@ class respaldo_bd extends conexion{
 		}
 	}
 
-	// public function respaldar(){
-	// 	try{
+	public function eliminarRestorePoint(){
+		try {
 
-	// 		$fecha = date("Ymd-His"); 
+			if(preg_match_all('/^[\w()-.]{20,50}$/',$this->restorePoint)){
 
-	// 		$salida_sql = 'backup/'.$this->bd.'_'.$fecha.'.sql'; 
+				$restorePoint = "backup/".$this->limpiarCadena($this->restorePoint);
+				
+				if(is_file($restorePoint)){
+
+					unlink($restorePoint);
+
+					http_response_code(200);
+					return "Eliminado correctamente";
+				}else {
+					http_response_code(400);
+					return "Error: No existe este punto de restauracion";
+				}
 	
-	// 		//Comando para genera respaldo de MySQL, enviamos las variales de conexion y el destino
-
-	// 		$dump = "mysqldump --host={$this->ip} --user={$this->usuario} --port=3306 --no-data {$this->bd} > {$salida_sql}";
-
-	// 		system($dump, $output); //Ejecutamos el comando para respaldo
-			
-	// 		// // Verificamos si hubo errores durante la ejecución del comando
-	// 		if ($output !== 0) {
-	// 			throw new Exception("Error al realizar el respaldo. Código de salida: $output");
-	// 		}
-
-	// 		return "Respaldo creado correctamente";
-
-	// 	} catch (Exception $e) {
-	// 		return "Error: " . $e->getMessage();
-	// 	}
-	// }
+			}else{
+				http_response_code(400);
+				return 'Error: Datos invalidos';
+			}
+		
+		} catch (Exception $e) {
+			http_response_code(500);
+			return "Error: " . $e->getMessage();
+		}
+	}
 
     public function permisos($rol){
 		
