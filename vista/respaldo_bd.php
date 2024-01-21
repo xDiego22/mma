@@ -53,6 +53,7 @@
 								<p class="mt-2 font-size-xl">Restaurar Copia de Seguridad</p>
 							</button>
 
+
 						</div>
 					</div>
 
@@ -62,6 +63,9 @@
 		</div>
 	</div>
 
+	<?php 
+		if($permisos[2] == "true"){
+	?>
 	<!--Modal-->
 	<div class="modal fade" id="modal_restorePoint" tabindex="-1" aria-labelledby="modal_restorePointlabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
@@ -75,6 +79,9 @@
 				<div class="modal-body">
 
 					<div class="container-fluid">
+					<?php 
+						if($permisos[2] == "true"){
+					?> 
 						<div class="row justify-content-center">
 							<div class="col-md-10">
 								<label for="restorePoint">Seleccionar punto de restauracion</label>
@@ -119,9 +126,17 @@
 											}
 										?>
 									</select>
+								<?php 
+									if($permisos[3] == "true"){
+								?> 
+								
 									<button type='button' id="boton_eliminar" class="btn btn-danger mb-1 ml-2">
 										<i class='bi bi-trash-fill'></i>
 									</button>
+
+								<?php 
+									}
+								?>
 								</div>
 							</div>
 						</div>
@@ -133,6 +148,9 @@
 							</button>
 							
 						</div>
+					<?php 
+						}
+					?>
 					</div>
 
 
@@ -146,6 +164,9 @@
 			</div>
 		</div>
 	</div>
+	<?php 
+		}
+	?>
 	<!--Fin Modal regitro-->
 	<a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>

@@ -4,11 +4,15 @@ $(document).ready(function () {
     mensajemodal($("#mensajes").html());
   }
 
- 
-  $("#boton_recargar").on("click", function () {
-    var datos = new FormData();
-    datos.append("accion", "consultar");
-    enviaAjax(datos, "recargar");
+  $("#boton_restorePoint").on("click", function () {
+    
+    if (!$("#modal_restorePoint").length) {
+      Swal.fire({
+        title: "No tiene permiso de realizar esta accion",
+        icon: "error",
+      });
+    }
+    
   });
 
   $("#respaldar").on("click", function () {
@@ -54,10 +58,6 @@ $(document).ready(function () {
   });
 
 });
-
-function validar() {
-  
-}
 
 
 

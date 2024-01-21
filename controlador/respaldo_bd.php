@@ -27,28 +27,28 @@
 			$accion = $_POST['accion'];
 
 			if($accion == 'respaldar'){
-				echo $objeto->backup();
+				echo $objeto->backup($rol_usuario,$cedula_bitacora, $modulo);
 			}
 			if($accion == 'restore'){
 				$objeto->set_restorePoint($_POST['restorePoint']);
-				echo $objeto->restore($cedula_bitacora, $modulo);
+				echo $objeto->restore($rol_usuario,$cedula_bitacora, $modulo);
 			}
 
 			if($accion == 'eliminar'){
 				$objeto->set_restorePoint($_POST['restorePoint']);
-				echo $objeto->eliminarRestorePoint($cedula_bitacora, $modulo);
+				echo $objeto->eliminarRestorePoint($rol_usuario,$cedula_bitacora, $modulo);
 			}
 
 			exit;
 		}
 
-		// $permisos = $objeto->permisos($rol_usuario);
+		$permisos = $objeto->permisos($rol_usuario);
 
-		// if($permisos[0] == "true"){
+		if($permisos[0] == "true"){
 			require_once("vista/".$pagina.".php");
-		// }else{
-		// 	echo "<center>No tienes acceso para consultar este modulo</center>";
-		// }
+		}else{
+			echo "<center>No tienes acceso para consultar este modulo</center>";
+		}
 		
 	}
 	else{

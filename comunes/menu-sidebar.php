@@ -92,6 +92,15 @@
             }
         } 
         for ($i=0; $i <$contador ; $i++) {
+            if ($modulo[$i]=="15") {
+
+                $respaldo=$modulo[$i];
+                break;
+            }else{
+                $respaldo="";
+            }
+        } 
+        for ($i=0; $i <$contador ; $i++) {
             if ($modulo[$i]=="8") {
 
                 $bitacora=$modulo[$i];
@@ -457,12 +466,15 @@
         </a>
         <div id="collapseSeguridad" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-
+            <?php 
+                if($respaldo == "15"){
+            ?>
                 <a class="collapse-item text-wrap" href="?pagina=respaldo_bd">
                     <img src="img/iconos/database.png" style="width:30px;">
                     Respaldo BD
                 </a>
             <?php 
+                }
                 if($bitacora == "8"){
             ?>
                 <a class="collapse-item" href="?pagina=bitacora_usuario">
