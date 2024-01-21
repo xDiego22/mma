@@ -109,6 +109,13 @@ $(document).ready(function () {
 					datos.append('modulo_usuarios','false');
 				}
 
+				if ($("#modulo_respaldo").is(":checked")) {
+					datos.append('modulo_respaldo','true');
+				}
+				else {
+					datos.append('modulo_respaldo','false');
+				}
+
 				if ($("#modulo_bitacora").is(":checked")) {
 					datos.append('modulo_bitacora','true');
 				}
@@ -251,6 +258,7 @@ function validar_checkbox () {
 		$("#modulo_socioeconomicos") .is(":checked") ||
 		$("#modulo_eventos") .is(":checked") ||
 		$("#modulo_usuarios") .is(":checked") ||
+		$("#modulo_respaldo") .is(":checked") ||
 		$("#modulo_bitacora") .is(":checked") ||
 		$("#modulo_roles") .is(":checked") ||
 		$("#modulo_inscripcion") .is(":checked") ||
@@ -275,6 +283,7 @@ function limpiarCheckbox() {
 	$("#modulo_socioeconomicos").prop("checked", false);
 	$("#modulo_eventos").prop("checked", false);
 	$("#modulo_usuarios").prop("checked", false); 
+	$("#modulo_respaldo").prop("checked", false);
 	$("#modulo_bitacora").prop("checked", false);
 	$("#modulo_roles").prop("checked", false);
 	$("#modulo_inscripcion").prop("checked", false);

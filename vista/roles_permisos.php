@@ -153,6 +153,12 @@
 												</td>
 											</tr>
 											<tr>
+												<td>Respaldo de Base de Datos</td>
+												<td class="text-center">
+													<input type="checkbox" class="form-check-input" id="modulo_respaldo" name="modulo_respaldo">
+												</td>
+											</tr>
+											<tr>
 												<td>Bitacora de Usuarios</td>
 												<td class="text-center">
 													<input type="checkbox" class="form-check-input" id="modulo_bitacora" name="modulo_bitacora">

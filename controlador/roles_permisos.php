@@ -58,6 +58,7 @@
 				$objeto->set_modulo_socioeconomicos($_POST['modulo_socioeconomicos']);
 				$objeto->set_modulo_eventos($_POST['modulo_eventos']);
 				$objeto->set_modulo_usuarios($_POST['modulo_usuarios']);
+				$objeto->set_modulo_respaldo($_POST['modulo_respaldo']);
 				$objeto->set_modulo_bitacora($_POST['modulo_bitacora']);
 				$objeto->set_modulo_roles($_POST['modulo_roles']);
 				$objeto->set_modulo_inscripcion($_POST['modulo_inscripcion']);

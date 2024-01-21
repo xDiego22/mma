@@ -22,6 +22,7 @@
         private $modulo_socioeconomicos;
         private $modulo_eventos;
         private $modulo_usuarios;
+        private $modulo_respaldo;
         private $modulo_bitacora;
         private $modulo_roles;
         private $modulo_inscripcion;
@@ -74,6 +75,9 @@
         }
         public function set_modulo_usuarios($valor){
             $this->modulo_usuarios = $valor;
+        }
+        public function set_modulo_respaldo($valor){
+            $this->modulo_respaldo = $valor;
         }
         public function set_modulo_bitacora($valor){
             $this->modulo_bitacora = $valor;
@@ -290,6 +294,19 @@
                                 $resultado->execute();
                             }
 
+                            if ($this->modulo_respaldo == "true") {
+                                $valor_permiso = "false";
+                                $id_modulo = "15";
+                                $resultado = $co->prepare("INSERT into intermediaria(id_rol,id_modulos,consultar,registrar,modificar,eliminar) values (:rol, :modulo,:consultar,:registrar,:modificar,:eliminar)");
+
+                                $resultado->bindParam(':rol',$id_nuevo_rol);
+                                $resultado->bindParam(':modulo',$id_modulo);
+                                $resultado->bindParam(':consultar',$valor_permiso);
+                                $resultado->bindParam(':registrar',$valor_permiso);
+                                $resultado->bindParam(':modificar',$valor_permiso);
+                                $resultado->bindParam(':eliminar',$valor_permiso);
+                                $resultado->execute();
+                            }
                             if ($this->modulo_bitacora == "true") {
                                 $valor_permiso = "false";
                                 $id_modulo = "8";
@@ -732,6 +749,9 @@
 			    return false;
 		    }
             else if(!preg_match_all('/^[a-zA-Z\b]{2,6}$/',$this->modulo_usuarios)){
+			    return false;
+		    }
+            else if(!preg_match_all('/^[a-zA-Z\b]{2,6}$/',$this->modulo_respaldo)){
 			    return false;
 		    }
             else if(!preg_match_all('/^[a-zA-Z\b]{2,6}$/',$this->modulo_bitacora)){
