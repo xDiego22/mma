@@ -30,8 +30,12 @@ class respaldo_bd extends conexion{
 		return $this->restorePoint;
 	}
 
-	public function backup (){
+	public function backup ($rol_usuario,$cedula_bitacora, $modulo){
 		try {
+
+			$valor = $this->permisos($rol_usuario); //rol del usuario
+
+			if($valor[1]=='true'){
 
 				$bd = $this->conecta();
 				$bd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -94,56 +98,75 @@ class respaldo_bd extends conexion{
 				$rutaArchivo = 'backup/' . $this->bd. "_" . $fecha . "_(".$hora.")" . ".sql";
 
 				if (file_put_contents($rutaArchivo, $sql)) {
+
+					$accion= "Ha creado un punto de respaldo de base de datos";
+	
+					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+
 					return 'Copia de seguridad realizada con éxito';
 				} else {
 					return 'Ocurrió un error inesperado al crear la copia de seguridad';
 				}
+				
+			}else {
+				http_response_code(403);
+				return 'No tiene permiso de realizar esta accion';
+			
+			}
 		}  catch (Exception $e) {
 			return "Error: " . $e->getMessage();
 		}
 	}
 
-	public function restore($cedula_bitacora, $modulo){
+	public function restore($rol_usuario,$cedula_bitacora, $modulo){
 		try {
+			$valor = $this->permisos($rol_usuario); //rol del usuario
+			if($valor[2]=='true'){
 
-			if(preg_match_all('/^[\w()-.]{20,50}$/',$this->restorePoint)){
-
-				$bd = $this->conecta();
-				$bd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				if(preg_match_all('/^[\w()-.]{20,50}$/',$this->restorePoint)){
 	
-				$restorePoint = "backup/".$this->limpiarCadena($this->restorePoint);
-				$sql = explode(";", file_get_contents($restorePoint));
-				$totalErrors = 0;
-	
-				set_time_limit(60);
-	
-	
-				$bd->exec("SET FOREIGN_KEY_CHECKS=0");
-	
-				for ($i = 0; $i < (count($sql) - 1); $i++) {
-					try {
-						$bd->exec($sql[$i] . ";");
-					} catch (PDOException $e) {
-						$totalErrors++;
+					$bd = $this->conecta();
+					$bd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
+					$restorePoint = "backup/".$this->limpiarCadena($this->restorePoint);
+					$sql = explode(";", file_get_contents($restorePoint));
+					$totalErrors = 0;
+		
+					set_time_limit(60);
+		
+		
+					$bd->exec("SET FOREIGN_KEY_CHECKS=0");
+		
+					for ($i = 0; $i < (count($sql) - 1); $i++) {
+						try {
+							$bd->exec($sql[$i] . ";");
+						} catch (PDOException $e) {
+							$totalErrors++;
+						}
 					}
-				}
+		
+					$bd->exec("SET FOREIGN_KEY_CHECKS=1");
+		
+					if ($totalErrors <= 0) {
 	
-				$bd->exec("SET FOREIGN_KEY_CHECKS=1");
+						$accion= "Ha restaurado la base de datos";
 	
-				if ($totalErrors <= 0) {
+						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
 
-					$accion= "Ha restaurado la base de datos";
-
-					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-					http_response_code(200);
-					return "Restauración completada con éxito";
-				} else {
-					http_response_code(500);
-					return "Ocurrió un error inesperado, no se pudo hacer la restauración completamente";
+						http_response_code(200);
+						return "Restauración completada con éxito";
+					} else {
+						http_response_code(500);
+						return "Ocurrió un error inesperado, no se pudo hacer la restauración completamente";
+					}
+				}else{
+					http_response_code(400);
+					return 'Error: Datos invalidos';
 				}
-			}else{
-				http_response_code(400);
-				return 'Error: Datos invalidos';
+			}else {
+				http_response_code(403);
+				return 'No tiene permiso de realizar esta accion';
+			
 			}
 		
 		} catch (Exception $e) {
@@ -152,32 +175,43 @@ class respaldo_bd extends conexion{
 		}
 	}
 
-	public function eliminarRestorePoint($cedula_bitacora, $modulo){
+	public function eliminarRestorePoint($rol_usuario,$cedula_bitacora, $modulo){
 		try {
 
-			if(preg_match_all('/^[\w()-.]{20,50}$/',$this->restorePoint)){
+			$valor = $this->permisos($rol_usuario); //rol del usuario
+			
+			if($valor[3]=='true'){
 
-				$restorePoint = "backup/".$this->limpiarCadena($this->restorePoint);
-				
-				if(is_file($restorePoint)){
-
-					unlink($restorePoint);
-
-					$accion= "Ha eliminado un punto de respaldo";
-
-					parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-
-					http_response_code(200);
-					return "Eliminado correctamente";
-				}else {
-					http_response_code(400);
-					return "Error: No existe este punto de restauracion";
-				}
+				if(preg_match_all('/^[\w()-.]{20,50}$/',$this->restorePoint)){
 	
-			}else{
-				http_response_code(400);
-				return 'Error: Datos invalidos';
+					$restorePoint = "backup/".$this->limpiarCadena($this->restorePoint);
+					
+					if(is_file($restorePoint)){
+	
+						unlink($restorePoint);
+	
+						$accion= "Ha eliminado un punto de respaldo";
+	
+						parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+	
+						http_response_code(200);
+						return "Eliminado correctamente";
+					}else {
+						http_response_code(400);
+						return "Error: No existe este punto de restauracion";
+					}
+		
+				}else{
+					http_response_code(400);
+					return 'Error: Datos invalidos';
+				}
+				
+			}else {
+				http_response_code(403);
+				return 'No tiene permiso de realizar esta accion';
+			
 			}
+
 		
 		} catch (Exception $e) {
 			http_response_code(500);
