@@ -492,6 +492,8 @@
                                 if ($resultado) {
                                     $accion= "Ha eliminado un Rol";
                                     parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+                                    http_response_code(200);
+
                                     return "eliminado";
                                 }
                                 else{
@@ -502,16 +504,21 @@
                                 return $e->getMessage();
                             }
                         }else{
-                            return 'No puede eliminar Rol Super Usuario';
+                            http_response_code(400);
+                            return 'Error: No puede eliminar Rol Super Usuario';
                         }
                     }
                     else {
-                        return "Club no registrado";
+                        http_response_code(400);
+                        return "Rol no registrado";
                     }
                 }else{
+                    http_response_code(400);
                     return "ingrese datos correctamente";
                 }
             }else {
+                http_response_code(403);
+                
                 return "no tiene permiso para eliminar";
             }
             

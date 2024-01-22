@@ -486,8 +486,20 @@ function elimina(fila){
 					mensajemodal("Error en Ajax " + e.name + " !!!");
 					}
 				},
-				error: function () {
-				mensajemodal("Error con ajax");
+				error: function (respuesta) {
+					if (
+						respuesta.responseText == "Error: No puede eliminar Rol Super Usuario" ||
+						respuesta.responseText == "Rol no registrado" ||
+						respuesta.responseText == "ingrese datos correctamente" ||
+						respuesta.responseText == "no tiene permiso para eliminar") {
+						
+						Swal.fire({
+							title: `${respuesta.responseText}`,
+							icon: "error",
+						});
+					} else {
+						mensajemodal("Error con ajax");
+					}
 				},
 			});	
 		}
