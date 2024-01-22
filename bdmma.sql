@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-12-2023 a las 19:55:25
+-- Tiempo de generación: 22-01-2024 a las 04:37:04
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -134,7 +134,13 @@ INSERT INTO `emparejamientos` (`id`, `id_evento`, `atleta`, `ronda`) VALUES
 (182, 35, 46, '2'),
 (183, 35, 45, '2'),
 (184, 35, 45, '3'),
-(185, 35, 45, '4');
+(185, 35, 45, '4'),
+(194, 9, 12, '1'),
+(195, 9, 11, '1'),
+(196, 9, 16, '1'),
+(197, 9, 14, '1'),
+(198, 9, 10, '1'),
+(199, 9, 2, '1');
 
 -- --------------------------------------------------------
 
@@ -225,7 +231,6 @@ CREATE TABLE `informacion_socioeconomica` (
 
 INSERT INTO `informacion_socioeconomica` (`id`, `id_atleta`, `tipo_vivienda`, `zona_vivienda`, `habitantes_hogar`, `internet`, `luz`, `agua`, `telefono_residencial`, `cable`, `propiedad_vivienda`) VALUES
 (1, 3, 'Casa', 'Rural', '4', 'POSEE', 'POSEE', 'POSEE', 'NO POSEE', 'POSEE', 'Propia'),
-(10, 37, 'Departamento', 'Rural', '2', 'POSEE', 'POSEE', 'POSEE', 'POSEE', 'POSEE', 'Propia'),
 (12, 32, 'Apartamento', 'Rural', '4', 'NO POSEE', 'POSEE', 'POSEE', 'NO POSEE', 'NO POSEE', 'Alquilada'),
 (13, 30, 'Casa', 'Rural', '1', 'NO POSEE', 'NO POSEE', 'POSEE', 'NO POSEE', 'POSEE', 'Alquilada'),
 (14, 35, 'Departamento', 'Urbana', '2', 'NO POSEE', 'NO POSEE', 'POSEE', 'NO POSEE', 'NO POSEE', 'Otro'),
@@ -333,7 +338,8 @@ INSERT INTO `intermediaria` (`id`, `id_rol`, `id_modulos`, `consultar`, `registr
 (49, 12, 1, 'true', 'false', 'false', 'false'),
 (50, 12, 3, 'true', 'false', 'false', 'false'),
 (51, 12, 4, 'true', 'false', 'false', 'false'),
-(52, 12, 5, 'true', 'false', 'false', 'false');
+(52, 12, 5, 'true', 'false', 'false', 'false'),
+(54, 1, 15, 'true', 'true', 'true', 'true');
 
 -- --------------------------------------------------------
 
@@ -365,6 +371,7 @@ INSERT INTO `modulos` (`id`, `nombre`) VALUES
 (12, 'Resultados de Eventos'),
 (13, 'Historial del Atleta'),
 (14, 'Perfil de Usuario'),
+(15, 'Respaldo de Base de Datos'),
 (21, 'Reportes');
 
 -- --------------------------------------------------------
@@ -434,7 +441,7 @@ CREATE TABLE `resultados` (
 --
 
 INSERT INTO `resultados` (`id`, `id_evento`, `atleta1`, `atleta2`, `forma_ganar`, `ronda`) VALUES
-(2, 35, 46, 45, 'decision', '1');
+(9, 35, 46, 50, 'rcb', '1');
 
 -- --------------------------------------------------------
 
@@ -479,6 +486,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`cedula`, `id_rol`, `nombre`, `contrasena`, `correo`, `token`, `token_contrasena`, `solicitud_contrasena`) VALUES
+(1234567, 12, 'Jose Ramonez', '$2y$12$q7erFVZj9kuF4H82q.Bbqu3SriulnW3fOKKJVqF6HHHIUwIjvSKG6', 'joseramonez_1@gmail.com', '2877edf038c14e984ae33aca8e0a3321', '', 0),
 (29604245, 1, 'Ruander Cuello', '$2y$12$/MbXa.WbIobE2aAAXy2XZe1gZduG9rMXNVYGhZbCpZ5zO1/EJSslO', 'ruander@gmail.com', '3fb207d5a79a6b5b4ec4aa9fa0c20dd2', '', 0),
 (29831184, 1, 'Diego Aguilar', '$2y$12$3cDdVUUVElEWwXtdba3FBO33uje5wIfbqI/kF3oOo/y.qBGiuLSnu', 'diegoaguilar221202@gmail.com', '3c3548f7d26a892b08faefaa1cfca4b4', '', 0),
 (29945099, 1, 'Cirez Barriga', '$2y$12$dnf0Yo3Zko6AhZEWwJVkMOaTw2.kh4B/F7PA1hphVT1Wa5nDmcVbq', 'cirezeduardo10@gmail.com', '03b65da7e4186c722674cef9f9ae4409', '', 0),
@@ -602,31 +610,31 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `atletas`
 --
 ALTER TABLE `atletas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT de la tabla `bitacora_usuario`
 --
 ALTER TABLE `bitacora_usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `clubes`
 --
 ALTER TABLE `clubes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de tabla clubes', AUTO_INCREMENT=168;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de tabla clubes', AUTO_INCREMENT=166;
 
 --
 -- AUTO_INCREMENT de la tabla `emparejamientos`
 --
 ALTER TABLE `emparejamientos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=186;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
 
 --
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `informacion_medica`
@@ -644,13 +652,13 @@ ALTER TABLE `informacion_socioeconomica`
 -- AUTO_INCREMENT de la tabla `inscripcion_evento`
 --
 ALTER TABLE `inscripcion_evento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT de la tabla `intermediaria`
 --
 ALTER TABLE `intermediaria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT de la tabla `modulos`
@@ -662,19 +670,19 @@ ALTER TABLE `modulos`
 -- AUTO_INCREMENT de la tabla `personal`
 --
 ALTER TABLE `personal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de tabla personal', AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de tabla personal', AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `resultados`
 --
 ALTER TABLE `resultados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Restricciones para tablas volcadas
