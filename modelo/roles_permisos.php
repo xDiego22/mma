@@ -477,25 +477,32 @@
                 $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 if(preg_match_all('/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{5,30}$/',$this->nombre)){
                     if($this->existe($this->nombre)){
-                        try{
 
-                            $resultado = $co->prepare("DELETE from roles where nombre = :nombre_rol");
+                        //PARA QUE NO SE PUEDA ELIMINAR SUPER USUARIO
+                        if($this->buscarId($this->nombre) != '1'){
 
-                            $resultado->bindParam(':nombre_rol',$this->nombre);
-
-                            $resultado->execute();		
-
-                            if ($resultado) {
-                                $accion= "Ha eliminado un Rol";
-                                parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-                                return "eliminado";
+                            try{
+    
+                                $resultado = $co->prepare("DELETE from roles where nombre = :nombre_rol");
+    
+                                $resultado->bindParam(':nombre_rol',$this->nombre);
+    
+                                $resultado->execute();		
+    
+                                if ($resultado) {
+                                    $accion= "Ha eliminado un Rol";
+                                    parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+                                    return "eliminado";
+                                }
+                                else{
+                                    return "no eliminado";
+                                }
+                                
+                            }catch(Exception $e) {
+                                return $e->getMessage();
                             }
-                            else{
-                                return "no eliminado";
-                            }
-                            
-                        }catch(Exception $e) {
-                            return $e->getMessage();
+                        }else{
+                            return 'No puede eliminar Rol Super Usuario';
                         }
                     }
                     else {
@@ -514,7 +521,6 @@
             $co = $this->conecta();
             $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            
             try {
 
                 //se asigna a $resultado la consulta prepare para conocer si existe el registro
@@ -684,8 +690,13 @@
                 $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 
                 if($this->validar_actualizar($id_modulo,$registrar,$consultar,$modificar,$eliminar)){
-                    
+
                     try {
+
+                        if ($this->rol_2 == '1' and $id_modulo == '9'){
+                            $registrar = 'true';
+                            $consultar ='true';
+                        }
 
                         $resultado = $co->prepare("UPDATE intermediaria set 
                         consultar = :consultar,
@@ -818,6 +829,32 @@
             }
             else{
                 return true;
+            }
+        }
+
+        private function buscarId($nombre){
+            
+            try {
+                $co = $this->conecta();
+                $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                $resultado = $co->prepare("SELECT * from roles where nombre = :nombre_rol");
+                $resultado->bindParam(':nombre_rol',$nombre);
+                $resultado->execute();
+
+                $fila = $resultado->fetchAll(PDO::FETCH_BOTH);
+                
+                if($fila){ 
+                    return $fila[0][0]; 
+                }
+                else{
+                    
+                    return false;
+                }
+                
+            }catch(Exception $e){
+                
+                return false;
             }
         }
        
