@@ -182,3 +182,5 @@ en model de roles permisos metodo de actualizar se coloca condicion para que el 
 Tambien se añadio un metodo de buscar id para que no se pueda eliminar el rol de super usuario
 
 metodo de eliminar no permite eliminar al usuario de cedula 29831184 
+
+modelo de conexion en metodo registro bitacora es difente del web, se asigna default timezone para que registre hora de caracas y variables con date de fecha y hora php porque phpmyadmin del servidor esta adelantado 4 horas
