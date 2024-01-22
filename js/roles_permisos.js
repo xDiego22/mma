@@ -406,14 +406,16 @@ function enviaAjax2(datos) {
             data: datos.serialize(),
             beforeSend: function(){},
             timeout:10000,
-            complete: function() {
-				mensajemodal("Permisos actualizados");
-				
-            },
             error: function(){
 				mensajemodal("Error con ajax");	
-            }
-    });
+            },
+			complete: function() {
+				
+				mensajemodal("Permisos actualizados");
+				$('#mostrarmodal').on('hidden.bs.modal', () => $('.modal-backdrop').remove());
+
+			},
+		});
 }
 
 function limpia_formulario(){
