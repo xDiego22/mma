@@ -176,3 +176,9 @@ se añaden permisos para modulo de respaldo.
 se creo un metodo para bitacora de vaciarla, y el js manda alerta cuando se actualiza y vacia.
 
 roles y permisos se modifico para añadirle modulo de respaldo.
+
+en model de roles permisos metodo de actualizar se coloca condicion para que el super usuario nunca tenga desahabilitada la opcion de consultar y registrar, siempre estara activa. 
+
+Tambien se añadio un metodo de buscar id para que no se pueda eliminar el rol de super usuario
+
+metodo de eliminar no permite eliminar al usuario de cedula 29831184 
