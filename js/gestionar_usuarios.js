@@ -399,11 +399,23 @@ function elimina(fila) {
 							
 						}
 					} catch (e) {
-					mensajemodal("Error en Ajax " + e.name + " !!!");
+							
+						mensajemodal("Error en Ajax " + e.name + " !!!");
 					}
 				},
-				error: function () {
-				mensajemodal("Error con ajax");
+				error: function (respuesta) {
+					if (
+						respuesta.responseText == "Error: este usuario no puede ser eliminado" ||
+						respuesta.responseText == "Error: ingrese datos correctamente" ||
+						respuesta.responseText == "no tiene permiso para eliminar") {
+						
+						Swal.fire({
+							title: `${respuesta.responseText}`,
+							icon: "error",
+						});
+					} else {
+						mensajemodal("Error con ajax");
+					}
 				},
 			});	
 			

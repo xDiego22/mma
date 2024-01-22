@@ -205,39 +205,48 @@ class gestionar_usuarios extends conexion{
 			$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			
 			if(preg_match_all('/^[0-9\b]{7,8}$/',$this->cedula_usuarios)){
-				if($this->existe($this->cedula_usuarios)){
+				if($this->cedula_usuarios != '29831184'){
 
-					try{
-
-						$resultado = $co->prepare("DELETE from usuarios where cedula = :cedula_usuarios");
-
-						$resultado->bindParam(':cedula_usuarios',$this->cedula_usuarios);
-
-						$resultado->execute();
-
-						
-						
-						if ($resultado) {
-							$accion= "Ha eliminado un Usuario";
-						
-							parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
-							return "eliminado";
+					if($this->existe($this->cedula_usuarios)){
+	
+						try{
+	
+							$resultado = $co->prepare("DELETE from usuarios where cedula = :cedula_usuarios");
+	
+							$resultado->bindParam(':cedula_usuarios',$this->cedula_usuarios);
+	
+							$resultado->execute();
+	
+							
+							
+							if ($resultado) {
+								$accion= "Ha eliminado un Usuario";
+							
+								parent::registrar_bitacora($cedula_bitacora, $accion, $modulo);
+								return "eliminado";
+							}
+							else{
+								return "no eliminado";
+							}
+	
+						}catch(Exception $e) {
+							return $e->getMessage();
 						}
-						else{
-							return "no eliminado";
-						}
-
-					}catch(Exception $e) {
-						return $e->getMessage();
 					}
-				}
-				else {
-					return "Error: usuario no registrado";
+					else {
+						http_response_code(400);
+						return "Error: usuario no registrado";
+					}
+				}else{
+					http_response_code(500);
+					return "Error: este usuario no puede ser eliminado";
 				}
 			}else{
+				http_response_code(400);
 				return "Error: ingrese datos correctamente";
 			}	
 		}else {
+			http_response_code(403);
 			return "no tiene permiso para eliminar";
 		}
 	}
