@@ -314,6 +314,13 @@ class inicio_sesion extends conexion{
 								])
 							];
 						}
+					}else {
+						$array = [
+							'data' =>[
+								'error' => 'error de query, intente de nuevo',
+								'status' => 'error'
+							]
+						];
 					}
 				}
 				else{
