@@ -270,7 +270,7 @@ class inicio_sesion extends conexion{
 				
 					if($query->execute([':cedula' => $cedula])){
 						$usuario = $query->fetch();
-						if ($usuario['cedula']){
+						if ($usuario !== false && isset($usuario['cedula'])){
 				
 							if(password_verify($contrasena, $usuario['contrasena'])){
 				
