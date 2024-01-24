@@ -21,6 +21,7 @@ class registrar_rolesTest extends TestCase{
         $this->rol->set_modulo_socioeconomicos('!"#d');
         $this->rol->set_modulo_eventos('3D$');
         $this->rol->set_modulo_usuarios('3d3');
+        $this->rol->set_modulo_respaldo('&%f');
         $this->rol->set_modulo_bitacora('&%f');
         $this->rol->set_modulo_roles('$fg');
         $this->rol->set_modulo_inscripcion('7%&&');
