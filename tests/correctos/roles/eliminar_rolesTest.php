@@ -19,6 +19,7 @@ class eliminar_rolesTest extends TestCase{
         $this->rol->set_modulo_socioeconomicos('false');
         $this->rol->set_modulo_eventos('false');
         $this->rol->set_modulo_usuarios('false');
+        $this->rol->set_modulo_respaldo('false');
         $this->rol->set_modulo_bitacora('false');
         $this->rol->set_modulo_roles('false');
         $this->rol->set_modulo_inscripcion('false');
