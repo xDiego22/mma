@@ -96,14 +96,16 @@ class gestionar_usuarios extends conexion{
 								contrasena,
 								id_rol,
 								correo,
-								token)
+								token,
+								solicitud_contrasena)
 								Values(
 								:cedula_usuarios,
 								:nombre_usuarios,
 								:contrasena_usuarios,
 								:rol_usuario,
 								:correo_usuarios,
-								:token)");
+								:token,
+								0)");
 
 							$resultado->bindParam(':cedula_usuarios',$this->cedula_usuarios);
 							$resultado->bindParam(':nombre_usuarios',$this->nombre_usuarios);
@@ -205,7 +207,7 @@ class gestionar_usuarios extends conexion{
 			$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			
 			if(preg_match_all('/^[0-9\b]{7,8}$/',$this->cedula_usuarios)){
-				if($this->cedula_usuarios != '29831184'){
+				if($this->cedula_usuarios != '9586218'){
 
 					if($this->existe($this->cedula_usuarios)){
 	
